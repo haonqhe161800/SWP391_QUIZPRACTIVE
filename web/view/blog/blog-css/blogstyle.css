@@ -1,0 +1,285 @@
+/* resert css */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/*các thể có letter sẽ kế thừa*/
+html {
+    font-family: Arial, Helvetica, sans-serif;
+}
+.header {
+    background-color: #a5b0d0;
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    align-items: center;
+}
+
+.logo {
+    margin-right: auto;
+    color: white;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+.logo h2 {
+    line-height: 46px;
+    padding: 0 10px;
+
+}
+
+.nav {
+    display: inline-block;
+}
+
+.nav {
+    list-style-type: none;
+}
+
+
+.nav li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+.nav>li {
+    display: inline-block;
+}
+
+.nav>li>a {
+    padding: 0 24px;
+    display: block;
+    line-height: 46px;
+}
+
+.nav>li:hover>a {
+    color: #000;
+    background-color: rgba(0, 0, 0, 0.3);
+
+}
+
+form,
+.search_bar {
+    display: inline-block;
+}
+
+form {
+    min-width: 50%;
+
+}
+
+.search_bar {
+    float: left;
+    width: 52%;
+    position: relative;
+}
+
+.search_bar input {
+    width: 100%;
+    padding: 7px;
+    border: none;
+    border-radius: 8px;
+}
+
+.btn-search {
+    position: absolute;
+    right: 24%;
+    top: 35%;
+}
+
+.btn-search button {
+    background: none;
+    border: none;
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+
+.slider {
+    margin-top: 46px;
+    padding-top: 50%;
+    /*theo chieu ngang ccuar chinh no*/
+    background: url('../slider/img_ch.jpg') top center / cover no-repeat;
+}
+
+
+.blog_item {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    width: 100%;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+.avatar_author img {
+    border-radius: 50%;
+    height: 9em;
+    object-fit: cover;
+    width: 9em;
+    cursor: pointer;
+}
+
+.intro_author{
+    display: flex;
+    align-items: center;
+}
+
+.name_author {
+    margin-left: 10px;
+}
+
+.name_author{
+    color: #292929;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.content_blog_item h2 {
+    color: #292929;
+    font-family: system-ui;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 32px;
+}
+
+.blog_infor{
+    display: flex;
+    align-items: center;
+}
+.blog_tag{
+    background-color: #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.blog_tag a{
+    list-style: none;
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
+    padding: 7px;
+}
+
+.create_at{
+    margin-left: 10px;
+}
+
+.widget {
+    box-shadow: 0 0 30px rgba(31, 45, 61, 0.125);
+    border-radius: 5px;
+    overflow: hidden;
+    background: #ffffff;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 100%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+
+.media {
+    display: flex;
+    align-items: flex-start;
+}
+
+.blog-aside .latest-post-aside .lpa-left {
+    padding-right: 15px;
+}
+
+.blog-aside .latest-post-aside .lpa-right img {
+    border-radius: 3px;
+}
+
+.latest-post-aside .lpa-title h5 {
+    margin: 0;
+    font-size: 15px;
+}
+
+h5 a {
+    color: #000;
+    text-decoration: none;
+}
+
+.lpa-meta a {
+    color: #6F8BA4;
+    font-size: 12px;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.lpa-right img{
+    vertical-align: middle;
+    border-style: none;
+}
+
+.lpa-right img{
+    max-width: 100%;
+}
+.widget-title {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+ .widget-title h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #292929;
+    margin: 0;
+}
+
+.widget-body {
+    padding: 15px;
+}
+
+.nav {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+.tag-cloud a {
+    padding: 4px 15px;
+    font-size: 13px;
+    color: #ffffff;
+    background: #20247b;
+    border-radius: 3px;
+    margin-right: 4px;
+    margin-bottom: 4px;
+}
+
+/*pagination*/
+.pagination{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.pagination li:not(:first-child):not(:last-child){
+    background-color: #645c5c;
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+}
+
+.pagination > li > a {
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
+    padding: 10px;
+    
+}
+
+
+/* footer */
