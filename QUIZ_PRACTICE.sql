@@ -144,8 +144,8 @@ insert into [Subject] values ('C', './assets/images/categories/C.png'),
 							 ('Javascript', './assets/images/categories/Javascript.png'),
 							 ('Python', './assets/images/categories/Python.png')
 
-insert into [Course]([subject_id], [course_name], [description], [image], [is_publish], [created_date]) values (1, N'Khóa học C cơ bản cho người mới bắt đầu', N'Khóa học C cơ bản giúp các bạn nắm chắc những kiến thức cơ bản của lập trình nói chung và lập trình C nói riêng để các bạn có nền tảng vững chắc để chinh phục con đường trở thành một lập trình viên', 'https://unica.vn/media/imagesck/1611651442_phan-mem-lap-trinh-c-1.jpg?v=1611651442', 0, '24/05/2023'),
-																						       (1, N'Lập trình C từ cơ bản đến nâng cao', N'Khóa học lập trình C từ cơ bản tới nâng cao dành cho người mới bắt đầu. Mục tiêu của khóa học này nhằm giúp các bạn nắm được các khái niệm căn cơ của lập trình, giúp các bạn có nền tảng vững chắc để chinh phục con đường trở thành một lập trình viên.', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTB9jIF4VaKJXBmGdGpbsdUXcDhfSdSIAsyDRcdsY-DZauLx5cScEzVlYXKU4Qrr74mYc&usqp=CAU', 0, '24/05/2023')
+insert into [Course]([subject_id], [course_name], [description], [image], [is_publish], [created_date]) values (1, N'Khóa học C cơ bản cho người mới bắt đầu', N'Khóa học C cơ bản giúp các bạn nắm chắc những kiến thức cơ bản của lập trình nói chung và lập trình C nói riêng để các bạn có nền tảng vững chắc để chinh phục con đường trở thành một lập trình viên', './assets/images/categories/CourseC(1).png', 0, '24/05/2023'),
+													       (1, N'Lập trình C từ cơ bản đến nâng cao', N'Khóa học lập trình C từ cơ bản tới nâng cao dành cho người mới bắt đầu. Mục tiêu của khóa học này nhằm giúp các bạn nắm được các khái niệm căn cơ của lập trình, giúp các bạn có nền tảng vững chắc để chinh phục con đường trở thành một lập trình viên.', './assets/images/categories/CourseC(2).png', 0, '24/05/2023')
 
 insert into [Question] values ('In C, correct order(s) of a function implementation. Choose at least one answer.', 1), ---- 1 ----
 							  ('The while loop can be written as a for loop', 1), ---- 2 ----
