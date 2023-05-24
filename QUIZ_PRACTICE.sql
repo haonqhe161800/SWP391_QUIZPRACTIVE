@@ -1,4 +1,6 @@
 
+
+
 CREATE DATABASE QUIZ_PRACTICE
 
 GO
@@ -38,14 +40,30 @@ CREATE TABLE [Subject] (
 )
 
 
+---- Create table Mentor ----
+CREATE TABLE [Mentor] (
+	[mentor_id] [int] IDENTITY (1,1) not null PRIMARY KEY,
+	[email] [nvarchar] (250) not null,
+	[password] [nvarchar] (250) not null,
+	[image] [nvarchar] (250) not null,
+	[display_name] [nvarchar] (250) not null,
+	[created_date] [date] not null,
+	[address] [nvarchar] (250) not null,
+	[date_of_birth] [nvarchar] (250) not null
+)
+
+
 ----- Create table Course ------
 CREATE TABLE [Course] (
 	[course_id] [int] IDENTITY (1,1) PRIMARY KEY not null,
 	[subject_id] [int] not null FOREIGN KEY REFERENCES [Subject]([subject_id]),
+	[mentor_id] [int] FOREIGN KEY REFERENCES [Mentor]([mentor_id]) default null,
 	[course_name] [nvarchar] (250) not null,
 	[description] [nvarchar] (max) not null,
 	[image] [nvarchar] (250) not null,
-	[is_publish] [int] not null
+	[is_publish] [int] not null,
+	[quantity] [int] default 0,
+	[created_date] [nvarchar] (250) not null
 )
 
 ---- Create table Errol ----
@@ -56,8 +74,6 @@ CREATE TABLE [Errol] (
 	PRIMARY KEY ([user_id], [course_id])
 )
 
-
-
 --- Create table ResultTest ----
 CREATE TABLE [Result_test] (
 	[user_id] [int] not null FOREIGN KEY REFERENCES [User]([user_id]),
@@ -66,7 +82,6 @@ CREATE TABLE [Result_test] (
 	[score] [int] not null,
 	PRIMARY KEY ([user_id], [course_id])
 )
-
 
 ---- Create table Question ----
 CREATE TABLE [Question] (
@@ -84,30 +99,6 @@ CREATE TABLE [Answer] (
 )
 
 
----- Create table Mentor ----
-CREATE TABLE [Mentor] (
-	[mentor_id] [int] IDENTITY (1,1) not null PRIMARY KEY,
-	[email] [nvarchar] (250) not null,
-	[password] [nvarchar] (250) not null,
-	[image] [nvarchar] (250) not null,
-	[display_name] [nvarchar] (250) not null,
-	[created_date] [date] not null,
-	[address] [nvarchar] (250) not null,
-	[date_of_birth] [nvarchar] (250) not null
-)
-
-
-
------ Create table Teach -----
-CREATE TABLE [Teach] (
-	[mentor_id] [int] not null FOREIGN KEY REFERENCES [Mentor]([mentor_id]),
-	[course_id] [int] not null FOREIGN KEY REFERENCES [Course]([course_id]),
-	[created_date] [nvarchar] (250) not null,
-	[updated_date] [nvarchar] (250) not null,
-	PRIMARY KEY ([created_date], [updated_date])
-)
-
-
 ---- Create table Marketer ------
 CREATE TABLE [Marketer] (
 	[marketer_id] [int] IDENTITY (1,1) not null PRIMARY KEY,
@@ -120,15 +111,12 @@ CREATE TABLE [Marketer] (
 	[date_of_birth] [nvarchar] (250) not null
 )
 
-
-
 ---- Create table List_marketing ------
 CREATE TABLE [List_marketing] (
 	[lc_id] [int] IDENTITY (1,1) PRIMARY KEY not null,
 	[public_date] [date] not null,
 	[course_id] [int] not null FOREIGN KEY REFERENCES [Course]([course_id]),
 )
-
 
 ---- Create table Marketing -----
 CREATE TABLE [Marketing] (
@@ -141,7 +129,8 @@ CREATE TABLE [Marketing] (
 	[content] [nvarchar] (max) not null,
 	[tittle] [nvarchar] (max) not null
 )
-		
+
+drop table Marketing	
 
 insert into [Admin] values (1, 'tuanvm@gmail.com', '12345678')
 
@@ -156,8 +145,8 @@ insert into [Subject] values ('C', '../assets/images/categories/C.png'),
 							 ('Javascript', '../assets/images/categories/Javascript.png'),
 							 ('Python', '../assets/images/categories/Python.png')
 
-insert into [Course] values (1, N'Khóa học C cơ bản cho người mới bắt đầu', N'Khóa học C cơ bản giúp các bạn nắm chắc những kiến thức cơ bản của lập trình nói chung và lập trình C nói riêng để các bạn có nền tảng vững chắc để chinh phục con đường trở thành một lập trình viên', 'https://unica.vn/media/imagesck/1611651442_phan-mem-lap-trinh-c-1.jpg?v=1611651442', 0),
-						    (1, N'Lập trình C từ cơ bản đến nâng cao', N'Khóa học lập trình C từ cơ bản tới nâng cao dành cho người mới bắt đầu. Mục tiêu của khóa học này nhằm giúp các bạn nắm được các khái niệm căn cơ của lập trình, giúp các bạn có nền tảng vững chắc để chinh phục con đường trở thành một lập trình viên.', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTB9jIF4VaKJXBmGdGpbsdUXcDhfSdSIAsyDRcdsY-DZauLx5cScEzVlYXKU4Qrr74mYc&usqp=CAU', 0)
+insert into [Course]([subject_id], [course_name], [description], [image], [is_publish], [create_date]) values (1, N'Khóa học C cơ bản cho người mới bắt đầu', N'Khóa học C cơ bản giúp các bạn nắm chắc những kiến thức cơ bản của lập trình nói chung và lập trình C nói riêng để các bạn có nền tảng vững chắc để chinh phục con đường trở thành một lập trình viên', 'https://unica.vn/media/imagesck/1611651442_phan-mem-lap-trinh-c-1.jpg?v=1611651442', 0, '24/05/2023'),
+																						       (1, N'Lập trình C từ cơ bản đến nâng cao', N'Khóa học lập trình C từ cơ bản tới nâng cao dành cho người mới bắt đầu. Mục tiêu của khóa học này nhằm giúp các bạn nắm được các khái niệm căn cơ của lập trình, giúp các bạn có nền tảng vững chắc để chinh phục con đường trở thành một lập trình viên.', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTB9jIF4VaKJXBmGdGpbsdUXcDhfSdSIAsyDRcdsY-DZauLx5cScEzVlYXKU4Qrr74mYc&usqp=CAU', 0, '24/05/2023')
 
 insert into [Question] values ('In C, correct order(s) of a function implementation. Choose at least one answer.', 1), ---- 1 ----
 							  ('The while loop can be written as a for loop', 1), ---- 2 ----
@@ -210,5 +199,3 @@ insert into [Answer] values ('a. Return type, body, function name, parameters', 
 							('c.25', 1, 10),
 							('d.13', 0, 10),
 							('e.3', 0, 10)
-
-insert into Marketer values ('tuanvm@gmail.com', 12345678, 'https://www.longan.city/uploads/files/2020/10/24/y-nghia-cua-ten-rosie-anh-1.jpg', 'tuanvm', '05/24/2023', N'Hà Nội', '03/29/1991')
