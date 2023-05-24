@@ -4,7 +4,7 @@
  */
 package DAO;
 
-import Entity.Subject;
+import Entities.Subject;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import module.DBConnect;
