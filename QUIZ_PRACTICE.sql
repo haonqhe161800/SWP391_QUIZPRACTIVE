@@ -139,7 +139,7 @@ insert into [Mentor] values ('trungnt@gmail.com', 12345678, 'https://kenh14cdn.c
 
 insert into [Subject] values ('C', './assets/images/categories/C.png'),
 							 ('C++', './assets/images/categories/C++.png'),
-							 ('C#', './assets/images/categories/C#.png'),
+							 ('C#', './assets/images/categories/CSharp.png'),
 							 ('Java', './assets/images/categories/Java.png'),
 							 ('Javascript', './assets/images/categories/Javascript.png'),
 							 ('Python', './assets/images/categories/Python.png')
