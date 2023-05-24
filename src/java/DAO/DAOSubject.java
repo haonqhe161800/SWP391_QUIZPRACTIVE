@@ -8,7 +8,6 @@ import Entity.Subject;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import module.DBConnect;
-import module.DBConnect;
 
 /**
  *

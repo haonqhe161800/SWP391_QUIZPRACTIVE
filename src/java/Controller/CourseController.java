@@ -6,7 +6,6 @@
 package Controller;
 
 import DAO.DAOCourse;
-import DAO.DAOSubject;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -23,8 +22,8 @@ import java.util.logging.Logger;
  *
  * @author admin
  */
-@WebServlet(name="SubjectController", urlPatterns={"/SubjectController"})
-public class SubjectController extends HttpServlet {
+@WebServlet(name="CourseController", urlPatterns={"/CourseController"})
+public class CourseController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -37,7 +36,7 @@ public class SubjectController extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            DAOSubject daoSubject = new DAOSubject();
+            
             DAOCourse daoCourse = new DAOCourse();
             
             String service = request.getParameter("service");
@@ -45,18 +44,18 @@ public class SubjectController extends HttpServlet {
             if(service.equals("details")) {
                 String id_raw = request.getParameter("id");
                 int id = Integer.parseInt(id_raw);
-                ResultSet rsSubject = daoSubject.getData("select * from Subject where subject_id = " + id);
-                String subject_name = "";
-                if(rsSubject.next()) {
-                    subject_name = rsSubject.getString(2);
+                ResultSet rsCourse = daoCourse.getData("select * from Course where course_id = " + id);
+                ResultSet rsCountQuestion = daoCourse.getData("select Count(q.question_name) from Course c, Question q where q.course_id = c.course_id and c.course_id = " + id);
+                int countQuestion = 0;
+                if(rsCountQuestion.next()) {
+                    countQuestion = rsCountQuestion.getInt(1);
                 }
-                ResultSet rsCourse = daoCourse.getData("select * from Course where subject_id = " + id);       
-                request.setAttribute("subject_name", subject_name);
+                request.setAttribute("countQuestion", countQuestion);
                 request.setAttribute("rsCourse", rsCourse);
-                request.getRequestDispatcher("jspClient/SubjectDetails.jsp").forward(request, response);
+                request.getRequestDispatcher("jspClient/CourseDetails.jsp").forward(request, response);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(SubjectController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CourseController.class.getName()).log(Level.SEVERE, null, ex);
         }
     } 
 

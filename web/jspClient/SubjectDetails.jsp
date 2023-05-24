@@ -11,7 +11,7 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="x-ua-compatible" content="ie=edge" />
-        <title>Quiz Practice</title>
+        <title>ClassiGrids - Classified Ads and Listing Website Template.</title>
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
@@ -24,17 +24,17 @@
         <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 
         <!-- ========================= CSS here ========================= -->
-        <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="../assets/css/LineIcons.2.0.css" />
-        <link rel="stylesheet" href="../assets/css/animate.css" />
-        <link rel="stylesheet" href="../assets/css/tiny-slider.css" />
-        <link rel="stylesheet" href="../assets/css/glightbox.min.css" />
-        <link rel="stylesheet" href="../assets/css/main.css" />
+        <link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="./assets/css/LineIcons.2.0.css" />
+        <link rel="stylesheet" href="./assets/css/animate.css" />
+        <link rel="stylesheet" href="./assets/css/tiny-slider.css" />
+        <link rel="stylesheet" href="./assets/css/glightbox.min.css" />
+        <link rel="stylesheet" href="./assets/css/main.css" />
     </head>
     <body>
 
         <%
-        ResultSet rsSubject = (ResultSet) request.getAttribute("rsSubject");
+        String subject_name = (String) request.getAttribute("subject_name");
         ResultSet rsCourse = (ResultSet) request.getAttribute("rsCourse");
         %>
 
@@ -198,34 +198,32 @@
                     <div class="single-head">
                         <div class="row">
                         <%while(rsCourse.next()) {%>
-                        <div class="col-lg-4 col-md-6 col-12">
-                            <!-- Start Single Grid -->
-                            <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
-                                <div class="image"> <!--ảnh course-->
-                                    <!--Click vào ảnh cũng giống như click vào phần details -->
-                                    <a href="#" class="thumbnail"><img src="<%rsCourse.getString(5)%>" alt="#"></a>
-                                    <div class="author">
-                                        <div class="author-image">    <!--ảnh mentor-->
-                                            <a href=""><img src="../assets/images/items-grid/author-1.jpg" alt="#"></a>
-                                            <a href="">Mentor name</a>
+                        <div class="col-lg-4 col-md-4 col-12">
+                                <!-- Start Single Grid -->
+                                <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
+                                    <div class="image"> <!--ảnh course-->
+                                        <!--Click vào ảnh cũng giống như click vào phần details -->
+                                        <a href="#" class="thumbnail"><img height="218px" src="<%=rsCourse.getString(6)%>" alt="#"></a>
+                                        <div class="author">
+                                            <a href="#" class="sale"> Join to study </a>
                                         </div>
-                                        <a href="#" class="sale"> Join to study </a>
+                                    </div>
+                                    <div class="content">
+                                        <div class="top-content">
+                                            <h2><%=subject_name%></h2>
+                                            <p class="title"><%=rsCourse.getString(4)%></p>
+                                            <p class="update-time">Cập nhật ngày <%=rsCourse.getString(9)%></p>
+                                            <ul class="rating">
+                                                <li>Số người tham gia (<%=rsCourse.getInt(8)%>)</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="bottom-content">
+                                            <a href="CourseController?service=details&id=<%=rsCourse.getInt(1)%>" class="btn btn-block btn-primary">Details</a>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="content">
-                                    <div class="top-content">
-                                        <h3 class="title"><%rsCourse.getString(3)%></h3>
-                                        <ul class="rating">
-                                            <li>số người joined (35)</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="bottom-content">
-                                        <a href="#" class="btn btn-block btn-primary">Details</a>
-                                    </div>
-                                </div>
+                                <!-- End Single Grid -->
                             </div>
-                            <!-- End Single Grid -->
-                        </div>
                         <%}%>
                     </div>
                 </div>
@@ -242,9 +240,6 @@
         <!-- Chỗ này copy bên trên, còn làm thì tự thiết kế -->
 
         <jsp:include page="Footer.jsp"></jsp:include>
-        <!--/ End Footer Area -->
-
-
 
         <!-- ========================= scroll-top ========================= -->
         <a href="#" class="scroll-top btn-hover">
@@ -252,11 +247,11 @@
         </a>
 
         <!-- ========================= JS here ========================= -->
-        <script src="../assets/js/bootstrap.min.js"></script>
-        <script src="../assets/js/wow.min.js"></script>
-        <script src="../assets/js/tiny-slider.js"></script>
-        <script src="../assets/js/glightbox.min.js"></script>
-        <script src="../assets/js/main.js"></script>
+        <script src="./assets/js/bootstrap.min.js"></script>
+        <script src="./assets/js/wow.min.js"></script>
+        <script src="./assets/js/tiny-slider.js"></script>
+        <script src="./assets/js/glightbox.min.js"></script>
+        <script src="./assets/js/main.js"></script>
         <script type="text/javascript">
             //========= Category Slider 
             tns({
