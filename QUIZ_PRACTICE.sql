@@ -138,7 +138,7 @@ insert into [User] values ('tuanpm@gmail.com', 12345678, 'https://kenh14cdn.com/
 
 insert into [Mentor] values ('trungnt@gmail.com', 12345678, 'https://kenh14cdn.com/thumb_w/660/203336854389633024/2021/7/8/base64-1625718112693743044058.png', 'trungnt', '05/23/2023', N'Thái Bình', '11/08/2002')
 
-insert into [Subject] values ('C', '../assets/images/categories/C.png'),
+insert into [Subject] values ('C', './assets/images/categories/C.png'),
 							 ('C++', './assets/images/categories/C++.png'),
 							 ('C#', './assets/images/categories/C#.png'),
 							 ('Java', './assets/images/categories/Java.png'),
