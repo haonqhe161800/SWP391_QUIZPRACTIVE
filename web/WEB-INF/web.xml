@@ -8,6 +8,10 @@
         <servlet-name>ChangePassword</servlet-name>
         <servlet-class>Controller.ChangePassword</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>userProfile</servlet-name>
+        <servlet-class>Controller.userProfile</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControllBlogList</servlet-name>
         <url-pattern>/cbl</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>ChangePassword</servlet-name>
         <url-pattern>/ChangePassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>userProfile</servlet-name>
+        <url-pattern>/userProfile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
