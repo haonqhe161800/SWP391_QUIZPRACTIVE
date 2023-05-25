@@ -26,13 +26,6 @@ import java.util.logging.Logger;
 @WebServlet(name="SubjectController", urlPatterns={"/SubjectController"})
 public class SubjectController extends HttpServlet {
    
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -45,15 +38,19 @@ public class SubjectController extends HttpServlet {
             if(service.equals("details")) {
                 String id_raw = request.getParameter("id");
                 int id = Integer.parseInt(id_raw);
+                ResultSet rsAllSubject = daoSubject.getData("select * from Subject");
                 ResultSet rsSubject = daoSubject.getData("select * from Subject where subject_id = " + id);
+                ResultSet rsCourse = daoCourse.getData("select * from Course where subject_id = " + id);       
+                
                 String subject_name = "";
                 if(rsSubject.next()) {
                     subject_name = rsSubject.getString(2);
                 }
-                ResultSet rsCourse = daoCourse.getData("select * from Course where subject_id = " + id);       
+                
+                request.setAttribute("rsAllSubject", rsAllSubject);
                 request.setAttribute("subject_name", subject_name);
                 request.setAttribute("rsCourse", rsCourse);
-                request.getRequestDispatcher("jspClient/SubjectDetails.jsp").forward(request, response);
+                request.getRequestDispatcher("/jspClient/SubjectDetails.jsp").forward(request, response);
             }
         } catch (SQLException ex) {
             Logger.getLogger(SubjectController.class.getName()).log(Level.SEVERE, null, ex);
