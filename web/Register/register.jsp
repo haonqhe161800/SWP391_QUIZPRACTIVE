@@ -1,3 +1,11 @@
+<%-- 
+    Document   : register
+    Created on : May 25, 2023, 3:51:20 PM
+    Author     : Nam Kroos
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
 
@@ -6,7 +14,7 @@
 <head>
 <meta charset="utf-8" />
 <meta http-equiv="x-ua-compatible" content="ie=edge" />
-<title>Login - ClassiGrids Classified Ads and Listing Website Template</title>
+<title>Registration - ClassiGrids Classified Ads and Listing Website Template</title>
 <meta name="description" content />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
@@ -29,13 +37,7 @@ g.o=function(a,b){function d(){if(!(c.b&&a||c.i)){var b=200;200<(new Date).getTi
 pagespeed.lazyLoadInit(true, "../../pagespeed_static/1.JiBnMqyl6S.gif");
 </script></head>
 <body>
-<!--[if lte IE 9]>
-      <p class="browserupgrade">
-        You are using an <strong>outdated</strong> browser. Please
-        <a href="https://browsehappy.com/">upgrade your browser</a> to improve
-        your experience and security.
-      </p>
-    <![endif]-->
+
 
 <div class="preloader">
 <div class="preloader-inner">
@@ -92,8 +94,8 @@ pagespeed.lazyLoadInit(true, "../../pagespeed_static/1.JiBnMqyl6S.gif");
 <li class="nav-item"><a href="item-details.html">Ads Details</a></li>
 <li class="nav-item"><a href="post-item.html">Ads Post</a></li>
 <li class="nav-item"><a href="pricing.html">Pricing Table</a></li>
-<li class="nav-item"><a href="registration.html">Sign Up</a></li>
-<li class="nav-item active"><a href="login.html">Sign In</a></li>
+<li class="nav-item active"><a href="registration.html">Sign Up</a></li>
+<li class="nav-item"><a href="login.html">Sign In</a></li>
 <li class="nav-item"><a href="contact.html">Contact Us</a></li>
 <li class="nav-item"><a href="faq.html">FAQ</a></li>
 <li class="nav-item"><a href="404.html">Error Page</a></li>
@@ -162,13 +164,13 @@ Sibebar</a></li>
 <div class="row align-items-center">
 <div class="col-lg-6 col-md-6 col-12">
 <div class="breadcrumbs-content">
-<h1 class="page-title">Login</h1>
+<h1 class="page-title">Registration</h1>
 </div>
 </div>
 <div class="col-lg-6 col-md-6 col-12">
 <ul class="breadcrumb-nav">
 <li><a href="index-2.html">Home</a></li>
-<li>Login</li>
+<li>Registration</li>
 </ul>
 </div>
 </div>
@@ -176,50 +178,56 @@ Sibebar</a></li>
 </div>
 
 
-<section class="login section">
+<section class="login registration section">
 <div class="container">
 <div class="row">
 <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-12">
 <div class="form-head">
-<h4 class="title">Login</h4>
+<h4 class="title">Registration</h4>
 <form action="#!" method="post">
+<div class="socila-login">
+<ul>
+<li><a href="javascript:void(0)" class="facebook"><i class="lni lni-facebook-original"></i>Import
+From Facebook</a></li>
+<li><a href="javascript:void(0)" class="google"><i class="lni lni-google"></i>Import From Google
+Plus</a>
+</li>
+</ul>
+</div>
+<div class="alt-option">
+<span>Or</span>
+</div>
 <div class="form-group">
-<label>Username or email</label>
+<label>Name</label>
+<input name="password" type="text">
+</div>
+<div class="form-group">
+<label>Email</label>
 <input name="email" type="email">
 </div>
 <div class="form-group">
 <label>Password</label>
 <input name="password" type="password">
 </div>
+<div class="form-group">
+<label>Confirm Password</label>
+<input name="password" type="password">
+</div>
 <div class="check-and-pass">
 <div class="row align-items-center">
-<div class="col-lg-6 col-md-6 col-12">
+<div class="col-12">
 <div class="form-check">
 <input type="checkbox" class="form-check-input width-auto" id="exampleCheck1">
-<label class="form-check-label">Remember me</label>
+<label class="form-check-label">Agree to our <a href="javascript:void(0)">Terms and
+Conditions</a></label>
 </div>
-</div>
-<div class="col-lg-6 col-md-6 col-12">
-<a href="javascript:void(0)" class="lost-pass">Lost your password?</a>
 </div>
 </div>
 </div>
 <div class="button">
-<button type="submit" class="btn">Login Now</button>
+<button type="submit" class="btn">Registration</button>
 </div>
-<div class="alt-option">
-<span>Or</span>
-</div>
-<div class="socila-login">
-<ul>
-<li><a href="javascript:void(0)" class="facebook"><i class="lni lni-facebook-original"></i>Login With
-Facebook</a></li>
-<li><a href="javascript:void(0)" class="google"><i class="lni lni-google"></i>Login With Google
-Plus</a>
-</li>
-</ul>
-</div>
-<p class="outer-link">Don't have an account? <a href="registration.html">Register here</a>
+<p class="outer-link">Already have an account? <a href="login.html"> Login Now</a>
 </p>
 </form>
 </div>
@@ -382,5 +390,5 @@ App Store
 <script>eval(mod_pagespeed_HdsMDM_iw_);</script>
 </body>
 
-<!-- Mirrored from demo.graygrids.com/themes/classigrids-demo/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 23 May 2023 17:18:28 GMT -->
+<!-- Mirrored from demo.graygrids.com/themes/classigrids-demo/registration.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 23 May 2023 17:18:28 GMT -->
 </html>
