@@ -36,7 +36,10 @@ public class HomeController extends HttpServlet {
             DAO.DAOMarketing daoMarketing = new DAOMarketing();
 
             if (service.equals("displayAll")) {
-                ResultSet rsSubject = daoSubject.getData("select * from Subject");
+                ResultSet rsSubject = daoSubject.getData("SELECT [Subject].subject_name, [Subject].subject_id, [Subject].[image], COUNT(Course.course_id) AS quantity_of_course\n"
+                        + "FROM Subject\n"
+                        + "LEFT JOIN Course ON Subject.subject_id = Course.subject_id\n"
+                        + "GROUP BY [Subject].subject_id,  [Subject].subject_name, [Subject].[image]");
                 ResultSet rsCourse = daoCourse.getData("select * from [Course] c join [Subject] s on c.subject_id = s.subject_id ");
                 ResultSet rsMentor = daoMentor.getData("select * from Mentor");
                 ResultSet rsMarketing = daoMarketing.getData("select * from Marketing");

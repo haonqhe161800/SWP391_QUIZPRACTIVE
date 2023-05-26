@@ -106,12 +106,12 @@
                     <div class="col-12 p-0">
                         <div class="category-slider">
                             <%while(rsSubject.next()) {%>
-                            <a href="SubjectController?service=details&id=<%=rsSubject.getInt(1)%>" class="single-cat">
+                            <a href="SubjectController?service=details&id=<%=rsSubject.getInt(2)%>" class="single-cat">
                                 <div class="icon">
                                     <img src="<%=rsSubject.getString(3)%>" alt="#">
                                 </div>
-                                <h3><%=rsSubject.getString(2)%></h3>
-                                <h5 class="total">35</h5>
+                                <h3><%=rsSubject.getString(1)%></h3>
+                                <h5 class="total"><%=rsSubject.getInt(4)%></h5>
                             </a>
                             <% } %>
                         </div>

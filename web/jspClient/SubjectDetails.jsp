@@ -11,7 +11,7 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="x-ua-compatible" content="ie=edge" />
-        <title>ClassiGrids - Classified Ads and Listing Website Template.</title>
+        <title>Quiz Practice</title>
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
@@ -52,8 +52,6 @@
                                     <p class="wow fadeInUp" data-wow-delay=".5s">Let's learn and progress together</p>
                                 </div>
                                 <!-- End Search Form -->
-                                <!-- Start Search Form -->
-                                <!-- End Search Form -->
                             </div>
                         </div>
                     </div>
@@ -69,12 +67,12 @@
                             <div class="col-12 p-0">
                                 <div class="category-slider">
                                 <% while(rsAllSubject.next()) { %>
-                                    <a href="<%=rsAllSubject.getString(2)%>" class="single-cat">
+                                <a href="SubjectController?service=details&id=<%=rsAllSubject.getInt(2)%>" class="single-cat">
                                         <div class="icon">
                                             <img src="<%=rsAllSubject.getString(3)%>"alt="#">
                                         </div>
-                                        <h3>C</h3>
-                                        <h5 class="total">35</h5>
+                                        <h3><%=rsAllSubject.getString(1)%></h3>
+                                        <h5 class="total"><%=rsAllSubject.getInt(4)%></h5>
                                     </a>
                                 <%} %>
                                 </div>
