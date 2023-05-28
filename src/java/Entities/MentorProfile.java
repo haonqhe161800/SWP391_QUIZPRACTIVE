@@ -8,14 +8,14 @@ package Entities;
  *
  * @author admin
  */
-public class MentoProfile {
+public class MentorProfile {
     private int mentor_id;
     private String email, password, image, display_name, create_date, address, date_of_birth;
 
-    public MentoProfile() {
+    public MentorProfile() {
     }
 
-    public MentoProfile(int mentor_id, String email, String password, String image, String display_name, String create_date, String address, String date_of_birth) {
+    public MentorProfile(int mentor_id, String email, String password, String image, String display_name, String create_date, String address, String date_of_birth) {
         this.mentor_id = mentor_id;
         this.email = email;
         this.password = password;
