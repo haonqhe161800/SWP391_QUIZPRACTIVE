@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <!--FIXXED-->
         <link rel="stylesheet" href="view/blog/assets/blog-css/blogstyle.css"/>
