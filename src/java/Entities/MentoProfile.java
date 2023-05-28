@@ -4,42 +4,34 @@
  */
 package Entities;
 
-import java.sql.Date;
-
 /**
  *
- * @author QUANG HAO
+ * @author admin
  */
-public class UserProfile {
-    private String user_id;
-    private String email;
-    private String password;
-    private String image;
-    private String display_name;
-    private String created_date;
-    private String address;
-    private Date birth;
+public class MentoProfile {
+    private int mentor_id;
+    private String email, password, image, display_name, create_date, address, date_of_birth;
 
-    public UserProfile() {
+    public MentoProfile() {
     }
 
-    public UserProfile(String user_id, String email, String password, String image, String display_name, String created_date, String address, Date birth) {
-        this.user_id = user_id;
+    public MentoProfile(int mentor_id, String email, String password, String image, String display_name, String create_date, String address, String date_of_birth) {
+        this.mentor_id = mentor_id;
         this.email = email;
         this.password = password;
         this.image = image;
         this.display_name = display_name;
-        this.created_date = created_date;
+        this.create_date = create_date;
         this.address = address;
-        this.birth = birth;
+        this.date_of_birth = date_of_birth;
     }
 
-    public String getUser_id() {
-        return user_id;
+    public int getMentor_id() {
+        return mentor_id;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setMentor_id(int mentor_id) {
+        this.mentor_id = mentor_id;
     }
 
     public String getEmail() {
@@ -74,12 +66,12 @@ public class UserProfile {
         this.display_name = display_name;
     }
 
-    public String getCreated_date() {
-        return created_date;
+    public String getCreate_date() {
+        return create_date;
     }
 
-    public void setCreated_date(String created_date) {
-        this.created_date = created_date;
+    public void setCreate_date(String create_date) {
+        this.create_date = create_date;
     }
 
     public String getAddress() {
@@ -90,15 +82,13 @@ public class UserProfile {
         this.address = address;
     }
 
-    public Date getBirth() {
-        return birth;
+    public String getDate_of_birth() {
+        return date_of_birth;
     }
 
-    public void setBirth(Date birth) {
-        this.birth = birth;
+    public void setDate_of_birth(String date_of_birth) {
+        this.date_of_birth = date_of_birth;
     }
-  
-    
     
     
 }

@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.*"%>
+<%@page import="java.sql.ResultSet"%>
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
 
@@ -24,12 +26,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 
     <!-- ========================= CSS here ========================= -->
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../assets/css/LineIcons.2.0.css" />
-    <link rel="stylesheet" href="../assets/css/animate.css" />
-    <link rel="stylesheet" href="../assets/css/tiny-slider.css" />
-    <link rel="stylesheet" href="../assets/css/glightbox.min.css" />
-    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/css/LineIcons.2.0.css" />
+    <link rel="stylesheet" href="./assets/css/animate.css" />
+    <link rel="stylesheet" href="./assets/css/tiny-slider.css" />
+    <link rel="stylesheet" href="./assets/css/glightbox.min.css" />
+    <link rel="stylesheet" href="./assets/css/main.css" />
 </head>
 
 <body>
@@ -87,130 +89,31 @@
     </section>
     <!-- End Hero Area -->
 
+    
     <!-- Start Categories Area -->
+    
+    <%
+        ResultSet rsSubject = (ResultSet)request.getAttribute("rsSubject");
+        ResultSet rsCourse = (ResultSet)request.getAttribute("rsCourse");
+        ResultSet rsMentor = (ResultSet)request.getAttribute("rsMentor");
+        ResultSet rsMarketing = (ResultSet)request.getAttribute("rsMarketing");
+    %>
+    
     <section class="categories">
         <div class="container">
             <div class="cat-inner">
                 <div class="row">
                     <div class="col-12 p-0">
                         <div class="category-slider">
-                            <!-- Start Single Category -->
-                            <a href="#" class="single-cat">
+                            <%while(rsSubject.next()) {%>
+                            <a href="SubjectController?service=details&id=<%=rsSubject.getInt(2)%>" class="single-cat">
                                 <div class="icon">
-                                    <img src="https://tse1.mm.bing.net/th?id=OIP.BPbaRdlEItg1oqqyGlkW_AHaHa&pid=Api&P=0&h=180" alt="#">
+                                    <img src="<%=rsSubject.getString(3)%>" alt="#">
                                 </div>
-                                <h3>Math</h3>
-                                <h5 class="total">35</h5>
+                                <h3><%=rsSubject.getString(1)%></h3>
+                                <h5 class="total"><%=rsSubject.getInt(4)%></h5>
                             </a>
-                            <!-- End Single Category -->
-                            <!-- Start Single Category -->
-                            <a href="category.html" class="single-cat">
-                                <div class="icon">
-                                    <img src="https://tse1.mm.bing.net/th?id=OIP.E3u5DstNSu_PUW6-aBdCOgHaEK&pid=Api&P=0&h=180" alt="#">
-                                </div>
-                                <h3>Program</h3>
-                                <h5 class="total">22</h5>
-                            </a>
-                            <!-- End Single Category -->
-                            <!-- Start Single Category -->
-                            <a href="category.html" class="single-cat">
-                                <div class="icon">
-                                    <img src="../assets/images/categories/matrimony.svg" alt="#">
-                                </div>
-                                <h3>Subject Name</h3>
-                                <h5 class="total">số lượng course</h5>
-                            </a>
-                            <!-- End Single Category -->
-                            <!-- Start Single Category -->
-                            <a href="category.html" class="single-cat">
-                                <div class="icon">
-                                    <img src="../assets/images/categories/furniture.svg" alt="#">
-                                </div>
-                                <h3>Subject Name</h3>
-                                <h5 class="total">số lượng course</h5>
-                            </a>
-                            <!-- End Single Category -->
-                            <!-- Start Single Category -->
-                            <a href="category.html" class="single-cat">
-                                <div class="icon">
-                                    <img src="../assets/images/categories/jobs.svg" alt="#">
-                                </div>
-                                <h3>Subject Name</h3>
-                                <h5 class="total">số lượng course</h5>
-                            </a>
-                            <!-- End Single Category -->
-                            <!-- Start Single Category -->
-                            <a href="category.html" class="single-cat">
-                                <div class="icon">
-                                    <img src="../assets/images/categories/real-estate.svg" alt="#">
-                                </div>
-                                <h3>Subject Name</h3>
-                                <h5 class="total">số lượng course</h5>
-                            </a>
-                            <!-- End Single Category -->
-                            <!-- Start Single Category -->
-                            <a href="category.html" class="single-cat">
-                                <div class="icon">
-                                    <img src="../assets/images/categories/laptop.svg" alt="#">
-                                </div>
-                                <h3>Subject Name</h3>
-                                <h5 class="total">số lượng course</h5>
-                            </a>
-                            <!-- End Single Category -->
-                            <!-- Start Single Category -->
-                            <a href="category.html" class="single-cat">
-                                <div class="icon">
-                                    <img src="../assets/images/categories/hospital.svg" alt="#">
-                                </div>
-                                <h3>Subject Name</h3>
-                                <h5 class="total">số lượng course</h5>
-                            </a>
-                            <!-- End Single Category -->
-                            <!-- Start Single Category -->
-                            <a href="category.html" class="single-cat">
-                                <div class="icon">
-                                    <img src="../assets/images/categories/tshirt.svg" alt="#">
-                                </div>
-                                <h3>Subject Name</h3>
-                                <h5 class="total">số lượng course</h5>
-                            </a>
-                            <!-- End Single Category -->
-                            <!-- Start Single Category -->
-                            <a href="category.html" class="single-cat">
-                                <div class="icon">
-                                    <img src="../assets/images/categories/education.svg" alt="#">
-                                </div>
-                                <h3>Subject Name</h3>
-                                <h5 class="total">số lượng course</h5>
-                            </a>
-                            <!-- End Single Category -->
-                            <!-- Start Single Category -->
-                            <a href="category.html" class="single-cat">
-                                <div class="icon">
-                                    <img src="../assets/images/categories/controller.svg" alt="#">
-                                </div>
-                                <h3>Subject Name</h3>
-                                <h5 class="total">số lượng course</h5>
-                            </a>
-                            <!-- End Single Category -->
-                            <!-- Start Single Category -->
-                            <a href="category.html" class="single-cat">
-                                <div class="icon">
-                                    <img src="../assets/images/categories/travel.svg" alt="#">
-                                </div>
-                                <h3>Subject Name</h3>
-                                <h5 class="total">số lượng course</h5>
-                            </a>
-                            <!-- End Single Category -->
-                            <!-- Start Single Category -->
-                            <a href="category.html" class="single-cat">
-                                <div class="icon">
-                                    <img src="../assets/images/categories/watch.svg" alt="#">
-                                </div>
-                                <h3>Subject Name</h3>
-                                <h5 class="total">số lượng course</h5>
-                            </a>
-                            <!-- End Single Category -->
+                            <% } %>
                         </div>
                     </div>
                 </div>
@@ -219,6 +122,9 @@
     </section>
     <!-- /End Categories Area -->
 
+    
+    
+    
     <!-- List Course -->
     <section class="items-grid section custom-padding">
         <div class="container">
@@ -226,24 +132,25 @@
                 <div class="col-12">
                     <div class="section-title">
                         <h2 class="wow fadeInUp" data-wow-delay=".4s">Latest Course</h2>
-<!--                        <p class="wow fadeInUp" data-wow-delay=".6s">There are many variations of passages of Lorem
-                            Ipsum available, but the majority have suffered alteration in some form.</p>-->
                     </div>
                 </div>
             </div>
+            
             <div class="single-head">
                 <div class="row">
+                    <%while(rsCourse.next()) {%>
                     <div class="col-lg-4 col-md-6 col-12">
-                        <!-- Start Single Grid -->
                         <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
                             <div class="image"> <!--ảnh course-->
                                 <!--Click vào ảnh cũng giống như click vào phần details -->
-                                <a href="#" class="thumbnail"><img src="../assets/images/items-grid/img1.jpg" alt="#"></a>
+                                <a href="#" class="thumbnail">
+                                    <img height="218px" src="<%=rsCourse.getString(6)%>" alt="#">
+                                </a>
                                 <div class="author">
                                     <div class="author-image">    <!--ảnh mentor-->
                                         <a href="#">
-                                            <img src="../assets/images/items-grid/author-1.jpg" alt="#">
-                                            <span>Mentor name</span>
+                                            <img src="./assets/images/items-grid/author-1.jpg" alt="#">
+                                        <span>Mentor name</span>
                                         </a>
                                     </div>
                                     <a href="#" class="sale"> Join to study </a>
@@ -251,14 +158,14 @@
                             </div>
                             <div class="content">
                                 <div class="top-content">
-                                    <p>Subject name</p>
-                                    <h3 class="title"> Course Name </h3>
-                                    <p class="update-time">Ngày update gần nhất</p>
+                                    <p><%=rsCourse.getString(4)%></p>
+                                    <h3 class="title"> <%=rsCourse.getString(11)%>  </h3>
+                                    <p class="update-time">Ngày update gần nhất <%=rsCourse.getString(9)%></p>
                                     <ul class="rating">
-                                        <li>số người joined (35)</a></li>
+                                        <li>số người joined (<%=rsCourse.getInt(8)%>)</li>
                                     </ul>
                                     <ul class="info-list">
-                                        <li><i class="lni lni-timer"></i> Ngày đăng khóa học</a></li>
+                                        <li><i class="lni lni-timer"></i> Ngày đăng khóa học <%=rsCourse.getString(9)%></li>
                                     </ul>
                                 </div>
                                 <div class="bottom-content">
@@ -266,177 +173,8 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- End Single Grid -->
                     </div>
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <!-- Start Single Grid -->
-                        <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
-                            <div class="image"> <!--ảnh course-->
-                                <!--Click vào ảnh cũng giống như click vào phần details -->
-                                <a href="#" class="thumbnail"><img src="../assets/images/items-grid/img1.jpg" alt="#"></a>
-                                <div class="author">
-                                    <div class="author-image">    <!--ảnh mentor-->
-                                        <a href="#">
-                                            <img src="../assets/images/items-grid/author-1.jpg" alt="#">
-                                            <span>Mentor name</span>
-                                        </a>
-                                    </div>
-                                    <a href="#" class="sale"> Join to study </a>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <div class="top-content">
-                                    <p>Subject name</p>
-                                    <h3 class="title"> Course Name </h3>
-                                    <p class="update-time">Ngày update gần nhất</p>
-                                    <ul class="rating">
-                                        <li>số người joined (35)</a></li>
-                                    </ul>
-                                    <ul class="info-list">
-                                        <li><i class="lni lni-timer"></i> Ngày đăng khóa học</a></li>
-                                    </ul>
-                                </div>
-                                <div class="bottom-content">
-                                    <a href="#" class="btn btn-block btn-primary">Details</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Single Grid -->
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <!-- Start Single Grid -->
-                        <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
-                            <div class="image"> <!--ảnh course-->
-                                <!--Click vào ảnh cũng giống như click vào phần details -->
-                                <a href="#" class="thumbnail"><img src="../assets/images/items-grid/img1.jpg" alt="#"></a>
-                                <div class="author">
-                                    <div class="author-image">    <!--ảnh mentor-->
-                                        <a href="#">
-                                            <img src="../assets/images/items-grid/author-1.jpg" alt="#">
-                                            <span>Mentor name</span>
-                                        </a>
-                                    </div>
-                                    <a href="#" class="sale"> Join to study </a>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <div class="top-content">
-                                    <p>Subject name</p>
-                                    <h3 class="title"> Course Name </h3>
-                                    <p class="update-time">Ngày update gần nhất</p>
-                                    <ul class="rating">
-                                        <li>số người joined (35)</a></li>
-                                    </ul>
-                                    <ul class="info-list">
-                                        <li><i class="lni lni-timer"></i> Ngày đăng khóa học</a></li>
-                                    </ul>
-                                </div>
-                                <div class="bottom-content">
-                                    <a href="#" class="btn btn-block btn-primary">Details</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Single Grid -->
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <!-- Start Single Grid -->
-                        <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
-                            <div class="image"> <!--ảnh course-->
-                                <!--Click vào ảnh cũng giống như click vào phần details -->
-                                <a href="#" class="thumbnail"><img src="../assets/images/items-grid/img1.jpg" alt="#"></a>
-                                <div class="author">
-                                    <div class="author-image">    <!--ảnh mentor-->
-                                        <img src="../assets/images/items-grid/author-1.jpg" alt="#">
-                                        <span>Mentor name</span></a>
-                                    </div>
-                                    <a href="#" class="sale"> Join to study </a>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <div class="top-content">
-                                    <p>Subject name</p>
-                                    <h3 class="title"> Course Name </h3>
-                                    <p class="update-time">Ngày update gần nhất</p>
-                                    <ul class="rating">
-                                        <li>số người joined (35)</a></li>
-                                    </ul>
-                                    <ul class="info-list">
-                                        <li><i class="lni lni-timer"></i> Ngày đăng khóa học</a></li>
-                                    </ul>
-                                </div>
-                                <div class="bottom-content">
-                                    <a href="#" class="btn btn-block btn-primary">Details</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Single Grid -->
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <!-- Start Single Grid -->
-                        <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
-                            <div class="image"> <!--ảnh course-->
-                                <!--Click vào ảnh cũng giống như click vào phần details -->
-                                <a href="#" class="thumbnail"><img src="../assets/images/items-grid/img1.jpg" alt="#"></a>
-                                <div class="author">
-                                    <div class="author-image">    <!--ảnh mentor-->
-                                        <img src="../assets/images/items-grid/author-1.jpg" alt="#">
-                                        <span>Mentor name</span></a>
-                                    </div>
-                                    <a href="#" class="sale"> Join to study </a>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <div class="top-content">
-                                    <p>Subject name</p>
-                                    <h3 class="title"> Course Name </h3>
-                                    <p class="update-time">Ngày update gần nhất</p>
-                                    <ul class="rating">
-                                        <li>số người joined (35)</a></li>
-                                    </ul>
-                                    <ul class="info-list">
-                                        <li><i class="lni lni-timer"></i> Ngày đăng khóa học</a></li>
-                                    </ul>
-                                </div>
-                                <div class="bottom-content">
-                                    <a href="#" class="btn btn-block btn-primary">Details</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Single Grid -->
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <!-- Start Single Grid -->
-                        <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
-                            <div class="image"> <!--ảnh course-->
-                                <!--Click vào ảnh cũng giống như click vào phần details -->
-                                <a href="#" class="thumbnail"><img src="../assets/images/items-grid/img1.jpg" alt="#"></a>
-                                <div class="author">
-                                    <div class="author-image">    <!--ảnh mentor-->
-                                        <img src="../assets/images/items-grid/author-1.jpg" alt="#">
-                                        <span>Mentor name</span></a>
-                                    </div>
-                                    <a href="#" class="sale"> Join to study </a>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <div class="top-content">
-                                    <p>Subject name</p>
-                                    <h3 class="title"> Course Name </h3>
-                                    <p class="update-time">Ngày update gần nhất</p>
-                                    <ul class="rating">
-                                        <li>số người joined (35)</a></li>
-                                    </ul>
-                                    <ul class="info-list">
-                                        <li><i class="lni lni-timer"></i> Ngày đăng khóa học</a></li>
-                                    </ul>
-                                </div>
-                                <div class="bottom-content">
-                                    <a href="#" class="btn btn-block btn-primary">Details</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Single Grid -->
-                    </div>
+                    <% } %>
                 </div>
             </div>
             <div class="row view-all" style="margin-top: 10px">
@@ -451,6 +189,9 @@
     
     
     
+                
+                
+                
     <!--Mentor List-->
     <!-- Chỗ này copy bên trên, còn làm thì tự thiết kế -->
     <section class="items-grid section custom-padding">
@@ -788,11 +529,11 @@
     </a>
 
     <!-- ========================= JS here ========================= -->
-    <script src="../assets/js/bootstrap.min.js"></script>
-    <script src="../assets/js/wow.min.js"></script>
-    <script src="../assets/js/tiny-slider.js"></script>
-    <script src="../assets/js/glightbox.min.js"></script>
-    <script src="../assets/js/main.js"></script>
+    <script src="./assets/js/bootstrap.min.js"></script>
+    <script src="./assets/js/wow.min.js"></script>
+    <script src="./assets/js/tiny-slider.js"></script>
+    <script src="./assets/js/glightbox.min.js"></script>
+    <script src="./assets/js/main.js"></script>
     <script type="text/javascript">
         //========= Category Slider 
         tns({
