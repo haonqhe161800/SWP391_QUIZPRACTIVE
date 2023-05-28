@@ -22,7 +22,8 @@ public class ControllBlogList extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("Home.jsp").forward(request, response);
+//        request.getRequestDispatcher("view/blog/BlogDetail.jsp").forward(request, response);
+        request.getRequestDispatcher("view/blog/BlogList.jsp").forward(request, response);
     } 
 
     @Override
