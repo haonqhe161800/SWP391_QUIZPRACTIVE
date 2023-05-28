@@ -73,7 +73,7 @@
                                                 <ul>
                                                     <li class="mega-menu-title">Dashboard</li>
                                                     <li class="nav-item"><a href="#">Account Overview</a></li>
-                                                    <li class="nav-item"><a href="#">My Profile</a></li>
+                                                    <li class="http://localhost:9999/WebApplication2/Profile"><a href="#">My Profile</a></li>
                                                     <li class="nav-item"><a href="#">My Ads</a></li>
                                                     <li class="nav-item"><a href="#">Messages</a></li></li>
                                                 </ul>

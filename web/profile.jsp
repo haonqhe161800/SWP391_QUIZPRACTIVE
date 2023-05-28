@@ -1,11 +1,17 @@
+<%-- 
+    Document   : profile
+    Created on : May 25, 2023, 10:35:15 PM
+    Author     : QUANG HAO
+--%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="model.Account" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <jsp:include page="base-view/baseTag.jsp"></jsp:include>
-            <link href="css/base.css" rel="stylesheet" type="text/css"/>
-            <link href="css/profile.css" rel="stylesheet" type="text/css"/>
+            <link href="assets/css/base.css" rel="stylesheet" type="text/css"/>
+            <link href="assets/css/profile.css" rel="stylesheet" type="text/css"/>
 
             <title>Profile</title>
         </head>
@@ -75,9 +81,9 @@
             </form>
 
             <div id="avatar">
-                <img src="uploads/${acc.avatar}" alt="Avatar" width="250" height="250">
+                <img src="https://th.bing.com/th?id=OIP.oDswBx6Lu_H42yRqQC_xUwHaHd&w=249&h=250&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2/${acc.avatar}" alt="Avatar" width="250" height="250">
             </div>  
-        </div>
+
     </body>
 
 </html>

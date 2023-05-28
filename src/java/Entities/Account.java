@@ -10,8 +10,8 @@ import java.sql.Date;
  *
  * @author QUANG HAO
  */
-public class UserProfile {
-    private String user_id;
+public class Account {
+     private int user_id;
     private String email;
     private String password;
     private String image;
@@ -20,10 +20,10 @@ public class UserProfile {
     private String address;
     private Date birth;
 
-    public UserProfile() {
+    public Account() {
     }
 
-    public UserProfile(String user_id, String email, String password, String image, String display_name, String created_date, String address, Date birth) {
+    public Account(int user_id, String email, String password, String image, String display_name, String created_date, String address, Date birth) {
         this.user_id = user_id;
         this.email = email;
         this.password = password;
@@ -34,11 +34,11 @@ public class UserProfile {
         this.birth = birth;
     }
 
-    public String getUser_id() {
+    public int getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(String user_id) {
+    public void setUser_id(int user_id) {
         this.user_id = user_id;
     }
 
@@ -97,8 +97,7 @@ public class UserProfile {
     public void setBirth(Date birth) {
         this.birth = birth;
     }
-  
-    
+
     
     
 }
