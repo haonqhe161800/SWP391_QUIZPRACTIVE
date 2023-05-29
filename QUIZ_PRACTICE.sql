@@ -128,8 +128,7 @@ CREATE TABLE [Marketing] (
 	[content] [nvarchar] (max) not null,
 	[tittle] [nvarchar] (max) not null
 )
-
-drop table Marketing	
+	
 
 insert into [Admin] values (1, 'tuanvm@gmail.com', '12345678')
 
