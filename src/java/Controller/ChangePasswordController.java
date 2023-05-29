@@ -11,7 +11,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import Entities.Account;
+import Entities.AccountUser;
+import Entities.AccountMentor;
+import Entities.AccountMaketer;
 import jakarta.servlet.annotation.WebServlet;
 /**
  *
@@ -65,7 +67,11 @@ public class ChangePasswordController extends HttpServlet {
            request.setCharacterEncoding("utf-8");
        
         AccountDAO accountDao = new AccountDAO();
-        Account oldAccount=(Account) request.getSession().getAttribute("account");
+        
+        //o dây can set profile cho 3 thang : mentor, user, marketing.
+        //vi nhom khong chia role chung len t buoc phai lam the
+        
+        AccountUser oldAccount=(AccountUser) request.getSession().getAttribute("account");
         int userid = oldAccount.getUser_id();
         String newPassword = request.getParameter("newPassword");
 //        accountDao.changePassword(user_id, newPassword);

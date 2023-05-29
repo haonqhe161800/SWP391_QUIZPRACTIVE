@@ -17,7 +17,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import Entities.Account;
+import Entities.AccountMaketer;
+import Entities.AccountMentor;
+import Entities.AccountUser;
 
 /**
  *
@@ -59,8 +61,10 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
         System.out.println("session: " + request.getSession().getAttribute("account"));
-        Account account = (Account) request.getSession().getAttribute("account");
-        System.out.println("acc: " + account);
+        //o dây can set profile cho 3 thang : mentor, user, marketing.
+        //vi nhom khong chia role chung len t buoc phai lam the
+//        Account account = (Account) request.getSession().getAttribute("account");
+//        System.out.println("acc: " + account);
         request.setAttribute("acc", request.getSession().getAttribute("account"));
         request.getRequestDispatcher("profile.jsp").forward(request, response);
     }
@@ -73,8 +77,12 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
         AccountDAO accountDAO = new AccountDAO();
         String isNoti = "yes";
         request.setAttribute("isNoti", isNoti);
-        Account oldAccount = (Account) request.getSession().getAttribute("account");
-        int accountID = oldAccount.getUser_id();//lay id cu
+        
+        //o dây can set profile cho 3 thang : mentor, user, marketing.
+        //vi nhom khong chia role chung len t buoc phai lam the
+        
+//        Account oldAccount = (Account) request.getSession().getAttribute("account");
+//        int accountID = oldAccount.getUser_id();//lay id cu
         String fullname = request.getParameter("fullname");
         //String lastName = request.getParameter("lastName");
 //        boolean gender = true;
@@ -85,12 +93,15 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
         String image = request.getParameter("avatar");
         String address = request.getParameter("address");
         String filename = uploadFile(request);
-        Account acc = (Account) request.getSession().getAttribute("account");
+        
+        //o dây can set profile cho 3 thang : mentor, user, marketing.
+        //vi nhom khong chia role chung len t buoc phai lam the
+//        Account acc = (Account) request.getSession().getAttribute("account");
         // System.out.println("Phone: "+phone);
         // System.out.println("Name: "+fullname);
         // System.out.println("address: "+address);
 //        acc.setUserid(accountID);
-        acc.setDisplay_name(fullname);
+//        acc.setDisplay_name(fullname);
         //acc.setLastName(lastName);
         //acc.setGender(Gender.of(gender));
 //        acc.setPhone(phone);

@@ -8,14 +8,16 @@ package Entities;
  *
  * @author admin
  */
-public class MentorProfile {
+public class AccountMaketer {
+
     private int mentor_id;
     private String email, password, image, display_name, create_date, address, date_of_birth;
+    private String role = "makerting";
 
-    public MentorProfile() {
+    public AccountMaketer() {
     }
 
-    public MentorProfile(int mentor_id, String email, String password, String image, String display_name, String create_date, String address, String date_of_birth) {
+    public AccountMaketer(int mentor_id, String email, String password, String image, String display_name, String create_date, String address, String date_of_birth, String role) {
         this.mentor_id = mentor_id;
         this.email = email;
         this.password = password;
@@ -24,6 +26,7 @@ public class MentorProfile {
         this.create_date = create_date;
         this.address = address;
         this.date_of_birth = date_of_birth;
+        role = "makerting";
     }
 
     public int getMentor_id() {
@@ -89,6 +92,6 @@ public class MentorProfile {
     public void setDate_of_birth(String date_of_birth) {
         this.date_of_birth = date_of_birth;
     }
-    
+
     
 }

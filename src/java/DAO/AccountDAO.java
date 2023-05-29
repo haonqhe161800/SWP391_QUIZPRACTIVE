@@ -5,7 +5,7 @@
  */
 package DAO;
 
-import Entities.Account;
+import Entities.AccountUser;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -322,7 +322,7 @@ public class AccountDAO {
 //        return -1;
 //    }
 
-    public void editProfile(Account acc) {
+    public void editProfile(AccountUser acc) {
         Timestamp createdTime = new Timestamp(System.currentTimeMillis());
 
         String sql = "   UPDATE [Account] SET [fullname] =? , [phone] =?, [avatar]=?, [modify_date]= ?, [address] =? WHERE [userId] = ?";

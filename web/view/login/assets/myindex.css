@@ -1,0 +1,134 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    /* overflow: hidden; */
+}
+
+.abcdy {
+    width: 100%;
+    display: flex;
+}
+
+.left_slide {
+    width: calc((100%/12)*6);
+    height: 100vh;
+    color: #2e3856;
+    background-image: url('https://assets.quizlet.com/a/j/dist/app/i/signup/QZ_Auth_Light.f0832112f8d66a6.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+}
+
+.right_slide {
+    flex: 1;
+    /* overflow: scroll; */
+    padding: 1rem;
+    /* background-color: rgb(31, 153, 228); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+}
+
+.right_slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+
+.box_banner_mini {
+    position: fixed;
+    top: 5%;
+    right: 5%;
+    font-weight: 800;
+    font-family: 'Trebuchet MS' l
+}
+
+.login-header h1 {
+    padding-left: 20px;
+    margin-bottom: 0px;
+    font-family: 'Segoe UI';
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.login {
+    width: 80%;
+    /* background-color: cadetblue; */
+}
+
+.login-header {
+    font-size: 1rem;
+    padding: 10px 10px;
+}
+
+.login-form {
+    box-sizing: border-box;
+    padding-bottom: 10%;
+    text-align: center;
+}
+
+.form-input {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 10px;
+    gap: 10px;
+}
+
+.login input[type="text"],
+.login input[type="password"] {
+    width: 90%;
+    line-height: 3em;
+    font-family: 'Ubuntu', sans-serif;
+    border-radius: 5px;
+    border: 2px solid skyblue;
+}
+
+.checkbox {
+    transform: scale(1.3);
+}
+
+.forgot-pass a {
+    text-decoration: none;
+    list-style: none;
+    color: #181b39;
+    font-weight: 900;
+
+}
+
+.form-signin button {
+
+    width: 87%;
+    background: #4255ff;
+    border: none;
+    border-radius: 8px;
+    color: slategrey;
+    font-family: 'Ubuntu', sans-serif;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.title_signin {
+    color: white;
+    font-weight: 600;
+}
+
+.login-form-footer {
+    padding: 20px 20px;
+}
+
+.text_footer {
+    font-weight: 300;
+}
+
+.text_footer a {
+    list-style: none;
+    text-decoration: none;
+    color: black;
+    font-size: 15px;
+    font-weight: 900;
+}
+
+
