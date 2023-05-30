@@ -39,7 +39,7 @@ CREATE TABLE [User_type] (
 	[date_of_birth] [nvarchar] (250),
 	[academic_level] [nvarchar] (250),
 	[modify_date] [nvarchar] (250),
-	[gender] [int],
+	[gender] [int] NOT NULL CHECK (gender IN (0, 1)),
 	[role_id] [int] FOREIGN KEY REFERENCES [Role]([role_id]),
 )
 
@@ -66,7 +66,7 @@ CREATE TABLE [Mentor_type] (
 	[date_of_birth] [nvarchar] (250),
 	[academic_level] [nvarchar] (250),
 	[modify_date] [nvarchar] (250),
-	[gender] [int],
+	[gender] [int] NOT NULL CHECK (gender IN (0, 1)),
 	[specialize] [nvarchar] (MAX),
 	[role_id] [int] FOREIGN KEY REFERENCES [Role]([role_id]),
 )
@@ -133,7 +133,7 @@ CREATE TABLE [Marketer_type] (
 	[date_of_birth] [nvarchar] (250),
 	[academic_level] [nvarchar] (250),
 	[modify_date] [nvarchar] (250),
-	[gender] [int],
+	[gender] [int] NOT NULL CHECK (gender IN (0, 1)),
 	[role_id] [int] FOREIGN KEY REFERENCES [Role]([role_id]),
 )
 
@@ -155,9 +155,44 @@ CREATE TABLE [Marketing] (
 	[content] [nvarchar] (max) not null,
 	[tittle] [nvarchar] (max) not null
 )
-	
 
+--add role	
+INSERT INTO Role(role_id,role_name) VALUES(1,'admin')
+INSERT INTO Role(role_id,role_name) VALUES(2,'mentor')
+INSERT INTO Role(role_id,role_name) VALUES(3,'marketer')
+INSERT INTO Role(role_id,role_name) VALUES(4,'user')
+
+--add admin
 insert into [Admin] values (1, 'tuanvm@gmail.com', '12345678')
+
+--add user
+INSERT INTO [dbo].[User_type]
+           ([email] ,[password],[fullname],[display_name],[address],[date_of_birth],[gender],[role_id])
+     VALUES
+           ('ngohuunam2002@gmail.com','123456789','Ngo Huu Nam','NamNH',N'Việt Nam','2002-10-01',1,4)
+
+
+INSERT INTO [dbo].[User_type]
+           ([email] ,[password],[fullname],[display_name],[address],[date_of_birth],[gender],[role_id])
+     VALUES
+           ('nguyenvana@gmail.com','123456','Nguyen Van A','VanANguyen',N'Việt Nam','1999-10-01',1,4)
+
+
+--add markerter
+INSERT INTO [dbo].[Marketer_type]
+           ([email] ,[password],[fullname],[display_name],[address],[date_of_birth],[gender],[role_id])
+     VALUES
+           ('TranThiB@gmail.com','12345','Tran Thi B','BTran',N'Việt Nam','1998-01-01',0,3)
+
+
+
+--add mentor
+
+INSERT INTO [dbo].[Mentor_type]
+           ([email] ,[password],[fullname],[display_name],[address],[date_of_birth],[gender],[role_id])
+     VALUES
+           ('TranQuyBan@gmail.com','12345','BanKelly','QuyTran',N'Việt Nam','1990-01-01',0,2)
+
 
 insert into [Subject] values ('C', './assets/images/categories/C.png'),
 							 ('C++', './assets/images/categories/C++.png'),

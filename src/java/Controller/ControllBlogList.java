@@ -23,7 +23,7 @@ public class ControllBlogList extends HttpServlet {
 //        request.getRequestDispatcher("view/blog/BlogDetail.jsp").forward(request, response);
 //        request.getRequestDispatcher("view/blog/BlogList.jsp").forward(request, response);
 //        request.getRequestDispatcher("Register/register.jsp").forward(request, response);
-//        request.getRequestDispatcher("view/login/sign_in.jsp").forward(request, response);
+        request.getRequestDispatcher("view/login/sign_in.jsp").forward(request, response);
     }
 
     @Override
