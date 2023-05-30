@@ -4,12 +4,14 @@
  */
 package Entities;
 
+
 /**
  *
  * @author admin
  */
-public class AccountMentor {
-     private int mentor_id;
+public class AccountMarketer {
+
+    private int makerter_id;
     private String email;
     private String password;
     private String descyourself;
@@ -23,12 +25,12 @@ public class AccountMentor {
     private String modify_date;
     private int gender;
     private int role_id;
-    
-    public AccountMentor() {
+
+    public AccountMarketer() {
     }
 
-    public AccountMentor(int mentor_id, String email, String password, String descyourself, String fullName, String image, String display_name, String created_date, String address, String dob, String academiclevel, String modify_date, int gender, int role_id) {
-        this.mentor_id = mentor_id;
+    public AccountMarketer(int makerter_id, String email, String password, String descyourself, String fullName, String image, String display_name, String created_date, String address, String dob, String academiclevel, String modify_date, int gender, int role_id) {
+        this.makerter_id = makerter_id;
         this.email = email;
         this.password = password;
         this.descyourself = descyourself;
@@ -84,15 +86,13 @@ public class AccountMentor {
         this.address = address;
     }
 
-    public String getDob() {
-        return dob;
+    public int getGender() {
+        return gender;
     }
 
-    public void setDob(String dob) {
-        this.dob = dob;
+    public void setGender(int gender) {
+        this.gender = gender;
     }
 
-        
    
-    
 }

@@ -17,7 +17,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import Entities.AccountMaketer;
 import Entities.AccountMentor;
 import Entities.AccountUser;
 
@@ -94,8 +93,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
         String address = request.getParameter("address");
         String filename = uploadFile(request);
         
-        //o dây can set profile cho 3 thang : mentor, user, marketing.
-        //vi nhom khong chia role chung len t buoc phai lam the
+
 //        Account acc = (Account) request.getSession().getAttribute("account");
         // System.out.println("Phone: "+phone);
         // System.out.println("Name: "+fullname);

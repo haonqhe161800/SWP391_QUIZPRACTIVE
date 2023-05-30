@@ -9,11 +9,7 @@ import Entities.AccountUser;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-//import context.DBContext;
-import java.sql.Date;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-//import model.Role;
 
 /**
  *

@@ -6,8 +6,8 @@ body {
 }
 
 .abcdy {
-    width: 100%;
     display: flex;
+    width: 100%;
 }
 
 .left_slide {
@@ -77,7 +77,7 @@ body {
     gap: 10px;
 }
 
-.login input[type="text"],
+.login input[type="email"],
 .login input[type="password"] {
     width: 90%;
     line-height: 3em;

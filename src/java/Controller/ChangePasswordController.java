@@ -13,7 +13,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import Entities.AccountUser;
 import Entities.AccountMentor;
-import Entities.AccountMaketer;
 import jakarta.servlet.annotation.WebServlet;
 /**
  *
@@ -21,29 +20,6 @@ import jakarta.servlet.annotation.WebServlet;
  */
 @WebServlet(name = "ChangePasswordController", urlPatterns = {"/ChangePassword"})
 public class ChangePasswordController extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-  
-        
-    
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -52,14 +28,6 @@ public class ChangePasswordController extends HttpServlet {
         request.getRequestDispatcher("change-password.jsp").forward(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
       @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -72,10 +40,10 @@ public class ChangePasswordController extends HttpServlet {
         //vi nhom khong chia role chung len t buoc phai lam the
         
         AccountUser oldAccount=(AccountUser) request.getSession().getAttribute("account");
-        int userid = oldAccount.getUser_id();
+//        int userid = oldAccount.getUser_id();
         String newPassword = request.getParameter("newPassword");
 //        accountDao.changePassword(user_id, newPassword);
-    accountDao.changePassword(userid, newPassword);
+//    accountDao.changePassword(userid, newPassword);
         String isNoti = "yes";
         request.setAttribute("isNoti", isNoti);
         

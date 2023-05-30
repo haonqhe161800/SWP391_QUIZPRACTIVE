@@ -5,7 +5,7 @@
 package Controller;
 
 import DAO.DAOCourse;
-import DAO.DAOMarketing;
+import DAO.DAOMarketer;
 import DAO.DAOMentor;
 import DAO.DAOSubject;
 import java.io.IOException;
@@ -33,7 +33,7 @@ public class HomeController extends HttpServlet {
             DAO.DAOSubject daoSubject = new DAOSubject();
             DAO.DAOCourse daoCourse = new DAOCourse();
             DAO.DAOMentor daoMentor = new DAOMentor();
-            DAO.DAOMarketing daoMarketing = new DAOMarketing();
+            DAO.DAOMarketer daoMarketing = new DAOMarketer();
 
             if (service.equals("displayAll")) {
                 ResultSet rsSubject = daoSubject.getData("SELECT [Subject].subject_name, [Subject].subject_id, [Subject].[image], COUNT(Course.course_id) AS quantity_of_course\n"
