@@ -144,6 +144,7 @@
                             <div class="button header-button">
                                 <a href="#" class="btn">Practice</a>
                             </div>
+                            <%}%>
                         </nav> <!-- navbar -->
                     </div>
                 </div>
