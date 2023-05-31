@@ -36,6 +36,7 @@
         <%
         ResultSet rsSubject = (ResultSet) request.getAttribute("rsSubject");
         ResultSet rsCourse = (ResultSet) request.getAttribute("rsCourse");
+        int subject_id = (int) request.getAttribute("subject_id");
         %>
 
         <jsp:include page="Header.jsp"></jsp:include>
@@ -54,6 +55,7 @@
                                 <!-- Start Search Form -->
                                 <form action="SubjectController" method="post">
                                     <input type="hidden" value="search" name="service">
+                                    <input type="hidden" value="<%=subject_id%>" name="subject_id">
                                     <div class="search-form wow fadeInUp" data-wow-delay=".7s">
                                         <div class="row">
                                             <div class="col-lg-9 col-md-9 col-12 p-0">

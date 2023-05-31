@@ -129,7 +129,7 @@ public class Login extends HttpServlet {
         if (aa != null && au == null && am == null && ame == null) {
             session.setAttribute("accountAdmin", aa);
             //tra ve Dashboard admin
-            response.sendRedirect("cbl");
+            response.sendRedirect("HomeController");
         } else if (au != null && am == null && ame == null) {
             session.setAttribute("accountUser", au);
             //tra ve home
@@ -138,11 +138,11 @@ public class Login extends HttpServlet {
         } else if (am != null && au == null && ame == null) {
             session.setAttribute("accountMarketer", am);
             //tra ve Dashboard marketer
-            response.sendRedirect("cbl");
+            response.sendRedirect("HomeController");
         } else if (ame != null && am == null && au == null) {
             session.setAttribute("accountMentor", ame);
             //tra ve Dashboard memtor
-            response.sendRedirect("cbl");
+            response.sendRedirect("HomeController");
         } else {
             request.getRequestDispatcher("view/login/sign_in.jsp").forward(request, response);
         }
