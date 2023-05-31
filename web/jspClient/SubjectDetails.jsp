@@ -141,7 +141,7 @@
                                         </ul>
                                     </div>
                                     <div class="bottom-content">
-                                        <a href="#" class="btn btn-block btn-primary">Details</a>
+                                        <a href="CourseController?service=details&id=<%=rsCourse.getInt(1)%>" class="btn btn-block btn-primary">Details</a>
                                     </div>
                                 </div>
                             </div>

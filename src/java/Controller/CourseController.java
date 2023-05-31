@@ -42,22 +42,26 @@ public class CourseController extends HttpServlet {
             String service = request.getParameter("service");
             
             if(service.equals("details")) {
-                String id_raw = request.getParameter("course_id");
+                String id_raw = request.getParameter("id");
                 int id = Integer.parseInt(id_raw);
                 ResultSet rsCourse = daoCourse.getData("select * from Course where course_id = " + id);
                 ResultSet rsCountQuestion = daoCourse.getData("select Count(q.question_name) from Course c, Question q where q.course_id = c.course_id and c.course_id = " + id);
-                int countQuestion = 0;
+                int cout = 0;
                 if(rsCountQuestion.next()) {
-                    countQuestion = rsCountQuestion.getInt(1);
+                    cout = rsCountQuestion.getInt(1);
                 }
-                request.setAttribute("countQuestion", countQuestion);
+                request.setAttribute("cout", cout);
                 request.setAttribute("rsCourse", rsCourse);
                 request.getRequestDispatcher("jspClient/CourseDetails.jsp").forward(request, response);
+            }
+            
+            if(service.equals("errol")) {
+                
             }
         } catch (SQLException ex) {
             Logger.getLogger(CourseController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    } 
+         } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
