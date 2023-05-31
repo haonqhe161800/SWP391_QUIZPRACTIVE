@@ -71,49 +71,17 @@ body {
 }
 
 .dob-input {
-    width: 90%;
+    width: 100%;
 }
 
 .title p {
-    text-align: left;
+    float: left;
+    padding-left: 24px;
     font-size: 15px;
     font-weight: 600;
     color: rgb(191, 39, 39);
     letter-spacing: 1px;
 }
-
-.dob-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-}
-
-.dob-content select option {
-    color: #2e3856;
-    font-weight: 500;
-}
-
-.select-day {
-    width: 33.33333%;
-    padding: 10px 10px;
-    cursor: pointer;
-    color: #2e3856;
-}
-
-.select-month {
-    padding: 10px 8px;
-    cursor: pointer;
-    color: #2e3856;
-}
-
-.select-year {
-    width: 27%;
-    padding: 10px 10px;
-    cursor: pointer;
-    color: #2e3856;
-}
-
 .radio-gender {
     display: flex;
     justify-content: space-around;
@@ -129,16 +97,16 @@ body {
     font-weight: 600;
     color: rgba(51, 65, 85, 1);
 }
-
 .login input[type="email"],
-.login input[type="password"] {
+.login input[type="password"],
+.login input[type="text"],
+.login input[type="date"]{
     width: 90%;
     line-height: 3em;
     font-family: 'Ubuntu', sans-serif;
     border-radius: 5px;
     border: 2px solid skyblue;
 }
-
 
 .radio-inputs {
     position: relative;
@@ -193,7 +161,7 @@ body {
 #bt {
     display: inline-block;
     cursor: pointer;
-    background-color:#2e3856; 
+    background-color:#2e3856;
     font-size: 18px;
     border-radius: 3px;
     box-shadow: 0px 2px 2px 2px black;
@@ -273,7 +241,9 @@ body {
     }
 
     .login input[type="email"],
-    .login input[type="password"] {
+    .login input[type="password"],
+    .login input[type="text"],
+    .login input[type="date"]{
         line-height: 2em;
     }
 

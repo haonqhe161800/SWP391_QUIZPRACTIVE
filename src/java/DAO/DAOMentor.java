@@ -1,4 +1,3 @@
-
 package DAO;
 
 import Entities.AccountMentor;
@@ -63,7 +62,7 @@ public class DAOMentor extends DBConnect {
     }
 
     //check exist
-    public AccountMentor checkExist (String emailInput){
+    public AccountMentor checkExist(String emailInput) {
         String sql = "SELECT * FROM [Mentor_type] WHERE email = ?";
 
         try {
@@ -95,38 +94,38 @@ public class DAOMentor extends DBConnect {
         }
         return null;
     }
-    
-    
-        //INSERT AccountMentor
-    public void insertMentor(String emailInput, String password, String displayname, String dob, int gender, int roleid) {
-        String sql = "INSERT INTO [dbo].[Mentor_type]\n"
+
+    //INSERT AccountMentor
+    public void insertMentor(String emailInput, String password, String fullname, String displayname, String dob, int gender, int roleid) {
+        String sql = "INSERT INTO [dbo].[User_type]\n"
                 + "           ([email]\n"
                 + "           ,[password]\n"
+                + "           ,[fullname]\n"
                 + "           ,[display_name]\n"
                 + "           ,[date_of_birth]\n"
                 + "           ,[gender]\n"
                 + "           ,[role_id])\n"
-                + "     VALUES (?, ?, ?, ?, ?, ?)";
-        
+                + "     VALUES (?, ?, ?, ?, ?, ?, ?)";
+
         try {
-             PreparedStatement st = conn.prepareStatement(sql);
-             st.setString(1,emailInput);
-             st.setString(2,password);
-             st.setString(3,displayname);
-             st.setString(4,dob);
-             st.setInt(5,gender);
-             st.setInt(6,roleid);
-             st.executeUpdate();
-        }
-        catch (SQLException e) {
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setString(1, emailInput);
+            st.setString(2, password);
+            st.setString(3, fullname);
+            st.setString(4, displayname);
+            st.setString(5, dob);
+            st.setInt(6, gender);
+            st.setInt(7, roleid);
+            st.executeUpdate();
+        } catch (SQLException e) {
             System.out.println(e);
         }
     }
 
     public static void main(String args[]) {
-         DAOMentor dudb = new DAOMentor();
+        DAOMentor dudb = new DAOMentor();
         AccountMentor au = dudb.checkLogin("TranQuyBan@gmail.com", "12345");
-        
+
         System.out.println(au.getDisplay_name());
     }
 }

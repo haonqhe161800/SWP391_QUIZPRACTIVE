@@ -34,4 +34,27 @@ public class DAORole extends DBConnect {
         }
         return list;
     }
+    
+    //return String role name
+    public Role getRoleById(int role_id){
+        String sql = "SELECT * FROM Role WHERE role_id = ?";
+        try {
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setInt(1, role_id);
+            ResultSet rs = st.executeQuery();
+            if(rs.next()){
+                Role r = new Role(rs.getInt("role_id"), rs.getString("role_name"));
+                return r;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+    
+    
+    public static void main(String[] args) {
+        DAORole dr = new DAORole();
+        System.out.println(dr.getRoleById(4).getRoleName());
+    }
 }

@@ -51,7 +51,7 @@
                             </div>
                         </form>
                         <div class="login-form-footer">
-                            <span class="text_footer"> Don't have an account? <a class="sign-up" href="#">Sign
+                            <span class="text_footer"> Don't have an account? <a class="sign-up" href="signup">Sign
                                     Up!</a></span>
                         </div>
                     </div>
