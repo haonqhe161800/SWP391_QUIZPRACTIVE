@@ -32,15 +32,16 @@
         <link rel="stylesheet" href="./assets/css/main.css" />
     </head>
     <body>
-        
+
         <%
         ResultSet rsCourse = (ResultSet) request.getAttribute("rsCourse");
         int cout = (int) request.getAttribute("cout");
         %>
-        
+
         <jsp:include page="Header.jsp"></jsp:include>
-        
-        <div style="margin: 100px 0" class="container">
+
+
+            <div style="margin: 100px 0" class="container">
             <%if(rsCourse.next()) {%>
             <div>
                 <img style="width:200px; height: 200px" src="<%=rsCourse.getString(6)%>">
@@ -50,12 +51,14 @@
                 <p><%=rsCourse.getString(5)%></p>
                 <p>Số lượng câu hỏi: <%=cout%></p>
             </div>
+            <%if((session.getAttribute("accountUser") != null && session.getAttribute("accountMarketer") == null && session.getAttribute("accountMentor") == null) || (session.getAttribute("accountUser") == null && session.getAttribute("accountMarketer") == null && session.getAttribute("accountMentor") == null)) {%>   
             <div class="bottom-content">
                 <a href="CourseController?service=errol&id=<%=rsCourse.getInt(1)%>" class="btn btn-block btn-primary">Tham gia khóa học</a>
             </div>
             <%}%>
+            <%}%>
         </div>
-        
+
         <jsp:include page="Footer.jsp"></jsp:include>
 
         <!-- ========================= scroll-top ========================= -->
@@ -71,6 +74,7 @@
         <script src="./assets/js/main.js"></script>
         <script type="text/javascript">
             //========= Category Slider 
+            
             tns({
                 container: '.category-slider',
                 items: 3,

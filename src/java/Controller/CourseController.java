@@ -6,6 +6,8 @@
 package Controller;
 
 import DAO.DAOCourse;
+import DAO.DAOErrol;
+import Entities.AccountUser;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,6 +15,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -38,6 +41,7 @@ public class CourseController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             
             DAOCourse daoCourse = new DAOCourse();
+            DAOErrol daoErrol = new DAOErrol();
             
             String service = request.getParameter("service");
             
@@ -56,7 +60,18 @@ public class CourseController extends HttpServlet {
             }
             
             if(service.equals("errol")) {
-                
+                HttpSession session = request.getSession();
+                if(session.getAttribute("accountUser") == null) {
+                    response.sendRedirect("login");
+                }else {
+                    AccountUser au = (AccountUser) session.getAttribute("accountUser");
+                    String id_raw = request.getParameter("id");
+                    int id = Integer.parseInt(id_raw);
+                    int n = daoErrol.addProductByPre(id, au);
+                    if(n > 0) {
+                        response.sendRedirect("HomeController");
+                    }
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(CourseController.class.getName()).log(Level.SEVERE, null, ex);

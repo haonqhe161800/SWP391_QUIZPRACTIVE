@@ -10,7 +10,7 @@
                 <div class="col-lg-12">
                     <div class="nav-inner">
                         <nav class="navbar navbar-expand-lg">
-                            <a class="navbar-brand" href="#">
+                            <a class="navbar-brand" href="HomeController">
                                QUIZPRACTICE
                             </a>
                             <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
@@ -23,7 +23,7 @@
                             <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                                 <ul id="nav" class="navbar-nav ms-auto">
                                     <li class="nav-item">
-                                        <a class=" active dd-menu collapsed" href="javascript:void(0)"
+                                        <a class=" active dd-menu collapsed" href="HomeController"
                                             data-bs-toggle="collapse" data-bs-target="#submenu-1-1"
                                             aria-controls="navbarSupportedContent" aria-expanded="false"
                                             aria-label="Toggle navigation">Home</a>
