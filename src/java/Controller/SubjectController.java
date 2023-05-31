@@ -29,34 +29,33 @@ public class SubjectController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
+            request.setCharacterEncoding("UTF-8");
             DAOSubject daoSubject = new DAOSubject();
             DAOCourse daoCourse = new DAOCourse();
 
             String service = request.getParameter("service");
 
             if (service.equals("details")) {
-                String id_raw = request.getParameter("id");
-                int id = Integer.parseInt(id_raw);
-                ResultSet rsAllSubject = daoSubject.getData("SELECT [Subject].subject_name, [Subject].subject_id, [Subject].[image], COUNT(Course.course_id) AS quantity_of_course\n"
+                int subject_id = Integer.parseInt(request.getParameter("subject_id"));
+                ResultSet rsSubject = daoSubject.getData("SELECT [Subject].subject_name, [Subject].subject_id, [Subject].[image], COUNT(Course.course_id) AS quantity_of_course\n"
                         + "FROM Subject\n"
                         + "LEFT JOIN Course ON Subject.subject_id = Course.subject_id\n"
                         + "GROUP BY [Subject].subject_id,  [Subject].subject_name, [Subject].[image]");
-                ResultSet rsSubject = daoSubject.getData("select * from Subject where subject_id = " + id);
-                ResultSet rsCourse = daoCourse.getData("select * from Course where subject_id = " + id);
+                ResultSet rsCourse = daoCourse.getData("select * from [Course] c join [Subject] s on c.subject_id = s.subject_id where c.subject_id = " + subject_id);
 
-                String subject_name = "";
-                if (rsSubject.next()) {
-                    subject_name = rsSubject.getString(2);
-                }
-
-                request.setAttribute("rsAllSubject", rsAllSubject);
-                request.setAttribute("subject_name", subject_name);
+                request.setAttribute("rsSubject", rsSubject);
                 request.setAttribute("rsCourse", rsCourse);
                 request.getRequestDispatcher("/jspClient/SubjectDetails.jsp").forward(request, response);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(SubjectController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            
+            if(service.equals("search")){
+                String course_name = request.getParameter("course_name");
+                int subject_id = Integer.parseInt(request.getParameter("subject_id"));
+                ResultSet rsCourseOfSubject = daoCourse.getData("select * from [Course] c join [Subject] s on c.subject_id = s.subject_id where c.subject_id = " + subject_id + " ");
+                
+                request.setAttribute("rsCourseOfSubject", rsCourseOfSubject);
+            }
+        } 
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

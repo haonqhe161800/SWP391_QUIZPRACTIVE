@@ -42,7 +42,7 @@ public class CourseController extends HttpServlet {
             String service = request.getParameter("service");
             
             if(service.equals("details")) {
-                String id_raw = request.getParameter("id");
+                String id_raw = request.getParameter("course_id");
                 int id = Integer.parseInt(id_raw);
                 ResultSet rsCourse = daoCourse.getData("select * from Course where course_id = " + id);
                 ResultSet rsCountQuestion = daoCourse.getData("select Count(q.question_name) from Course c, Question q where q.course_id = c.course_id and c.course_id = " + id);

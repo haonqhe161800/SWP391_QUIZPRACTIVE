@@ -34,8 +34,7 @@
     <body>
 
         <%
-        String subject_name = (String) request.getAttribute("subject_name");
-        ResultSet rsAllSubject = (ResultSet) request.getAttribute("rsAllSubject");
+        ResultSet rsSubject = (ResultSet) request.getAttribute("rsSubject");
         ResultSet rsCourse = (ResultSet) request.getAttribute("rsCourse");
         %>
 
@@ -51,6 +50,26 @@
                                     <h2 class="wow fadeInUp" data-wow-delay=".3s">Welcome to Practice Quiz Web</h2>
                                     <p class="wow fadeInUp" data-wow-delay=".5s">Let's learn and progress together</p>
                                 </div>
+                                <!--End Hero text-->
+                                <!-- Start Search Form -->
+                                <form action="SubjectController" method="post">
+                                    <input type="hidden" value="search" name="service">
+                                    <div class="search-form wow fadeInUp" data-wow-delay=".7s">
+                                        <div class="row">
+                                            <div class="col-lg-9 col-md-9 col-12 p-0">
+                                                <div class="search-input">
+                                                    <label for="keyword"><i class="lni lni-search-alt theme-color"></i></label>
+                                                    <input type="text" name="course_name" value="" id="keyword" placeholder="Find Course ...">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-3 col-12 p-0">
+                                                <div class="search-btn button">
+                                                    <button class="btn"><i class="lni lni-search-alt"></i>Search</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                                 <!-- End Search Form -->
                             </div>
                         </div>
@@ -59,84 +78,84 @@
             </section>
             <!-- End Hero Area -->
 
-            <!-- Start Categories Area -->
+            <!-- list subject -->
             <section class="categories">
                 <div class="container">
                     <div class="cat-inner">
                         <div class="row">
                             <div class="col-12 p-0">
                                 <div class="category-slider">
-                                <% while(rsAllSubject.next()) { %>
-                                <a href="SubjectController?service=details&id=<%=rsAllSubject.getInt(2)%>" class="single-cat">
-                                        <div class="icon">
-                                            <img src="<%=rsAllSubject.getString(3)%>"alt="#">
-                                        </div>
-                                        <h3><%=rsAllSubject.getString(1)%></h3>
-                                        <h5 class="total"><%=rsAllSubject.getInt(4)%></h5>
-                                    </a>
+                                <% while(rsSubject.next()) { %>
+                                <a href="SubjectController?service=details&subject_id=<%=rsSubject.getInt(2)%>" class="single-cat">
+                                    <div class="icon">
+                                        <img src="<%=rsSubject.getString(3)%>"alt="#">
+                                    </div>
+                                    <h3><%=rsSubject.getString(1)%></h3>
+                                    <h5 class="total"><%=rsSubject.getInt(4)%></h5>
+                                </a>
                                 <%} %>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-            <!-- /End Categories Area -->
+            </div>
+        </section>
+        <!--End list subject -->
 
-            <!-- List Course -->
-            <section class="items-grid section custom-padding">
-                <div class="container">
-                    <div class="single-head">
-                        <div class="row">
+
+        <!-- List Course -->
+        <section class="items-grid section custom-padding">
+            <div class="container">
+                <div class="single-head">
+                    <div class="row">
                         <%while(rsCourse.next()) {%>
-                        <div class="col-lg-4 col-md-4 col-12">
-                                <!-- Start Single Grid -->
-                                <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
-                                    <div class="image"> <!--ảnh course-->
-                                        <!--Click vào ảnh cũng giống như click vào phần details -->
-                                        <a href="#" class="thumbnail"><img height="218px" src="<%=rsCourse.getString(6)%>" alt="#"></a>
-                                        <div class="author">
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
+                                <div class="image"> <!--ảnh course-->
+                                    <!--Click vào ảnh cũng giống như click vào phần details -->
+                                    <a href="#" class="thumbnail">
+                                        <img height="218px" src="<%=rsCourse.getString(6)%>" alt="#">
+                                    </a>
+                                    <div class="author">
                                         <div class="author-image">    <!--ảnh mentor-->
                                             <a href="#">
                                                 <img src="./assets/images/items-grid/author-1.jpg" alt="#">
-                                            <span>Mentor name</span>
+                                                <span>Mentor name</span>
                                             </a>
                                         </div>
-                                    <a href="#" class="sale"> Join to study </a>
-                                </div>
-                                    </div>
-                                    <div class="content">
-                                        <div class="top-content">
-                                            <h2><%=subject_name%></h2>
-                                            <p class="title"><%=rsCourse.getString(4)%></p>
-                                            <p class="update-time">Cập nhật ngày <%=rsCourse.getString(9)%></p>
-                                            <ul class="rating">
-                                                <li>Số người tham gia (<%=rsCourse.getInt(8)%>)</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="bottom-content">
-                                            <a href="CourseController?service=details&id=<%=rsCourse.getInt(1)%>" class="btn btn-block btn-primary">Details</a>
-                                        </div>
+                                        <a href="#" class="sale"> Join to study </a>
                                     </div>
                                 </div>
-                                <!-- End Single Grid -->
+                                <div class="content">
+                                    <div class="top-content">
+                                        <p><%=rsCourse.getString(4)%></p>
+                                        <h3 class="title"> <%=rsCourse.getString(12)%>  </h3>
+                                        <p class="update-time">Ngày update gần nhất <%=rsCourse.getString(9)%></p>
+                                        <ul class="rating">
+                                            <li>số người joined (<%=rsCourse.getInt(8)%>)</li>
+                                        </ul>
+                                        <ul class="info-list">
+                                            <li><i class="lni lni-timer"></i> Ngày đăng khóa học <%=rsCourse.getString(9)%></li>
+                                        </ul>
+                                    </div>
+                                    <div class="bottom-content">
+                                        <a href="#" class="btn btn-block btn-primary">Details</a>
+                                    </div>
+                                </div>
                             </div>
-                        <%}%>
+                        </div>
+                        <% } %>
                     </div>
-                </div>
-                <div class="row view-all" style="margin-top: 10px">
-                    <div class="col-lg-5 col-md-5 col-12"></div>
-                    <div class="col-lg-2 col-md-2 col-12">
-                        <a href="#" class="btn btn-block btn-primary"> View All Course</a>
-                    </div>
-                    <div class="col-lg-5 col-md-5 col-12"></div>
                 </div>
             </div>
         </section>
         <!--Mentor List-->
-        <!-- Chỗ này copy bên trên, còn làm thì tự thiết kế -->
 
+        <!--Footer-->
         <jsp:include page="Footer.jsp"></jsp:include>
+        <!--End footer-->
+
+
 
         <!-- ========================= scroll-top ========================= -->
         <a href="#" class="scroll-top btn-hover">
