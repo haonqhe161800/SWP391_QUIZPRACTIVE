@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package DAO;
 
 import Entities.AccountAdmin;
@@ -27,6 +24,28 @@ public class DAOAdmin extends DBConnect {
             PreparedStatement st = conn.prepareStatement(sql);
             st.setString(1,emailInput);
             st.setString(2,pass);
+            ResultSet rs = st.executeQuery();
+            if(rs.next()){
+                AccountAdmin aa = new AccountAdmin(rs.getInt("admin_id"),rs.getString("email"),rs.getString("password"));
+                return aa;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+    
+    
+    //check Exist
+    public AccountAdmin checkExist(String emailInput){
+          String sql = "SELECT [admin_id]\n"
+                + "      ,[email]\n"
+                + "      ,[password]\n"
+                + "  FROM [QUIZ_PRACTICE].[dbo].[Admin] WHERE email = ?";
+
+        try {
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setString(1,emailInput);
             ResultSet rs = st.executeQuery();
             if(rs.next()){
                 AccountAdmin aa = new AccountAdmin(rs.getInt("admin_id"),rs.getString("email"),rs.getString("password"));

@@ -27,7 +27,8 @@ public class Signout extends HttpServlet {
         HttpSession session = request.getSession();
         // Xóa thông tin đăng nhập của người dùng khỏi session
         session.invalidate();
-        response.sendRedirect("main");
+        //trang home
+        response.sendRedirect("HomeController");
     }
 
 }
