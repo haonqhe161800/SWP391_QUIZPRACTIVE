@@ -85,7 +85,7 @@
                              <div class="login-button">
                                 <ul>
                                     <li>
-                                        <a href="#"><i class="lni lni-enter"></i> Login</a>
+                                        <a href="login"><i class="lni lni-enter"></i> Login</a>
                                     </li>
                                     <li>
                                         <a href="#"><i class="lni lni-user"></i> Register</a>
