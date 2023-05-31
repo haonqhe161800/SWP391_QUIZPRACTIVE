@@ -1,8 +1,8 @@
 <!-- Start Header Area -->
-<%@page import="entities.AccountAdmin"%>
-<%@page import="entities.AccountUser"%> 
-<%@page import="entities.AccountMarketer"%> 
-<%@page import="entities.AccountMentor"%> 
+<%@page import="Entities.AccountAdmin"%>
+<%@page import="Entities.AccountUser"%> 
+<%@page import="Entities.AccountMarketer"%> 
+<%@page import="Entities.AccountMentor"%> 
 
 <header class="header navbar-area">
         <div class="container">
@@ -115,7 +115,7 @@
                                 <a href="#" class="btn">Post an Ad</a>
                             </div>
                             <%} else if(session.getAttribute("accountMentor") != null) {
-                                AccountMentor amor = (AccountMarketer) session.getAttribute("accountMentor");
+                                AccountMentor amor = (AccountMentor) session.getAttribute("accountMentor");
                             %>
                             <div class="login-button">
                                 <ul>
