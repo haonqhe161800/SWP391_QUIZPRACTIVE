@@ -36,24 +36,39 @@ public class SubjectController extends HttpServlet {
             String service = request.getParameter("service");
 
             if (service.equals("details")) {
+                //Lấy ra id của subject mà mình muốn xem list
                 int subject_id = Integer.parseInt(request.getParameter("subject_id"));
+                //câu lệnh sql lấy ra phần subject list
                 ResultSet rsSubject = daoSubject.getData("SELECT [Subject].subject_name, [Subject].subject_id, [Subject].[image], COUNT(Course.course_id) AS quantity_of_course\n"
                         + "FROM Subject\n"
                         + "LEFT JOIN Course ON Subject.subject_id = Course.subject_id\n"
                         + "GROUP BY [Subject].subject_id,  [Subject].subject_name, [Subject].[image]");
+                //câu lệnh sql lấy ra phần list courses
                 ResultSet rsCourse = daoCourse.getData("select * from [Course] c join [Subject] s on c.subject_id = s.subject_id where c.subject_id = " + subject_id);
-
+                
+                request.setAttribute("subject_id", subject_id);
                 request.setAttribute("rsSubject", rsSubject);
                 request.setAttribute("rsCourse", rsCourse);
                 request.getRequestDispatcher("/jspClient/SubjectDetails.jsp").forward(request, response);
             }
             
             if(service.equals("search")){
+                //lấy ra phần text nhập vào
                 String course_name = request.getParameter("course_name");
                 int subject_id = Integer.parseInt(request.getParameter("subject_id"));
-                ResultSet rsCourseOfSubject = daoCourse.getData("select * from [Course] c join [Subject] s on c.subject_id = s.subject_id where c.subject_id = " + subject_id + " ");
+                //câu lệnh sql để select course có ở trong khóa học đó
+                ResultSet rsCourseOfSubject = daoCourse.getData("select * from [Course] c join [Subject] s on c.subject_id = s.subject_id where c.subject_id = " + subject_id + " and c.course_name like N'%"+course_name+"%'");
+                //setAtribute lại cho phần Subject list
+                ResultSet rsSubject = daoSubject.getData("SELECT [Subject].subject_name, [Subject].subject_id, [Subject].[image], COUNT(Course.course_id) AS quantity_of_course\n"
+                        + "FROM Subject\n"
+                        + "LEFT JOIN Course ON Subject.subject_id = Course.subject_id\n"
+                        + "GROUP BY [Subject].subject_id,  [Subject].subject_name, [Subject].[image]");
                 
-                request.setAttribute("rsCourseOfSubject", rsCourseOfSubject);
+                
+                request.setAttribute("rsCourse", rsCourseOfSubject);
+                request.setAttribute("subject_id", subject_id);
+                request.setAttribute("rsSubject", rsSubject);
+                request.getRequestDispatcher("/jspClient/SubjectDetails.jsp").forward(request, response);
             }
         } 
     }
