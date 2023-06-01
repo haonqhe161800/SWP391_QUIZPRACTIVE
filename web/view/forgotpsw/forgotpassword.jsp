@@ -5,7 +5,6 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,13 +21,13 @@
                         <p class="paragraph">Enter your Quizlet username or the email address you signed up with. We'll email you a link to log in and reset your password.</p>
                     </div>
                     <div class="forgot-form">
-                        <form action="restpassword" method="POST">
+                        <form action="">
                             <div class="form-input">
-                                <input type="email" placeholder="abc.gmail.com" name="email"/>
+                                <input type="text" placeholder="abc.gmail.com" />
                             </div>
                             <span class="UIInput-border"></span>
                             <div class="form-signin">
-                                <button type="submit">Submit</button>
+                                <button><p class="title_submit">Submit</p></button>
                             </div>
                         </form>
                     </div>

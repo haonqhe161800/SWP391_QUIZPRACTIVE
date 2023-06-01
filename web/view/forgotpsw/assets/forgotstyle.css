@@ -50,14 +50,14 @@ body {
     align-items: flex-end;
 }
 
-.forgot-form input[type="email"] {
+.forgot-form input[type="text"] {
     width: 100%;
     line-height: 2em;
     border-radius: 5px;
     border: none;
 }
 
-.forgot-form input[type="email"]::placeholder {
+.forgot-form input[type="text"]::placeholder {
     color: rgba(0, 0, 0, 0.5);
     /* Màu chữ mờ */
     opacity: 0.5;
@@ -66,14 +66,14 @@ body {
     /* Kích thước chữ */
 }
 
-.forgot-form input[type="email"] {
+.forgot-form input[type="text"] {
     color: black;
     /* Màu chữ */
     font-size: 16px;
     /* Kích thước chữ */
 }
 
-.forgot-form input[type="email"]:focus {
+.forgot-form input[type="text"]:focus {
     outline: none;
 }
 
@@ -104,6 +104,6 @@ body {
 }
 
 
-button{
-    padding: 10px 10px;
+button p{
+    padding: 6px 20px;
 }
