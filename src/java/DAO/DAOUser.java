@@ -108,7 +108,6 @@ public class DAOUser extends DBConnect {
         }
     }
     
-    
 
     public static void main(String[] args) {
         DAOUser dudb = new DAOUser();

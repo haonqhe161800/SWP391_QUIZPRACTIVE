@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< Updated upstream
 <<<<<<< HEAD
             <file>file:/D:/SWP391_QUIZPRACTIVE/src/java/Controller/VerifyControlller.java</file>
             <file>file:/D:/SWP391_QUIZPRACTIVE/src/java/DAO/AccountDAO.java</file>
@@ -28,6 +29,13 @@
             <file>file:/D:/admin/Documents/Semester%205/SWP391/SWP391_QUIZPRACTIVE/src/java/DAO/DAOErrol.java</file>
             <file>file:/D:/admin/Documents/Semester%205/SWP391/SWP391_QUIZPRACTIVE/web/jspClient/HomePage.jsp</file>
 >>>>>>> f58c6551418969926d4e8abd42fb20400ce86a11
+=======
+            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Project_SWP391/SWP391_QUIZPRACTIVE/web/view/restpsw/changepsw.jsp</file>
+            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Project_SWP391/SWP391_QUIZPRACTIVE/web/view/forgotpsw/forgotpassword.jsp</file>
+            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Project_SWP391/SWP391_QUIZPRACTIVE/src/java/Controller/Login.java</file>
+            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Project_SWP391/SWP391_QUIZPRACTIVE/src/java/Controller/Account/RestPasswordController.java</file>
+            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Project_SWP391/SWP391_QUIZPRACTIVE/web/view/restpsw/vertify.jsp</file>
+>>>>>>> Stashed changes
         </group>
     </open-files>
 </project-private>

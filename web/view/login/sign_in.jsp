@@ -38,7 +38,7 @@
                                     <label for="rememberMeCheckbox">Remember me</label>
                                 </div>
                                 <div class="forgot-pass">
-                                    <span><a href="#">Forgot password?</a></span>
+                                    <span><a href="restpassword">Forgot password?</a></span>
                                 </div>
                             </div>
                             <div class="form-signin">
