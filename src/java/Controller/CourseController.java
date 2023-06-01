@@ -6,6 +6,8 @@
 package Controller;
 
 import DAO.DAOCourse;
+import DAO.DAOErrol;
+import Entities.AccountUser;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,6 +15,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -38,6 +41,7 @@ public class CourseController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             
             DAOCourse daoCourse = new DAOCourse();
+            DAOErrol daoErrol = new DAOErrol();
             
             String service = request.getParameter("service");
             
@@ -46,18 +50,33 @@ public class CourseController extends HttpServlet {
                 int id = Integer.parseInt(id_raw);
                 ResultSet rsCourse = daoCourse.getData("select * from Course where course_id = " + id);
                 ResultSet rsCountQuestion = daoCourse.getData("select Count(q.question_name) from Course c, Question q where q.course_id = c.course_id and c.course_id = " + id);
-                int countQuestion = 0;
+                int cout = 0;
                 if(rsCountQuestion.next()) {
-                    countQuestion = rsCountQuestion.getInt(1);
+                    cout = rsCountQuestion.getInt(1);
                 }
-                request.setAttribute("countQuestion", countQuestion);
+                request.setAttribute("cout", cout);
                 request.setAttribute("rsCourse", rsCourse);
                 request.getRequestDispatcher("jspClient/CourseDetails.jsp").forward(request, response);
+            }
+            
+            if(service.equals("errol")) {
+                HttpSession session = request.getSession();
+                if(session.getAttribute("accountUser") == null) {
+                    response.sendRedirect("login");
+                }else {
+                    AccountUser au = (AccountUser) session.getAttribute("accountUser");
+                    String id_raw = request.getParameter("id");
+                    int id = Integer.parseInt(id_raw);
+                    int n = daoErrol.addProductByPre(id, au);
+                    if(n > 0) {
+                        response.sendRedirect("HomeController");
+                    }
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(CourseController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    } 
+         } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
