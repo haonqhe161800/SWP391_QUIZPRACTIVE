@@ -57,7 +57,7 @@ public class Signup extends HttpServlet {
             AccountMarketer am = new DAOMarketer().checkExist(email);
             AccountAdmin aa = new DAOAdmin().checkExist(email);
 
-            if (formatDOB(dob) == null) {
+            if (dob == null) {
                 request.setAttribute("messregis", "Date of birth may be invalid");
                 request.getRequestDispatcher("view/login/sign_up.jsp").forward(request, response);
             }
@@ -71,10 +71,10 @@ public class Signup extends HttpServlet {
                 //loop insert follow role
                 while (aa == null && am == null && au == null && ame == null) {
                     if (new DAORole().getRoleById(Integer.valueOf(roleid)).getRoleName().equals("user")) {
-                        new DAOUser().insertUser(email, pass, fullname, displayname, formatDOB(dob), Integer.valueOf(gender), Integer.valueOf(roleid));
+                        new DAOUser().insertUser(email, pass, fullname, displayname, dob, Integer.valueOf(gender), Integer.valueOf(roleid));
                         request.getRequestDispatcher("view/login/sign_in.jsp").forward(request, response);
                     } else {
-                        new DAOMentor().insertMentor(email, pass, fullname, randomdisplayName(), formatDOB(dob), Integer.valueOf(gender), Integer.valueOf(roleid));
+                        new DAOMentor().insertMentor(email, pass, fullname, randomdisplayName(), dob, Integer.valueOf(gender), Integer.valueOf(roleid));
                         request.getRequestDispatcher("view/login/sign_in.jsp").forward(request, response);
                     }
                     flag = false;
@@ -94,30 +94,30 @@ public class Signup extends HttpServlet {
 
     }
 
-    public String formatDOB(String dateoutput) {
-        //2023-05-31
-
-        String[] arrStr = dateoutput.split("-");
-        String res = "";
-        for (int i = arrStr.length - 1; i >= 0; i--) {
-            if (i == 0) {
-                res += arrStr[i];
-                break;
-            }
-            res += arrStr[i] + "/";
-        }
-
-        SimpleDateFormat dateformat = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            dateformat.setLenient(false);
-            dateformat.parse(res);
-            return res;
-        } catch (ParseException e) {
-            System.out.println(e);
-        }
-
-        return null;
-    }
+//    public String formatDOB(String dateoutput) {
+//        //2023-05-31
+//
+//        String[] arrStr = dateoutput.split("-");
+//        String res = "";
+//        for (int i = arrStr.length - 1; i >= 0; i--) {
+//            if (i == 0) {
+//                res += arrStr[i];
+//                break;
+//            }
+//            res += arrStr[i] + "/";
+//        }
+//
+//        SimpleDateFormat dateformat = new SimpleDateFormat("dd/MM/yyyy");
+//        try {
+//            dateformat.setLenient(false);
+//            dateformat.parse(res);
+//            return res;
+//        } catch (ParseException e) {
+//            System.out.println(e);
+//        }
+//
+//        return null;
+//    }
 
     public String randomdisplayName() {
         Random r = new Random();

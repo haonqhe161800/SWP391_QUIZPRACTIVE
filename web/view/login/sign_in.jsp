@@ -32,10 +32,10 @@
                         <c:set var="cookie" value="${pageContext.request.cookies}" />
                         <form action="login" method="POST" id="loginForm">
                             <div class="form-input">
-                                <input type="email" placeholder="Enter email" name="email" value="${cookie.cemail.value}"/>
+                                <input type="email" placeholder="Enter email" name="email" value="${cookie.cemail.value}" onchange="message()"/>
                             </div>
                             <div class="form-input">
-                                <input type="password" placeholder="Enter password" name="password" value="${cookie.cpass.value}"/>
+                                <input type="password" placeholder="Enter password" name="password" value="${cookie.cpass.value}" onchange="message()"/>
                             </div>
                             <div class="form-input">
                                 <div class="checkboxxx">
@@ -43,7 +43,7 @@
                                     <label for="rememberMeCheckbox">Remember me</label>
                                 </div>
                                 <div class="forgot-pass">
-                                    <span><a href="#">Forgot password?</a></span>
+                                    <span><a href="restpassword" target="_blank">Forgot password?</a></span>
                                 </div>
                             </div>
                             <div class="form-signin">

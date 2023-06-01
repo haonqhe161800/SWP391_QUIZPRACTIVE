@@ -56,4 +56,42 @@ public class DAOAdmin extends DBConnect {
         }
         return null;
     }
+    
+    public boolean checkEmail(String emailInput) {
+
+        String sql = "SELECT * FROM [Admin] WHERE email = ?";
+        try {
+            PreparedStatement st = conn.prepareCall(sql);
+            st.setString(1, emailInput);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+    
+    
+                 //update password
+    public void updatePasswordByName(String pass,String emailInput) {
+        String sql = "  UPDATE [dbo].[Admin]\n"
+                + "   SET [password] = ? \n"
+                + " WHERE [email] = ?";
+        
+        try {
+            PreparedStatement st = conn.prepareCall(sql);
+            st.setString(1,pass);
+            st.setString(2,emailInput);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+    }
+    
+    
+
 }
+

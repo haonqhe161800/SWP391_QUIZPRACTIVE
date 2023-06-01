@@ -92,6 +92,14 @@ public class AccountMentor {
         this.dob = dob;
     }
 
+    public int getRole_id() {
+        return role_id;
+    }
+
+    public void setRole_id(int role_id) {
+        this.role_id = role_id;
+    }
+
         
    
     

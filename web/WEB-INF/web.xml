@@ -28,6 +28,10 @@
         <servlet-name>RestPasswordController</servlet-name>
         <servlet-class>Controller.Account.RestPasswordController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ChangePassword</servlet-name>
+        <servlet-class>Controller.Account.ChangePassword</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControllBlogList</servlet-name>
         <url-pattern>/cbl</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>RestPasswordController</servlet-name>
         <url-pattern>/restpassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePassword</servlet-name>
+        <url-pattern>/changepsw</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

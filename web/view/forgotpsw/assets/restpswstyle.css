@@ -4,9 +4,10 @@ body {
     padding: 0;
 }
 
+body {}
+
 .abcdy {
     align-items: center;
-    
     bottom: 0;
     display: flex;
     background: url('tt.png') no-repeat center / cover;
@@ -14,7 +15,6 @@ body {
     font-size: 1.2rem;
     justify-content: center;
     left: 0;
-    line-height: 1.8;
     position: fixed;
     right: 0;
     top: -10%;
@@ -29,50 +29,28 @@ body {
     font-family: 'Segoe UI';
 }
 
-.forgot-header h1 {
+.forgot-header h2 {
     color: #2e3856;
-    font-size: 190%;
+    font-size: 50px;
     font-weight: 700;
-    line-height: 10vh;
-}
-
-#message{
-    border: 2px solid red;
-}
-
-#message ul {
-    margin-top: 0px;
-    margin-bottom: 0px;
-}
-
-#message li {
-    letter-spacing: 1px;
-}
-
-
-
-.forgot-header p {
-    color: #2e3856;
-    font-size: 72%;
-    line-height: 26px;
-    font-weight: 400;
-    letter-spacing: 1px;
 }
 
 
 .form-input {
     display: flex;
     align-items: flex-end;
+    flex-direction: column;
+    margin: 10px 0;
 }
 
-.forgot-form input[type="text"] {
+.forgot-form input[type="password"] {
     width: 100%;
     line-height: 2em;
     border-radius: 5px;
     border: none;
 }
 
-.forgot-form input[type="text"]::placeholder {
+.forgot-form input[type="password"]::placeholder {
     color: rgba(0, 0, 0, 0.5);
     /* Màu chữ mờ */
     opacity: 0.5;
@@ -81,14 +59,14 @@ body {
     /* Kích thước chữ */
 }
 
-.forgot-form input[type="text"] {
+.forgot-form input[type="password"] {
     color: black;
     /* Màu chữ */
     font-size: 16px;
     /* Kích thước chữ */
 }
 
-.forgot-form input[type="text"]:focus {
+.forgot-form input[type="password"]:focus {
     outline: none;
 }
 
@@ -98,12 +76,13 @@ body {
     width: 100%;
     margin-top: 1%;
 }
-.form-signin{
-    margin-top: 5%;
+
+.form-signin {
     width: 100%;
 }
+
 .form-signin button {
-    width: 37%;
+    width: 26%;
     align-items: flex-start;
     background-color: #94aeb8;
     color: #ffffff;
@@ -119,6 +98,22 @@ body {
 }
 
 
-button p{
-    padding: 6px 20px;
+button {
+    padding: 10px 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .forgot-header h2 {
+        font-size: 20px;
+    }
+
+    .form-signin button {
+        width: 41%;
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+    button {
+        /* padding: 10px 10px; */
+    }
 }

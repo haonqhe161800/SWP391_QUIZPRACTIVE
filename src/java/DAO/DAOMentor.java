@@ -122,6 +122,40 @@ public class DAOMentor extends DBConnect {
         }
     }
 
+    //CHECK EMAIL
+    public boolean checkEmail(String emailInput) {
+
+        String sql = "SELECT * FROM [Mentor_type] WHERE email = ?";
+        try {
+            PreparedStatement st = conn.prepareCall(sql);
+            st.setString(1, emailInput);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+    
+        //update password
+    public void updatePasswordByName(String pass,String emailInput) {
+        String sql = "  UPDATE [dbo].[Mentor_type]\n"
+                + "   SET [password] = ? \n"
+                + " WHERE [email] = ?";
+        
+        try {
+            PreparedStatement st = conn.prepareCall(sql);
+            st.setString(1,pass);
+            st.setString(2,emailInput);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+    }
+
     public static void main(String args[]) {
         DAOMentor dudb = new DAOMentor();
         AccountMentor au = dudb.checkLogin("TranQuyBan@gmail.com", "12345");

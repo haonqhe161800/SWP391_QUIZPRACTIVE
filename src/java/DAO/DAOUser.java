@@ -81,7 +81,7 @@ public class DAOUser extends DBConnect {
     }
 
     //INSERT AccountUser
-    public void insertUser(String emailInput, String password, String fullname,String displayname, String dob, int gender, int roleid) {
+    public void insertUser(String emailInput, String password, String fullname, String displayname, String dob, int gender, int roleid) {
         String sql = "INSERT INTO [dbo].[User_type]\n"
                 + "           ([email]\n"
                 + "           ,[password]\n"
@@ -91,24 +91,55 @@ public class DAOUser extends DBConnect {
                 + "           ,[gender]\n"
                 + "           ,[role_id])\n"
                 + "     VALUES (?, ?, ?, ?, ?, ?, ?)";
-        
+
         try {
-             PreparedStatement st = conn.prepareStatement(sql);
-             st.setString(1,emailInput);
-             st.setString(2,password);
-             st.setString(3,fullname);
-             st.setString(4,displayname);
-             st.setString(5,dob);
-             st.setInt(6,gender);
-             st.setInt(7,roleid);
-             st.executeUpdate();
-        }
-        catch (SQLException e) {
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setString(1, emailInput);
+            st.setString(2, password);
+            st.setString(3, fullname);
+            st.setString(4, displayname);
+            st.setString(5, dob);
+            st.setInt(6, gender);
+            st.setInt(7, roleid);
+            st.executeUpdate();
+        } catch (SQLException e) {
             System.out.println(e);
         }
     }
-    
-    
+
+    //CHECK EMAIL
+    public boolean checkEmail(String emailInput) {
+
+        String sql = "SELECT * FROM [User_type] WHERE email = ?";
+        try {
+            PreparedStatement st = conn.prepareCall(sql);
+            st.setString(1, emailInput);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+
+    //update password
+    public void updatePasswordByName(String pass,String emailInput) {
+        String sql = "  UPDATE [dbo].[User_type]\n"
+                + "   SET [password] = ? \n"
+                + " WHERE [email] = ?";
+        
+        try {
+            PreparedStatement st = conn.prepareCall(sql);
+            st.setString(1,pass);
+            st.setString(2,emailInput);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+    }
 
     public static void main(String[] args) {
         DAOUser dudb = new DAOUser();

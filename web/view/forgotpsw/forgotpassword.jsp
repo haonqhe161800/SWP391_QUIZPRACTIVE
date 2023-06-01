@@ -17,13 +17,33 @@
             <div class="abcd">
                 <div class="forgot-psw">
                     <div class="forgot-header">
+
                         <h1 class="title-forgot">Reset your password</h1>
-                        <p class="paragraph">Enter your Quizlet username or the email address you signed up with. We'll email you a link to log in and reset your password.</p>
+                        <%
+                            String m = (String) request.getAttribute("msg");
+                            String merror = (String) request.getAttribute("msgerror");
+                            if(m != null){
+                        %>
+                        <div id="message" style="color: green">
+                            <ul>
+                                <li><%=m%></li>
+                            </ul>
+                        </div>
+
+                        <%}%>
+                        <%if(merror != null){%>
+                        <div id="message" style="color: red">
+                            <ul>
+                                <li><%=merror%></li>
+                            </ul>
+                        </div>
+                        <%}%>
+                        <p class="paragraph">We'll email you a link to log in and reset your password.</p>
                     </div>
                     <div class="forgot-form">
-                        <form action="">
+                        <form action="restpassword" method="POST">
                             <div class="form-input">
-                                <input type="text" placeholder="abc.gmail.com" />
+                                <input type="text" placeholder="abc.gmail.com" name="email" />
                             </div>
                             <span class="UIInput-border"></span>
                             <div class="form-signin">
