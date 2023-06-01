@@ -11,7 +11,7 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="x-ua-compatible" content="ie=edge" />
-        <title>ClassiGrids - Classified Ads and Listing Website Template.</title>
+        <title>Quiz Practice</title>
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
@@ -35,6 +35,7 @@
 
         <%
         String subject_name = (String) request.getAttribute("subject_name");
+        ResultSet rsAllSubject = (ResultSet) request.getAttribute("rsAllSubject");
         ResultSet rsCourse = (ResultSet) request.getAttribute("rsCourse");
         %>
 
@@ -51,8 +52,6 @@
                                     <p class="wow fadeInUp" data-wow-delay=".5s">Let's learn and progress together</p>
                                 </div>
                                 <!-- End Search Form -->
-                                <!-- Start Search Form -->
-                                <!-- End Search Form -->
                             </div>
                         </div>
                     </div>
@@ -67,123 +66,15 @@
                         <div class="row">
                             <div class="col-12 p-0">
                                 <div class="category-slider">
-                                    <!-- Start Single Category -->
-                                    <a href="SubjectController?service=details&id=1" class="single-cat">
+                                <% while(rsAllSubject.next()) { %>
+                                <a href="SubjectController?service=details&id=<%=rsAllSubject.getInt(2)%>" class="single-cat">
                                         <div class="icon">
-                                            <img src="../assets/images/categories/C.png" alt="#">
+                                            <img src="<%=rsAllSubject.getString(3)%>"alt="#">
                                         </div>
-                                        <h3>C</h3>
-                                        <h5 class="total">35</h5>
+                                        <h3><%=rsAllSubject.getString(1)%></h3>
+                                        <h5 class="total"><%=rsAllSubject.getInt(4)%></h5>
                                     </a>
-                                    <!-- End Single Category -->
-                                    <!-- Start Single Category -->
-                                    <a href="category.html" class="single-cat">
-                                        <div class="icon">
-                                            <img src="https://tse1.mm.bing.net/th?id=OIP.E3u5DstNSu_PUW6-aBdCOgHaEK&pid=Api&P=0&h=180" alt="#">
-                                        </div>
-                                        <h3>Program</h3>
-                                        <h5 class="total">22</h5>
-                                    </a>
-                                    <!-- End Single Category -->
-                                    <!-- Start Single Category -->
-                                    <a href="category.html" class="single-cat">
-                                        <div class="icon">
-                                            <img src="../assets/images/categories/matrimony.svg" alt="#">
-                                        </div>
-                                        <h3>Subject Name</h3>
-                                        <h5 class="total">số lượng course</h5>
-                                    </a>
-                                    <!-- End Single Category -->
-                                    <!-- Start Single Category -->
-                                    <a href="category.html" class="single-cat">
-                                        <div class="icon">
-                                            <img src="../assets/images/categories/furniture.svg" alt="#">
-                                        </div>
-                                        <h3>Subject Name</h3>
-                                        <h5 class="total">số lượng course</h5>
-                                    </a>
-                                    <!-- End Single Category -->
-                                    <!-- Start Single Category -->
-                                    <a href="category.html" class="single-cat">
-                                        <div class="icon">
-                                            <img src="../assets/images/categories/jobs.svg" alt="#">
-                                        </div>
-                                        <h3>Subject Name</h3>
-                                        <h5 class="total">số lượng course</h5>
-                                    </a>
-                                    <!-- End Single Category -->
-                                    <!-- Start Single Category -->
-                                    <a href="category.html" class="single-cat">
-                                        <div class="icon">
-                                            <img src="../assets/images/categories/real-estate.svg" alt="#">
-                                        </div>
-                                        <h3>Subject Name</h3>
-                                        <h5 class="total">số lượng course</h5>
-                                    </a>
-                                    <!-- End Single Category -->
-                                    <!-- Start Single Category -->
-                                    <a href="category.html" class="single-cat">
-                                        <div class="icon">
-                                            <img src="../assets/images/categories/laptop.svg" alt="#">
-                                        </div>
-                                        <h3>Subject Name</h3>
-                                        <h5 class="total">số lượng course</h5>
-                                    </a>
-                                    <!-- End Single Category -->
-                                    <!-- Start Single Category -->
-                                    <a href="category.html" class="single-cat">
-                                        <div class="icon">
-                                            <img src="../assets/images/categories/hospital.svg" alt="#">
-                                        </div>
-                                        <h3>Subject Name</h3>
-                                        <h5 class="total">số lượng course</h5>
-                                    </a>
-                                    <!-- End Single Category -->
-                                    <!-- Start Single Category -->
-                                    <a href="category.html" class="single-cat">
-                                        <div class="icon">
-                                            <img src="../assets/images/categories/tshirt.svg" alt="#">
-                                        </div>
-                                        <h3>Subject Name</h3>
-                                        <h5 class="total">số lượng course</h5>
-                                    </a>
-                                    <!-- End Single Category -->
-                                    <!-- Start Single Category -->
-                                    <a href="category.html" class="single-cat">
-                                        <div class="icon">
-                                            <img src="../assets/images/categories/education.svg" alt="#">
-                                        </div>
-                                        <h3>Subject Name</h3>
-                                        <h5 class="total">số lượng course</h5>
-                                    </a>
-                                    <!-- End Single Category -->
-                                    <!-- Start Single Category -->
-                                    <a href="category.html" class="single-cat">
-                                        <div class="icon">
-                                            <img src="../assets/images/categories/controller.svg" alt="#">
-                                        </div>
-                                        <h3>Subject Name</h3>
-                                        <h5 class="total">số lượng course</h5>
-                                    </a>
-                                    <!-- End Single Category -->
-                                    <!-- Start Single Category -->
-                                    <a href="category.html" class="single-cat">
-                                        <div class="icon">
-                                            <img src="../assets/images/categories/travel.svg" alt="#">
-                                        </div>
-                                        <h3>Subject Name</h3>
-                                        <h5 class="total">số lượng course</h5>
-                                    </a>
-                                    <!-- End Single Category -->
-                                    <!-- Start Single Category -->
-                                    <a href="category.html" class="single-cat">
-                                        <div class="icon">
-                                            <img src="../assets/images/categories/watch.svg" alt="#">
-                                        </div>
-                                        <h3>Subject Name</h3>
-                                        <h5 class="total">số lượng course</h5>
-                                    </a>
-                                    <!-- End Single Category -->
+                                <%} %>
                                 </div>
                             </div>
                         </div>
@@ -205,8 +96,14 @@
                                         <!--Click vào ảnh cũng giống như click vào phần details -->
                                         <a href="#" class="thumbnail"><img height="218px" src="<%=rsCourse.getString(6)%>" alt="#"></a>
                                         <div class="author">
-                                            <a href="#" class="sale"> Join to study </a>
+                                        <div class="author-image">    <!--ảnh mentor-->
+                                            <a href="#">
+                                                <img src="./assets/images/items-grid/author-1.jpg" alt="#">
+                                            <span>Mentor name</span>
+                                            </a>
                                         </div>
+                                    <a href="#" class="sale"> Join to study </a>
+                                </div>
                                     </div>
                                     <div class="content">
                                         <div class="top-content">

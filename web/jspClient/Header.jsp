@@ -6,7 +6,7 @@
                     <div class="nav-inner">
                         <nav class="navbar navbar-expand-lg">
                             <a class="navbar-brand" href="#">
-                                <img src="https://media.newstrack.in/uploads/education-news/institutes-info/May/30/big_thumb/lllp_60b38a97e391d.jpeg" alt="Logo">
+                               QUIZPRACTICE
                             </a>
                             <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -73,7 +73,7 @@
                                                 <ul>
                                                     <li class="mega-menu-title">Dashboard</li>
                                                     <li class="nav-item"><a href="#">Account Overview</a></li>
-                                                    <li class="nav-item"><a href="#">My Profile</a></li>
+                                                    <li class="http://localhost:9999/WebApplication2/Profile"><a href="#">My Profile</a></li>
                                                     <li class="nav-item"><a href="#">My Ads</a></li>
                                                     <li class="nav-item"><a href="#">Messages</a></li></li>
                                                 </ul>
@@ -82,7 +82,7 @@
                                     </li>
                                 </ul>
                             </div> <!-- navbar collapse -->
-                            <div class="login-button">
+                             <div class="login-button">
                                 <ul>
                                     <li>
                                         <a href="#"><i class="lni lni-enter"></i> Login</a>
@@ -93,13 +93,7 @@
                                 </ul>
                             </div>
                             <div class="button header-button">
-                                <a href="#" class="btn">Post an Ad</a>
-                            </div>
-                            <div class="button header-button">
                                 <a href="#" class="btn">Practice</a>
-                            </div>
-                            <div class="button header-button">
-                                <a href="#" class="btn">Post an Course</a>
                             </div>
                         </nav> <!-- navbar -->
                     </div>

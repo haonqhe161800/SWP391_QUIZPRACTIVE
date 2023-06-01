@@ -9,6 +9,11 @@
 html {
     font-family: Arial, Helvetica, sans-serif;
 }
+
+
+
+
+
 .header {
     background-color: #a5b0d0;
     display: flex;
@@ -105,7 +110,7 @@ form {
     margin-top: 46px;
     padding-top: 50%;
     /*theo chieu ngang ccuar chinh no*/
-    background: url('../slider/img_ch.jpg') top center / cover no-repeat;
+    background: url('../img/slider/img_ch.jpg') top center / cover no-repeat;
 }
 
 
@@ -260,25 +265,24 @@ h5 a {
 }
 
 /*pagination*/
-.pagination{
+.paginationnn{
     display: flex;
     justify-content: center;
     padding: 10px;
 }
 
-.pagination li:not(:first-child):not(:last-child){
+.paginationnn li:not(:first-child):not(:last-child){
     background-color: #645c5c;
     width: 30px;
     height: 30px;
     margin-right: 5px;
 }
 
-.pagination > li > a {
+.paginationnn > li > a {
     text-decoration: none;
     color: #000;
-    font-weight: 500;
+    font: 500 ;
     padding: 10px;
-    
 }
 
 
