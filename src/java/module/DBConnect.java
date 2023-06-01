@@ -53,8 +53,4 @@ public class DBConnect {
         }
         return rs;
     }
-
-    public static void main(String[] args) {
-        new DBConnect();
-    }
 }

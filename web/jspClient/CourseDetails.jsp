@@ -32,30 +32,33 @@
         <link rel="stylesheet" href="./assets/css/main.css" />
     </head>
     <body>
-        
+
         <%
         ResultSet rsCourse = (ResultSet) request.getAttribute("rsCourse");
-        int countQuestion = (int) request.getAttribute("countQuestion");
+        int cout = (int) request.getAttribute("cout");
         %>
-        
+
         <jsp:include page="Header.jsp"></jsp:include>
-        
-        <div style="margin-top: 200px" class="container">
+
+
+            <div style="margin: 100px 0" class="container">
             <%if(rsCourse.next()) {%>
             <div>
-                <img src="<%=rsCourse.getString(6)%>">
+                <img style="width:200px; height: 200px" src="<%=rsCourse.getString(6)%>">
             </div>
-            <div class="content">
+            <div style="margin: 20px 0">
                 <h2><%=rsCourse.getString(4)%></h2>
                 <p><%=rsCourse.getString(5)%></p>
-                <p>Số lượng câu hỏi: <%=countQuestion%></p>
+                <p>Số lượng câu hỏi: <%=cout%></p>
             </div>
-            <div class="author">
-                <a href="#" class="sale"> Tham gia khóa học </a>
+            <%if((session.getAttribute("accountUser") != null && session.getAttribute("accountMarketer") == null && session.getAttribute("accountMentor") == null) || (session.getAttribute("accountUser") == null && session.getAttribute("accountMarketer") == null && session.getAttribute("accountMentor") == null)) {%>   
+            <div class="bottom-content">
+                <a href="CourseController?service=errol&id=<%=rsCourse.getInt(1)%>" class="btn btn-block btn-primary">Tham gia khóa học</a>
             </div>
             <%}%>
+            <%}%>
         </div>
-        
+
         <jsp:include page="Footer.jsp"></jsp:include>
 
         <!-- ========================= scroll-top ========================= -->
@@ -71,6 +74,7 @@
         <script src="./assets/js/main.js"></script>
         <script type="text/javascript">
             //========= Category Slider 
+            
             tns({
                 container: '.category-slider',
                 items: 3,

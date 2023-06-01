@@ -1,11 +1,16 @@
 <!-- Start Header Area -->
-    <header class="header navbar-area">
+<%@page import="Entities.AccountAdmin"%>
+<%@page import="Entities.AccountUser"%> 
+<%@page import="Entities.AccountMarketer"%> 
+<%@page import="Entities.AccountMentor"%> 
+
+<header class="header navbar-area">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-12">
                     <div class="nav-inner">
                         <nav class="navbar navbar-expand-lg">
-                            <a class="navbar-brand" href="#">
+                            <a class="navbar-brand" href="HomeController">
                                QUIZPRACTICE
                             </a>
                             <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
@@ -18,15 +23,10 @@
                             <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                                 <ul id="nav" class="navbar-nav ms-auto">
                                     <li class="nav-item">
-                                        <a class=" active dd-menu collapsed" href="javascript:void(0)"
+                                        <a class=" active dd-menu collapsed" href="HomeController"
                                             data-bs-toggle="collapse" data-bs-target="#submenu-1-1"
                                             aria-controls="navbarSupportedContent" aria-expanded="false"
                                             aria-label="Toggle navigation">Home</a>
-                                        <ul class="sub-menu collapse" id="submenu-1-1">
-                                            <li class="nav-item active"><a href="#">Home Default</a></li>
-                                            <li class="nav-item"><a href="#">Home Version 2</a></li>
-                                            <li class="nav-item"><a href="#">Home Version 3</a></li>
-                                        </ul>
                                     </li>
                                     <li class="nav-item">
                                         <a href="#" aria-label="Toggle navigation">Activity</a>
@@ -82,19 +82,69 @@
                                     </li>
                                 </ul>
                             </div> <!-- navbar collapse -->
+                            <%if(session.getAttribute("accountUser") != null) {
+                                AccountUser au = (AccountUser) session.getAttribute("accountUser");
+                            %>                        
                              <div class="login-button">
                                 <ul>
                                     <li>
-                                        <a href="#"><i class="lni lni-enter"></i> Login</a>
+                                        <a href="#"><i class="lni lni-enter"></i><%=au.getDisplay_name()%></a>
                                     </li>
                                     <li>
-                                        <a href="#"><i class="lni lni-user"></i> Register</a>
+                                        <a href="signout"><i class="lni lni-user"></i> Logout</a>
                                     </li>
                                 </ul>
                             </div>
                             <div class="button header-button">
                                 <a href="#" class="btn">Practice</a>
                             </div>
+                            <%} else if(session.getAttribute("accountMarketer") != null) {
+                                AccountMarketer amer = (AccountMarketer) session.getAttribute("accountMarketer");
+                            %>
+                            <div class="login-button">
+                                <ul>
+                                    <li>
+                                        <a href="#"><i class="lni lni-enter"></i><%=amer.getDisplay_name()%></a>
+                                    </li>
+                                    <li>
+                                        <a href="signout"><i class="lni lni-user"></i> Logout</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="button header-button">
+                                <a href="#" class="btn">Post an Ad</a>
+                            </div>
+                            <%} else if(session.getAttribute("accountMentor") != null) {
+                                AccountMentor amor = (AccountMentor) session.getAttribute("accountMentor");
+                            %>
+                            <div class="login-button">
+                                <ul>
+                                    <li>
+                                        <a href="#"><i class="lni lni-enter"></i><%=amor.getDisplay_name()%></a>
+                                    </li>
+                                    <li>
+                                        <a href="signout"><i class="lni lni-user"></i> Logout</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="button header-button">
+                                <a href="#" class="btn">Post a course</a>
+                            </div>
+                            <%} else {%>
+                            <div class="login-button">
+                                <ul>
+                                    <li>
+                                        <a href="login"><i class="lni lni-enter"></i>Login</a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="lni lni-user"></i>Sig up</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="button header-button">
+                                <a href="#" class="btn">Practice</a>
+                            </div>
+                            <%}%>
                         </nav> <!-- navbar -->
                     </div>
                 </div>
