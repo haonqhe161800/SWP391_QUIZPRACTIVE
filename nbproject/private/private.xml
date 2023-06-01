@@ -2,44 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
-        <group>
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-            <file>file:/D:/SWP391_QUIZPRACTIVE/src/java/Controller/VerifyControlller.java</file>
-            <file>file:/D:/SWP391_QUIZPRACTIVE/src/java/DAO/AccountDAO.java</file>
-            <file>file:/D:/SWP391_QUIZPRACTIVE/web/view/themify-icons-font/themify-icons/ie7/ie7.css</file>
-            <file>file:/D:/SWP391_QUIZPRACTIVE/src/java/Controller/Erro404Controller.java</file>
-            <file>file:/D:/SWP391_QUIZPRACTIVE/web/assets/css/profile.css</file>
-            <file>file:/D:/SWP391_QUIZPRACTIVE/web/Login/login.jsp</file>
-            <file>file:/D:/SWP391_QUIZPRACTIVE/src/java/Controller/ProfileController.java</file>
-            <file>file:/D:/SWP391_QUIZPRACTIVE/web/assets/css/tiny-slider.css</file>
-            <file>file:/D:/SWP391_QUIZPRACTIVE/src/java/Controller/SubjectController.java</file>
-            <file>file:/D:/SWP391_QUIZPRACTIVE/web/Login/login.css</file>
-            <file>file:/D:/SWP391_QUIZPRACTIVE/web/Register/register.jsp</file>
-            <file>file:/D:/SWP391_QUIZPRACTIVE/web/view/themify-icons-font/themify-icons/themify-icons.css</file>
-            <file>file:/D:/SWP391_QUIZPRACTIVE/web/view/ResetPassword/resetpassword.jsp</file>
-            <file>file:/D:/SWP391_QUIZPRACTIVE/web/assets/css/change-password.css</file>
-            <file>file:/D:/SWP391_QUIZPRACTIVE/web/Register/register.css</file>
-            <file>file:/D:/SWP391_QUIZPRACTIVE/src/java/Controller/ResetPassword.java</file>
-=======
-            <file>file:/D:/admin/Documents/Semester%205/SWP391/SWP391_QUIZPRACTIVE/src/java/Controller/CourseController.java</file>
-            <file>file:/D:/admin/Documents/Semester%205/SWP391/SWP391_QUIZPRACTIVE/src/java/DAO/DAOAnswer.java</file>
-            <file>file:/D:/admin/Documents/Semester%205/SWP391/SWP391_QUIZPRACTIVE/src/java/Entities/Errol.java</file>
-            <file>file:/D:/admin/Documents/Semester%205/SWP391/SWP391_QUIZPRACTIVE/src/java/Controller/Login.java</file>
-            <file>file:/D:/admin/Documents/Semester%205/SWP391/SWP391_QUIZPRACTIVE/src/java/DAO/DAOErrol.java</file>
-            <file>file:/D:/admin/Documents/Semester%205/SWP391/SWP391_QUIZPRACTIVE/web/jspClient/HomePage.jsp</file>
->>>>>>> f58c6551418969926d4e8abd42fb20400ce86a11
-=======
-            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Project_SWP391/SWP391_QUIZPRACTIVE/web/view/restpsw/changepsw.jsp</file>
-            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Project_SWP391/SWP391_QUIZPRACTIVE/web/view/forgotpsw/forgotpassword.jsp</file>
-            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Project_SWP391/SWP391_QUIZPRACTIVE/src/java/Controller/Login.java</file>
-            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Project_SWP391/SWP391_QUIZPRACTIVE/src/java/Controller/Account/RestPasswordController.java</file>
-            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Project_SWP391/SWP391_QUIZPRACTIVE/web/view/restpsw/vertify.jsp</file>
->>>>>>> Stashed changes
-        </group>
-=======
         <group/>
->>>>>>> 19f2c48b16d782835d7760a39018cb79f6d3d360
     </open-files>
 </project-private>

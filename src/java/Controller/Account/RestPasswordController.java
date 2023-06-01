@@ -1,59 +1,68 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
 
 package Controller.Account;
 
-import DAO.DAOAdmin;
-import DAO.DAOMarketer;
-import DAO.DAOMentor;
-import DAO.DAOUser;
-import Entities.AccountAdmin;
-import Entities.AccountMarketer;
-import Entities.AccountMentor;
-import Entities.AccountUser;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.Random;
 
-
+/**
+ *
+ * @author Admin
+ */
 public class RestPasswordController extends HttpServlet {
+   
+   
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet RestPasswordController</title>");  
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet RestPasswordController at " + request.getContextPath () + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    } 
 
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         request.getRequestDispatcher("view/forgotpsw/forgotpassword.jsp").forward(request, response);
-    }
+    } 
 
+    /** 
+     * Handles the HTTP <code>POST</code> method.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String newpass = getRandomNumberString();
-
-        DAOUser dudb = new DAOUser();
-        DAOMarketer dmdb = new DAOMarketer();
-        DAOMentor dmedb = new DAOMentor();
-        DAOAdmin dadb = new DAOAdmin();
-
-//        
-//        //initial parameter each role in database
-        AccountUser au = dudb.checkExist(email);
-        AccountMentor ame = dmedb.checkExist(email);
-        AccountMarketer am = dmdb.checkExist(email);
-        AccountAdmin aa = dadb.checkExist(email);
-        
-        request.getRequestDispatcher("view/login/sign_in.jsp").forward(request, response);
-
+    throws ServletException, IOException {
+        processRequest(request, response);
     }
 
-    public static String getRandomNumberString() {
-        // It will generate 6 digit random Number.
-        // from 0 to 999999
-        Random rnd = new Random();
-        int number = rnd.nextInt(999999);
+    /** 
+     * Returns a short description of the servlet.
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
 
-        // this will convert any number sequence into 6 character.
-        return String.format("%06d", number);
-    }
 }
