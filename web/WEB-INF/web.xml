@@ -12,6 +12,22 @@
         <servlet-name>ProfileController</servlet-name>
         <servlet-class>Controller.ProfileController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>Controller.Login</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Signup</servlet-name>
+        <servlet-class>Controller.Signup</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangePasswordForgotController</servlet-name>
+        <servlet-class>Controller.Account.ChangePasswordForgotController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RestPasswordController</servlet-name>
+        <servlet-class>Controller.Account.RestPasswordController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControllBlogList</servlet-name>
         <url-pattern>/cbl</url-pattern>
@@ -24,9 +40,28 @@
         <servlet-name>ProfileController</servlet-name>
         <url-pattern>/Profile</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Signup</servlet-name>
+        <url-pattern>/signup</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePasswordForgotController</servlet-name>
+        <url-pattern>/forgotten</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RestPasswordController</servlet-name>
+        <url-pattern>/restpassword</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    <welcome-file-list>
+        <welcome-file>HomeController</welcome-file>
+    </welcome-file-list>
 </web-app>

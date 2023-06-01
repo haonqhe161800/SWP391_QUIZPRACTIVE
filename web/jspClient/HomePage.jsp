@@ -106,7 +106,7 @@
                     <div class="col-12 p-0">
                         <div class="category-slider">
                             <%while(rsSubject.next()) {%>
-                            <a href="SubjectController?service=details&id=<%=rsSubject.getInt(2)%>" class="single-cat">
+                            <a href="SubjectController?service=details&subject_id=<%=rsSubject.getInt(2)%>" class="single-cat">
                                 <div class="icon">
                                     <img src="<%=rsSubject.getString(3)%>" alt="#">
                                 </div>
@@ -159,7 +159,7 @@
                             <div class="content">
                                 <div class="top-content">
                                     <p><%=rsCourse.getString(4)%></p>
-                                    <h3 class="title"> <%=rsCourse.getString(11)%>  </h3>
+                                    <h3 class="title"> <%=rsCourse.getString(12)%>  </h3>
                                     <p class="update-time">Ngày update gần nhất <%=rsCourse.getString(9)%></p>
                                     <ul class="rating">
                                         <li>số người joined (<%=rsCourse.getInt(8)%>)</li>
@@ -169,7 +169,7 @@
                                     </ul>
                                 </div>
                                 <div class="bottom-content">
-                                    <a href="#" class="btn btn-block btn-primary">Details</a>
+                                    <a href="CourseController?service=details&id=<%=rsCourse.getInt(1)%>" class="btn btn-block btn-primary">Details</a>
                                 </div>
                             </div>
                         </div>
