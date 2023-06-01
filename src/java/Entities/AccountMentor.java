@@ -9,30 +9,39 @@ package Entities;
  * @author admin
  */
 public class AccountMentor {
-    private int mentor_id;
-    private String email, password, image, display_name, create_date, address, date_of_birth;
-    private String role = "mentor";
+     private int mentor_id;
+    private String email;
+    private String password;
+    private String descyourself;
+    private String fullName;
+    private String image;
+    private String display_name;
+    private String created_date;
+    private String address;
+    private String dob;
+    private String academiclevel;
+    private String modify_date;
+    private int gender;
+    private int role_id;
+    
     public AccountMentor() {
     }
 
-    public AccountMentor(int mentor_id, String email, String password, String image, String display_name, String create_date, String address, String date_of_birth, String role) {
+    public AccountMentor(int mentor_id, String email, String password, String descyourself, String fullName, String image, String display_name, String created_date, String address, String dob, String academiclevel, String modify_date, int gender, int role_id) {
         this.mentor_id = mentor_id;
         this.email = email;
         this.password = password;
+        this.descyourself = descyourself;
+        this.fullName = fullName;
         this.image = image;
         this.display_name = display_name;
-        this.create_date = create_date;
+        this.created_date = created_date;
         this.address = address;
-        this.date_of_birth = date_of_birth;
-        role = "mentor";
-    }
-
-    public int getMentor_id() {
-        return mentor_id;
-    }
-
-    public void setMentor_id(int mentor_id) {
-        this.mentor_id = mentor_id;
+        this.dob = dob;
+        this.academiclevel = academiclevel;
+        this.modify_date = modify_date;
+        this.gender = gender;
+        this.role_id = role_id;
     }
 
     public String getEmail() {
@@ -51,12 +60,12 @@ public class AccountMentor {
         this.password = password;
     }
 
-    public String getImage() {
-        return image;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getDisplay_name() {
@@ -67,14 +76,6 @@ public class AccountMentor {
         this.display_name = display_name;
     }
 
-    public String getCreate_date() {
-        return create_date;
-    }
-
-    public void setCreate_date(String create_date) {
-        this.create_date = create_date;
-    }
-
     public String getAddress() {
         return address;
     }
@@ -83,13 +84,15 @@ public class AccountMentor {
         this.address = address;
     }
 
-    public String getDate_of_birth() {
-        return date_of_birth;
+    public String getDob() {
+        return dob;
     }
 
-    public void setDate_of_birth(String date_of_birth) {
-        this.date_of_birth = date_of_birth;
+    public void setDob(String dob) {
+        this.dob = dob;
     }
-    
+
+        
+   
     
 }

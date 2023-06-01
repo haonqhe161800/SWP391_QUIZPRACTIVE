@@ -18,16 +18,29 @@ CREATE TABLE [Admin] (
 )
 
 
+----  Create table Role ----
+CREATE TABLE [Role] (
+	[role_id] [int] PRIMARY KEY not null ,
+	[role_name] [nvarchar] (250) not null,
+)
+
+
 ---- Create table User ----
-CREATE TABLE [User] (
+CREATE TABLE [User_type] (
 	[user_id] [int] IDENTITY (1,1) PRIMARY KEY not null,
 	[email] [nvarchar] (250) not null,
 	[password] [nvarchar] (250) not null,
-	[image] [nvarchar] (250) not null,
-	[display_name] [nvarchar] (250) not null,
-	[created_date] [nvarchar] (250) not null,
-	[address] [nvarchar] (250) not null,
-	[date_of_birth] [nvarchar] (250) not null
+	[describe_yourself] [nvarchar] (MAX),
+	[fullname] [nvarchar] (250) not null,
+	[image] [nvarchar] (250),
+	[display_name] [nvarchar] (250),
+	[created_date] [nvarchar] (250) default getdate(),
+	[address] [nvarchar] (250),
+	[date_of_birth] [nvarchar] (250),
+	[academic_level] [nvarchar] (250),
+	[modify_date] [nvarchar] (250),
+	[gender] [int] NOT NULL CHECK (gender IN (0, 1)),
+	[role_id] [int] FOREIGN KEY REFERENCES [Role]([role_id]),
 )
 
 
@@ -35,20 +48,27 @@ CREATE TABLE [User] (
 CREATE TABLE [Subject] (
 	[subject_id] [int] IDENTITY (1,1) PRIMARY KEY not null,
 	[subject_name] [nvarchar] (250) not null,
-	[image] [nvarchar] (250) not null
+	[image] [nvarchar] (250)
 )
 
 
 ---- Create table Mentor ----
-CREATE TABLE [Mentor] (
-	[mentor_id] [int] IDENTITY (1,1) not null PRIMARY KEY,
+CREATE TABLE [Mentor_type] (
+	[mentor_id] [int] IDENTITY (1,1) PRIMARY KEY not null,
 	[email] [nvarchar] (250) not null,
 	[password] [nvarchar] (250) not null,
-	[image] [nvarchar] (250) not null,
-	[display_name] [nvarchar] (250) not null,
-	[created_date] [date] not null,
-	[address] [nvarchar] (250) not null,
-	[date_of_birth] [nvarchar] (250) not null
+	[describe_yourself] [nvarchar] (MAX),
+	[fullname] [nvarchar] (250) not null,
+	[image] [nvarchar] (250),
+	[display_name] [nvarchar] (250),
+	[created_date] [nvarchar] (250) default getdate(),
+	[address] [nvarchar] (250),
+	[date_of_birth] [nvarchar] (250),
+	[academic_level] [nvarchar] (250),
+	[modify_date] [nvarchar] (250),
+	[gender] [int] NOT NULL CHECK (gender IN (0, 1)),
+	[specialize] [nvarchar] (MAX),
+	[role_id] [int] FOREIGN KEY REFERENCES [Role]([role_id]),
 )
 
 
@@ -56,26 +76,27 @@ CREATE TABLE [Mentor] (
 CREATE TABLE [Course] (
 	[course_id] [int] IDENTITY (1,1) PRIMARY KEY not null,
 	[subject_id] [int] not null FOREIGN KEY REFERENCES [Subject]([subject_id]),
-	[mentor_id] [int] FOREIGN KEY REFERENCES [Mentor]([mentor_id]) default null,
+	[mentor_id] [int] FOREIGN KEY REFERENCES [Mentor_type]([mentor_id]) default null,
 	[course_name] [nvarchar] (250) not null,
-	[description] [nvarchar] (max) not null,
+	[description] [nvarchar] (max),
 	[image] [nvarchar] (250) not null,
-	[is_publish] [int] not null,
+	[is_publish] [int],
 	[quantity] [int] default 0,
-	[created_date] [nvarchar] (250) not null
+	[created_date] [nvarchar] (250) default (getdate()),
+	[updated_date] [nvarchar] (250),
 )
 
 ---- Create table Errol ----
 CREATE TABLE [Errol] (
-	[user_id] [int] not null FOREIGN KEY REFERENCES [User]([user_id]),
+	[user_id] [int] not null FOREIGN KEY REFERENCES [User_type]([user_id]),
 	[course_id] [int] not null FOREIGN KEY REFERENCES [Course]([course_id]),
-	[erroled_date] [date] not null,
+	[erroled_date] [date] default (getdate()),
 	PRIMARY KEY ([user_id], [course_id])
 )
 
 --- Create table ResultTest ----
 CREATE TABLE [Result_test] (
-	[user_id] [int] not null FOREIGN KEY REFERENCES [User]([user_id]),
+	[user_id] [int] not null FOREIGN KEY REFERENCES [User_type]([user_id]),
 	[course_id] [int] not null FOREIGN KEY REFERENCES [Course]([course_id]),
 	[status] [nvarchar] (250) not null,
 	[score] [int] not null,
@@ -99,43 +120,79 @@ CREATE TABLE [Answer] (
 
 
 ---- Create table Marketer ------
-CREATE TABLE [Marketer] (
-	[marketer_id] [int] IDENTITY (1,1) not null PRIMARY KEY,
+CREATE TABLE [Marketer_type] (
+	[marketer_id] [int] IDENTITY (1,1) PRIMARY KEY not null,
 	[email] [nvarchar] (250) not null,
 	[password] [nvarchar] (250) not null,
-	[image] [nvarchar] (250) not null,
-	[display_name] [nvarchar] (250) not null,
-	[created_date] [date] not null,
-	[address] [nvarchar] (250) not null,
-	[date_of_birth] [nvarchar] (250) not null
+	[describe_yourself] [nvarchar] (MAX),
+	[fullname] [nvarchar] (250) not null,
+	[image] [nvarchar] (250),
+	[display_name] [nvarchar] (250),
+	[created_date] [nvarchar] (250) default getdate(),
+	[address] [nvarchar] (250),
+	[date_of_birth] [nvarchar] (250),
+	[academic_level] [nvarchar] (250),
+	[modify_date] [nvarchar] (250),
+	[gender] [int] NOT NULL CHECK (gender IN (0, 1)),
+	[role_id] [int] FOREIGN KEY REFERENCES [Role]([role_id]),
 )
 
 ---- Create table List_marketing ------
 CREATE TABLE [List_marketing] (
 	[lc_id] [int] IDENTITY (1,1) PRIMARY KEY not null,
-	[public_date] [date] not null,
+	[public_date] [date] default getdate(),
 	[course_id] [int] not null FOREIGN KEY REFERENCES [Course]([course_id]),
 )
 
 ---- Create table Marketing -----
 CREATE TABLE [Marketing] (
 	[marketing_id] [int] IDENTITY (1,1) PRIMARY KEY not null,
-	[marketer_id] [int] not null FOREIGN KEY REFERENCES [Marketer]([marketer_id]),
+	[marketer_id] [int] not null FOREIGN KEY REFERENCES [Marketer_type]([marketer_id]),
 	[lc_id] [int] not null FOREIGN KEY REFERENCES [List_marketing]([lc_id]),
-	[posted_date] [date] not null,
-	[updated_date] [date] not null,
+	[posted_date] [date] default getdate(),
+	[updated_date] [date],
 	[image] [nvarchar] (250) not null,
 	[content] [nvarchar] (max) not null,
 	[tittle] [nvarchar] (max) not null
 )
 
-drop table Marketing	
+--add role	
+INSERT INTO Role(role_id,role_name) VALUES(1,'admin')
+INSERT INTO Role(role_id,role_name) VALUES(2,'mentor')
+INSERT INTO Role(role_id,role_name) VALUES(3,'marketer')
+INSERT INTO Role(role_id,role_name) VALUES(4,'user')
 
+--add admin
 insert into [Admin] values (1, 'tuanvm@gmail.com', '12345678')
 
-insert into [User] values ('tuanpm@gmail.com', 12345678, 'https://kenh14cdn.com/thumb_w/660/203336854389633024/2021/7/8/base64-1625718112693743044058.png', 'tuanpm', '05/23/2023', N'Thái Bình', '11/08/2002')
+--add user
+INSERT INTO [dbo].[User_type]
+           ([email] ,[password],[fullname],[display_name],[address],[date_of_birth],[gender],[role_id])
+     VALUES
+           ('ngohuunam2002@gmail.com','123456789','Ngo Huu Nam','NamNH',N'Việt Nam','2002-10-01',1,4)
 
-insert into [Mentor] values ('trungnt@gmail.com', 12345678, 'https://kenh14cdn.com/thumb_w/660/203336854389633024/2021/7/8/base64-1625718112693743044058.png', 'trungnt', '05/23/2023', N'Thái Bình', '11/08/2002')
+
+INSERT INTO [dbo].[User_type]
+           ([email] ,[password],[fullname],[display_name],[address],[date_of_birth],[gender],[role_id])
+     VALUES
+           ('nguyenvana@gmail.com','123456','Nguyen Van A','VanANguyen',N'Việt Nam','1999-10-01',1,4)
+
+
+--add markerter
+INSERT INTO [dbo].[Marketer_type]
+           ([email] ,[password],[fullname],[display_name],[address],[date_of_birth],[gender],[role_id])
+     VALUES
+           ('TranThiB@gmail.com','12345','Tran Thi B','BTran',N'Việt Nam','1998-01-01',0,3)
+
+
+
+--add mentor
+
+INSERT INTO [dbo].[Mentor_type]
+           ([email] ,[password],[fullname],[display_name],[address],[date_of_birth],[gender],[role_id])
+     VALUES
+           ('TranQuyBan@gmail.com','12345','BanKelly','QuyTran',N'Việt Nam','1990-01-01',0,2)
+
 
 insert into [Subject] values ('C', './assets/images/categories/C.png'),
 							 ('C++', './assets/images/categories/C++.png'),
