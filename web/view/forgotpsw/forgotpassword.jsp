@@ -43,7 +43,7 @@
                     <div class="forgot-form">
                         <form action="restpassword" method="POST">
                             <div class="form-input">
-                                <input type="text" placeholder="abc.gmail.com" name="email" />
+                                <input type="text" placeholder="abc.gmail.com" name="email" value="${sessionScope.eemail}" />
                             </div>
                             <span class="UIInput-border"></span>
                             <div class="form-signin">

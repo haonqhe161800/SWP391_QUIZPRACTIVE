@@ -8,6 +8,10 @@ import DAO.DAOAdmin;
 import DAO.DAOMarketer;
 import DAO.DAOMentor;
 import DAO.DAOUser;
+import Entities.AccountAdmin;
+import Entities.AccountMarketer;
+import Entities.AccountMentor;
+import Entities.AccountUser;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,6 +19,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 import module.Mailer;
 
 public class RestPasswordController extends HttpServlet {
@@ -39,6 +45,29 @@ public class RestPasswordController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+
+        AccountAdmin atk = (AccountAdmin) session.getAttribute("accountAdmin");
+        AccountMentor mtk = (AccountMentor) session.getAttribute("accountMentor");
+        AccountMarketer matk = (AccountMarketer) session.getAttribute("accountMarketer");
+        AccountUser utk = (AccountUser) session.getAttribute("accountUser");
+
+        Map<String, Object> accountMap = new HashMap<>();
+        accountMap.put("Admin", atk);
+        accountMap.put("Mentor", mtk);
+        accountMap.put("Marketer", matk);
+        accountMap.put("User", utk);
+
+        for (Map.Entry<String, Object> entry : accountMap.entrySet()) {
+            Object accountobject = entry.getValue();
+
+            if (accountobject != null) {
+                String email = getEmailFromAccountObject(accountobject);
+                sendDocumentHTML(email);
+                request.setAttribute("changepass", email);
+                request.getRequestDispatcher("view/forgotpsw/sentlink.jsp").forward(request, response);
+            }
+        }
         request.getRequestDispatcher("view/forgotpsw/forgotpassword.jsp").forward(request, response);
     }
 
@@ -52,24 +81,24 @@ public class RestPasswordController extends HttpServlet {
         if (new DAOAdmin().checkExist(email) != null) {
             sendDocumentHTML(email);
             request.setAttribute("msg", "Check your email and verify!");
-            session.setAttribute("sessionrole",1);
+            session.setAttribute("sessionrole", 1);
         } else if (new DAOMarketer().checkExist(email) != null) {
             sendDocumentHTML(email);
             request.setAttribute("msg", "Check your email and verify!");
-            session.setAttribute("sessionrole",3);
+            session.setAttribute("sessionrole", 3);
         } else if (new DAOMentor().checkExist(email) != null) {
             sendDocumentHTML(email);
             request.setAttribute("msg", "Check your email and verify!");
-            session.setAttribute("sessionrole",2);
+            session.setAttribute("sessionrole", 2);
         } else if (new DAOUser().checkExist(email) != null) {
             sendDocumentHTML(email);
             request.setAttribute("msg", "Check your email and verify!");
-            session.setAttribute("sessionrole",4);
+            session.setAttribute("sessionrole", 4);
         } else {
-            session.setAttribute("email", email);
+            session.setAttribute("eemail", email);
             request.setAttribute("msgerror", "Invalid email!");
         }
-        
+
         request.getRequestDispatcher("view/forgotpsw/forgotpassword.jsp").forward(request, response);
     }
 
@@ -157,13 +186,27 @@ public class RestPasswordController extends HttpServlet {
                 + "                </p>\n"
                 + "            </div>\n"
                 + "            <div class=\"link\">\n"
-                + "                <a href=\"http://localhost:8080/Project_SWP391/changepsw?action=reset&email="+email+"\">Reset Password</a>\n"
+                + "                <a href=\"http://localhost:8080/Project_SWP391/changepsw?action=reset&email=" + email + "\">Reset Password</a>\n"
                 + "            </div>\n"
                 + "         </div>\n"
                 + "    </div>\n"
                 + "</body>\n"
                 + "</html>");
 
+    }
+
+    public String getEmailFromAccountObject(Object a) {
+        if (a instanceof AccountAdmin) {
+            return ((AccountAdmin) a).getEmail();
+        } else if (a instanceof AccountMentor) {
+            return ((AccountMentor) a).getEmail();
+        } else if (a instanceof AccountMarketer) {
+            return ((AccountMarketer) a).getEmail();
+        } else if (a instanceof AccountUser) {
+            return ((AccountUser) a).getEmail();
+        } else {
+            return null;
+        }
     }
 
     @Override

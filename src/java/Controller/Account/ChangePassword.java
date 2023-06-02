@@ -8,10 +8,12 @@ import DAO.DAOAdmin;
 import DAO.DAOMarketer;
 import DAO.DAOMentor;
 import DAO.DAOUser;
+import Entities.AccountAdmin;
+import Entities.AccountMarketer;
+import Entities.AccountMentor;
+import Entities.AccountUser;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -21,7 +23,6 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author Admin
  */
-//@WebServlet(name = "ChangePassword", urlPatterns = {"/changepsw"})
 public class ChangePassword extends HttpServlet {
 
     @Override
@@ -36,19 +37,15 @@ public class ChangePassword extends HttpServlet {
             if (action.equals("reset")) {
                 switch (attribute) {
                     case 1:
-                        email = request.getParameter("email");
                         request.getSession().setAttribute("AccountA", new DAOAdmin().checkExist(email));
                         break;
                     case 2:
-                        email = request.getParameter("email");
                         request.getSession().setAttribute("AccountM", new DAOMentor().checkExist(email));
                         break;
                     case 3:
-                        email = request.getParameter("email");
                         request.getSession().setAttribute("AccountMa", new DAOMarketer().checkExist(email));
                         break;
                     case 4:
-                        email = request.getParameter("email");
                         request.getSession().setAttribute("AccountU", new DAOUser().checkExist(email));
                         break;
                     default:
@@ -56,7 +53,8 @@ public class ChangePassword extends HttpServlet {
                 }
                 request.getRequestDispatcher("view/forgotpsw/resetpsw.jsp").forward(request, response);
             } else {
-                request.getRequestDispatcher("view/Error/404.jsp").forward(request, response);
+//                request.getRequestDispatcher("view/Error/404.jsp").forward(request, response);
+                response.sendRedirect("view/Error/404.jsp");
             }
         } else {
             //tra ve cai gi khi khong co action 
@@ -67,18 +65,46 @@ public class ChangePassword extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = (String) request.getSession().getAttribute("email");
         String npass = request.getParameter("password");
         String cpass = request.getParameter("repassword");
         Integer attribute = (Integer) request.getSession().getAttribute("sessionrole");
+
+        HttpSession session = request.getSession();
         if (!npass.equals(cpass)) {
             request.setAttribute("msg", "New password and confirm new password fields do not match.");
             request.getRequestDispatcher("view/forgotpsw/resetpsw.jsp").forward(request, response);
             return;
+        } else {
+            switch (attribute) {
+                case 1:
+                    AccountAdmin aa = (AccountAdmin) session.getAttribute("AccountA");
+                    //update new password for you
+                    new DAOAdmin().updatePasswordByName(npass, aa.getEmail());
+                    //send page login
+                    break;
+                case 2:
+                    AccountMentor am = (AccountMentor) session.getAttribute("AccountM");
+                    //update new password for you
+                    new DAOMentor().updatePasswordByName(npass, am.getEmail());
+                    //send page login
+                    break;
+                case 3:
+                    AccountMarketer ama = (AccountMarketer) session.getAttribute("AccountMa");
+                    //update new password for you
+                    new DAOMarketer().updatePasswordByName(npass, ama.getEmail());
+                    //send page login
+                    break;
+                case 4:
+                    AccountUser au = (AccountUser) session.getAttribute("AccountU");
+                    //update new password for you
+                     new DAOUser().updatePasswordByName(npass, au.getEmail());
+                    //send page login
+                    break;
+            }
+            request.getRequestDispatcher("view/login/sign_in.jsp").forward(request, response);
         }
 
-        //update pass for account 
-        request.getRequestDispatcher("view/login/sign_in.jsp").forward(request, response);
+        
     }
 
 }

@@ -17,7 +17,7 @@
             <div class="abcd">
                 <div class="forgot-psw">
                     <div class="forgot-header">
-                        <h2 class="title-forgot">Reset your password for ${sessionScope.email}</h2>
+                        <h2 class="title-forgot">Reset your password for ${sessionScope.eemail}</h2>
                     </div>
                     <div class="forgot-form">
                         <form action="changepsw" method="POST">
@@ -29,7 +29,7 @@
                                 <input type="password" placeholder="confirm password" id="repassword" name="repassword" required onkeyup="mycheck()"/>
                                 <span class="UIInput-border"></span>
                             </div>
-                            <span id='message'></span>
+                            <p id='mess'></p>
                             <div class="form-signin">
                                 <button type="submit">Save Password</button>
                             </div>
