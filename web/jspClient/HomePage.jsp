@@ -162,7 +162,7 @@
                                     <h3 class="title"> <%=rsCourse.getString(12)%>  </h3>
                                     <p class="update-time">Ngày update gần nhất <%=rsCourse.getString(9)%></p>
                                     <ul class="rating">
-                                        <li>số người joined (<%=rsCourse.getInt(8)%>)</li>
+                                        <li>Số người tham gia (<%=rsCourse.getInt(8)%>)</li>
                                     </ul>
                                     <ul class="info-list">
                                         <li><i class="lni lni-timer"></i> Ngày đăng khóa học <%=rsCourse.getString(9)%></li>
