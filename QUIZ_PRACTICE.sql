@@ -50,7 +50,27 @@ CREATE TABLE [Subject] (
 	[subject_name] [nvarchar] (250) not null,
 	[image] [nvarchar] (250)
 )
+--------------------------------add
+ALTER TABLE [Subject]
+ADD status BIT not null DEFAULT 0;
 
+ALTER TABLE [Subject]
+ADD title nvarchar(255);
+
+ALTER TABLE [Subject]
+ADD description nvarchar(255);
+
+----------------------------------add
+
+--add slider ket noi voi subject
+CREATE TABLE Slider (
+ slider_id [int] IDENTITY (1,1) PRIMARY KEY not null,
+ [subject_id] [int] FOREIGN KEY REFERENCES [Subject]([subject_id]) ,
+ slider_url varchar(255),
+ content nvarchar(255),
+ note nvarchar(255),
+ isShow BIT not null DEFAULT 0
+)
 
 ---- Create table Mentor ----
 CREATE TABLE [Mentor_type] (
@@ -137,25 +157,33 @@ CREATE TABLE [Marketer_type] (
 	[role_id] [int] FOREIGN KEY REFERENCES [Role]([role_id]),
 )
 
----- Create table List_marketing ------
-CREATE TABLE [List_marketing] (
-	[lc_id] [int] IDENTITY (1,1) PRIMARY KEY not null,
-	[public_date] [date] default getdate(),
-	[course_id] [int] not null FOREIGN KEY REFERENCES [Course]([course_id]),
+---------------------------------------------------------------add
+
+---- Create table Blog ------(List_marketing )
+--DROP TABLE [List_marketing]
+CREATE TABLE Blog (
+	[blog_id] [int] IDENTITY (1,1) PRIMARY KEY not null,
+	blog_name nvarchar(255) not null,
+	[subject_id] [int] FOREIGN KEY REFERENCES [Subject]([subject_id])
 )
 
----- Create table Marketing -----
-CREATE TABLE [Marketing] (
-	[marketing_id] [int] IDENTITY (1,1) PRIMARY KEY not null,
+---- Create table Post -----(Marketing)
+-- DROP TABLE [Marketing]
+CREATE TABLE Post (
+	[post_id] [int] IDENTITY (1,1) PRIMARY KEY not null,
 	[marketer_id] [int] not null FOREIGN KEY REFERENCES [Marketer_type]([marketer_id]),
-	[lc_id] [int] not null FOREIGN KEY REFERENCES [List_marketing]([lc_id]),
+	[blog_id] [int] not null FOREIGN KEY REFERENCES Blog([blog_id]),
+	[tittle] [nvarchar] (max) not null,
 	[posted_date] [date] default getdate(),
 	[updated_date] [date],
 	[image] [nvarchar] (250) not null,
 	[content] [nvarchar] (max) not null,
-	[tittle] [nvarchar] (max) not null
+	[short_content] [nvarchar] (250) not null,
+	status BIT not null DEFAULT 0
+	
 )
 
+---------------------------------------------------------------add
 --add role	
 INSERT INTO Role(role_id,role_name) VALUES(1,'admin')
 INSERT INTO Role(role_id,role_name) VALUES(2,'mentor')
