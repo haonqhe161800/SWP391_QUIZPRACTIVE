@@ -48,7 +48,7 @@ CREATE TABLE [User_type] (
 CREATE TABLE [Subject] (
 	[subject_id] [int] IDENTITY (1,1) PRIMARY KEY not null,
 	[subject_name] [nvarchar] (250) not null,
-	[image] [nvarchar] (250)
+	[image] [nvarchar] (250),
 	-----Add-------
 	[status] [BIT] not null DEFAULT 0,
 	[tittle] [nvarchar] (max),
