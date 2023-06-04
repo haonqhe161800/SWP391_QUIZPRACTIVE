@@ -67,7 +67,7 @@
                                 <div> <p class="update-time"><i class="lni lni-timer"></i><strong>   Ngày update gần nhất:</strong> <%=rsCourse.getString(9)%></p> </div>
                         <%if((session.getAttribute("accountUser") != null && session.getAttribute("accountMarketer") == null && session.getAttribute("accountMentor") == null) || (session.getAttribute("accountUser") == null && session.getAttribute("accountMarketer") == null && session.getAttribute("accountMentor") == null)) {%>   
                         <div class="bottom-content">
-                            <a href="CourseController?service=errol&course_id=<%=rsCourse.getInt(1)%>" class="btn btn-block btn-primary">Tham gia khóa học</a>
+                            <a href="CourseController?service=errol&id=<%=rsCourse.getInt(1)%>" class="btn btn-block btn-primary">Tham gia khóa học</a>
                         </div>
                         <%}%>
                     </div>

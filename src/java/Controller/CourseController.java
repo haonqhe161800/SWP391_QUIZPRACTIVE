@@ -8,6 +8,7 @@ import DAO.DAOCourse;
 import DAO.DAOErrol;
 import DAO.DAOMentor;
 import Entities.AccountUser;
+import Entities.Course;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -18,6 +19,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -64,15 +66,28 @@ public class CourseController extends HttpServlet {
 
             if (service.equals("errol")) {
                 HttpSession session = request.getSession();
+                ResultSet rsErrol = daoErrol.getData("select * from Errol");
                 if (session.getAttribute("accountUser") == null) {
                     response.sendRedirect("login");
                 } else {
                     AccountUser au = (AccountUser) session.getAttribute("accountUser");
                     String id_raw = request.getParameter("id");
                     int id = Integer.parseInt(id_raw);
-                    int n = daoErrol.addProductByPre(id, au);
-                    if (n > 0) {
-                        response.sendRedirect("HomeController");
+                    Vector<Course> list = daoCourse.getAll("select * from Course where course_id = " + id);
+                    Course course = list.get(0);                 
+                    boolean flag = true;
+                    while (rsErrol.next()) {
+                        if (rsErrol.getInt(1) == au.getUser_id() && rsErrol.getInt(2) == id) {
+                            flag = false;
+                            request.getRequestDispatcher("jspClient/PracticeDetails.jsp").forward(request, response);
+                        }
+                    }
+                    if (flag == true) {
+                        int n = daoErrol.addProductByPre(au, id);
+                        if (n > 0) {
+                            daoCourse.updateQuantity(course);
+                            response.sendRedirect("HomeController");
+                        }
                     }
                 }
             }
