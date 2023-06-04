@@ -51,22 +51,34 @@ public class CourseController extends HttpServlet {
             String service = request.getParameter("service");
 
             if (service.equals("details")) {
+                HttpSession session = request.getSession();
+                AccountUser au = (AccountUser) session.getAttribute("accountUser");
                 int course_id = Integer.parseInt(request.getParameter("course_id"));
                 ResultSet rsCourse = daoCourse.getData("select * from [Course] c join [Subject] s on c.subject_id = s.subject_id where c.course_id = " + course_id);
                 ResultSet rsCountQuestion = daoCourse.getData("select Count(q.question_name) from Course c, Question q where q.course_id = c.course_id and c.course_id = " + course_id);
+                ResultSet rsErrol = daoErrol.getData("select * from Errol");
+                int errol = 0;
+                if (au != null) {
+                    while (rsErrol.next()) {
+                        if (rsErrol.getInt(1) == au.getUser_id() && rsErrol.getInt(2) == course_id) {
+                            errol++;
+                        }
+                    }
+                }
                 int count = 0;
                 if (rsCountQuestion.next()) {
                     count = rsCountQuestion.getInt(1);
                 }
 
                 request.setAttribute("count", count);
+                request.setAttribute("errol", errol);
                 request.setAttribute("rsCourse", rsCourse);
+                request.setAttribute("rsErrol", rsErrol);
                 request.getRequestDispatcher("jspClient/CourseDetails.jsp").forward(request, response);
             }
 
             if (service.equals("errol")) {
                 HttpSession session = request.getSession();
-                ResultSet rsErrol = daoErrol.getData("select * from Errol");
                 if (session.getAttribute("accountUser") == null) {
                     response.sendRedirect("login");
                 } else {
@@ -74,20 +86,11 @@ public class CourseController extends HttpServlet {
                     String id_raw = request.getParameter("id");
                     int id = Integer.parseInt(id_raw);
                     Vector<Course> list = daoCourse.getAll("select * from Course where course_id = " + id);
-                    Course course = list.get(0);                 
-                    boolean flag = true;
-                    while (rsErrol.next()) {
-                        if (rsErrol.getInt(1) == au.getUser_id() && rsErrol.getInt(2) == id) {
-                            flag = false;
-                            request.getRequestDispatcher("jspClient/PracticeDetails.jsp").forward(request, response);
-                        }
-                    }
-                    if (flag == true) {
-                        int n = daoErrol.addProductByPre(au, id);
-                        if (n > 0) {
-                            daoCourse.updateQuantity(course);
-                            response.sendRedirect("HomeController");
-                        }
+                    Course course = list.get(0);
+                    int n = daoErrol.addProductByPre(au, id);
+                    if (n > 0) {
+                        daoCourse.updateQuantity(course);
+                        response.sendRedirect("HomeController");
                     }
                 }
             }
