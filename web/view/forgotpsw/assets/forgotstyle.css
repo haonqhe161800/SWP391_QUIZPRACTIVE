@@ -6,7 +6,7 @@ body {
 
 .abcdy {
     align-items: center;
-    
+
     bottom: 0;
     display: flex;
     background: url('tt.png') no-repeat center / cover;
@@ -121,4 +121,21 @@ body {
 
 button p{
     padding: 6px 20px;
+}
+
+@media screen and (max-width: 768px) {
+
+    .forgot-header h1{
+        font-size: 121%;
+
+    }
+    #message li{
+        font-size: 59%;
+
+    }
+    .form-signin button{
+        font-size: 18px;
+        line-height: 0px;
+    }
+
 }

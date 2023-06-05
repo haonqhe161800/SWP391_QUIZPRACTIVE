@@ -11,72 +11,9 @@ html {
 }
 
 
-
-
-
-.header {
-    background-color: #a5b0d0;
-    display: flex;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1;
-    align-items: center;
-}
-
-.logo {
-    margin-right: auto;
-    color: white;
-    text-transform: uppercase;
-    display: inline-block;
-}
-
-.logo h2 {
-    line-height: 46px;
-    padding: 0 10px;
-
-}
-
-.nav {
-    display: inline-block;
-}
-
-.nav {
-    list-style-type: none;
-}
-
-
-.nav li a {
-    color: white;
-    text-decoration: none;
-    display: block;
-}
-
-.nav>li {
-    display: inline-block;
-}
-
-.nav>li>a {
-    padding: 0 24px;
-    display: block;
-    line-height: 46px;
-}
-
-.nav>li:hover>a {
-    color: #000;
-    background-color: rgba(0, 0, 0, 0.3);
-
-}
-
-form,
-.search_bar {
-    display: inline-block;
-}
-
-form {
-    min-width: 50%;
-
+.space{
+    height: 46px;
+    width: 100%;
 }
 
 .search_bar {
@@ -106,16 +43,8 @@ form {
 }
 
 
-.slider {
-    margin-top: 46px;
-    padding-top: 50%;
-    /*theo chieu ngang ccuar chinh no*/
-    background: url('../img/slider/img_ch.jpg') top center / cover no-repeat;
-}
-
-
 .blog_item {
-    border: 2px solid #ccc;
+    border: 2px solid #2e3856;
     border-radius: 10px;
     width: 100%;
     padding: 20px;
@@ -130,7 +59,7 @@ form {
     cursor: pointer;
 }
 
-.intro_author{
+.intro_author {
     display: flex;
     align-items: center;
 }
@@ -139,7 +68,7 @@ form {
     margin-left: 10px;
 }
 
-.name_author{
+.name_author {
     color: #292929;
     font-size: 12px;
     font-weight: 600;
@@ -153,18 +82,19 @@ form {
     line-height: 32px;
 }
 
-.blog_infor{
+.blog_infor {
     display: flex;
     align-items: center;
 }
-.blog_tag{
+
+.blog_tag {
     background-color: #ccc;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     border: 1px solid black;
     border-radius: 10px;
 }
 
-.blog_tag a{
+.blog_tag a {
     list-style: none;
     text-decoration: none;
     color: #000;
@@ -172,12 +102,11 @@ form {
     padding: 7px;
 }
 
-.create_at{
+.create_at {
     margin-left: 10px;
 }
 
 .widget {
-    box-shadow: 0 0 30px rgba(31, 45, 61, 0.125);
     border-radius: 5px;
     overflow: hidden;
     background: #ffffff;
@@ -188,18 +117,36 @@ form {
     vertical-align: top;
 }
 
+.widget-title {
+    padding: 15px 0px;
+    border-bottom: 1px solid #eee;
+}
+
+.widget-title h3 {
+    font-size: 20px;
+    margin: 0;
+    border-bottom: 2px solid #000;
+}
+
+
 
 .media {
-    display: flex;
-    align-items: flex-start;
+    display: block;
+    position: relative;
+    /* align-items: flex-start; */
 }
 
-.blog-aside .latest-post-aside .lpa-left {
-    padding-right: 15px;
+.lpa-right img{
+    width: 100%;
+    height: 200px;
 }
 
-.blog-aside .latest-post-aside .lpa-right img {
-    border-radius: 3px;
+.lpa-left {
+    position: absolute;
+    padding-left: 10px;
+    bottom: 5%;
+    color: #000;
+    box-shadow: 0  0 rgba(0, 0, 0, 6.199);
 }
 
 .latest-post-aside .lpa-title h5 {
@@ -208,41 +155,25 @@ form {
 }
 
 h5 a {
-    color: #000;
     text-decoration: none;
+    color: #000;
 }
 
 .lpa-meta a {
-    color: #6F8BA4;
+    color: #000;
     font-size: 12px;
     text-transform: uppercase;
     display: inline-block;
     margin-right: 10px;
+    text-decoration: none;
 }
 
-.lpa-right img{
-    vertical-align: middle;
-    border-style: none;
-}
-
-.lpa-right img{
+.lpa-right img {
+    opacity: 0.5;
     max-width: 100%;
 }
-.widget-title {
-    padding: 15px;
-    border-bottom: 1px solid #eee;
-}
 
- .widget-title h3 {
-    font-size: 20px;
-    font-weight: 700;
-    color: #292929;
-    margin: 0;
-}
 
-.widget-body {
-    padding: 15px;
-}
 
 .nav {
     display: -ms-flexbox;
@@ -257,33 +188,12 @@ h5 a {
 .tag-cloud a {
     padding: 4px 15px;
     font-size: 13px;
-    color: #ffffff;
-    background: #20247b;
+    color: #000;
+    background: #ddd;
     border-radius: 3px;
     margin-right: 4px;
     margin-bottom: 4px;
-}
-
-/*pagination*/
-.paginationnn{
-    display: flex;
-    justify-content: center;
-    padding: 10px;
-}
-
-.paginationnn li:not(:first-child):not(:last-child){
-    background-color: #645c5c;
-    width: 30px;
-    height: 30px;
-    margin-right: 5px;
-}
-
-.paginationnn > li > a {
     text-decoration: none;
-    color: #000;
-    font: 500 ;
-    padding: 10px;
 }
-
 
 /* footer */

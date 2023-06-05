@@ -15,6 +15,39 @@ import module.DBConnect;
  * @author Admin
  */
 public class DAOMarketer extends DBConnect {
+    
+    
+    public AccountMarketer getById(int id){
+        String sql = "SELECT * FROM Marketer_type WHERE marketer_id = ?";
+        try {
+             PreparedStatement st = conn.prepareStatement(sql);
+             st.setInt(1, id);
+             ResultSet rs = st.executeQuery();
+             if(rs.next()){
+                 AccountMarketer am = new AccountMarketer(
+                        rs.getInt("marketer_id"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("describe_yourself"),
+                        rs.getString("fullname"),
+                        rs.getString("image"),
+                        rs.getString("display_name"),
+                        rs.getString("created_date"),
+                        rs.getString("address"),
+                        rs.getString("date_of_birth"),
+                        rs.getString("academic_level"),
+                        rs.getString("modify_date"),
+                        rs.getInt("gender"),
+                        rs.getInt("role_id") );
+                 
+                 return am;
+             }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+        return null;
+    }
 
     public AccountMarketer checkLogin(String emailInput, String password) {
         String sql = "SELECT[marketer_id]\n"

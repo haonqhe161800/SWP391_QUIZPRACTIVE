@@ -10,6 +10,9 @@ package Entities;
  */
 public class Subject {
     private String subject_name, image;
+    private String tilte, description;
+    private boolean status;
+    private int subject_id;
 
     public Subject() {
     }
@@ -19,6 +22,16 @@ public class Subject {
         this.image = image;
     }
 
+    public Subject(int subject_id,String subject_name, String image, String tilte, String description, boolean status) {
+        this.subject_id = subject_id;
+        this.subject_name = subject_name;
+        this.image = image;
+        this.tilte = tilte;
+        this.description = description;
+        this.status = status;
+    }
+
+    
     public String getSubject_name() {
         return subject_name;
     }
@@ -34,6 +47,31 @@ public class Subject {
     public void setImage(String image) {
         this.image = image;
     }
+
+    public String getTilte() {
+        return tilte;
+    }
+
+    public void setTilte(String tilte) {
+        this.tilte = tilte;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+    
     
     
 }

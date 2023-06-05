@@ -1,8 +1,4 @@
-<%-- 
-    Document   : forgotpassword
-    Created on : 01-Jun-2023, 00:19:30
-    Author     : Admin
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

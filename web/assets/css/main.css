@@ -6454,11 +6454,13 @@ blockquote .shape {
   border-radius: 50%;
   color: #fff;
   background: transparent;
-  border: 1px solid #eee3;
+  border: 1px solid #eee;
 }
 
 .footer .footer-bottom .footer-social li a:hover {
   color: #fff;
   background: #5830E0;
   border-color: transparent;
+}.page-section {
+
 }

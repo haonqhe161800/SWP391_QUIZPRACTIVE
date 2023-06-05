@@ -102,6 +102,16 @@ public class AccountMarketer {
         this.role_id = role_id;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+    
+    
+
     
    
 }

@@ -65,7 +65,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
 //        Account account = (Account) request.getSession().getAttribute("account");
 //        System.out.println("acc: " + account);
         request.setAttribute("acc", request.getSession().getAttribute("account"));
-        request.getRequestDispatcher("profile.jsp").forward(request, response);
+        request.getRequestDispatcher("view/profile.jsp").forward(request, response);
     }
 
     @Override
