@@ -46,7 +46,6 @@ public class CourseController extends HttpServlet {
 
             DAOCourse daoCourse = new DAOCourse();
             DAOErrol daoErrol = new DAOErrol();
-            DAOMentor daoMentor = new DAOMentor();
 
             String service = request.getParameter("service");
 
