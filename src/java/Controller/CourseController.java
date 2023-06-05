@@ -72,7 +72,6 @@ public class CourseController extends HttpServlet {
                 request.setAttribute("count", count);
                 request.setAttribute("errol", errol);
                 request.setAttribute("rsCourse", rsCourse);
-                request.setAttribute("rsErrol", rsErrol);
                 request.getRequestDispatcher("jspClient/CourseDetails.jsp").forward(request, response);
             }
 

@@ -35,7 +35,6 @@
 
         <%
         ResultSet rsCourse = (ResultSet) request.getAttribute("rsCourse");
-        ResultSet rsErrol = (ResultSet) request.getAttribute("rsErrol");
         int count = (int) request.getAttribute("count");
         int errol = (int) request.getAttribute("errol");
         %>
@@ -68,7 +67,7 @@
                     </div>
                     <div> <p class="update-time"><i class="lni lni-timer"></i><strong>   Ngày update gần nhất:</strong> <%=rsCourse.getString(9)%></p> </div>
                     <div style="display: flex">
-                        <%if((session.getAttribute("accountUser") != null && session.getAttribute("accountMarketer") == null && session.getAttribute("accountMentor") == null) || (session.getAttribute("accountUser") == null && session.getAttribute("accountMarketer") == null && session.getAttribute("accountMentor") == null)) {%>   
+                        <%if((errol == 0) || (session.getAttribute("accountUser") == null && session.getAttribute("accountMarketer") == null && session.getAttribute("accountMentor") == null)) {%>   
                             <div class="bottom-content" style="margin-right: 20px">
                                 <a href="CourseController?service=errol&id=<%=rsCourse.getInt(1)%>" class="btn btn-block btn-primary">Tham gia khóa học</a>
                             </div>
