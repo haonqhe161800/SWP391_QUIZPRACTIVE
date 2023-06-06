@@ -135,6 +135,30 @@ public class AccountUser {
         this.role_id = role_id;
     }
 
+    public String getDescyourself() {
+        return descyourself;
+    }
+
+    public void setDescyourself(String descyourself) {
+        this.descyourself = descyourself;
+    }
+
+    public String getCreated_date() {
+        return created_date;
+    }
+
+    public void setCreated_date(String created_date) {
+        this.created_date = created_date;
+    }
+
+    public String getAcademiclevel() {
+        return academiclevel;
+    }
+
+    public void setAcademiclevel(String academiclevel) {
+        this.academiclevel = academiclevel;
+    }
+
     
     
 }
