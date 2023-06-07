@@ -36,6 +36,10 @@
         <servlet-name>ControllBlogDetail</servlet-name>
         <servlet-class>Controller.ControllBlogDetail</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ControllDashboardMarketer</servlet-name>
+        <servlet-class>Controller.Marketer.ControllDashboardMarketer</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControllBlogList</servlet-name>
         <url-pattern>/cbl</url-pattern>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>ControllBlogDetail</servlet-name>
         <url-pattern>/cbd</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControllDashboardMarketer</servlet-name>
+        <url-pattern>/dashboardmarketer</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -76,7 +76,7 @@
                         </div>
                          <div class="intro_author">
                             <div class="avatar_author" style="font-size: 2.9px;">
-                                <img src="view/blog/assets/img/slider/img_ch.jpg" alt="">
+                                <img src="view/avatar/<%=am.getImage()%>" alt="">
                             </div>
                             <div class="name_author">
                                 <%=am.getDisplay_name()%>

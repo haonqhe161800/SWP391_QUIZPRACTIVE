@@ -23,7 +23,6 @@
         <!-- ========================= CSS here ========================= -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
         <style>
             .content {
@@ -52,7 +51,7 @@
 
         <!-- slider -->
         <section class="page-section bg-light " id="sliders">
-            <div id="demo" class="carousel slide" data-bs-ride="carousel" style="margin: 0 auto;">
+            <div id="demo" class="carousel slide" data-bs-ride="carousel">
 
                 <!-- Indicators/dots -->
                 <div class="carousel-indicators">
@@ -66,7 +65,7 @@
                 <div class="carousel-inner">
                     <c:forEach var="ss" items="${sessionScope.listslider}">
                         <div class="carousel-item ${ss.slider_id == 1 ? "active" : ""}">
-                            <a href="#"><img src="view/blog/assets/slider/${ss.url}" alt="" class="d-block w-100"></a>
+                            <a href="#" style="width: 100%;"><img src="view/blog/assets/slider/${ss.url}" alt="" class="d-block w-100"></a>
                         </div>
                     </c:forEach>
                 </div>
@@ -134,7 +133,7 @@
                     <div class="blog_item">
                         <div class="intro_author">
                             <div class="avatar_author" style="font-size: 2.9px;">
-                                <img src=".view/avatar/<%=am.getImage()%>" alt="">
+                                <img src="view/avatar/<%=am.getImage()%>" alt="">
                             </div>
                             <div class="name_author">
                                 <%=am.getDisplay_name()%>
@@ -175,7 +174,7 @@
                                     </div>
                                     <div class="lpa-meta">
                                         <a class="name" href="#">
-                                           <%=amm.getDisplay_name()%>
+                                            <%=amm.getDisplay_name()%>
                                         </a>
                                         <%=p1.getPosted_date()%>
                                     </div>

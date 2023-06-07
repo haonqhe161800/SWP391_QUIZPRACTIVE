@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Profile</title>
         <link rel="stylesheet" href="view/profile/assets/css.profile.css"/>
-        
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
         <!--link sweetAlert-->
@@ -28,7 +28,7 @@
         <jsp:include page="/jspClient/Header.jsp" ></jsp:include>
 
             <div class="space"></div>
-            
+
             <div class="container rounded bg-white mt-5 mb-5">
             <c:set scope="session" var="adse" value="${sessionScope.accountAdmin}"/>
             <c:set scope="session" var="amase" value="${sessionScope.accountMarketer}"/>
@@ -70,9 +70,9 @@
                                 <div class="col-md-12">
                                     <label class="labels">Gender</label>
                                     <div class="group-rad" style="display: flex;justify-content: space-around;">
-                                        <div class="item"> <input type="radio"  name="gender" value="1" ${ause.gender == 1 ? 'checked' : ''} ${adse != null ? 'disabled' : ''}>
+                                        <div class="item"> <input type="radio"  name="gender" value="1"  ${amase != null ? (amase.gender == 1 ? 'checked' : '') : (amese != null ? (amese.gender == 1 ? 'checked' : '') : (ause != null ? (ause.gender == 1 ? 'checked' : '') : ''))} ${adse != null ? 'disabled' : ''}>
                                             <label>Male</label><br></div>
-                                        <div class="item"> <input type="radio" name="gender" value="0"  ${ause.gender == 0 ? 'checked' : ''} ${adse != null ? 'disabled' : ''}>
+                                        <div class="item"> <input type="radio" name="gender" value="0"  ${amase != null ? (amase.gender == 0 ? 'checked' : '') : (amese != null ? (amese.gender == 0 ? 'checked' : '') : (ause != null ? (ause.gender == 0 ? 'checked' : '') : ''))} ${adse != null ? 'disabled' : ''}>
                                               <label>Female</label><br></div>
                                     </div>
                                 </div>
@@ -90,21 +90,16 @@
                     </form>        
                 </div>
 
-<!--                <div class="col-md-4 border-right">
+                <div class="col-md-4 border-right">
 
                     <div class="p-3 py-5" style="border-top: 2px solid black;">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h6 class="text-right">Update your email address</h6>
+                            <h6 class="text-right">Change Password</h6>
                         </div>
-                        <form action="">
-                            <div class="col-md-12"><label class="labels">Email current</label><input type="email" class="form-control" value="${amase != null ? amase.email : (amese != null ? amese.email : (ause != null ? ause.email : adse.email))}"></div>
-                            <div class="col-md-12"><label class="labels">Password</label><input type="password" class="form-control" value="${amase != null ? amase.password : (amese != null ? amese.password : (ause != null ? ause.password : adse.password))}"></div>
-                            <div class="mt-3"><button class="btn btn-success profile-button" type="button">Send</button></div>
-                        </form>
                         <div><p style="font-size: 14px; margin-top: 10px">If you forget your password, you can <a href="restpassword">reset password.</a></p></div>
                     </div>
 
-                </div>            -->
+                </div>            
             </div>
         </div>
     </div>
