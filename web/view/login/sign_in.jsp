@@ -32,10 +32,10 @@
                         <c:set var="cookie" value="${pageContext.request.cookies}" />
                         <form action="login" method="POST" id="loginForm">
                             <div class="form-input">
-                                <input type="email" placeholder="Enter email" name="email" value="${cookie.cemail.value}" onchange="message()"/>
+                                <input type="email" placeholder="Enter email" name="email" value="${cookie.cemail.value}"/>
                             </div>
                             <div class="form-input">
-                                <input type="password" placeholder="Enter password" name="password" value="${cookie.cpass.value}" onchange="message()"/>
+                                <input type="password" placeholder="Enter password" name="password" value="${cookie.cpass.value}"/>
                             </div>
                             <div class="form-input">
                                 <div class="checkboxxx">
@@ -47,7 +47,7 @@
                                 </div>
                             </div>
                             <div class="form-signin">
-                                <button onclick="message()"><span class="title_signin">Login</span></button>
+                                <button><span class="title_signin">Login</span></button>
                             </div>
                         </form>
                         <div class="login-form-footer">
@@ -63,14 +63,19 @@
         </section>
     </body>
     <script type="text/javascript">
-        function message() {
+       document.getElementById("loginForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
             var _email = $("input[type='email']").val();
             var _password = $("input[type='password']").val();
             if (_email === "" || _email.length === 0) {
                 window.alert("Please enter email!");
             } else if (_password === "" || _password.length === 0) {
                 window.alert("Please enter password!");
+            } else {
+                event.currentTarget.submit();
             }
-        }
+
+        });
     </script>
 </html>

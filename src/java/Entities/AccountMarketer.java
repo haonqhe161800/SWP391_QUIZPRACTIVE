@@ -109,6 +109,54 @@ public class AccountMarketer {
     public void setImage(String image) {
         this.image = image;
     }
+
+    public int getMakerter_id() {
+        return makerter_id;
+    }
+
+    public void setMakerter_id(int makerter_id) {
+        this.makerter_id = makerter_id;
+    }
+
+    public String getDescyourself() {
+        return descyourself;
+    }
+
+    public void setDescyourself(String descyourself) {
+        this.descyourself = descyourself;
+    }
+
+    public String getCreated_date() {
+        return created_date;
+    }
+
+    public void setCreated_date(String created_date) {
+        this.created_date = created_date;
+    }
+
+    public String getDob() {
+        return dob;
+    }
+
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
+
+    public String getAcademiclevel() {
+        return academiclevel;
+    }
+
+    public void setAcademiclevel(String academiclevel) {
+        this.academiclevel = academiclevel;
+    }
+
+    public String getModify_date() {
+        return modify_date;
+    }
+
+    public void setModify_date(String modify_date) {
+        this.modify_date = modify_date;
+    }
     
     
 
