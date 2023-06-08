@@ -7,6 +7,7 @@ package Controller;
 import DAO.DAOCourse;
 import DAO.DAOMarketer;
 import DAO.DAOMentor;
+import DAO.DAOPost;
 import DAO.DAOSubject;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -33,7 +34,7 @@ public class HomeController extends HttpServlet {
             DAO.DAOSubject daoSubject = new DAOSubject();
             DAO.DAOCourse daoCourse = new DAOCourse();
             DAO.DAOMentor daoMentor = new DAOMentor();
-            DAO.DAOMarketer daoMarketing = new DAOMarketer();
+            DAO.DAOPost daoPost = new DAOPost();
 
             if (service.equals("displayAll")) {
                 ResultSet rsSubject = daoSubject.getData("SELECT [Subject].subject_name, [Subject].subject_id, [Subject].[image], COUNT(Course.course_id) AS quantity_of_course\n"
@@ -41,14 +42,43 @@ public class HomeController extends HttpServlet {
                         + "LEFT JOIN Course ON Subject.subject_id = Course.subject_id\n"
                         + "GROUP BY [Subject].subject_id,  [Subject].subject_name, [Subject].[image]");
                 ResultSet rsCourse = daoCourse.getData("select * from [Course] c join [Subject] s on c.subject_id = s.subject_id ");
-                ResultSet rsMentor = daoMentor.getData("select * from Mentor");
-                ResultSet rsMarketing = daoMarketing.getData("select * from Marketing");
+                ResultSet rsMentor = daoMentor.getData("select * from Mentor_type");
+                ResultSet rsPost = daoPost.getData("select * from Post");
 
                 request.setAttribute("rsSubject", rsSubject);
                 request.setAttribute("rsCourse", rsCourse);
                 request.setAttribute("rsMentor", rsMentor);
-                request.setAttribute("rsMarketing", rsMarketing);
+                request.setAttribute("rsPost", rsPost);
 
+                request.getRequestDispatcher("/jspClient/HomePage.jsp").forward(request, response);
+            }
+            
+            if ( service.equals("search") ) {
+                request.setCharacterEncoding("UTF-8");
+                String type = request.getParameter("category");
+                String search_name = request.getParameter("keyword");
+                
+                switch(type) {
+                    case "mentor" :
+                        ResultSet rsMentorS = daoMentor.getData("select * from Mentor_type m where m.display_name like N'%"+search_name+"%'");
+                        request.setAttribute("rsMentorS", rsMentorS);
+                        break;
+                          
+                    case "blog" :
+                        ResultSet rsPostS = daoPost.getData("select * from Blog b where b.blog_name like N'%"+search_name+"%'");
+                        request.setAttribute("rsPostS", rsPostS);
+                        break;
+                        
+                    case "course" :
+                        ResultSet rsCourseS = daoCourse.getData("select * from Course c where c.course_name like N'%"+search_name+"%'");
+                        request.setAttribute("rsCourseS", rsCourseS);
+                        break;
+                        
+                    default :
+                        break;
+                }
+                
+                request.setAttribute("text_search", search_name);
                 request.getRequestDispatcher("/jspClient/HomePage.jsp").forward(request, response);
             }
         }

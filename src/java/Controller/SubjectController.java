@@ -61,7 +61,7 @@ public class SubjectController extends HttpServlet {
                         + "LEFT JOIN Course ON Subject.subject_id = Course.subject_id\n"
                         + "GROUP BY [Subject].subject_id,  [Subject].subject_name, [Subject].[image]");
                 
-                
+                request.setAttribute("text_search", course_name);
                 request.setAttribute("rsCourse", rsCourseOfSubject);
                 request.setAttribute("subject_id", subject_id);
                 request.setAttribute("rsSubject", rsSubject);
