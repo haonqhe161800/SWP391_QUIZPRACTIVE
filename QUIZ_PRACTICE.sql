@@ -231,9 +231,8 @@ insert into [Question] values ('In C, correct order(s) of a function implementat
 							  ('The while loop can be written as a for loop', 1), ---- 2 ----
 							  ('Using break statement we can exit from', 1), ---- 3 ----
 							  ('Declare a two dimensional integer array of two rows and four columns having some initial values', 1), ---- 4 ----
-							  ('What number is equivalent to -4e3?', 1),
-							  ('Which of the following statement are true with regards to the || operator?(select al correct answer', 2), ---- 5 ----
-							  ('What is the incorrect statement about floating-point data types(float and double)?', 2), ---- 6 ----
+							  ('What number is equivalent to -4e3?', 1), ---- 5 ----
+							  ('Which of the following statement are true with regards to the || operator?(select al correct answer', 2), ---- 6 ----
 							  ('Which one of the following is a variable, which can contain the address of the memory location of another variable?(choose the best answer)', 2), ---- 7 ----
 							  ('How is a variable accessed from another file?', 2), ---- 8 ----
 							  ('Which option is correct about the function scanf?', 2), ---- 9 ----
