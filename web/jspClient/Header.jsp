@@ -64,7 +64,7 @@
                                                     <li class="mega-menu-title">Essential Pages</li>
                                                     <li class="nav-item"><a href="#">About Us</a></li>
                                                     <li class="nav-item"><a href="#">Sign Up</a></li>
-                                                    <li class="nav-item"><a href="#">Sign In</a></li>
+                                                    <li class="nav-item"><a href="SubjectController">Sign In</a></li>
                                                     <li class="nav-item"><a href="#">Contact Us</a></li>
                                                     <li class="nav-item"><a href="#">FAQ</a></li>
                                                 </ul>
@@ -73,7 +73,7 @@
                                                 <ul>
                                                     <li class="mega-menu-title">Dashboard</li>
                                                     <li class="nav-item"><a href="#">Account Overview</a></li>
-                                                    <li class="http://localhost:9999/WebApplication2/Profile"><a href="profile">My Profile</a></li>
+                                                    <li class=""><a href="profile">My Profile</a></li>
                                                     <li class="nav-item"><a href="#">My Ads</a></li>
                                                     <li class="nav-item"><a href="#">Messages</a></li></li>
                                                 </ul>
