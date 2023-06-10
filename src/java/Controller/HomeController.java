@@ -16,6 +16,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.sql.ResultSet;
 
 @WebServlet(name = "HomeController", urlPatterns = {"/HomeController"})
@@ -54,30 +55,35 @@ public class HomeController extends HttpServlet {
             }
             
             if ( service.equals("search") ) {
+                HttpSession session = request.getSession();
                 request.setCharacterEncoding("UTF-8");
                 String type = request.getParameter("category");
                 String search_name = request.getParameter("keyword");
                 
+//                session.setAttribute("type", type);
+                
                 switch(type) {
                     case "mentor" :
                         ResultSet rsMentorS = daoMentor.getData("select * from Mentor_type m where m.display_name like N'%"+search_name+"%'");
-                        request.setAttribute("rsMentorS", rsMentorS);
+                        request.setAttribute("rsMentor", rsMentorS);
+                        session.setAttribute("type", "mentor");
                         break;
                           
                     case "blog" :
                         ResultSet rsPostS = daoPost.getData("select * from Blog b where b.blog_name like N'%"+search_name+"%'");
-                        request.setAttribute("rsPostS", rsPostS);
+                        request.setAttribute("rsPost", rsPostS);
+                        session.setAttribute("type", "blog");
                         break;
                         
                     case "course" :
                         ResultSet rsCourseS = daoCourse.getData("select * from Course c where c.course_name like N'%"+search_name+"%'");
-                        request.setAttribute("rsCourseS", rsCourseS);
+                        request.setAttribute("rsCourse", rsCourseS);
+                        session.setAttribute("type", "course");
                         break;
                         
                     default :
                         break;
                 }
-                
                 request.setAttribute("text_search", search_name);
                 request.getRequestDispatcher("/jspClient/HomePage.jsp").forward(request, response);
             }

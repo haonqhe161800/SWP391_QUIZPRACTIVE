@@ -104,7 +104,7 @@
         ResultSet rsSubject = (ResultSet)request.getAttribute("rsSubject");
         ResultSet rsCourse = (ResultSet)request.getAttribute("rsCourse");
         ResultSet rsMentor = (ResultSet)request.getAttribute("rsMentor");
-        ResultSet rsMarketing = (ResultSet)request.getAttribute("rsMarketing");
+        ResultSet rsPost = (ResultSet)request.getAttribute("rsPost");
     %>
     
     <section class="categories">
@@ -131,8 +131,6 @@
     <!-- /End Categories Area -->
 
     
-    
-    
     <!-- List Course -->
     <section class="items-grid section custom-padding">
         <div class="container">
@@ -146,7 +144,8 @@
             
             <div class="single-head">
                 <div class="row">
-                    <%while(rsCourse.next()) {%>
+                    <% while(rsCourse.next()) {%>
+                        
                     <div class="col-lg-4 col-md-6 col-12">
                         <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
                             <div class="image"> <!--ảnh course-->
@@ -197,8 +196,6 @@
         </div>
     </section>
     
-    
-    
                 
                 
                 
@@ -230,7 +227,7 @@
                             <div class="content">
                                 <div class="top-content">
                                     <p>Full name: <Strong><%=rsMentor.getString(5)%></Strong></p>
-                                    <h5 class="title"> Name: <strong><%=rsMentor.getString(7)%></strong> </h5>
+                                    <h5 class="title"><strong><%=rsMentor.getString(7)%></strong> </h5>
                                     <p>Ngày sinh: <strong> <%=rsMentor.getString(10)%></strong></p>
                                     <ul class="info-list">
                                         <li><i class="fa-solid fa-sparkles"></i> Chuyên môn: <strong> <%=rsMentor.getString(11)%> </strong></li>
@@ -239,7 +236,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- End Single Grid -->
                     </div>
                     <% } %>
                 </div>
@@ -270,7 +266,8 @@
             </div>
             <div class="single-head">
                 <div class="row">
-                    <div class="col-lg-3 col-md-6 col-12">
+                    <% while(rsPost.next()) { %>
+                    <div class="col-lg-4 col-md-6 col-12">
                         <!-- Start Single Grid -->
                         <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
                             <div class="image"> <!--ảnh course-->
@@ -301,106 +298,8 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- End Single Grid -->
                     </div>
-                    <div class="col-lg-3 col-md-6 col-12">
-                        <!-- Start Single Grid -->
-                        <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
-                            <div class="image"> <!--ảnh course-->
-                                <!--Click vào ảnh cũng giống như click vào phần details -->
-                                <a href="#" class="thumbnail"><img src="../assets/images/items-grid/img1.jpg" alt="#"></a>
-                                <div class="author">
-                                    <div class="author-image">    <!--ảnh mentor-->
-                                        <img src="../assets/images/items-grid/author-1.jpg" alt="#">
-                                        <span>Mentor name</span></a>
-                                    </div>
-                                    <a href="#" class="sale"> Join to study </a>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <div class="top-content">
-                                    <p>Subject name</p>
-                                    <h3 class="title"> Course Name </h3>
-                                    <p class="update-time">Ngày update gần nhất</p>
-                                    <ul class="rating">
-                                        <li>số người joined (35)</a></li>
-                                    </ul>
-                                    <ul class="info-list">
-                                        <li><i class="lni lni-timer"></i> Ngày đăng khóa học</a></li>
-                                    </ul>
-                                </div>
-                                <div class="bottom-content">
-                                    <a href="#" class="btn btn-block btn-primary">Details</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Single Grid -->
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-12">
-                        <!-- Start Single Grid -->
-                        <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
-                            <div class="image"> <!--ảnh course-->
-                                <!--Click vào ảnh cũng giống như click vào phần details -->
-                                <a href="#" class="thumbnail"><img src="../assets/images/items-grid/img1.jpg" alt="#"></a>
-                                <div class="author">
-                                    <div class="author-image">    <!--ảnh mentor-->
-                                        <img src="../assets/images/items-grid/author-1.jpg" alt="#">
-                                        <span>Mentor name</span></a>
-                                    </div>
-                                    <a href="#" class="sale"> Join to study </a>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <div class="top-content">
-                                    <p>Subject name</p>
-                                    <h3 class="title"> Course Name </h3>
-                                    <p class="update-time">Ngày update gần nhất</p>
-                                    <ul class="rating">
-                                        <li>số người joined (35)</a></li>
-                                    </ul>
-                                    <ul class="info-list">
-                                        <li><i class="lni lni-timer"></i> Ngày đăng khóa học</a></li>
-                                    </ul>
-                                </div>
-                                <div class="bottom-content">
-                                    <a href="#" class="btn btn-block btn-primary">Details</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Single Grid -->
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-12">
-                        <!-- Start Single Grid -->
-                        <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
-                            <div class="image"> <!--ảnh course-->
-                                <!--Click vào ảnh cũng giống như click vào phần details -->
-                                <a href="#" class="thumbnail"><img src="../assets/images/items-grid/img1.jpg" alt="#"></a>
-                                <div class="author">
-                                    <div class="author-image">    <!--ảnh mentor-->
-                                        <img src="../assets/images/items-grid/author-1.jpg" alt="#">
-                                        <span>Mentor name</span></a>
-                                    </div>
-                                    <a href="#" class="sale"> Join to study </a>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <div class="top-content">
-                                    <p>Subject name</p>
-                                    <h3 class="title"> Course Name </h3>
-                                    <p class="update-time">Ngày update gần nhất</p>
-                                    <ul class="rating">
-                                        <li>số người joined (35)</a></li>
-                                    </ul>
-                                    <ul class="info-list">
-                                        <li><i class="lni lni-timer"></i> Ngày đăng khóa học</a></li>
-                                    </ul>
-                                </div>
-                                <div class="bottom-content">
-                                    <a href="#" class="btn btn-block btn-primary">Details</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Single Grid -->
+                    <% } %>
                     </div>
                 </div>
             </div>
