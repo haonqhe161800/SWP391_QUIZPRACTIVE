@@ -32,6 +32,7 @@
         <link rel="stylesheet" href="./assets/css/tiny-slider.css" />
         <link rel="stylesheet" href="./assets/css/glightbox.min.css" />
         <link rel="stylesheet" href="./assets/css/main.css" />
+        <link rel="stylesheet" href="./assets/css/exam.css" />
     </head>
     <body>
         
@@ -39,7 +40,6 @@
         Vector<Question> listQuestion = (Vector<Question>) request.getAttribute("listQuestion");
         Vector<Answer> listAnswer = (Vector<Answer>) request.getAttribute("listAnswer");
         String nameCourse = (String) request.getAttribute("nameCourse");
-        int id = (int) request.getAttribute("id");
         %>
         
         <div style="margin-bottom: 150px ">
@@ -50,23 +50,33 @@
             <h2><%=nameCourse%></h2>
         </div>
         
-        <div class="container" style="margin-bottom: 100px">
-            <%for (Question question : listQuestion) {%>
-            <div style="margin-bottom: 12px">
-                <p><%=question.getQuestion_name()%></p>
-                <%for (Answer answer : listAnswer) {
-                    if(answer.getQuestion_id() == question.getQuestion_id()) {
-                        if(answer.getIs_correct() == 1) {%>
-                        <input type="radio" checked /><%=answer.getAnswer_name()%><br>
-                        <%} else {%>
-                        <input type="radio" disabled /><%=answer.getAnswer_name()%><br>
-                        <%}
-                        }
-                }%>
+        
+        <div class="container exam">
+            <div class="content_exam">
+                <form action="CourseController" method="post">
+                    <input type="hidden" name="service" value="result">
+                    <%for (Question question : listQuestion) {%>
+                    <div style="margin-bottom: 12px">
+                        <input readonly class="question" type="text" value="<%=question.getQuestion_name()%>">
+                        <%for (Answer answer : listAnswer) {
+                            if(answer.getQuestion_id() == question.getQuestion_id()) {%>    
+                            <input class="answer" type="radio" /><%=answer.getAnswer_name()%><br>
+                            <%}
+                        }%>
+                    </div>
+                    <%}%>
+                    <div class="bottom-content">
+                        <input class="btn btn-block btn-primary" type="submit" value="Nộp bài">
+                    </div>
+                </form>
             </div>
-            <%}%>
-            <div class="bottom-content">
-                <a href="CourseController?service=exam&id=<%=id%>" class="btn btn-block btn-primary">Kiểm tra</a>
+                    
+            <div class="menu_exam">
+                <%for (Question question : listQuestion) {%>
+                <div>
+                    <p class="number_question"><%=question.getQuestion_id()%></p>
+                </div>
+                <%}%>
             </div>
         </div>
         
@@ -87,6 +97,7 @@
         <script src="./assets/js/tiny-slider.js"></script>
         <script src="./assets/js/glightbox.min.js"></script>
         <script src="./assets/js/main.js"></script>
+        <script src="./assets/js/exam.js"></script>
         <script type="text/javascript">
             //========= Category Slider 
 

@@ -98,7 +98,7 @@ public class CourseController extends HttpServlet {
                 }
             }
             
-             if(service.equals("learning")) {
+            if(service.equals("learning")) {
                 String id_raw = request.getParameter("id");
                 int id = Integer.parseInt(id_raw);  
                 String nameCourse = "";
@@ -108,10 +108,32 @@ public class CourseController extends HttpServlet {
                 }
                 Vector<Question> listQuestion = daoQuestion.getAll("select * from Question where course_id = " + id);
                 Vector<Answer> listAnswer = daoAnswer.getAll("select * from Answer");
+                request.setAttribute("id", id);
                 request.setAttribute("nameCourse", nameCourse);
                 request.setAttribute("listQuestion", listQuestion);
                 request.setAttribute("listAnswer", listAnswer);
                 request.getRequestDispatcher("jspClient/Learning.jsp").forward(request, response);
+            }
+            
+            if(service.equals("exam")) {
+                String id_raw = request.getParameter("id");
+                int id = Integer.parseInt(id_raw);  
+                String nameCourse = "";
+                ResultSet rsCourse = daoCourse.getData("select * from Course where course_id = " + id);
+                if(rsCourse.next()) {
+                    nameCourse = rsCourse.getString(4);
+                }
+                Vector<Question> listQuestion = daoQuestion.getAll("select * from Question where course_id = " + id);
+                Vector<Answer> listAnswer = daoAnswer.getAll("select * from Answer");
+                request.setAttribute("id", id);
+                request.setAttribute("nameCourse", nameCourse);
+                request.setAttribute("listQuestion", listQuestion);
+                request.setAttribute("listAnswer", listAnswer);
+                request.getRequestDispatcher("jspClient/Exam.jsp").forward(request, response);
+            }
+            
+            if(service.equals("result")) {
+                
             }
         } catch (SQLException ex) {
             Logger.getLogger(CourseController.class.getName()).log(Level.SEVERE, null, ex);
