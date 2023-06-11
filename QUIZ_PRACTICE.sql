@@ -168,6 +168,7 @@ CREATE TABLE Post (
 	[post_id] [int] IDENTITY (1,1) PRIMARY KEY not null,
 	[marketer_id] [int] not null FOREIGN KEY REFERENCES [Marketer_type]([marketer_id]),
 	[blog_id] [int] not null FOREIGN KEY REFERENCES Blog([blog_id]),
+	[tittle] [nvarchar] (max) not null,
 	[posted_date] [date] default getdate(),
 	[updated_date] [date],
 	[image] [nvarchar] (250) not null,
