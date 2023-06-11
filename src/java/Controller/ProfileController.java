@@ -4,19 +4,18 @@
  */
 package Controller;
 
-import DAO.AccountDAO;
+import DAO.DAOAdmin;
+import DAO.DAOMarketer;
+import DAO.DAOMentor;
+import DAO.DAOUser;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Part;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
+import jakarta.servlet.http.HttpSession;
+import Entities.AccountAdmin;
+import Entities.AccountMarketer;
 import Entities.AccountMentor;
 import Entities.AccountUser;
 
@@ -24,162 +23,97 @@ import Entities.AccountUser;
  *
  * @author QUANG HAO
  */
-@MultipartConfig(
-        fileSizeThreshold = 1024 * 1024 * 10,
-        maxFileSize = 1024 * 1024 * 50,
-        maxRequestSize = 1024 * 1024 * 100
-)
 public class ProfileController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-
-
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-/**
- * Handles the HTTP <code>GET</code> method.
- *
- * @param request servlet request
- * @param response servlet response
- * @throws ServletException if a servlet-specific error occurs
- * @throws IOException if an I/O error occurs
- */
-private static final long SerialVersionUID = 1L;
-    private static final String UPLOAD_DIR = "img";
-
     @Override
-protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
-        System.out.println("session: " + request.getSession().getAttribute("account"));
-        //o dây can set profile cho 3 thang : mentor, user, marketing.
-        //vi nhom khong chia role chung len t buoc phai lam the
-//        Account account = (Account) request.getSession().getAttribute("account");
-//        System.out.println("acc: " + account);
-        request.setAttribute("acc", request.getSession().getAttribute("account"));
-        request.getRequestDispatcher("view/profile.jsp").forward(request, response);
+        request.getRequestDispatcher("view/profile/profile.jsp").forward(request, response);
+
     }
 
     @Override
-protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("utf-8");
-        AccountDAO accountDAO = new AccountDAO();
-        String isNoti = "yes";
-        request.setAttribute("isNoti", isNoti);
-        
-        //o dây can set profile cho 3 thang : mentor, user, marketing.
-        //vi nhom khong chia role chung len t buoc phai lam the
-        
-//        Account oldAccount = (Account) request.getSession().getAttribute("account");
-//        int accountID = oldAccount.getUser_id();//lay id cu
         String fullname = request.getParameter("fullname");
-        //String lastName = request.getParameter("lastName");
-//        boolean gender = true;
-//        if (request.getParameter("gender").equalsIgnoreCase("female")) {
-//            gender = false;
-//        }
-        int phone = Integer.parseInt(request.getParameter("phone"));
-        String image = request.getParameter("avatar");
+        String displayname = request.getParameter("displayname");
         String address = request.getParameter("address");
-        String filename = uploadFile(request);
-        
+        String describeMe = request.getParameter("aboutme");
+        String academicLevel = request.getParameter("academiclevel");
+        String gender = request.getParameter("gender");
+        String dob = request.getParameter("dob");
+        String image = request.getParameter("avatar");
+        String modifydate = dateCurrent();
 
-//        Account acc = (Account) request.getSession().getAttribute("account");
-        // System.out.println("Phone: "+phone);
-        // System.out.println("Name: "+fullname);
-        // System.out.println("address: "+address);
-//        acc.setUserid(accountID);
-//        acc.setDisplay_name(fullname);
-        //acc.setLastName(lastName);
-        //acc.setGender(Gender.of(gender));
-//        acc.setPhone(phone);
-//        acc.setAddress(address);
-//        acc.setAvatar(image);
-//        // acc.setAvatar(filename);
-//        accountDAO.editProfile(acc);
-//
-//        Account accountUpdate = accountDAO.getAccount(oldAccount.getEmail(), oldAccount.getPassword());
-//        String a = oldAccount.getUsername();
-//        request.getSession().setAttribute("account", accountUpdate);
-//        Cookie usernameCookie = new Cookie("username", oldAccount.getUsername());
-//        usernameCookie.setMaxAge(60 * 60 * 24 * 2);
-//        Cookie passwordCookie = new Cookie("password", oldAccount.getPassword());
-//        passwordCookie.setMaxAge(60 * 60 * 24 * 2);
-//        response.addCookie(usernameCookie);
-//        response.addCookie(passwordCookie);
-//        request.getSession().setAttribute("account", oldAccount);
-        response.sendRedirect("profile");
-
-        // request.getRequestDispatcher("Login.jsp").forward(request, response);
-    }
-
-    public String uploadFile(HttpServletRequest request) throws IOException, ServletException {
-        String fileName = "";
-        try {
-            Part filePart = request.getPart("photo");
-            fileName = (String) getFileName(filePart);
-            String applicationPath = request.getServletContext().getRealPath("");
-            String basePath = applicationPath + File.separator + UPLOAD_DIR + File.separator;
-            InputStream inputStream = null;
-            OutputStream outputStream = null;
-            try {
-                File outputFilePath = new File(basePath + fileName);
-                inputStream = filePart.getInputStream();
-                outputStream = new FileOutputStream(outputFilePath);
-                int read = 0;
-                final byte[] bytes = new byte[1024];
-                while ((read = inputStream.read(bytes)) != -1) {
-                    outputStream.write(bytes, 0, read);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                fileName = "";
-            } finally {
-                if (inputStream != null) {
-                    inputStream.close();
-                }
-                if (outputStream != null) {
-                    outputStream.close();
-                }
-            }
-
-        } catch (Exception e) {
-            fileName = "";
-        }
-        return fileName;
-    }
-
-    public String getFileName(Part part) {
-        final String partHeader = part.getHeader("content-disposition");
-        System.out.println("*****partHeader :" + partHeader);
-        for (String content : part.getHeader("content-disposition").split(";")) {
-            if (content.trim().startsWith("filename")) {
-                return content.substring(content.indexOf('=') + 1).trim().replace("\"", "");
-            }
+        if (image.isEmpty()) {
+            image = "base.png";
         }
 
-        return null;
+        HttpSession session = request.getSession();
+
+        //khoi tao cac session cua each account trc do
+        AccountAdmin aa = (AccountAdmin) session.getAttribute("accountAdmin");
+        AccountMarketer am = (AccountMarketer) session.getAttribute("accountMarketer");
+        AccountMentor ame = (AccountMentor) session.getAttribute("accountMentor");
+        AccountUser au = (AccountUser) session.getAttribute("accountUser");
+
+        //khoi tao dao cua each account
+        DAOUser dudb = new DAOUser();
+        DAOMarketer dmdb = new DAOMarketer();
+        DAOMentor dmedb = new DAOMentor();
+        DAOAdmin dadb = new DAOAdmin();
+
+        if (aa != null) {
+            request.getRequestDispatcher("view/profile/profile.jsp").forward(request, response);
+        } else if (am != null) {
+            am.setDisplay_name(displayname);
+            am.setDescyourself(describeMe);
+            am.setFullName(fullname);
+            am.setImage(image);
+            am.setAddress(address);
+            am.setAcademiclevel(academicLevel);
+            am.setDob(dob);
+            dmdb.updateProfile(am.getMakerter_id(), describeMe, fullname, image, displayname, address, dob, academicLevel, modifydate, Integer.parseInt(gender));
+            request.setAttribute("message", "Update successfull!");
+            session.setAttribute("accountMarketer", am);
+            request.getRequestDispatcher("view/profile/profile.jsp").forward(request, response);
+        } else if (ame != null) {
+            ame.setDisplay_name(displayname);
+            ame.setDescyourself(describeMe);
+            ame.setFullName(fullname);
+            ame.setImage(image);
+            ame.setAddress(address);
+            ame.setAcademiclevel(academicLevel);
+            ame.setDob(dob);
+            dmedb.updateProfile(ame.getMentor_id(), describeMe, fullname, image, displayname, address, dob, academicLevel, modifydate, Integer.parseInt(gender));
+            request.setAttribute("message", "Update successfull!");
+            session.setAttribute("accountMentor", ame);
+            request.getRequestDispatcher("view/profile/profile.jsp").forward(request, response);
+        } else if (au != null) {
+            au.setDisplay_name(displayname);
+            au.setDescyourself(describeMe);
+            au.setFullName(fullname);
+            au.setImage(image);
+            au.setAddress(address);
+            au.setAcademiclevel(academicLevel);
+            au.setDob(dob);
+            au.setGender(Integer.parseInt(gender));
+            dudb.updateProfile(au.getUser_id(), describeMe, fullname, image, displayname, address, dob, academicLevel, modifydate, Integer.parseInt(gender));
+            request.setAttribute("message", "Update successfull!");
+            session.setAttribute("accountUser", au);
+            request.getRequestDispatcher("view/profile/profile.jsp").forward(request, response);
+        } else {
+            request.setAttribute("error", "Update fail");
+            request.getRequestDispatcher("view/profile/profile.jsp").forward(request, response);
+        }
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+    public String dateCurrent() {
+        long millis = System.currentTimeMillis();
+        java.sql.Date date = new java.sql.Date(millis);
+        return date.toString();
+    }
 
 }
-        

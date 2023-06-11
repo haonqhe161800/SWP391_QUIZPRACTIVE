@@ -140,6 +140,39 @@ public class DAOUser extends DBConnect {
         }
 
     }
+    
+     //update profile(fullname,describle yourself, image, display_name,address,modifiy date,dob, academic level, gender)
+    public void updateProfile(int id , String descyouself, String fullname, String image, String displayname, String address, String dob, String academiclevel, String modifydate, int gender) {
+        String sql = "UPDATE [dbo].[User_type]\n"
+                + "   SET [describe_yourself] = ?\n"
+                + "      ,[fullname] = ?\n"
+                + "      ,[image] = ?\n"
+                + "      ,[display_name] = ?\n"
+                + "      ,[address] = ?\n"
+                + "      ,[date_of_birth] = ?\n"
+                + "      ,[academic_level] = ?\n"
+                + "      ,[modify_date] = ?\n"
+                + "      ,[gender] = ?\n"
+                + " WHERE user_id = ?";
+
+        try {
+            PreparedStatement st = conn.prepareCall(sql);
+            st.setString(1, descyouself);
+            st.setString(2, fullname);
+            st.setString(3, image);
+            st.setString(4, displayname);
+            st.setString(5, address);
+            st.setString(6, dob);
+            st.setString(7, academiclevel);
+            st.setString(8, modifydate);
+            st.setInt(9, gender);
+            st.setInt(10, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
 
     public static void main(String[] args) {
         DAOUser dudb = new DAOUser();

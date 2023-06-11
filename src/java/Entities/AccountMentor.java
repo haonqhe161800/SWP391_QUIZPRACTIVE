@@ -100,6 +100,62 @@ public class AccountMentor {
         this.role_id = role_id;
     }
 
+    public int getMentor_id() {
+        return mentor_id;
+    }
+
+    public void setMentor_id(int mentor_id) {
+        this.mentor_id = mentor_id;
+    }
+
+    public String getDescyourself() {
+        return descyourself;
+    }
+
+    public void setDescyourself(String descyourself) {
+        this.descyourself = descyourself;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getCreated_date() {
+        return created_date;
+    }
+
+    public void setCreated_date(String created_date) {
+        this.created_date = created_date;
+    }
+
+    public String getAcademiclevel() {
+        return academiclevel;
+    }
+
+    public void setAcademiclevel(String academiclevel) {
+        this.academiclevel = academiclevel;
+    }
+
+    public String getModify_date() {
+        return modify_date;
+    }
+
+    public void setModify_date(String modify_date) {
+        this.modify_date = modify_date;
+    }
+
+    public int getGender() {
+        return gender;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
+    }
+
         
    
     

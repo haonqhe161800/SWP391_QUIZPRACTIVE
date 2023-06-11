@@ -92,6 +92,12 @@ public class CourseController extends HttpServlet {
                     }
                 }
             }
+            
+            if(service.equals("practice")) {
+                String id_raw = request.getParameter("id");
+                int id = Integer.parseInt(id_raw);  
+                
+            }
         } catch (SQLException ex) {
             Logger.getLogger(CourseController.class.getName()).log(Level.SEVERE, null, ex);
         }
