@@ -5,7 +5,6 @@
 package DAO;
 
 import Entities.Blog;
-import Entities.Post;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,22 +33,30 @@ public class DAOBlog extends DBConnect {
         }
         return total;
     }
-    
-    //getbyId
-    public Blog getById(int id){
+
+//    //getbyId
+    public Blog getById(int id) {
         String sql = "SELECT * FROM Blog WHERE blog_id = ?";
         try {
             PreparedStatement st = conn.prepareStatement(sql);
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 Blog b = new Blog(rs.getInt("blog_id"), rs.getInt("subject_id"), rs.getString("blog_name"));
                 return b;
             }
         } catch (Exception e) {
             System.out.println(e);
         }
-        
+
         return null;
+    }
+    
+
+   
+    
+    public static void main(String[] args) {
+        
+        
     }
 }

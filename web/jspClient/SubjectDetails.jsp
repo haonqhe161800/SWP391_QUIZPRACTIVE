@@ -61,7 +61,7 @@
                                             <div class="col-lg-9 col-md-9 col-12 p-0">
                                                 <div class="search-input">
                                                     <label for="keyword"><i class="lni lni-search-alt theme-color"></i></label>
-                                                    <input type="text" name="course_name" value="" id="keyword" placeholder="Find Course ...">
+                                                    <input type="text" name="course_name" value="${text_search}" id="keyword" placeholder="Find Course ...">
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-md-3 col-12 p-0">

@@ -230,9 +230,8 @@ insert into [Question] values ('In C, correct order(s) of a function implementat
 							  ('The while loop can be written as a for loop', 1), ---- 2 ----
 							  ('Using break statement we can exit from', 1), ---- 3 ----
 							  ('Declare a two dimensional integer array of two rows and four columns having some initial values', 1), ---- 4 ----
-							  ('What number is equivalent to -4e3?', 1),
-							  ('Which of the following statement are true with regards to the || operator?(select al correct answer', 2), ---- 5 ----
-							  ('What is the incorrect statement about floating-point data types(float and double)?', 2), ---- 6 ----
+							  ('What number is equivalent to -4e3?', 1), ---- 5 ----
+							  ('Which of the following statement are true with regards to the || operator?(select al correct answer', 2), ---- 6 ----
 							  ('Which one of the following is a variable, which can contain the address of the memory location of another variable?(choose the best answer)', 2), ---- 7 ----
 							  ('How is a variable accessed from another file?', 2), ---- 8 ----
 							  ('Which option is correct about the function scanf?', 2), ---- 9 ----
@@ -252,10 +251,10 @@ insert into [Answer] values ('a. Return type, body, function name, parameters', 
 							('b.int arr1[2][4]={{8,12},{22,45},{23,40},{44,79}}', 1, 4),
 							('c.int arr1[4][2]={{8,12};{22,45};{23,40};{44,79}}', 0, 4),
 							('d.int arr1[][2]={{8,12},{22,45},{23,40},{44,79}}', 0, 4),
-							('a. This operator is used to combine two conditional expressions which evaluate to true as a whole only if either of the two expressions evaluate to true.', 0, 5),
-							('b. Only if both the expressions evaluate to false, the outcome is false', 0, 5),
-							('c. If one of the conditional expressions return false, the outcome is false', 0, 5),
-							('d. This operator is used to combine two logical expressions which evaluate to true if both individual expression are true', 0, 5),
+							('a. -4000', 1, 5),
+							('b. -400', 0, 5),
+							('c. .004', 0, 5),
+							('d. .0004', 0, 5),
 							('a. Computers store floating-point data using separate components, including the mantissa and exponent', 0, 6),
 							('b.Float-point means that the decimal point can float(that is, it can ba placed anywhere relative to the significant digits)', 1, 6),
 							('c.Both data types(float and double) can represent arbitrarily small as well as arbitrarily large numbers', 0, 6),

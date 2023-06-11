@@ -11,15 +11,18 @@ import java.sql.Date;
  * @author Admin
  */
 public class Post {
-    private int post_id,marketer_id,blog_id;
-    private Date posted_date,update_date;
-    private String image,content,short_content;
+
+    private int post_id, marketer_id, blog_id;
+    private Date posted_date, update_date;
+    private String image, content, short_content;
+    private Blog b;
+    private AccountMarketer am;
     private boolean status;
 
     public Post() {
     }
 
-    public Post(int post_id, int marketer_id, int blog_id, Date posted_date, Date update_date, String image, String content, String short_content, boolean status) {
+    public Post(int post_id, int marketer_id, int blog_id,Date posted_date, Date update_date, String image, String content, String short_content, boolean status, Blog b, AccountMarketer am) {
         this.post_id = post_id;
         this.marketer_id = marketer_id;
         this.blog_id = blog_id;
@@ -29,6 +32,8 @@ public class Post {
         this.content = content;
         this.short_content = short_content;
         this.status = status;
+        this.b = b;
+        this.am = am;
     }
 
     public Date getPosted_date() {
@@ -102,6 +107,22 @@ public class Post {
     public void setBlog_id(int blog_id) {
         this.blog_id = blog_id;
     }
-    
+
+    public Blog getB() {
+        return b;
+    }
+
+    public void setB(Blog b) {
+        this.b = b;
+    }
+
+    public AccountMarketer getAm() {
+        return am;
+    }
+
+    public void setAm(AccountMarketer am) {
+        this.am = am;
+    }
+
     
 }

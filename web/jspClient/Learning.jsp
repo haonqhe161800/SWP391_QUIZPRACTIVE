@@ -1,11 +1,13 @@
 <%-- 
-    Document   : CourseDetails
-    Created on : May 24, 2023, 10:00:39 PM
+    Document   : Learning
+    Created on : Jun 7, 2023, 9:11:44 PM
     Author     : admin
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.sql.ResultSet"%>
+<%@page import="java.util.Vector"%>
+<%@page import="Entities.Question"%>
+<%@page import="Entities.Answer"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -32,56 +34,45 @@
         <link rel="stylesheet" href="./assets/css/main.css" />
     </head>
     <body>
-
+        
         <%
-        ResultSet rsCourse = (ResultSet) request.getAttribute("rsCourse");
-        int count = (int) request.getAttribute("count");
-        int errol = (int) request.getAttribute("errol");
+        Vector<Question> listQuestion = (Vector<Question>) request.getAttribute("listQuestion");
+        Vector<Answer> listAnswer = (Vector<Answer>) request.getAttribute("listAnswer");
+        String nameCourse = (String) request.getAttribute("nameCourse");
+        int id = (int) request.getAttribute("id");
         %>
-
+        
         <div style="margin-bottom: 150px ">
             <jsp:include page="Header.jsp"></jsp:include>
+        </div>
+        
+        <div style="text-align: center; margin-bottom: 20px">
+            <h2><%=nameCourse%></h2>
+        </div>
+        
+        <div class="container" style="margin-bottom: 100px">
+            <%for (Question question : listQuestion) {%>
+            <div style="margin-bottom: 12px">
+                <p><%=question.getQuestion_name()%></p>
+                <%for (Answer answer : listAnswer) {
+                    if(answer.getQuestion_id() == question.getQuestion_id()) {
+                        if(answer.getIs_correct() == 1) {%>
+                        <input type="radio" checked /><%=answer.getAnswer_name()%><br>
+                        <%} else {%>
+                        <input type="radio" disabled /><%=answer.getAnswer_name()%><br>
+                        <%}
+                        }
+                }%>
             </div>
-
-
-            <div class="container table">
-                <div class="row"> 
-                <%if(rsCourse.next()) {%>
-                <div class="col-md-3">
-                    <img style="width:100%; height: 100%" src="<%=rsCourse.getString(6)%>">
-                </div>
-                <div class="col-md-8">
-                    <div class="name"> <h2><%=rsCourse.getString(4)%></h2> </div>
-                    <div class="subject"> <p><strong>Subject: </strong><%=rsCourse.getString(12)%> </p> </div>    
-                    <div class="details"> <p><%=rsCourse.getString(5)%></p></div>    
-                    <div class="quantity-q"> <p><strong>Số lượng câu hỏi:</strong> <%=count%></p></div>
-                    <div>
-                        <ul class="rating">
-                            <li><strong>Số người tham gia:</strong> (<%=rsCourse.getInt(8)%>)</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <ul class="info-list">
-                            <li><i class="lni lni-timer"></i><strong> Ngày đăng khóa học:</strong> <%=rsCourse.getString(9)%></li>
-                        </ul>
-                    </div>
-                    <div> <p class="update-time"><i class="lni lni-timer"></i><strong>   Ngày update gần nhất:</strong> <%=rsCourse.getString(9)%></p> </div>
-                    <div style="display: flex">
-                        <%if((errol == 0) || (session.getAttribute("accountUser") == null && session.getAttribute("accountMarketer") == null && session.getAttribute("accountMentor") == null)) {%>   
-                            <div class="bottom-content" style="margin-right: 20px">
-                                <a href="CourseController?service=errol&id=<%=rsCourse.getInt(1)%>" class="btn btn-block btn-primary">Tham gia khóa học</a>
-                            </div>
-                        <%}%>
-                        <%if(errol != 0) {%>   
-                            <div class="bottom-content">
-                                <a href="CourseController?service=learning&id=<%=rsCourse.getInt(1)%>" class="btn btn-block btn-primary">Học</a>
-                            </div>
-                        <%}%>
-                    </div>
-                </div>
-                <%}%>
+            <%}%>
+            <div class="bottom-content">
+                <a href="CourseController?service=exam&id=<%=id%>" class="btn btn-block btn-primary">Kiểm tra</a>
             </div>
         </div>
+        
+
+
+            
 
         <jsp:include page="Footer.jsp"></jsp:include>
 

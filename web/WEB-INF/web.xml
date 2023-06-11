@@ -42,7 +42,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>ControllBlogList</servlet-name>
-        <url-pattern>/cbl</url-pattern>
+        <url-pattern>/listpost</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ChangePasswordController</servlet-name>
@@ -74,7 +74,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ControllBlogDetail</servlet-name>
-        <url-pattern>/cbd</url-pattern>
+        <url-pattern>/detailpost</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ControllDashboardMarketer</servlet-name>

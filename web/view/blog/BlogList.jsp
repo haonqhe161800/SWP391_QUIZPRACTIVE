@@ -1,29 +1,24 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page  import="DAO.DAOBlog"%>
-<%@page  import="DAO.DAOPost"%>
-<%@page  import="DAO.DAOMarketer"%>
-<%@page  import="DAO.DAOSubject"%>
-<%@page  import="java.util.List"%>
-<%@page  import="Entities.Post"%>
-<%@page  import="Entities.AccountMarketer"%>
-<%@page  import="Entities.Subject"%>
-<%@page  import="Entities.Blog"%>
 
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+        <meta http-equiv="Pragma" content="no-cache">
+        <meta http-equiv="Expires" content="0">
         <!--FIXXED-->
         <link rel="stylesheet" href="view/blog/assets/blog-css/blogstyle.css"/>
         <!--favicon-->
         <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo/lloo.png" />
 
-
+        <!--icon-->
+        <link rel="stylesheet" href="view/themify-icons-font/themify-icons/themify-icons.css"/>
         <!-- ========================= CSS here ========================= -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <style>
             .content {
                 padding-left: 0px;
@@ -41,6 +36,18 @@
             }
 
         </style>
+        <script>
+            function change() {
+
+                var searchInput = document.getElementById('searchInput').value;
+                var selectInput = document.getElementById('selectInput').value;
+                var url = 'listpost?search=' + encodeURIComponent(searchInput) + '&sort=' + encodeURIComponent(selectInput) + '&index=1';
+                window.location.href = url;
+//                document.getElementById("f1").submit();
+            }
+
+
+        </script>
     </head>
     <body>
         <jsp:include page="/jspClient/Header.jsp" />
@@ -82,80 +89,57 @@
         <!-- end slider -->
 
         <div class="content container">
-            <div class="heading_intro col-sm-10 mt-sm-3">
-                <!-- post search box -->
-                <div class="row">
-                    <div class="col-sm-4 col-lg-6 pt-3">
-                        <form action="">
-                            <div class="input-group">
-                                <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
-                                       aria-describedby="search-addon" />
-                                <button type="submit" class="btn btn-outline-dark">search</button>
-                            </div>
-                        </form>
+            <div class="row">
+                <form action="listpost?index=1&" id="f1" style="display: flex" onchange="change()">
+                    <div class="col-sm-4 col-lg-6 pt-3" style="width: 33%;">
+                        <h6 style="color: #055160; font-weight: 400; padding: 10px 0">Search By Name</h6>
+
+                        <div class="input-group" style="width: 60%;">
+                            <input type="search" class="form-control rounded" placeholder="Search" value="${requestScope.search}" aria-label="Search"
+                                   aria-describedby="search-addon" name="search" id="searchInput"/>
+
+                        </div>
                     </div>
-                    <div class="col-sm-8 col-lg-6 pt-3">
-                        <select class="form-select" aria-label=".form-select-sm example" style="width: 57%;">
-                            <option selected>Open this select menu</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                    <div class="col-sm-4 col-lg-6 pt-3" style="width: 33%;">
+                        <h6 style="color: #055160; font-weight: 400; padding: 10px 0">Sort By</h6>
+                        <select class="form-select" name="sort" aria-label=".form-select-sm example" style="width: 60%;" id="selectInput">
+                            <option value="0" ${param['sort']==0?"selected":""}>Default</option>
+                            <option value="1" ${param['sort']==1?"selected":""}>Latest Post</option>
+                            <option value="2" ${param['sort']==2?"selected":""}>Latest Date</option>
                         </select>
                     </div>
-                </div>
-
+                </form>
             </div>
-            <div class="row">
-                <%
-            DAOBlog bdb = new DAOBlog();
-            int total = bdb.countBlog();
-            int start = 0; int recordpage = 3; int pageNo = 0;
-                int pno = request.getParameter("page") == null ?1:Integer.parseInt(request.getParameter("page"));
-                pageNo = pno;
-                start = pno*recordpage;
-                %>
 
-                <%
-                     DAOPost pdb = new DAOPost();
-                     DAOMarketer mdb = new DAOMarketer();
-                     DAOSubject sdb = new DAOSubject();
-                     List<Post> listpost = pdb.listPostfollowPage(start, recordpage);
-                    
-                %>
-
-                <div class="blog_list col-sm-8 mt-sm-7">
-                    <% for(Post p : listpost){%>
-                    <%
-                         AccountMarketer am = mdb.getById(p.getMarketer_id());
-                         Blog b = bdb.getById(p.getBlog_id());
-                         Subject s = sdb.getById(b.getSubject_id());
-                    %>
-                    <div class="blog_item">
-                        <div class="intro_author">
-                            <div class="avatar_author" style="font-size: 2.9px;">
-                                <img src="view/avatar/<%=am.getImage()%>" alt="">
+            <div class="row" id="content">
+                <div class="blog_list col-md-8 mt-sm-7">
+                    <c:forEach var="p" items="${requestScope.plist}">
+                        <div class="blog_item">
+                            <div class="intro_author">
+                                <div class="avatar_author" style="font-size: 2.9px;">
+                                    <img src="../avatar/${p.getAm().getImage()}" alt="">
+                                </div>
+                                <div class="name_author">
+                                    ${p.getAm().getDisplay_name()}
+                                </div>
                             </div>
-                            <div class="name_author">
-                                <%=am.getDisplay_name()%>
+                            <div class="body-item">
+                                <div class="content_blog_item">
+                                    <h2 class="title_blog"> <a href="detailpost?detailpost=${p.getPost_id()}">${p.getB().getBlog_name()}</a></h2>
+                                    <p class="sub_paraph">${p.getShort_content()}</p>
+                                    <div class="blog_infor">
+                                        <div class="create_at"><p style="margin-top: 23%;padding: 0 5px; border-bottom: 2px solid black;">${p.getPosted_date()}</p></div>
+                                    </div>
+                                </div>
+                                <div class="image-blog">
+                                    <img src="view/blog/assets/img/imgPost/${p.getImage()}" alt="banner.png" onerror="this.src='view/blog/assets/img/broken-image.png'" width="200px" height="120px" style="border-radius: 6px">
+                                </div>
                             </div>
                         </div>
-                        <div class="content_blog_item">
-                            <h2 class="title_blog"><a href="cbd?pod=<%=p.getPost_id()%>"><%=b.getBlog_name()%></a></h2>
-                            <p class="sub_paraph"><%=p.getShort_content()%></p>
-                        </div>
-                        <div class="blog_infor">
-                            <div class="blog_tag"><a href=""><%=s.getSubject_name()%></a></div>
-                            <div class="create_at"><span><%=p.getPosted_date()%></span></div>
-                        </div>
-                    </div>
-                    <%}%>
+                    </c:forEach>
                 </div>
-                <div class="blog_right col-sm-4 mt-sm-7">
-                    <%
-                    Post p1 = pdb.getTop1Post();
-                    Blog bb = bdb.getById(p1.getBlog_id());
-                    AccountMarketer amm = mdb.getById(p1.getMarketer_id());
-                    %>
+                <div class="blog_right col-md-4 mt-sm-7">
+
                     <div class="widget widget-latest-post">
                         <div class="widget-title">
                             <h3>Latest Post</h3>
@@ -163,20 +147,20 @@
                         <div class="widget-body">
                             <div class="latest-post-aside media">
                                 <div class="lpa-right">
-                                    <a href="#" style="width: 100%">
-                                        <img src="https://th.bing.com/th/id/R.acc7ec177c5f10a7fe314d2d92e8a395?rik=Ar%2fHhJHCO2Zz4w&pid=ImgRaw&r=0"
-                                             title="" alt="">
+                                    <a href="detailpost?detailpost=${latestp.getPost_id()}" style="width: 100%;">
+                                        <img src="view/blog/assets/img/imgPost/${latestp.getImage()}" onerror="this.src='view/blog/assets/img/broken-image.png'">
                                     </a>
                                 </div>
                                 <div class="lpa-left media-body">
                                     <div class="lpa-title">
-                                        <h5><a href="#"><%=bb.getBlog_name()%></a></h5>
+                                        <h5><a href="detailpost?detailpost=${latestp.getPost_id()}">${latestp.getB().getBlog_name()}</a></h5>
+                                        <p class="sub_paraph" style="font-size: 10px;">${latestp.getShort_content()}</p>
                                     </div>
                                     <div class="lpa-meta">
                                         <a class="name" href="#">
-                                            <%=amm.getDisplay_name()%>
+                                            ${latestp.getAm().getDisplay_name()}
                                         </a>
-                                        <%=p1.getPosted_date()%>
+                                        ${latestp.getPosted_date()}
                                     </div>
                                 </div>
                             </div>
@@ -186,29 +170,30 @@
                         <div class="widget-title">
                             <h3>Tags</h3>
                         </div>
-                        <div class="widget-body">
-                            <div class="nav tag-cloud">
-                                <%
-                                  List<Subject> listsubject = sdb.getAll();
-                                  for(Subject ss : listsubject){
-                                %>
-                                <a href="#"><%=ss.getSubject_name()%></a>
-                                <% }%>
-                            </div>
-                        </div>
+                        <!--                        <div class="widget-body">
+                                                    <div class="nav tag-cloud">
+                                                        <a href="#">Design</a>
+                                                        <a href="#">Development</a>
+                                                        <a href="#">Travel</a>
+                                                        <a href="#">Web Design</a>
+                                                        <a href="#">Marketing</a>
+                                                        <a href="#">Research</a>
+                                                        <a href="#">Managment</a>
+                                                    </div>
+                                                </div>-->
                     </div>
 
                 </div>
             </div>
 
-            <div class="transfor_page row-cols-1 mt-sm-3  mb-sm-3">
+            <div class="transfor_page row-cols-1 mt-md-3  mb-sm-3">
                 <nav aria-label="Page navigation example">
                     <ul class="okok paginationn justify-content-center">
-                        <li class="page-item"><a class="page-link <%=(start == 0) ? "diasbled":""%>" href="">Previous</a></li>
-                            <% for(int i = 0; i < total/recordpage; i++){%>
-                        <li class="page-item"><span class="page-link"><a href="cbl?page=<%=i%>"><%=i+1%></a></span></li>
-                                <%}%>
-                        <li class="page-item"><a class="page-link <%=(start + recordpage > total) ? "diasbled":"" %>" href="">Next</a></li>
+                        <li class="page-item"><a class="page-link ${param['index']==1 ? 'disabled' : ''}" href="listpost?search=${requestScope.search}&sort=${param['sort']}&index=${param['index']-1}">Previous</a></li>
+                            <c:forEach var = "i" begin = "1" end = "${numberPage}">
+                            <li class="${param['index']==i?'page-item active':'page-item'}"><a href="listpost?search=${requestScope.search}&sort=${param['sort']}&index=${i}" class="page-link">${i}</a></li>
+                            </c:forEach>
+                        <li class="page-item"><a class="page-link ${param['index'] == numberPage ? 'disabled' : ''}" href="listpost?search=${requestScope.search}&sort=${param['sort']}&index=${param['index']+1}">Next</a></li>
                     </ul>
                 </nav>
             </div>
@@ -226,35 +211,48 @@
         <script src="assets/js/glightbox.min.js"></script>
         <script src="assets/js/main.js"></script>
         <script type="text/javascript">
-            //========= Category Slider 
-            tns({
-                container: '.category-slider',
-                items: 3,
-                slideBy: 'page',
-                autoplay: false,
-                mouseDrag: true,
-                gutter: 0,
-                nav: false,
-                controls: true,
-                controlsText: ['<i class="lni lni-chevron-left"></i>', '<i class="lni lni-chevron-right"></i>'],
-                responsive: {
-                    0: {
-                        items: 1,
-                    },
-                    540: {
-                        items: 2,
-                    },
-                    768: {
-                        items: 4,
-                    },
-                    992: {
-                        items: 5,
-                    },
-                    1170: {
-                        items: 6,
-                    }
+                                        //========= Category Slider 
+                                        tns({
+                                            container: '.category-slider',
+                                            items: 3,
+                                            slideBy: 'page',
+                                            autoplay: false,
+                                            mouseDrag: true,
+                                            gutter: 0,
+                                            nav: false,
+                                            controls: true,
+                                            controlsText: ['<i class="lni lni-chevron-left"></i>', '<i class="lni lni-chevron-right"></i>'],
+                                            responsive: {
+                                                0: {
+                                                    items: 1
+                                                },
+                                                540: {
+                                                    items: 2
+                                                },
+                                                768: {
+                                                    items: 4
+                                                },
+                                                992: {
+                                                    items: 5
+                                                },
+                                                1170: {
+                                                    items: 6
+                                                }
+                                            }
+                                        }
+                                        );
+        </script>
+
+        <script type="text/Javascript">
+            
+             function checkImage(img) {
+                if (img.naturalWidth === 0 || img.naturalHeight === 0) {
+                replaceImage(img);
                 }
-            });
+  }
+                function replaceImage(img) {
+                    img.src = "view/blog/assets/img/broken-image.png";
+                }
         </script>
     </body>
 </html>

@@ -4,11 +4,14 @@
  */
 package Controller;
 
+import DAO.DAOAnswer;
 import DAO.DAOCourse;
 import DAO.DAOErrol;
-import DAO.DAOMentor;
+import DAO.DAOQuestion;
 import Entities.AccountUser;
+import Entities.Answer;
 import Entities.Course;
+import Entities.Question;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -46,6 +49,8 @@ public class CourseController extends HttpServlet {
 
             DAOCourse daoCourse = new DAOCourse();
             DAOErrol daoErrol = new DAOErrol();
+            DAOQuestion daoQuestion = new DAOQuestion();
+            DAOAnswer daoAnswer = new DAOAnswer();
 
             String service = request.getParameter("service");
 
@@ -93,9 +98,41 @@ public class CourseController extends HttpServlet {
                 }
             }
             
-            if(service.equals("practice")) {
+            if(service.equals("learning")) {
                 String id_raw = request.getParameter("id");
                 int id = Integer.parseInt(id_raw);  
+                String nameCourse = "";
+                ResultSet rsCourse = daoCourse.getData("select * from Course where course_id = " + id);
+                if(rsCourse.next()) {
+                    nameCourse = rsCourse.getString(4);
+                }
+                Vector<Question> listQuestion = daoQuestion.getAll("select * from Question where course_id = " + id);
+                Vector<Answer> listAnswer = daoAnswer.getAll("select * from Answer");
+                request.setAttribute("id", id);
+                request.setAttribute("nameCourse", nameCourse);
+                request.setAttribute("listQuestion", listQuestion);
+                request.setAttribute("listAnswer", listAnswer);
+                request.getRequestDispatcher("jspClient/Learning.jsp").forward(request, response);
+            }
+            
+            if(service.equals("exam")) {
+                String id_raw = request.getParameter("id");
+                int id = Integer.parseInt(id_raw);  
+                String nameCourse = "";
+                ResultSet rsCourse = daoCourse.getData("select * from Course where course_id = " + id);
+                if(rsCourse.next()) {
+                    nameCourse = rsCourse.getString(4);
+                }
+                Vector<Question> listQuestion = daoQuestion.getAll("select * from Question where course_id = " + id);
+                Vector<Answer> listAnswer = daoAnswer.getAll("select * from Answer");
+                request.setAttribute("id", id);
+                request.setAttribute("nameCourse", nameCourse);
+                request.setAttribute("listQuestion", listQuestion);
+                request.setAttribute("listAnswer", listAnswer);
+                request.getRequestDispatcher("jspClient/Exam.jsp").forward(request, response);
+            }
+            
+            if(service.equals("result")) {
                 
             }
         } catch (SQLException ex) {
