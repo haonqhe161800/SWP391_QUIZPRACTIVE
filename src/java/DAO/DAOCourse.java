@@ -53,4 +53,14 @@ public class DAOCourse extends DBConnect{
         }
         return vector;
     }
+    
+    public int getEndPage(String sql) {
+        int endPage = 0;
+        Vector<Course> vector = getAll(sql);
+        endPage = vector.size()/12;
+        if(vector.size() % 12 != 0) {
+            endPage++;
+        }
+        return endPage;
+    }
 }

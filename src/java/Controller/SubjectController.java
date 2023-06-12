@@ -33,6 +33,21 @@ public class SubjectController extends HttpServlet {
             String service = request.getParameter("service");
 
             if (service.equals("details")) {
+                int endP = daoCourse.getEndPage("select * from Course");
+                String index = request.getParameter("index");
+                if (index == null) {
+                    index = "1";
+                }
+                int indexP = Integer.parseInt(index);
+                String href = "SubjectController?service=details";
+                String sql = "select * from Course order by course_id offset " + ((indexP - 1) * 12) + " rows fetch next 12 rows only";
+                request.setAttribute("endP", endP);
+                request.setAttribute("indexP", indexP);
+                request.setAttribute("href", href);
+                
+                
+                
+                
                 //Lấy ra id của subject mà mình muốn xem list
                 int subject_id = Integer.parseInt(request.getParameter("subject_id"));
                 //câu lệnh sql lấy ra phần subject list
