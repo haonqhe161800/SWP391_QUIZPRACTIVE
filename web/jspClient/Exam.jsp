@@ -40,6 +40,7 @@
         Vector<Question> listQuestion = (Vector<Question>) request.getAttribute("listQuestion");
         Vector<Answer> listAnswer = (Vector<Answer>) request.getAttribute("listAnswer");
         String nameCourse = (String) request.getAttribute("nameCourse");
+        int id = (int) request.getAttribute("id");
         %>
         
         <div style="margin-bottom: 150px ">
@@ -53,14 +54,20 @@
         
         <div class="container exam">
             <div class="content_exam">
-                <form action="CourseController" method="post">
+                <form action="CourseController" method="post" onsubmit="openResult(e)">
                     <input type="hidden" name="service" value="result">
-                    <%for (Question question : listQuestion) {%>
+                    <input type="hidden" name="id" value="<%=id%>">
+                    <%for (Question question : listQuestion) {
+                        int count = 0;
+                    %>
                     <div style="margin-bottom: 12px">
-                        <input readonly class="question" type="text" value="<%=question.getQuestion_name()%>">
+                        <p class="question"><%=question.getQuestion_name()%></p>
                         <%for (Answer answer : listAnswer) {
-                            if(answer.getQuestion_id() == question.getQuestion_id()) {%>    
-                            <input class="answer" type="radio" /><%=answer.getAnswer_name()%><br>
+                            count = count + 1;
+                            if(answer.getQuestion_id() == question.getQuestion_id()) {%>   
+                            <input id="<%=count%>" class="<%=question.getQuestion_id()%>" name="question<%=question.getQuestion_id()%>" type="radio" value="<%=answer.getIs_correct()%>" onclick="handleClick(className)"/>
+                            <label for="<%=count%>"><%=answer.getAnswer_name()%></label><br>
+                            
                             <%}
                         }%>
                     </div>
@@ -74,12 +81,16 @@
             <div class="menu_exam">
                 <%for (Question question : listQuestion) {%>
                 <div>
-                    <p class="number_question"><%=question.getQuestion_id()%></p>
+                    <p id="question<%=question.getQuestion_id()%>" class="number_question"><%=question.getQuestion_id()%></p>
                 </div>
                 <%}%>
             </div>
         </div>
-        
+            
+            
+ 
+        <%--<jsp:include page="Result.jsp"></jsp:include>--%>
+
 
 
             

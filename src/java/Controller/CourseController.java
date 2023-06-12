@@ -8,10 +8,12 @@ import DAO.DAOAnswer;
 import DAO.DAOCourse;
 import DAO.DAOErrol;
 import DAO.DAOQuestion;
+import DAO.DAOResultTest;
 import Entities.AccountUser;
 import Entities.Answer;
 import Entities.Course;
 import Entities.Question;
+import Entities.ResultTest;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -22,6 +24,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,6 +54,7 @@ public class CourseController extends HttpServlet {
             DAOErrol daoErrol = new DAOErrol();
             DAOQuestion daoQuestion = new DAOQuestion();
             DAOAnswer daoAnswer = new DAOAnswer();
+            DAOResultTest daoResultTest = new DAOResultTest();
 
             String service = request.getParameter("service");
 
@@ -90,7 +94,7 @@ public class CourseController extends HttpServlet {
                     int id = Integer.parseInt(id_raw);
                     Vector<Course> list = daoCourse.getAll("select * from Course where course_id = " + id);
                     Course course = list.get(0);
-                    int n = daoErrol.addProductByPre(au, id);
+                    int n = daoErrol.errolCourse(au, id);
                     if (n > 0) {
                         daoCourse.updateQuantity(course);
                         response.sendRedirect("HomeController");
@@ -99,8 +103,7 @@ public class CourseController extends HttpServlet {
             }
             
             if(service.equals("learning")) {
-                String id_raw = request.getParameter("id");
-                int id = Integer.parseInt(id_raw);  
+                int id = Integer.parseInt(request.getParameter("id"));  
                 String nameCourse = "";
                 ResultSet rsCourse = daoCourse.getData("select * from Course where course_id = " + id);
                 if(rsCourse.next()) {
@@ -116,8 +119,7 @@ public class CourseController extends HttpServlet {
             }
             
             if(service.equals("exam")) {
-                String id_raw = request.getParameter("id");
-                int id = Integer.parseInt(id_raw);  
+                int id = Integer.parseInt(request.getParameter("id"));  
                 String nameCourse = "";
                 ResultSet rsCourse = daoCourse.getData("select * from Course where course_id = " + id);
                 if(rsCourse.next()) {
@@ -133,7 +135,40 @@ public class CourseController extends HttpServlet {
             }
             
             if(service.equals("result")) {
-                
+                HttpSession session = request.getSession();
+                AccountUser au = (AccountUser) session.getAttribute("accountUser");
+                int id = Integer.parseInt(request.getParameter("id"));
+                ArrayList<Integer> answerCheck = new ArrayList<>();
+                String nameCourse = "";
+                ResultSet rsCourse = daoCourse.getData("select * from Course where course_id = " + id);
+                if(rsCourse.next()) {
+                    nameCourse = rsCourse.getString(4);
+                }
+                Vector<Question> listQuestion = daoQuestion.getAll("select * from Question where course_id = " + id);
+                Vector<Answer> listAnswer = daoAnswer.getAll("select * from Answer");
+                for (Question question : listQuestion) {
+                    int is_correct = Integer.parseInt(request.getParameter("question" + question.getQuestion_id()));
+                    answerCheck.add(is_correct);
+                }
+                int count = 0;
+                for (Integer check : answerCheck) {
+                    if(check == 1) {
+                        count = count + 1;
+                    }
+                }
+                double score = (double)count / (double)answerCheck.size();
+                double grade = ((double) Math.round(score * 100) / 100) * 100;
+                String stauts = "";
+                if(grade < 5) {
+                    stauts = "Not pass";
+                } else {
+                    stauts = "Passed";
+                }
+//                ResultTest restultTest = new ResultTest(id, au.getUser_id(), stauts, grade);
+//                daoResultTest.addResultTest(restultTest);
+                request.setAttribute("status", stauts);
+                request.setAttribute("grade", grade);
+                request.getRequestDispatcher("jspClient/Result.jsp").forward(request, response);
             }
         } catch (SQLException ex) {
             Logger.getLogger(CourseController.class.getName()).log(Level.SEVERE, null, ex);

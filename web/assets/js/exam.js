@@ -4,5 +4,12 @@
  */
 
 
-var answers = document.querySelectorAll('.question');
-console.log(answers)
+function handleClick(className) {
+    document.getElementById('question' + className).classList.add('forcus');
+}
+
+function openResult(e) {
+    console.log(e.target.value);
+    e.preventDefault();
+    document.querySelector('.modal').classList.add('open');
+}
