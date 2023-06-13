@@ -54,7 +54,7 @@
         
         <div class="container exam">
             <div class="content_exam">
-                <form action="CourseController" method="post" onsubmit="openResult(e)">
+                <form action="CourseController" method="get" onsubmit="openResult(e)">
                     <input type="hidden" name="service" value="result">
                     <input type="hidden" name="id" value="<%=id%>">
                     <%for (Question question : listQuestion) {
@@ -65,9 +65,8 @@
                         <%for (Answer answer : listAnswer) {
                             count = count + 1;
                             if(answer.getQuestion_id() == question.getQuestion_id()) {%>   
-                            <input id="<%=count%>" class="<%=question.getQuestion_id()%>" name="question<%=question.getQuestion_id()%>" type="radio" value="<%=answer.getIs_correct()%>" onclick="handleClick(className)"/>
-                            <label for="<%=count%>"><%=answer.getAnswer_name()%></label><br>
-                            
+                            <input id="<%=count%>" class="<%=question.getQuestion_id()%>" name="question<%=question.getQuestion_id()%>" type="radio" value="<%=answer.getIs_correct()%>_<%=answer.getAnswer_id()%>" onclick="handleClick(className)"/>
+                            <label name="answer" value="<%=answer.getAnswer_name()%>" for="<%=count%>"><%=answer.getAnswer_name()%></label><br>
                             <%}
                         }%>
                     </div>

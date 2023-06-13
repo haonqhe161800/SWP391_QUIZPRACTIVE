@@ -9,7 +9,6 @@ function handleClick(className) {
 }
 
 function openResult(e) {
-    console.log(e.target.value);
     e.preventDefault();
     document.querySelector('.modal').classList.add('open');
 }

@@ -16,11 +16,13 @@
         <%
             double grade = (double) request.getAttribute("grade");
             String status = (String) request.getAttribute("status");
+            String answer = (String) request.getAttribute("answer");
         %>
         <div class="modal">
             <div class="modal-container">
                 <p><%=grade%>%</p>
-                <p><%=status%></p>
+                <p><%=status%></p>                
+                <p><%=answer%></p>
             </div>
         </div>
     </body>
