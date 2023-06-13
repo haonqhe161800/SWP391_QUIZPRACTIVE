@@ -141,7 +141,11 @@ public class CourseController extends HttpServlet {
                 ArrayList<Integer> answerCheck = new ArrayList<>();
                 Vector<Question> listQuestion = daoQuestion.getAll("select * from Question where course_id = " + id);
                 for (Question question : listQuestion) {
-                    int is_correct = Integer.parseInt(request.getParameter("question" + question.getQuestion_id()));
+                    String getIs_correct = request.getParameter("question" + question.getQuestion_id());
+                    if(getIs_correct == null) {
+                        getIs_correct = "0";
+                    }
+                    int is_correct = Integer.parseInt(getIs_correct);
                     answerCheck.add(is_correct);
                 }
                 int count = 0;
@@ -153,7 +157,7 @@ public class CourseController extends HttpServlet {
                 double score = (double)count / (double)answerCheck.size();
                 double grade = ((double) Math.round(score * 100) / 100) * 100;
                 String stauts = "";
-                if(grade < 5) {
+                if(grade < 50) {
                     stauts = "Not pass";
                 } else {
                     stauts = "Passed";
