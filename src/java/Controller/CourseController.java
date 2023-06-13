@@ -139,7 +139,6 @@ public class CourseController extends HttpServlet {
                 AccountUser au = (AccountUser) session.getAttribute("accountUser");
                 int id = Integer.parseInt(request.getParameter("id"));
                 ArrayList<Integer> answerCheck = new ArrayList<>();
-                String nameCourse = request.getParameter("answer");
                 Vector<Question> listQuestion = daoQuestion.getAll("select * from Question where course_id = " + id);
                 for (Question question : listQuestion) {
                     int is_correct = Integer.parseInt(request.getParameter("question" + question.getQuestion_id()));
@@ -161,7 +160,6 @@ public class CourseController extends HttpServlet {
                 }
 //                ResultTest restultTest = new ResultTest(id, au.getUser_id(), stauts, grade);
 //                daoResultTest.addResultTest(restultTest);
-                request.setAttribute("answer", nameCourse);
                 request.setAttribute("status", stauts);
                 request.setAttribute("grade", grade);
                 request.getRequestDispatcher("jspClient/Result.jsp").forward(request, response);

@@ -65,7 +65,7 @@
                         <%for (Answer answer : listAnswer) {
                             count = count + 1;
                             if(answer.getQuestion_id() == question.getQuestion_id()) {%>   
-                            <input id="<%=count%>" class="<%=question.getQuestion_id()%>" name="question<%=question.getQuestion_id()%>" type="radio" value="<%=answer.getIs_correct()%>_<%=answer.getAnswer_id()%>" onclick="handleClick(className)"/>
+                            <input id="<%=count%>" class="<%=question.getQuestion_id()%>" name="question<%=question.getQuestion_id()%>" type="radio" value="<%=answer.getIs_correct()%>" onclick="handleClick(className)"/>
                             <label name="answer" value="<%=answer.getAnswer_name()%>" for="<%=count%>"><%=answer.getAnswer_name()%></label><br>
                             <%}
                         }%>
