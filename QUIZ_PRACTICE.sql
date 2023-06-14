@@ -128,7 +128,7 @@ CREATE TABLE [Exam_details] (
 	[course_id] [int] not null FOREIGN KEY REFERENCES [Course]([course_id]),
 	[question_id] [int] not null FOREIGN KEY REFERENCES [Question]([question_id]),
 	[answer_choose] [int] not null,
-	PRIMARY KEY ([user_id], [course_id])
+	PRIMARY KEY ([user_id], [course_id], [question_id])
 )
 
 ---- Create table Answer -----
