@@ -107,28 +107,30 @@
         ResultSet rsPost = (ResultSet)request.getAttribute("rsPost");
     %>
     
-    <section class="categories">
-        <div class="container">
-            <div class="cat-inner">
-                <div class="row">
-                    <div class="col-12 p-0">
-                        <div class="category-slider">
-                            <%while(rsSubject.next()) {%>
-                            <a href="SubjectController?service=details&subject_id=<%=rsSubject.getInt(2)%>" class="single-cat">
-                                <div class="icon">
-                                    <img src="<%=rsSubject.getString(3)%>" alt="#">
-                                </div>
-                                <h3><%=rsSubject.getString(1)%></h3>
-                                <h5 class="total"><%=rsSubject.getInt(4)%></h5>
-                            </a>
-                            <% } %>
+    <!-- list subject -->
+        <section class="categories">
+            <div class="container">
+                <div class="cat-inner">
+                    <div class="row">
+                        <div class="col-12 p-0">
+                            <div class="category-slider">
+                                <% while(rsSubject.next()) { %>
+                                <a href="SubjectController?service=details&subject_id=<%=rsSubject.getInt(2)%>" class="single-cat">
+                                    <div class="icon">
+                                        <img src="<%=rsSubject.getString(3)%>"alt="#">
+                                    </div>
+                                    <h3><%=rsSubject.getString(1)%></h3>
+                                    <h5 class="total"><%=rsSubject.getInt(4)%></h5>
+                                </a>
+                                <%} %>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <!-- /End Categories Area -->
+        </section>
+        <!--End list subject -->
+
 
     
     <!-- List Course -->
@@ -266,7 +268,6 @@
             </div>
             <div class="single-head">
                 <div class="row">
-                    <% while(rsPost.next()) { %>
                     <div class="col-lg-4 col-md-6 col-12">
                         <!-- Start Single Grid -->
                         <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
@@ -299,7 +300,6 @@
                             </div>
                         </div>
                     </div>
-                    <% } %>
                     </div>
                 </div>
             </div>
