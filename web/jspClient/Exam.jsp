@@ -17,6 +17,7 @@
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
         <!-- Place favicon.ico in the root directory -->
 
         <!-- Web Font -->
@@ -51,29 +52,26 @@
             <h2><%=nameCourse%></h2>
         </div>
         
-        
         <div class="container exam">
             <div class="content_exam">
                 <form action="CourseController" method="get" onsubmit="openResult(e)">
                     <input type="hidden" name="service" value="result">
                     <input type="hidden" name="id" value="<%=id%>">
-                    <%for (Question question : listQuestion) {
-                        int count = 0;
-                    %>
+                    <%for (Question question : listQuestion) {%>
                     <div style="margin-bottom: 12px">
                         <p class="question"><%=question.getQuestion_name()%></p>
                         <%for (Answer answer : listAnswer) {
-                            count = count + 1;
-                            if(answer.getQuestion_id() == question.getQuestion_id()) {%>   
-                            <input id="<%=count%>" class="<%=question.getQuestion_id()%>" name="question<%=question.getQuestion_id()%>" type="radio" value="<%=answer.getIs_correct()%>" onclick="handleClick(className)"/>
-                            <label for="<%=count%>"><%=answer.getAnswer_name()%></label><br>
+                            if(answer.getQuestion_id() == question.getQuestion_id()) {%> 
+                            <span id="icon"></span>
+                            <input id="<%=answer.getAnswer_id()%>" class="<%=question.getQuestion_id()%>" name="question<%=question.getQuestion_id()%>" type="radio" value="<%=answer.getIs_correct()%>" onclick="handleClick(className)"/>
+                            <label for="<%=answer.getAnswer_id()%>"><%=answer.getAnswer_name()%></label><br>
                             <input type="hidden" name="answer" value="<%=answer.getAnswer_name()%>" >
                             <%}
                         }%>
                     </div>
                     <%}%>
                     <div class="bottom-content">
-                        <input class="btn btn-block btn-primary" type="submit" value="Nộp bài">
+                        <input id="submit" class="btn btn-block btn-primary" type="submit" value="Nộp bài">
                     </div>
                 </form>
             </div>
@@ -87,31 +85,20 @@
             </div>
         </div>
             
-            
- 
-        <%--<jsp:include page="Result.jsp"></jsp:include>--%>
-
-
-
-            
 
         <jsp:include page="Footer.jsp"></jsp:include>
 
-        <!-- ========================= scroll-top ========================= -->
         <a href="#" class="scroll-top btn-hover">
             <i class="lni lni-chevron-up"></i>
         </a>
 
-        <!-- ========================= JS here ========================= -->
         <script src="./assets/js/bootstrap.min.js"></script>
         <script src="./assets/js/wow.min.js"></script>
         <script src="./assets/js/tiny-slider.js"></script>
         <script src="./assets/js/glightbox.min.js"></script>
         <script src="./assets/js/main.js"></script>
-        <script src="./assets/js/exam.js"></script>
-        <script type="text/javascript">
-            //========= Category Slider 
-
+        <script>
+            
             tns({
                 container: '.category-slider',
                 items: 3,
@@ -140,6 +127,29 @@
                     }
                 }
             });
+            
+            function handleClick(className) {
+                document.getElementById('question' + className).classList.add('forcus');
+            }
+
+            function openResult(e) {
+                e.preventDefault();
+                document.querySelector('.modal').classList.add('open');
+            }
+            
+            document.getElementById('submit').onclick = function () {
+                   <%for (Answer answer : listAnswer) {%>
+                        values = document.getElementById('<%=answer.getAnswer_id()%>');
+                        for (var i = 0; i < values.length; i++) {
+                            if(values[i].checked === true && values[i].value === "1") {
+                                document.getElementById('icon').innerHTML = `<i class="fas fa-check-circle"></i>`;
+                            } else {
+                                document.getElementById('icon').innerHTML = `<i class="fas fa-times-circle"></i>`;
+                            }    
+                        }
+                   <%}%>
+            }
+            
         </script>
     </body>
 </html>

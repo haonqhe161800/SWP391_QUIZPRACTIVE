@@ -13,7 +13,6 @@ import Entities.AccountUser;
 import Entities.Answer;
 import Entities.Course;
 import Entities.Question;
-import Entities.ResultTest;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -140,6 +139,12 @@ public class CourseController extends HttpServlet {
                 int id = Integer.parseInt(request.getParameter("id"));
                 ArrayList<Integer> answerCheck = new ArrayList<>();
                 Vector<Question> listQuestion = daoQuestion.getAll("select * from Question where course_id = " + id);
+                String nameCourse = "";
+                ResultSet rsCourse = daoCourse.getData("select * from Course where course_id = " + id);
+                Vector<Answer> listAnswer = daoAnswer.getAll("select * from Answer");
+                if(rsCourse.next()) {
+                    nameCourse = rsCourse.getString(4);
+                }
                 for (Question question : listQuestion) {
                     String getIs_correct = request.getParameter("question" + question.getQuestion_id());
                     if(getIs_correct == null) {
@@ -164,6 +169,10 @@ public class CourseController extends HttpServlet {
                 }
 //                ResultTest restultTest = new ResultTest(id, au.getUser_id(), stauts, grade);
 //                daoResultTest.addResultTest(restultTest);
+                request.setAttribute("id", id);
+                request.setAttribute("nameCourse", nameCourse);
+                request.setAttribute("listQuestion", listQuestion);
+                request.setAttribute("listAnswer", listAnswer);
                 request.setAttribute("status", stauts);
                 request.setAttribute("grade", grade);
                 request.getRequestDispatcher("jspClient/Result.jsp").forward(request, response);
