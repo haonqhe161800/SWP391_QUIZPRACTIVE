@@ -97,7 +97,7 @@ public class DAOMentor extends DBConnect {
 
     //INSERT AccountMentor
     public void insertMentor(String emailInput, String password, String fullname, String displayname, String dob, int gender, int roleid) {
-        String sql = "INSERT INTO [dbo].[User_type]\n"
+        String sql = "INSERT INTO [dbo].[Mentor_type]\n"
                 + "           ([email]\n"
                 + "           ,[password]\n"
                 + "           ,[fullname]\n"
