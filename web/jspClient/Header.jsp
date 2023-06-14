@@ -65,7 +65,7 @@
                                                     <li class="nav-item"><a href="#">About Us</a></li>
                                                     <li class="nav-item"><a href="#">Sign Up</a></li>
                                                     <li class="nav-item"><a href="SubjectController">Sign In</a></li>
-                                                    <li class="nav-item"><a href="#">Contact Us</a></li>
+                                                      <li class="nav-item"><a href="view/changePassword/changePassword.jsp">Change Password</a></li>
                                                     <li class="nav-item"><a href="#">FAQ</a></li>
                                                 </ul>
                                             </li>
