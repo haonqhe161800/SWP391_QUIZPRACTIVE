@@ -1,23 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
-<<<<<<< HEAD
-=======
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< Updated upstream
         <group>
-            <file>file:/D:/admin/Documents/Semester%205/SWP391/SWP391_QUIZPRACTIVE/src/java/Controller/CourseController.java</file>
-            <file>file:/D:/admin/Documents/Semester%205/SWP391/SWP391_QUIZPRACTIVE/web/jspClient/Learning.jsp</file>
-            <file>file:/D:/admin/Documents/Semester%205/SWP391/SWP391_QUIZPRACTIVE/web/jspClient/Result.jsp</file>
-            <file>file:/D:/admin/Documents/Semester%205/SWP391/SWP391_QUIZPRACTIVE/web/jspClient/Exam.jsp</file>
-            <file>file:/D:/admin/Documents/Semester%205/SWP391/SWP391_QUIZPRACTIVE/web/assets/js/exam.js</file>
-            <file>file:/D:/admin/Documents/Semester%205/SWP391/SWP391_QUIZPRACTIVE/web/jspClient/CourseDetails.jsp</file>
-            <file>file:/D:/admin/Documents/Semester%205/SWP391/SWP391_QUIZPRACTIVE/src/java/Entities/Answer.java</file>
-            <file>file:/D:/admin/Documents/Semester%205/SWP391/SWP391_QUIZPRACTIVE/web/assets/css/exam.css</file>
+            <file>file:/D:/FULearning/SU23/SWP391/SWP391_Project/SWP391_QUIZPRACTIVE/src/java/Controller/ChangePasswordController.java</file>
+            <file>file:/D:/FULearning/SU23/SWP391/SWP391_Project/SWP391_QUIZPRACTIVE/web/view/profile/profile.jsp</file>
+            <file>file:/D:/FULearning/SU23/SWP391/SWP391_Project/SWP391_QUIZPRACTIVE/src/java/Controller/ControllBlogList.java</file>
+            <file>file:/D:/FULearning/SU23/SWP391/SWP391_Project/SWP391_QUIZPRACTIVE/web/view/blog/BlogList.jsp</file>
+            <file>file:/D:/FULearning/SU23/SWP391/SWP391_Project/SWP391_QUIZPRACTIVE/web/jspClient/Footer.jsp</file>
+            <file>file:/D:/FULearning/SU23/SWP391/SWP391_Project/SWP391_QUIZPRACTIVE/web/view/forgotpsw/forgotpassword.jsp</file>
+            <file>file:/D:/FULearning/SU23/SWP391/SWP391_Project/SWP391_QUIZPRACTIVE/web/view/login/sign_in.jsp</file>
         </group>
-=======
-        <group/>
->>>>>>> Stashed changes
     </open-files>
->>>>>>> 70ac2f3184152fa5a1faa9063170d83e6997de3f
 </project-private>
