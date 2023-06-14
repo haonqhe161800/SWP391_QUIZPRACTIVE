@@ -7,11 +7,13 @@ package Controller;
 import DAO.DAOAnswer;
 import DAO.DAOCourse;
 import DAO.DAOErrol;
+import DAO.DAOExam_details;
 import DAO.DAOQuestion;
 import DAO.DAOResultTest;
 import Entities.AccountUser;
 import Entities.Answer;
 import Entities.Course;
+import Entities.Exam_details;
 import Entities.Question;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -54,6 +56,7 @@ public class CourseController extends HttpServlet {
             DAOQuestion daoQuestion = new DAOQuestion();
             DAOAnswer daoAnswer = new DAOAnswer();
             DAOResultTest daoResultTest = new DAOResultTest();
+            DAOExam_details daoEd = new DAOExam_details();
 
             String service = request.getParameter("service");
 
@@ -100,12 +103,12 @@ public class CourseController extends HttpServlet {
                     }
                 }
             }
-            
-            if(service.equals("learning")) {
-                int id = Integer.parseInt(request.getParameter("id"));  
+
+            if (service.equals("learning")) {
+                int id = Integer.parseInt(request.getParameter("id"));
                 String nameCourse = "";
                 ResultSet rsCourse = daoCourse.getData("select * from Course where course_id = " + id);
-                if(rsCourse.next()) {
+                if (rsCourse.next()) {
                     nameCourse = rsCourse.getString(4);
                 }
                 Vector<Question> listQuestion = daoQuestion.getAll("select * from Question where course_id = " + id);
@@ -116,12 +119,12 @@ public class CourseController extends HttpServlet {
                 request.setAttribute("listAnswer", listAnswer);
                 request.getRequestDispatcher("jspClient/Learning.jsp").forward(request, response);
             }
-            
-            if(service.equals("exam")) {
-                int id = Integer.parseInt(request.getParameter("id"));  
+
+            if (service.equals("exam")) {
+                int id = Integer.parseInt(request.getParameter("id"));
                 String nameCourse = "";
                 ResultSet rsCourse = daoCourse.getData("select * from Course where course_id = " + id);
-                if(rsCourse.next()) {
+                if (rsCourse.next()) {
                     nameCourse = rsCourse.getString(4);
                 }
                 Vector<Question> listQuestion = daoQuestion.getAll("select * from Question where course_id = " + id);
@@ -132,8 +135,8 @@ public class CourseController extends HttpServlet {
                 request.setAttribute("listAnswer", listAnswer);
                 request.getRequestDispatcher("jspClient/Exam.jsp").forward(request, response);
             }
-            
-            if(service.equals("result")) {
+
+            if (service.equals("result")) {
                 HttpSession session = request.getSession();
                 AccountUser au = (AccountUser) session.getAttribute("accountUser");
                 int id = Integer.parseInt(request.getParameter("id"));
@@ -142,34 +145,53 @@ public class CourseController extends HttpServlet {
                 String nameCourse = "";
                 ResultSet rsCourse = daoCourse.getData("select * from Course where course_id = " + id);
                 Vector<Answer> listAnswer = daoAnswer.getAll("select * from Answer");
-                if(rsCourse.next()) {
+                if (rsCourse.next()) {
                     nameCourse = rsCourse.getString(4);
                 }
+                
+                
                 for (Question question : listQuestion) {
-                    String getIs_correct = request.getParameter("question" + question.getQuestion_id());
-                    if(getIs_correct == null) {
-                        getIs_correct = "0";
+                    for (Answer answer : listAnswer) {
+                        String getIs_correct = request.getParameter("question" + question.getQuestion_id());
+                        if(getIs_correct == null) {
+                            getIs_correct = "0_n";
+                        }
+                        String is_correct_raw = getIs_correct.substring(0, 1);
+                        String is_choose_raw = getIs_correct.substring(2, 3);
+                        int is_correct = Integer.parseInt(is_correct_raw);
+                        answerCheck.add(is_correct);
+                        String answer_choose = request.getParameter("answer" + answer.getAnswer_id());
+                        if(is_choose_raw.equals("n")) {
+                            Exam_details ed = new Exam_details(au.getUser_id(), id, question.getQuestion_id(), 0);
+                            daoEd.addExamDetails(ed);
+                        }
+                        if(is_choose_raw.equals(answer_choose)) {
+                            int choose = Integer.parseInt(is_choose_raw);
+                            Exam_details ed = new Exam_details(au.getUser_id(), id, question.getQuestion_id(), choose);
+                            daoEd.addExamDetails(ed);
+                        }
+                        
                     }
-                    int is_correct = Integer.parseInt(getIs_correct);
-                    answerCheck.add(is_correct);
                 }
                 int count = 0;
                 for (Integer check : answerCheck) {
-                    if(check == 1) {
+                    if (check == 1) {
                         count = count + 1;
                     }
                 }
-                double score = (double)count / (double)answerCheck.size();
+                double score = (double) count / (double) answerCheck.size();
                 double grade = ((double) Math.round(score * 100) / 100) * 100;
                 String stauts = "";
-                if(grade < 50) {
+                if (grade < 50) {
                     stauts = "Not pass";
                 } else {
                     stauts = "Passed";
                 }
+                Vector<Exam_details> listEd = daoEd.getAll("select * from Exam_details where user_id = " + au.getUser_id() + " and course_id = " + id);
 //                ResultTest restultTest = new ResultTest(id, au.getUser_id(), stauts, grade);
 //                daoResultTest.addResultTest(restultTest);
-                request.setAttribute("id", id);
+//                request.setAttribute("id", id);
+                request.setAttribute("listEd", listEd);
                 request.setAttribute("nameCourse", nameCourse);
                 request.setAttribute("listQuestion", listQuestion);
                 request.setAttribute("listAnswer", listAnswer);

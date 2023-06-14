@@ -8,6 +8,7 @@
 <%@page import="java.util.Vector"%>
 <%@page import="Entities.Question"%>
 <%@page import="Entities.Answer"%>
+<%@page import="Entities.Exam_details"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,12 +18,12 @@
     <body>
         
         <%
-        Vector<Question> listQuestion = (Vector<Question>) request.getAttribute("listQuestion");
-        Vector<Answer> listAnswer = (Vector<Answer>) request.getAttribute("listAnswer");
-        String nameCourse = (String) request.getAttribute("nameCourse");
-        int id = (int) request.getAttribute("id");
         double grade = (double) request.getAttribute("grade");
         String status = (String) request.getAttribute("status");
+        String nameCourse = (String) request.getAttribute("nameCourse");
+        Vector<Question> listQuestion = (Vector<Question>) request.getAttribute("listQuestion");
+        Vector<Answer> listAnswer = (Vector<Answer>) request.getAttribute("listAnswer");
+        Vector<Exam_details> listEd = (Vector<Exam_details>) request.getAttribute("listEd");
         %>
         
         <div style="margin-bottom: 150px ">
@@ -48,14 +49,17 @@
                     <%for (Question question : listQuestion) {%>
                     <div style="margin-bottom: 12px">
                         <p class="question"><%=question.getQuestion_name()%></p>
-                        <%for (Answer answer : listAnswer) {
-                            if(answer.getQuestion_id() == question.getQuestion_id()) {%> 
-                            <span id="icon"></span>
-                            <input id="<%=answer.getAnswer_id()%>" class="<%=question.getQuestion_id()%>" name="question<%=question.getQuestion_id()%>" type="radio" value="<%=answer.getIs_correct()%>" onclick="handleClick(className)"/>
-                            <label for="<%=answer.getAnswer_id()%>"><%=answer.getAnswer_name()%></label><br>
-                            <input type="hidden" name="answer" value="<%=answer.getAnswer_name()%>" >
-                            <%}
-                        }%>
+                          <%for (Exam_details ed : listEd) {
+                                for(Answer answer : listAnswer) {
+                                    if(answer.getQuestion_id() == question.getQuestion_id()) {
+                                        if(answer.getAnswer_id() == ed.getQuestion_id()) {%>
+                                            <input type="radio" checked><%=answer.getAnswer_name()%>
+                                        <%} else {%>
+                                            <input type="radio"><%=answer.getAnswer_name()%>
+                                        <%}
+                                    }
+                                }
+                            }%>
                     </div>
                     <%}%>
                     <div class="bottom-content">
@@ -63,17 +67,8 @@
                     </div>
                 </form>
             </div>
-                    
-            <div class="menu_exam">
-                <%for (Question question : listQuestion) {%>
-                <div>
-                    <p id="question<%=question.getQuestion_id()%>" class="number_question"><%=question.getQuestion_id()%></p>
-                </div>
-                <%}%>
-            </div>
-        </div>
+        </div>   
             
-
         <jsp:include page="Footer.jsp"></jsp:include>
         
         <a href="#" class="scroll-top btn-hover">
@@ -119,24 +114,7 @@
             function handleClick(className) {
                 document.getElementById('question' + className).classList.add('forcus');
             }
-
-            function openResult(e) {
-                e.preventDefault();
-                document.querySelector('.modal').classList.add('open');
-            }
             
-            document.getElementById('submit').onclick = function () {
-                   <%for (Answer answer : listAnswer) {%>
-                        values = document.getElementById('<%=answer.getAnswer_id()%>');
-                        for (var i = 0; i < values.length; i++) {
-                            if(values[i].checked === true && values[i].value === "1") {
-                                document.getElementById('icon').innerHTML = `<i class="fas fa-check-circle"></i>`;
-                            } else {
-                                document.getElementById('icon').innerHTML = `<i class="fas fa-times-circle"></i>`;
-                            }    
-                        }
-                   <%}%>
-            }
             
         </script>
         

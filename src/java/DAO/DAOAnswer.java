@@ -23,7 +23,7 @@ public class DAOAnswer extends DBConnect{
                 String answer_name = rs.getString(2);
                 int is_correct = rs.getInt(3);
                 int question_id = rs.getInt(4);
-                Answer answer = new Answer(question_id, answer_name, is_correct, question_id);
+                Answer answer = new Answer(answer_id, answer_name, is_correct, question_id);
                 vector.add(answer);
             }
         } catch (SQLException ex) {
