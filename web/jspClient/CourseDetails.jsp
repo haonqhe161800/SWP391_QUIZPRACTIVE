@@ -82,6 +82,64 @@
                 <%}%>
             </div>
         </div>
+            
+            
+        <% ResultSet rsRelCourse = (ResultSet) request.getAttribute("rsRelCourse");%>
+            <!--Related course-->
+            <section class="items-grid section custom-padding" style="padding-top: 250px">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title">
+                        <h2 class="wow fadeInUp" data-wow-delay=".4s">Related Course</h2>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="single-head">
+                <div class="row">
+                    <% while(rsRelCourse.next()) {%>
+                        
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
+                            <div class="image"> <!--ảnh course-->
+                                <!--Click vào ảnh cũng giống như click vào phần details -->
+                                <a href="CourseController?service=details&course_id=<%=rsRelCourse.getInt(1)%>" class="thumbnail">
+                                    <img height="218px" src="<%=rsRelCourse.getString(6)%>" alt="#">
+                                </a>
+                                <div class="author">
+                                    <div class="author-image">    <!--ảnh mentor-->
+                                        <a href="#">
+                                            <img src="./assets/images/items-grid/author-1.jpg" alt="#">
+                                        <span>Mentor name</span>
+                                        </a>
+                                    </div>
+                                    <a style="margin-left: 50px " href="CourseController?service=details&course_id=<%=rsRelCourse.getInt(1)%>" class="btn btn-block btn-primary">Details</a>
+                                </div>
+                            </div>
+                            <div class="content">
+                                <div class="top-content">
+                                    <p><%=rsRelCourse.getString(4)%></p>
+                                    <a href="SubjectController?service=details&subject_id=<%=rsRelCourse.getInt(11)%>">
+                                        <h4 class="title">Môn học: <%=rsRelCourse.getString(12)%>  </h4>
+                                    </a>
+                                    <p class="update-time"><i class="lni lni-timer"></i> Ngày update gần nhất:  <%=rsRelCourse.getString(9)%></p>
+                                    <ul class="rating">
+                                        <li>Số người tham gia (<%=rsRelCourse.getInt(8)%>)</li>
+                                    </ul>
+                                    <ul class="info-list">
+                                        <li><i class="lni lni-timer"></i> Ngày đăng khóa học: <%=rsRelCourse.getString(9)%></li>
+                                    </ul>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </section>        
 
         <jsp:include page="Footer.jsp"></jsp:include>
 

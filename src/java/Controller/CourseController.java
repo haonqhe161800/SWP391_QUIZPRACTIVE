@@ -79,6 +79,16 @@ public class CourseController extends HttpServlet {
                 if (rsCountQuestion.next()) {
                     count = rsCountQuestion.getInt(1);
                 }
+                
+                //related course
+                ResultSet rsCourse2 = daoCourse.getData("select * from [Course] c join [Subject] s on c.subject_id = s.subject_id where c.course_id = " + course_id);
+                int subject_id = 0;
+                if (rsCourse2.next()){
+                    subject_id = rsCourse2.getInt(2);
+                }
+                ResultSet rsRelCourse = daoCourse.getData("select * from [Course] c join [Subject] s on c.subject_id = s.subject_id where s.subject_id = " + subject_id + "  and c.course_id <> " + course_id);
+                request.setAttribute("rsRelCourse", rsRelCourse);
+
 
                 request.setAttribute("count", count);
                 request.setAttribute("errol", errol);
