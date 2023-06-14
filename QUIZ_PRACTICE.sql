@@ -118,6 +118,14 @@ CREATE TABLE [Result_test] (
 	PRIMARY KEY ([user_id], [course_id])
 )
 
+CREATE TABLE [Exam_details] (
+	[user_id] [int] not null FOREIGN KEY REFERENCES [User_type]([user_id]),
+	[course_id] [int] not null FOREIGN KEY REFERENCES [Course]([course_id]),
+	[question_id] [int] not null FOREIGN KEY REFERENCES [Question]([question_id]),
+	[answer_choose] [int] not null,
+	PRIMARY KEY ([user_id], [course_id])
+)
+
 ---- Create table Question ----
 CREATE TABLE [Question] (
 	[question_id] [int] IDENTITY (1,1) not null PRIMARY KEY,
