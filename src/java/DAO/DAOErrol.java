@@ -18,7 +18,7 @@ public class DAOErrol extends DBConnect {
     
     LocalDate date = LocalDate.now();
     
-    public int addProductByPre(AccountUser au, int course_id) {
+    public int errolCourse(AccountUser au, int course_id) {
         int n = 0;
         String sql = "insert into Errol "
                 + "values (" + au.getUser_id()

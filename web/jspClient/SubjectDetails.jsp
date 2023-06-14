@@ -56,37 +56,37 @@
                                 <form action="SubjectController" method="post">
                                     <input type="hidden" value="search" name="service">
                                     <input type="hidden" value="<%=subject_id%>" name="subject_id">
-                                    <div class="search-form wow fadeInUp" data-wow-delay=".7s">
-                                        <div class="row">
-                                            <div class="col-lg-9 col-md-9 col-12 p-0">
-                                                <div class="search-input">
-                                                    <label for="keyword"><i class="lni lni-search-alt theme-color"></i></label>
-                                                    <input type="text" name="course_name" value="${text_search}" id="keyword" placeholder="Find Course ...">
-                                                </div>
+                                <div class="search-form wow fadeInUp" data-wow-delay=".7s">
+                                    <div class="row">
+                                        <div class="col-lg-9 col-md-9 col-12 p-0">
+                                            <div class="search-input">
+                                                <label for="keyword"><i class="lni lni-search-alt theme-color"></i></label>
+                                                <input type="text" name="course_name" value="${text_search}" id="keyword" placeholder="Find Course ...">
                                             </div>
-                                            <div class="col-lg-3 col-md-3 col-12 p-0">
-                                                <div class="search-btn button">
-                                                    <button class="btn"><i class="lni lni-search-alt"></i>Search</button>
-                                                </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-3 col-12 p-0">
+                                            <div class="search-btn button">
+                                                <button class="btn"><i class="lni lni-search-alt"></i>Search</button>
                                             </div>
                                         </div>
                                     </div>
-                                </form>
-                                <!-- End Search Form -->
-                            </div>
+                                </div>
+                            </form>
+                            <!-- End Search Form -->
                         </div>
                     </div>
                 </div>
-            </section>
-            <!-- End Hero Area -->
+            </div>
+        </section>
+        <!-- End Hero Area -->
 
-            <!-- list subject -->
-            <section class="categories">
-                <div class="container">
-                    <div class="cat-inner">
-                        <div class="row">
-                            <div class="col-12 p-0">
-                                <div class="category-slider">
+        <!-- list subject -->
+        <section class="categories">
+            <div class="container">
+                <div class="cat-inner">
+                    <div class="row">
+                        <div class="col-12 p-0">
+                            <div class="category-slider">
                                 <% while(rsSubject.next()) { %>
                                 <a href="SubjectController?service=details&subject_id=<%=rsSubject.getInt(2)%>" class="single-cat">
                                     <div class="icon">
@@ -151,7 +151,29 @@
                 </div>
             </div>
         </section>
-        <!--Mentor List-->
+
+
+
+
+        <%
+    int endP = (int)request.getAttribute("endP");
+    int indexP = (int)request.getAttribute("indexP");
+    String href = (String)request.getAttribute("href");
+        %>
+        <p class="paging text-center" style="margin: 20px 0 20px 0">
+            <a href="<%=href%>&index=<%=(indexP-1)%>" style="<%=indexP > 1 && indexP <= endP ? "display: inline-block" : "display: none"%>"> 
+                <i class="fas fa-chevron-left btn_prev"></i>
+            </a>
+
+            <%for(int i = 1; i <= endP; i++) {%>
+            <a class="paging_link <%=indexP == i ? "active" : ""%>" href="<%=href%>&index=<%=i%>"><%=i%></a>
+            <%}%>
+
+            <a href="<%=href%>&index=<%=(indexP+1)%>" style="<%=indexP < endP && indexP >= 1 ? "display: inline-block" : "display: none"%>"> 
+                <i class="fas fa-chevron-right btn_next"></i>
+            </a>
+        </p>       
+
 
         <!--Footer-->
         <jsp:include page="Footer.jsp"></jsp:include>

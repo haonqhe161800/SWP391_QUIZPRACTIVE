@@ -9,13 +9,14 @@ package Entities;
  * @author admin
  */
 public class ResultTest {
-    private int course_id, user_id, status;
+    private int course_id, user_id;
+    private String status;
     private double grade;
 
     public ResultTest() {
     }
 
-    public ResultTest(int course_id, int user_id, int status, double grade) {
+    public ResultTest(int course_id, int user_id, String status, double grade) {
         this.course_id = course_id;
         this.user_id = user_id;
         this.status = status;
@@ -38,11 +39,11 @@ public class ResultTest {
         this.user_id = user_id;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
