@@ -43,7 +43,7 @@ public class DAOPost extends DBConnect {
                         rs.getString("modify_date"),
                         rs.getInt("gender"),
                         rs.getInt("role_id"));
-                Post p = new Post(rs.getInt("post_id"), rs.getInt("marketer_id"), rs.getInt("blog_id"), rs.getDate("posted_date"), rs.getDate("updated_date"), rs.getString("image"), rs.getString("content"), rs.getString("short_content"), rs.getBoolean("status"), b, am);
+                Post p = new Post(rs.getInt("post_id"), rs.getInt("marketer_id"), rs.getInt("blog_id"), rs.getDate("posted_date"), rs.getDate("updated_date"), rs.getString("image"), rs.getString("content"), rs.getString("short_content"), rs.getString("status"), b, am);
                 return p;
             }
         } catch (Exception e) {
@@ -77,7 +77,7 @@ public class DAOPost extends DBConnect {
                         rs.getString("modify_date"),
                         rs.getInt("gender"),
                         rs.getInt("role_id"));
-                list.add(new Post(rs.getInt("post_id"), rs.getInt("marketer_id"), rs.getInt("blog_id"), rs.getDate("posted_date"), rs.getDate("updated_date"), rs.getString("image"), rs.getString("content"), rs.getString("short_content"), rs.getBoolean("status"), b, am));
+                list.add(new Post(rs.getInt("post_id"), rs.getInt("marketer_id"), rs.getInt("blog_id"), rs.getDate("posted_date"), rs.getDate("updated_date"), rs.getString("image"), rs.getString("content"), rs.getString("short_content"), rs.getString("status"), b, am));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -110,7 +110,7 @@ public class DAOPost extends DBConnect {
                         rs.getString("modify_date"),
                         rs.getInt("gender"),
                         rs.getInt("role_id"));
-                Post p = new Post(rs.getInt("post_id"), rs.getInt("marketer_id"), rs.getInt("blog_id"), rs.getDate("posted_date"), rs.getDate("updated_date"), rs.getString("image"), rs.getString("content"), rs.getString("short_content"), rs.getBoolean("status"), b, am);
+                Post p = new Post(rs.getInt("post_id"), rs.getInt("marketer_id"), rs.getInt("blog_id"), rs.getDate("posted_date"), rs.getDate("updated_date"), rs.getString("image"), rs.getString("content"), rs.getString("short_content"), rs.getString("status"), b, am);
                 return p;
             }
         } catch (Exception e) {
@@ -160,7 +160,7 @@ public class DAOPost extends DBConnect {
                         rs.getString("modify_date"),
                         rs.getInt("gender"),
                         rs.getInt("role_id"));
-                list.add(new Post(rs.getInt("post_id"), rs.getInt("marketer_id"), rs.getInt("blog_id"), rs.getDate("posted_date"), rs.getDate("updated_date"), rs.getString("image"), rs.getString("content"), rs.getString("short_content"), rs.getBoolean("status"), b, am));
+                list.add(new Post(rs.getInt("post_id"), rs.getInt("marketer_id"), rs.getInt("blog_id"), rs.getDate("posted_date"), rs.getDate("updated_date"), rs.getString("image"), rs.getString("content"), rs.getString("short_content"), rs.getString("status"), b, am));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -201,7 +201,7 @@ public class DAOPost extends DBConnect {
 //        System.out.println(p.getB().getBlog_name());
 
         Post p = dpdb.getById(13);
-        System.out.println(p.getB().getBlog_name());
+        System.out.println(p.getStatus());
     }
 
 }

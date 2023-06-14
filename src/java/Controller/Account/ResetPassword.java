@@ -23,7 +23,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author Admin
  */
-public class ChangePassword extends HttpServlet {
+public class ResetPassword extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

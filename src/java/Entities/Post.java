@@ -17,12 +17,12 @@ public class Post {
     private String image, content, short_content;
     private Blog b;
     private AccountMarketer am;
-    private boolean status;
+    private String status;
 
     public Post() {
     }
 
-    public Post(int post_id, int marketer_id, int blog_id,Date posted_date, Date update_date, String image, String content, String short_content, boolean status, Blog b, AccountMarketer am) {
+    public Post(int post_id, int marketer_id, int blog_id,Date posted_date, Date update_date, String image, String content, String short_content, String status, Blog b, AccountMarketer am) {
         this.post_id = post_id;
         this.marketer_id = marketer_id;
         this.blog_id = blog_id;
@@ -76,12 +76,19 @@ public class Post {
         this.short_content = short_content;
     }
 
-    public boolean isStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setStatus(String status) {
+        if(status == "pending"){
+            this.status = status;
+        }else if(status == "approved"){
+            this.status = status;
+        }else if(status == "rejected"){
+            this.status = status;
+        }
+        
     }
 
     public int getPost_id() {
