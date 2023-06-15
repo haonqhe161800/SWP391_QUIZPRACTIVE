@@ -136,6 +136,13 @@ public class CourseController extends HttpServlet {
 
             if (service.equals("exam")) {
                 int id = Integer.parseInt(request.getParameter("id"));
+                HttpSession session = request.getSession();
+                AccountUser au = (AccountUser) session.getAttribute("accountUser");
+                ResultSet listEd = daoEd.getData("select * from Exam_details where course_id = " + id + " and user_id = " + au.getUser_id());
+                if(listEd.next()) {
+                    daoEd.removeExamdetails(au.getUser_id(), id);
+                    daoResultTest.removeResultTest(au.getUser_id(), id);
+                }
                 String nameCourse = "";
                 ResultSet rsCourse = daoCourse.getData("select * from Course where course_id = " + id);
                 if (rsCourse.next()) {
@@ -144,6 +151,7 @@ public class CourseController extends HttpServlet {
                 Vector<Question> listQuestion = daoQuestion.getAll("select * from Question where course_id = " + id);
                 Vector<Answer> listAnswer = daoAnswer.getAll("select * from Answer");
                 request.setAttribute("id", id);
+                request.setAttribute("listEd", listEd);
                 request.setAttribute("nameCourse", nameCourse);
                 request.setAttribute("listQuestion", listQuestion);
                 request.setAttribute("listAnswer", listAnswer);
@@ -160,7 +168,6 @@ public class CourseController extends HttpServlet {
                 ResultSet rsCourse = daoCourse.getData("select * from Course where course_id = " + id);
                 Vector<Answer> listAnswer = daoAnswer.getAll("select * from Answer");
                 ResultSet listEd = daoEd.getData("select * from Exam_details where course_id = " + id + " and user_id = " + au.getUser_id());
-                ResultSet listRt = daoResultTest.getData("select * from Result_test where course_id = " + id + " and user_id = " + au.getUser_id());
                 if(listEd.next()) {
                     daoEd.removeExamdetails(au.getUser_id(), id);
                     daoResultTest.removeResultTest(au.getUser_id(), id);
@@ -208,7 +215,7 @@ public class CourseController extends HttpServlet {
                     stauts = "Congratulations! You passed!";
                     statusDB = "pass";
                 }
-                Vector<Exam_results> er = daoEr.getAll("select a.question_id, ed.answer_choose, a.answer_id, a.is_correct, a.answer_name from Exam_details ed join Answer a on ed.question_id = a.question_id");
+                Vector<Exam_results> er = daoEr.getAll("select a.question_id, ed.answer_choose, a.answer_id, a.is_correct, a.answer_name from Exam_details ed join Answer a on ed.question_id = a.question_id where ed.user_id = " + au.getUser_id() + " and ed.course_id = " + id);
                 ResultTest restultTest = new ResultTest(au.getUser_id(), id, statusDB, grade);
                 daoResultTest.addResultTest(restultTest);
                 request.setAttribute("id", id);
@@ -219,6 +226,27 @@ public class CourseController extends HttpServlet {
                 request.setAttribute("status", stauts);
                 request.setAttribute("grade", grade);
                 request.getRequestDispatcher("jspClient/Result.jsp").forward(request, response);
+            }
+            
+            if(service.equals("review")) {
+                HttpSession session = request.getSession();
+                AccountUser au = (AccountUser) session.getAttribute("accountUser");
+                int id = Integer.parseInt(request.getParameter("id"));
+                Vector<Question> listQuestion = daoQuestion.getAll("select * from Question where course_id = " + id);
+                Vector<Exam_results> er = daoEr.getAll("select a.question_id, ed.answer_choose, a.answer_id, a.is_correct, a.answer_name from Exam_details ed join Answer a on ed.question_id = a.question_id where ed.user_id = " + au.getUser_id() + " and ed.course_id = " + id);
+                Vector<ResultTest> listrt = daoResultTest.getAll("select * from Result_test where user_id = " + au.getUser_id() + " and course_id = " + id);
+                ResultTest rt = listrt.get(0);
+                String nameCourse = "";
+                ResultSet rsCourse = daoCourse.getData("select * from Course where course_id = " + id);
+                if (rsCourse.next()) {
+                    nameCourse = rsCourse.getString(4);
+                }
+                request.setAttribute("id", id);
+                request.setAttribute("nameCourse", nameCourse);
+                request.setAttribute("listQuestion", listQuestion);
+                request.setAttribute("er", er);
+                request.setAttribute("rt", rt);
+                request.getRequestDispatcher("jspClient/ReviewExam.jsp").forward(request, response);
             }
         } catch (SQLException ex) {
             Logger.getLogger(CourseController.class.getName()).log(Level.SEVERE, null, ex);

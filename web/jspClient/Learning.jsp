@@ -8,6 +8,7 @@
 <%@page import="java.util.Vector"%>
 <%@page import="Entities.Question"%>
 <%@page import="Entities.Answer"%>
+<%@page import="java.sql.ResultSet"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -65,9 +66,16 @@
                 }%>
             </div>
             <%}%>
+            
+            <%if(request.getAttribute("listQuestion") == null) {%>
             <div class="bottom-content">
                 <a href="CourseController?service=exam&id=<%=id%>" class="btn btn-block btn-primary">Exam</a>
             </div>
+            <%} else {%>
+            <div class="bottom-content">
+                <a href="CourseController?service=review&id=<%=id%>" class="btn btn-block btn-primary">Review exam</a>
+            </div>
+            <%}%>
         </div>
         
 
