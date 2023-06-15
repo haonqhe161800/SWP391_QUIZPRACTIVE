@@ -100,13 +100,7 @@
     
     <!-- Start Categories Area -->
     
-    <%
-        ResultSet rsSubject = (ResultSet)request.getAttribute("rsSubject");
-        ResultSet rsCourse = (ResultSet)request.getAttribute("rsCourse");
-        ResultSet rsMentor = (ResultSet)request.getAttribute("rsMentor");
-        ResultSet rsPost = (ResultSet)request.getAttribute("rsPost");
-    %>
-    
+    <%ResultSet rsSubject = (ResultSet)request.getAttribute("rsSubject");%>
     <!-- list subject -->
         <section class="categories">
             <div class="container">
@@ -130,7 +124,13 @@
             </div>
         </section>
         <!--End list subject -->
-
+<%if(request.getAttribute("type") == null) {%>
+    <%
+        ResultSet rsCourse = (ResultSet)request.getAttribute("rsCourse");
+        ResultSet rsMentor = (ResultSet)request.getAttribute("rsMentor");
+        ResultSet rsPost = (ResultSet)request.getAttribute("rsPost");
+    %>
+    
 
     
     <!-- List Course -->
@@ -313,7 +313,146 @@
         </div>
     </section>
     
+
     
+    
+    
+    
+    <!--Search display -->
+    <%} else {
+        if(request.getAttribute("rsCourse") != null && request.getAttribute("rsMentor") == null && request.getAttribute("rsPost") == null) { %>
+        <%ResultSet rsCourses = (ResultSet)request.getAttribute("rsCourse");%>
+        
+            <section class="items-grid section custom-padding">
+                <div class="container">
+                    <div class="single-head">
+                        <div class="row">
+                            <% while(rsCourses.next()) {%>
+
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
+                                    <div class="image"> <!--ảnh course-->
+                                        <!--Click vào ảnh cũng giống như click vào phần details -->
+                                        <a href="CourseController?service=details&course_id=<%=rsCourses.getInt(1)%>" class="thumbnail">
+                                            <img height="218px" src="<%=rsCourses.getString(6)%>" alt="#">
+                                        </a>
+                                        <div class="author">
+                                            <div class="author-image">    <!--ảnh mentor-->
+                                                <a href="#">
+                                                    <img src="./assets/images/items-grid/author-1.jpg" alt="#">
+                                                <span>Mentor name</span>
+                                                </a>
+                                            </div>
+                                            <a href="#" class="sale"> Join to study </a>
+                                        </div>
+                                    </div>
+                                    <div class="content">
+                                        <div class="top-content">
+                                            <p><%=rsCourses.getString(4)%></p>
+                                            <a href="SubjectController?service=details&subject_id=<%=rsCourses.getInt(11)%>">
+                                                <h4 class="title">Môn học: <%=rsCourses.getString(12)%>  </h4>
+                                            </a>
+                                            <p class="update-time"><i class="lni lni-timer"></i> Ngày update gần nhất:  <%=rsCourses.getString(9)%></p>
+                                            <ul class="rating">
+                                                <li>Số người tham gia (<%=rsCourses.getInt(8)%>)</li>
+                                            </ul>
+                                            <ul class="info-list">
+                                                <li><i class="lni lni-timer"></i> Ngày đăng khóa học: <%=rsCourses.getString(9)%></li>
+                                            </ul>
+                                        </div>
+                                        <div class="bottom-content">
+                                            <a href="CourseController?service=details&course_id=<%=rsCourses.getInt(1)%>" class="btn btn-block btn-primary">Details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        <%} else if(request.getAttribute("rsCourse") == null && request.getAttribute("rsMentor") != null && request.getAttribute("rsPost") == null) { %>
+        <%ResultSet rsMentorS = (ResultSet)request.getAttribute("rsMentor");%>
+        
+            <section class="items-grid section custom-padding">
+        <div class="container">
+            <div class="single-head">
+                <div class="row">
+                    <% while (rsMentorS.next()) { %>
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
+                            <div class="image"> <!--ảnh mentor-->
+                                <a href="#" class="thumbnail">
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6WsN6dLPa3HAHXNM3Pgy2k1TIe5c80AJ3sg&usqp=CAU" alt="#">
+                                </a>
+                                <div class="author">
+                                    <a href="#" class="sale"> Details </a>
+                                </div>
+                            </div>
+                            <div class="content">
+                                <div class="top-content">
+                                    <p>Full name: <Strong><%=rsMentorS.getString(5)%></Strong></p>
+                                    <h5 class="title"><strong><%=rsMentorS.getString(7)%></strong> </h5>
+                                    <p>Ngày sinh: <strong> <%=rsMentorS.getString(10)%></strong></p>
+                                    <ul class="info-list">
+                                        <li><i class="fa-solid fa-sparkles"></i> Chuyên môn: <strong> <%=rsMentorS.getString(11)%> </strong></li>
+                                    </ul>
+                                    <p>Trình độ chuyên môn: <strong> <%=rsMentorS.getString(11)%></strong></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </section>
+        <%} else if(request.getAttribute("rsCourse") == null && request.getAttribute("rsMentor") == null && request.getAttribute("rsPost") != null) { %>
+        <%ResultSet rsPosts = (ResultSet)request.getAttribute("rsPost");%>
+        
+            <section class="items-grid section custom-padding">
+                <div class="container">
+                    <div class="single-head">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <!-- Start Single Grid -->
+                                <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
+                                    <div class="image"> <!--ảnh course-->
+                                        <!--Click vào ảnh cũng giống như click vào phần details -->
+                                        <a href="#" class="thumbnail"><img src="../assets/images/items-grid/img1.jpg" alt="#"></a>
+                                        <div class="author">
+                                            <div class="author-image">    <!--ảnh mentor-->
+                                                <img src="../assets/images/items-grid/author-1.jpg" alt="#">
+                                                <span>Mentor name</span></a>
+                                            </div>
+                                            <a href="#" class="sale"> Join to study </a>
+                                        </div>
+                                    </div>
+                                    <div class="content">
+                                        <div class="top-content">
+                                            <p>Subject name</p>
+                                            <h3 class="title"> Course Name </h3>
+                                            <p class="update-time">Ngày update gần nhất</p>
+                                            <ul class="rating">
+                                                <li>số người joined (35)</a></li>
+                                            </ul>
+                                            <ul class="info-list">
+                                                <li><i class="lni lni-timer"></i> Ngày đăng khóa học</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="bottom-content">
+                                            <a href="#" class="btn btn-block btn-primary">Details</a>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        <%}%>
+        
+    <% } %>
     
     
     <!-- /End Why Choose Area -->
