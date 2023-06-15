@@ -180,10 +180,12 @@ CREATE TABLE Post (
 	[image] [nvarchar] (250) not null,
 	[content] [nvarchar] (max) not null,
 	[short_content] [nvarchar] (250) not null,
-	status BIT not null DEFAULT 0
+	status NVARCHAR(20) DEFAULT 'pending',
 	
 )
 
+ALTER TABLE Post
+ADD status NVARCHAR(20) DEFAULT 'pending'
 ---------------------------------------------------------------add
 --add role	
 INSERT INTO Role(role_id,role_name) VALUES(1,'admin')
@@ -388,3 +390,23 @@ INSERT INTO [dbo].[Slider]([slider_url],[content],[isShow],[subject_id])
 INSERT INTO [dbo].[Slider]([slider_url],[content],[isShow],[subject_id])
      VALUES('6.png','Python language quiz now',1,6)
 GO
+
+--trigger rằng buộc khi insert hoặc update status phải là 1 trong 3 cái kia
+CREATE TRIGGER CheckStatusTrigger
+ON Post
+AFTER INSERT, UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    IF EXISTS (
+        SELECT *
+        FROM inserted
+        WHERE status NOT IN ('pending', 'approved', 'rejected')
+    )
+    BEGIN
+        RAISERROR ('Invalid status value. Allowed values are "pending", "approved", or "rejected".', 16, 1);
+        ROLLBACK TRANSACTION;
+        RETURN;
+    END;
+END;
