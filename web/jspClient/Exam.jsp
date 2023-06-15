@@ -54,16 +54,15 @@
         
         <div class="container exam">
             <div class="content_exam">
-                <form action="CourseController" method="get" onsubmit="openResult(e)">
+                <form action="CourseController" method="post">
                     <input type="hidden" name="service" value="result">
                     <input type="hidden" name="id" value="<%=id%>">
                     <%for (Question question : listQuestion) {%>
                     <div style="margin-bottom: 12px">
-                        <p class="question"><%=question.getQuestion_name()%></p>
+                        <p style="margin-bottom: 8px" class="question"><%=question.getQuestion_id()%>. <%=question.getQuestion_name()%></p>
                         <%for (Answer answer : listAnswer) {
                             if(answer.getQuestion_id() == question.getQuestion_id()) {%> 
-                            <span id="icon"></span>
-                            <input id="<%=answer.getAnswer_id()%>" class="<%=question.getQuestion_id()%>" name="question<%=question.getQuestion_id()%>" type="radio" value="<%=answer.getIs_correct()%>_<%=answer.getAnswer_id()%>" onclick="handleClick(className)"/>
+                            <input style="margin-bottom:8px" id="<%=answer.getAnswer_id()%>" class="<%=question.getQuestion_id()%>" name="question<%=question.getQuestion_id()%>" type="radio" value="<%=answer.getIs_correct()%>_<%=answer.getAnswer_id()%>" onclick="handleClick(className)"/>
                             <label for="<%=answer.getAnswer_id()%>"><%=answer.getAnswer_name()%></label><br>
                             <input type="hidden" name="answer<%=answer.getAnswer_id()%>" value="<%=answer.getAnswer_id()%>" >
                             <%}
@@ -71,7 +70,7 @@
                     </div>
                     <%}%>
                     <div class="bottom-content">
-                        <input id="submit" class="btn btn-block btn-primary" type="submit" value="Nộp bài">
+                        <input id="submit" class="btn btn-block btn-primary" type="submit" value="Submit">
                     </div>
                 </form>
             </div>
@@ -130,24 +129,6 @@
             
             function handleClick(className) {
                 document.getElementById('question' + className).classList.add('forcus');
-            }
-
-            function openResult(e) {
-                e.preventDefault();
-                document.querySelector('.modal').classList.add('open');
-            }
-            
-            document.getElementById('submit').onclick = function () {
-                   <%for (Answer answer : listAnswer) {%>
-                        values = document.getElementById('<%=answer.getAnswer_id()%>');
-                        for (var i = 0; i < values.length; i++) {
-                            if(values[i].checked === true && values[i].value === "1") {
-                                document.getElementById('icon').innerHTML = `<i class="fas fa-check-circle"></i>`;
-                            } else {
-                                document.getElementById('icon').innerHTML = `<i class="fas fa-times-circle"></i>`;
-                            }    
-                        }
-                   <%}%>
             }
             
         </script>

@@ -53,20 +53,20 @@
         <div class="container" style="margin-bottom: 100px">
             <%for (Question question : listQuestion) {%>
             <div style="margin-bottom: 12px">
-                <p><%=question.getQuestion_name()%></p>
+                <p style="margin-bottom: 8px"><%=question.getQuestion_id()%>. <%=question.getQuestion_name()%></p>
                 <%for (Answer answer : listAnswer) {
                     if(answer.getQuestion_id() == question.getQuestion_id()) {
                         if(answer.getIs_correct() == 1) {%>
-                        <input type="radio" checked /><%=answer.getAnswer_name()%><br>
+                        <input style="margin-bottom:8px" type="radio" checked /><%=answer.getAnswer_name()%><br>
                         <%} else {%>
-                        <input type="radio" disabled /><%=answer.getAnswer_name()%><br>
+                        <input style="margin-bottom:8px" type="radio" disabled /><%=answer.getAnswer_name()%><br>
                         <%}
                         }
                 }%>
             </div>
             <%}%>
             <div class="bottom-content">
-                <a href="CourseController?service=exam&id=<%=id%>" class="btn btn-block btn-primary">Kiểm tra</a>
+                <a href="CourseController?service=exam&id=<%=id%>" class="btn btn-block btn-primary">Exam</a>
             </div>
         </div>
         

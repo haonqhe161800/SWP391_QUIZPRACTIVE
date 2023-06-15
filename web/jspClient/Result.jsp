@@ -7,13 +7,15 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.Vector"%>
 <%@page import="Entities.Question"%>
-<%@page import="Entities.Answer"%>
 <%@page import="Entities.Exam_details"%>
+<%@page import="Entities.Exam_results"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" href="./assets/css/result.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     </head>
     <body>
         
@@ -22,8 +24,8 @@
         String status = (String) request.getAttribute("status");
         String nameCourse = (String) request.getAttribute("nameCourse");
         Vector<Question> listQuestion = (Vector<Question>) request.getAttribute("listQuestion");
-        Vector<Answer> listAnswer = (Vector<Answer>) request.getAttribute("listAnswer");
-        Vector<Exam_details> listEd = (Vector<Exam_details>) request.getAttribute("listEd");
+        Vector<Exam_results> listEr = (Vector<Exam_results>) request.getAttribute("er");
+        int id = (int) request.getAttribute("id");
         %>
         
         <div style="margin-bottom: 150px ">
@@ -34,38 +36,39 @@
             <h2><%=nameCourse%></h2>
         </div>
         
-        <div>
+        <div class="result_detail">
             <div>
-                <p><%=grade%>%</p>
-                <p><%=status%></p>                
+                <div style="margin-bottom: 12px">
+                    <p class="result_detail_status"><%=status%></p> 
+                </div>
+                <div class="result_detail_grade">
+                    <p>Grade received <span style="color: green"><%=grade%>%</span></p>
+                    <p>To pass 50% or higher</p>
+                </div>
             </div>
         </div>
         
-        <div class="container exam">
+        <div style="padding: 0 400px; margin-bottom: 20px">
             <div class="content_exam">
-                <form action="CourseController" method="get" onsubmit="openResult(e)">
-                    <input type="hidden" name="service" value="result">
-                    <input type="hidden" name="id" value="<%=id%>">
-                    <%for (Question question : listQuestion) {%>
+                <%for (Question question : listQuestion) {%>
                     <div style="margin-bottom: 12px">
-                        <p class="question"><%=question.getQuestion_name()%></p>
-                          <%for (Exam_details ed : listEd) {
-                                for(Answer answer : listAnswer) {
-                                    if(answer.getQuestion_id() == question.getQuestion_id()) {
-                                        if(answer.getAnswer_id() == ed.getQuestion_id()) {%>
-                                            <input type="radio" checked><%=answer.getAnswer_name()%>
-                                        <%} else {%>
-                                            <input type="radio"><%=answer.getAnswer_name()%>
-                                        <%}
-                                    }
-                                }
-                            }%>
+                        <p style="margin-bottom: 8px"><%=question.getQuestion_id()%>. <%=question.getQuestion_name()%></p>
+                         <%for (Exam_results er : listEr) {
+                            if(er.getQuestion_id() == question.getQuestion_id()) {
+                                if(er.getAnswer_choose() == er.getAnswer_id()) {%>
+                                <span class="icon" id="icon_<%=er.getAnswer_id()%>"></span>
+                                <input style="margin-bottom:8px" class="result" value="<%=er.getIs_correct()%>" type="radio" checked><span style="margin-left: 4px"><%=er.getAnswer_name()%></span><br>
+                                <%} else {%>
+                                <span id="icon_<%=er.getAnswer_id()%>"></span>
+                                <input style="margin-bottom:8px" class="result" value="<%=er.getIs_correct()%>" type="radio"><span style="margin-left: 4px"><%=er.getAnswer_name()%></span><br>
+                                <%}
+                            }
+                        }%>
                     </div>
-                    <%}%>
-                    <div class="bottom-content">
-                        <input id="submit" class="btn btn-block btn-primary" type="submit" value="Nộp bài">
-                    </div>
-                </form>
+              <%}%>
+                <div class="bottom-content">
+                    <a href="CourseController?service=exam&id=<%=id%>" class="btn btn-block btn-primary">Try again</a>
+                </div>
             </div>
         </div>   
             
@@ -80,6 +83,7 @@
         <script src="./assets/js/tiny-slider.js"></script>
         <script src="./assets/js/glightbox.min.js"></script>
         <script src="./assets/js/main.js"></script>
+        <script src="./assets/js/result.js"></script>
         <script>
             
             tns({
@@ -110,10 +114,6 @@
                     }
                 }
             });
-            
-            function handleClick(className) {
-                document.getElementById('question' + className).classList.add('forcus');
-            }
             
             
         </script>

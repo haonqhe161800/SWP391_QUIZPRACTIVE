@@ -8,13 +8,16 @@ import DAO.DAOAnswer;
 import DAO.DAOCourse;
 import DAO.DAOErrol;
 import DAO.DAOExam_details;
+import DAO.DAOExam_results;
 import DAO.DAOQuestion;
 import DAO.DAOResultTest;
 import Entities.AccountUser;
 import Entities.Answer;
 import Entities.Course;
 import Entities.Exam_details;
+import Entities.Exam_results;
 import Entities.Question;
+import Entities.ResultTest;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -57,6 +60,7 @@ public class CourseController extends HttpServlet {
             DAOAnswer daoAnswer = new DAOAnswer();
             DAOResultTest daoResultTest = new DAOResultTest();
             DAOExam_details daoEd = new DAOExam_details();
+            DAOExam_results daoEr = new DAOExam_results();
 
             String service = request.getParameter("service");
 
@@ -155,19 +159,23 @@ public class CourseController extends HttpServlet {
                 String nameCourse = "";
                 ResultSet rsCourse = daoCourse.getData("select * from Course where course_id = " + id);
                 Vector<Answer> listAnswer = daoAnswer.getAll("select * from Answer");
+                ResultSet listEd = daoEd.getData("select * from Exam_details where course_id = " + id + " and user_id = " + au.getUser_id());
+                ResultSet listRt = daoResultTest.getData("select * from Result_test where course_id = " + id + " and user_id = " + au.getUser_id());
+                if(listEd.next()) {
+                    daoEd.removeExamdetails(au.getUser_id(), id);
+                    daoResultTest.removeResultTest(au.getUser_id(), id);
+                }
                 if (rsCourse.next()) {
                     nameCourse = rsCourse.getString(4);
                 }
-                
-                
                 for (Question question : listQuestion) {
                     for (Answer answer : listAnswer) {
                         String getIs_correct = request.getParameter("question" + question.getQuestion_id());
                         if(getIs_correct == null) {
                             getIs_correct = "0_n";
                         }
-                        String is_correct_raw = getIs_correct.substring(0, 1);
-                        String is_choose_raw = getIs_correct.substring(2, 3);
+                        String is_correct_raw = getIs_correct.split("_")[0];
+                        String is_choose_raw = getIs_correct.split("_")[1];
                         int is_correct = Integer.parseInt(is_correct_raw);
                         answerCheck.add(is_correct);
                         String answer_choose = request.getParameter("answer" + answer.getAnswer_id());
@@ -192,16 +200,19 @@ public class CourseController extends HttpServlet {
                 double score = (double) count / (double) answerCheck.size();
                 double grade = ((double) Math.round(score * 100) / 100) * 100;
                 String stauts = "";
+                String statusDB = "";
                 if (grade < 50) {
-                    stauts = "Not pass";
+                    stauts = "Sorry! You failed!";
+                    statusDB = "falied";
                 } else {
-                    stauts = "Passed";
+                    stauts = "Congratulations! You passed!";
+                    statusDB = "pass";
                 }
-                Vector<Exam_details> listEd = daoEd.getAll("select * from Exam_details where user_id = " + au.getUser_id() + " and course_id = " + id);
-//                ResultTest restultTest = new ResultTest(id, au.getUser_id(), stauts, grade);
-//                daoResultTest.addResultTest(restultTest);
-//                request.setAttribute("id", id);
-                request.setAttribute("listEd", listEd);
+                Vector<Exam_results> er = daoEr.getAll("select a.question_id, ed.answer_choose, a.answer_id, a.is_correct, a.answer_name from Exam_details ed join Answer a on ed.question_id = a.question_id");
+                ResultTest restultTest = new ResultTest(au.getUser_id(), id, statusDB, grade);
+                daoResultTest.addResultTest(restultTest);
+                request.setAttribute("id", id);
+                request.setAttribute("er", er);
                 request.setAttribute("nameCourse", nameCourse);
                 request.setAttribute("listQuestion", listQuestion);
                 request.setAttribute("listAnswer", listAnswer);

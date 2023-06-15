@@ -8,6 +8,7 @@ import Entities.Exam_details;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Vector;
 import module.DBConnect;
 
@@ -51,5 +52,17 @@ public class DAOExam_details extends DBConnect {
             ex.printStackTrace();
         }
         return vector;
+    }
+    
+    public int removeExamdetails (int user_id, int course_id) {
+        int n = 0;
+        String sql = "delete from Exam_details where user_id = " + user_id + " and course_id = " + course_id;
+        try {
+            Statement statement = conn.createStatement();
+            n = statement.executeUpdate(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return n;
     }
 }
