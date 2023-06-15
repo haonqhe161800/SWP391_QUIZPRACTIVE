@@ -36,10 +36,7 @@
         <servlet-name>ControllDashboardMarketer</servlet-name>
         <servlet-class>Controller.Marketer.ControllDashboardMarketer</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>ChangePasswordController</servlet-name>
-        <servlet-class>Controller.ChangePasswordController</servlet-class>
-    </servlet>
+  
     <servlet-mapping>
         <servlet-name>ControllBlogList</servlet-name>
         <url-pattern>/listpost</url-pattern>
@@ -76,10 +73,7 @@
         <servlet-name>ControllDashboardMarketer</servlet-name>
         <url-pattern>/dashboardmarketer</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ChangePasswordController</servlet-name>
-        <url-pattern>/ChangePassword</url-pattern>
-    </servlet-mapping>
+ 
     <session-config>
         <session-timeout>
             30
