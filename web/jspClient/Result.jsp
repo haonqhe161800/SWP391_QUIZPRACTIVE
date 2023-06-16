@@ -49,16 +49,19 @@
         
         <div style="padding: 0 400px; margin-bottom: 20px">
             <div class="content_exam">
-                <%for (Question question : listQuestion) {%>
+                    <%int i = 0, j = 0;
+                    for (Question question : listQuestion) {
+                        j++;%>
                     <div style="margin-bottom: 12px">
-                        <p style="margin-bottom: 8px"><%=question.getQuestion_id()%>. <%=question.getQuestion_name()%></p>
+                        <p style="margin-bottom: 8px"><%=j%>. <%=question.getQuestion_name()%></p>
                          <%for (Exam_results er : listEr) {
+                            i++;
                             if(er.getQuestion_id() == question.getQuestion_id()) {
                                 if(er.getAnswer_choose() == er.getAnswer_id()) {%>
-                                <span class="icon" id="icon_<%=er.getAnswer_id()%>"></span>
+                                <span class="icon" id="icon_<%=i%>"></span>
                                 <input style="margin-bottom:8px" class="result" value="<%=er.getIs_correct()%>" type="radio" checked><span style="margin-left: 4px"><%=er.getAnswer_name()%></span><br>
                                 <%} else {%>
-                                <span id="icon_<%=er.getAnswer_id()%>"></span>
+                                <span id="icon_<%=i%>"></span>
                                 <input style="margin-bottom:8px" class="result" value="<%=er.getIs_correct()%>" type="radio"><span style="margin-left: 4px"><%=er.getAnswer_name()%></span><br>
                                 <%}
                             }

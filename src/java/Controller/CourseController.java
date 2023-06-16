@@ -120,8 +120,11 @@ public class CourseController extends HttpServlet {
 
             if (service.equals("learning")) {
                 int id = Integer.parseInt(request.getParameter("id"));
+                HttpSession session = request.getSession();
+                AccountUser au = (AccountUser) session.getAttribute("accountUser");
                 String nameCourse = "";
                 ResultSet rsCourse = daoCourse.getData("select * from Course where course_id = " + id);
+                ResultSet listEd = daoEd.getData("select * from Exam_details where course_id = " + id + " and user_id = " + au.getUser_id());
                 if (rsCourse.next()) {
                     nameCourse = rsCourse.getString(4);
                 }
@@ -131,6 +134,7 @@ public class CourseController extends HttpServlet {
                 request.setAttribute("nameCourse", nameCourse);
                 request.setAttribute("listQuestion", listQuestion);
                 request.setAttribute("listAnswer", listAnswer);
+                request.setAttribute("listEd", listEd);
                 request.getRequestDispatcher("jspClient/Learning.jsp").forward(request, response);
             }
 
@@ -151,7 +155,6 @@ public class CourseController extends HttpServlet {
                 Vector<Question> listQuestion = daoQuestion.getAll("select * from Question where course_id = " + id);
                 Vector<Answer> listAnswer = daoAnswer.getAll("select * from Answer");
                 request.setAttribute("id", id);
-                request.setAttribute("listEd", listEd);
                 request.setAttribute("nameCourse", nameCourse);
                 request.setAttribute("listQuestion", listQuestion);
                 request.setAttribute("listAnswer", listAnswer);
@@ -207,16 +210,13 @@ public class CourseController extends HttpServlet {
                 double score = (double) count / (double) answerCheck.size();
                 double grade = ((double) Math.round(score * 100) / 100) * 100;
                 String stauts = "";
-                String statusDB = "";
                 if (grade < 50) {
                     stauts = "Sorry! You failed!";
-                    statusDB = "falied";
                 } else {
                     stauts = "Congratulations! You passed!";
-                    statusDB = "pass";
                 }
                 Vector<Exam_results> er = daoEr.getAll("select a.question_id, ed.answer_choose, a.answer_id, a.is_correct, a.answer_name from Exam_details ed join Answer a on ed.question_id = a.question_id where ed.user_id = " + au.getUser_id() + " and ed.course_id = " + id);
-                ResultTest restultTest = new ResultTest(au.getUser_id(), id, statusDB, grade);
+                ResultTest restultTest = new ResultTest(au.getUser_id(), id, stauts, grade);
                 daoResultTest.addResultTest(restultTest);
                 request.setAttribute("id", id);
                 request.setAttribute("er", er);

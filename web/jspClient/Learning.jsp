@@ -40,6 +40,7 @@
         Vector<Question> listQuestion = (Vector<Question>) request.getAttribute("listQuestion");
         Vector<Answer> listAnswer = (Vector<Answer>) request.getAttribute("listAnswer");
         String nameCourse = (String) request.getAttribute("nameCourse");
+        ResultSet listEd = (ResultSet) request.getAttribute("listEd");
         int id = (int) request.getAttribute("id");
         %>
         
@@ -67,7 +68,7 @@
             </div>
             <%}%>
             
-            <%if(request.getAttribute("listQuestion") == null) {%>
+            <%if(!listEd.next()) {%>
             <div class="bottom-content">
                 <a href="CourseController?service=exam&id=<%=id%>" class="btn btn-block btn-primary">Exam</a>
             </div>

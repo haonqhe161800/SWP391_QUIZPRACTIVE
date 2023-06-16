@@ -57,9 +57,11 @@
                 <form action="CourseController" method="post">
                     <input type="hidden" name="service" value="result">
                     <input type="hidden" name="id" value="<%=id%>">
-                    <%for (Question question : listQuestion) {%>
+                    <%int = 0;
+                    for (Question question : listQuestion) {
+                        i++;%>
                     <div style="margin-bottom: 12px">
-                        <p style="margin-bottom: 8px" class="question"><%=question.getQuestion_id()%>. <%=question.getQuestion_name()%></p>
+                        <p style="margin-bottom: 8px" class="question"><%=i%>. <%=question.getQuestion_name()%></p>
                         <%for (Answer answer : listAnswer) {
                             if(answer.getQuestion_id() == question.getQuestion_id()) {%> 
                             <input style="margin-bottom:8px" id="<%=answer.getAnswer_id()%>" class="<%=question.getQuestion_id()%>" name="question<%=question.getQuestion_id()%>" type="radio" value="<%=answer.getIs_correct()%>_<%=answer.getAnswer_id()%>" onclick="handleClick(className)"/>
