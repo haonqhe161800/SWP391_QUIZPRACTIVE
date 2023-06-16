@@ -57,7 +57,7 @@
                 <form action="CourseController" method="post">
                     <input type="hidden" name="service" value="result">
                     <input type="hidden" name="id" value="<%=id%>">
-                    <%int = 0;
+                    <%int i = 0;
                     for (Question question : listQuestion) {
                         i++;%>
                     <div style="margin-bottom: 12px">
