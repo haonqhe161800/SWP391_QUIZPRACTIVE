@@ -48,6 +48,7 @@ CREATE TABLE [Subject] (
 	[subject_name] [nvarchar] (250) not null,
 	[image] [nvarchar] (250),
 	-----Add-------
+	[title] [nvarchar] (max)
 	[status] [BIT] not null DEFAULT 0,
 	[description] [nvarchar] (max)
 )
@@ -223,13 +224,13 @@ INSERT INTO [dbo].[Mentor_type]
      VALUES
            ('TranQuyBan@gmail.com','12345','BanKelly','QuyTran',N'Việt Nam','1990-01-01',0,2)
 	
-insert into [Subject] ([subject_name], [image], [status], [description]) 
-	values ('C', './assets/images/categories/C.png', 0, N'C - Ngôn ngữ cơ bản cho người mới bắt đầu', 'Hiểu và áp dụng những kiến thức nền tảng cần thiết cho developer'),
-							 ('C++', './assets/images/categories/C++.png',0, N'C++ - Ngôn ngữ cơ bản cho người mới bắt đầu', 'Hiểu và áp dụng những kiến thức nền tảng cần thiết cho developer'),
-							 ('C#', './assets/images/categories/CSharp.png' ,0, N'C# - Ngôn ngữ cơ bản cho người mới bắt đầu', 'Hiểu và áp dụng những kiến thức nền tảng cần thiết cho developer'),
-							 ('Java', './assets/images/categories/Java.png',0, N'Java - Ngôn ngữ cơ bản cho người mới bắt đầu', 'Hiểu và áp dụng những kiến thức nền tảng cần thiết cho developer'),
-							 ('Javascript', './assets/images/categories/Javascript.png',0, N'Javascript - Ngôn ngữ cơ bản cho người mới bắt đầu', 'Hiểu và áp dụng những kiến thức nền tảng cần thiết cho developer'),
-							 ('Python', './assets/images/categories/Python.png',0, N'Python - Ngôn ngữ cơ bản cho người mới bắt đầu', 'Hiểu và áp dụng những kiến thức nền tảng cần thiết cho developer')
+insert into [Subject] ([subject_name], [image], [status], [title], [description]) 
+	values ('C', './assets/images/categories/C.png', 0, N'C - Ngôn ngữ cơ bản cho người mới bắt đầu', N'Hiểu và áp dụng những kiến thức nền tảng cần thiết cho developer'),
+							 ('C++', './assets/images/categories/C++.png',0, N'C++ - Ngôn ngữ cơ bản cho người mới bắt đầu', N'Hiểu và áp dụng những kiến thức nền tảng cần thiết cho developer'),
+							 ('C#', './assets/images/categories/CSharp.png' ,0, N'C# - Ngôn ngữ cơ bản cho người mới bắt đầu', N'Hiểu và áp dụng những kiến thức nền tảng cần thiết cho developer'),
+							 ('Java', './assets/images/categories/Java.png',0, N'Java - Ngôn ngữ cơ bản cho người mới bắt đầu', N'Hiểu và áp dụng những kiến thức nền tảng cần thiết cho developer'),
+							 ('Javascript', './assets/images/categories/Javascript.png',0, N'Javascript - Ngôn ngữ cơ bản cho người mới bắt đầu', N'Hiểu và áp dụng những kiến thức nền tảng cần thiết cho developer'),
+							 ('Python', './assets/images/categories/Python.png',0, N'Python - Ngôn ngữ cơ bản cho người mới bắt đầu', N'Hiểu và áp dụng những kiến thức nền tảng cần thiết cho developer')
 
 insert into [Course]([subject_id], [course_name], [description], [image], [is_publish], [created_date]) values (1, N'Khóa học C cơ bản cho người mới bắt đầu', N'Khóa học C cơ bản giúp các bạn nắm chắc những kiến thức cơ bản của lập trình nói chung và lập trình C nói riêng để các bạn có nền tảng vững chắc để chinh phục con đường trở thành một lập trình viên', './assets/images/categories/CourseC(1).png', 0, '24/05/2023'),
 													       (1, N'Lập trình C từ cơ bản đến nâng cao', N'Khóa học lập trình C từ cơ bản tới nâng cao dành cho người mới bắt đầu. Mục tiêu của khóa học này nhằm giúp các bạn nắm được các khái niệm căn cơ của lập trình, giúp các bạn có nền tảng vững chắc để chinh phục con đường trở thành một lập trình viên.', './assets/images/categories/CourseC(2).png', 0, '24/05/2023')
