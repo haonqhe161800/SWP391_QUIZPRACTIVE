@@ -37,18 +37,20 @@ public class Login extends HttpServlet {
 
         String email = null;
         String pass = null;
-
-        for (Cookie cooky : cookies) {
-            if (cooky.getName().equals("cemail")) {
-                email = cooky.getValue();
-            }
-            if (cooky.getName().equals("cpass")) {
-                pass = cooky.getValue();
-            }
-            if (email != null && pass != null) {
-                break;
+        if (cookies != null) {
+            for (Cookie cooky : cookies) {
+                if (cooky.getName().equals("cemail")) {
+                    email = cooky.getValue();
+                }
+                if (cooky.getName().equals("cpass")) {
+                    pass = cooky.getValue();
+                }
+                if (email != null && pass != null) {
+                    break;
+                }
             }
         }
+
         if (email != null && pass != null) {
             HttpSession session = request.getSession();
             DAOUser dudb = new DAOUser();
@@ -148,7 +150,6 @@ public class Login extends HttpServlet {
         }
     }
 
-   
     @Override
     public String getServletInfo() {
         return "Short description";

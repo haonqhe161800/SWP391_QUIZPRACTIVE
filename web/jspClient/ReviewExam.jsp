@@ -8,6 +8,7 @@
 <%@page import="java.util.Vector"%>
 <%@page import="Entities.Question"%>
 <%@page import="Entities.Exam_results"%>
+<%@page import="Entities.ResultTest"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -19,8 +20,7 @@
     <body>
         
         <%
-        double grade = (double) request.getAttribute("grade");
-        String status = (String) request.getAttribute("status");
+        ResultTest rt = (ResultTest) request.getAttribute("rt");
         String nameCourse = (String) request.getAttribute("nameCourse");
         Vector<Question> listQuestion = (Vector<Question>) request.getAttribute("listQuestion");
         Vector<Exam_results> listEr = (Vector<Exam_results>) request.getAttribute("er");
@@ -38,10 +38,10 @@
         <div class="result_detail">
             <div>
                 <div style="margin-bottom: 12px">
-                    <p class="result_detail_status"><%=status%></p> 
+                    <p class="result_detail_status"><%=rt.getStatus()%></p> 
                 </div>
                 <div class="result_detail_grade">
-                    <p>Grade received <span style="color: green"><%=grade%>%</span></p>
+                    <p>Grade received <span style="color: green"><%=rt.getGrade()%>%</span></p>
                     <p>To pass 50% or higher</p>
                 </div>
             </div>
@@ -61,7 +61,7 @@
                                 <span class="icon" id="icon_<%=i%>"></span>
                                 <input style="margin-bottom:8px" class="result" value="<%=er.getIs_correct()%>" type="radio" checked><span style="margin-left: 4px"><%=er.getAnswer_name()%></span><br>
                                 <%} else {%>
-                                <span id="icon_<%=i%>"></span>
+                                <span id="icon_<%=er.getAnswer_id()%>"></span>
                                 <input style="margin-bottom:8px" class="result" value="<%=er.getIs_correct()%>" type="radio"><span style="margin-left: 4px"><%=er.getAnswer_name()%></span><br>
                                 <%}
                             }

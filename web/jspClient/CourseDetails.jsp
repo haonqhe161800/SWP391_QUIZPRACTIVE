@@ -41,7 +41,7 @@
 
         <div style="margin-bottom: 150px ">
             <jsp:include page="Header.jsp"></jsp:include>
-            </div>
+        </div>
 
 
             <div class="container table">
@@ -74,7 +74,7 @@
                         <%}%>
                         <%if(errol != 0) {%>   
                             <div class="bottom-content">
-                                <a href="CourseController?service=learning&id=<%=rsCourse.getInt(1)%>" class="btn btn-block btn-primary">Học</a>
+                                <a href="CourseController?service=learning&id=<%=rsCourse.getInt(1)%>" class="btn btn-block btn-primary">Learn</a>
                             </div>
                         <%}%>
                     </div>
@@ -86,7 +86,7 @@
             
         <% ResultSet rsRelCourse = (ResultSet) request.getAttribute("rsRelCourse");%>
             <!--Related course-->
-            <section class="items-grid section custom-padding" style="padding-top: 250px">
+            <section class="items-grid section custom-padding" >
         <div class="container">
             <div class="row">
                 <div class="col-12">
