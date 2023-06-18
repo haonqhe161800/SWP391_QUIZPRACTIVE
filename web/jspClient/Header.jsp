@@ -1,5 +1,4 @@
 <!-- Start Header Area -->
-<%@page import="Entities.AccountAdmin"%>
 <%@page import="Entities.AccountUser"%> 
 <%@page import="Entities.AccountMarketer"%> 
 <%@page import="Entities.AccountMentor"%> 

@@ -5,9 +5,11 @@
 package DAO;
 
 import Entities.AccountUser;
+import Entities.Course;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Vector;
 import module.DBConnect;
 
 public class DAOUser extends DBConnect {
@@ -171,6 +173,34 @@ public class DAOUser extends DBConnect {
         } catch (SQLException e) {
             System.out.println(e);
         }
+    }
+    
+    public Vector<AccountUser> getAll(String sql) {
+        Vector<AccountUser> vector = new Vector<AccountUser>();
+        ResultSet rs = this.getData(sql);
+        try {
+            while (rs.next()) {
+                int user_id = rs.getInt(1);
+                String email = rs.getString(2);
+                String password = rs.getString(3);
+                String descyourself = rs.getString(4);
+                String fullName = rs.getString(5);
+                String image = rs.getString(6);
+                String display_name = rs.getString(7);
+                String created_date = rs.getString(8);
+                String address = rs.getString(9);
+                String dob = rs.getString(10);
+                String academiclevel = rs.getString(11);
+                String modify_date = rs.getString(12);
+                int gender = rs.getInt(13);
+                int role_id = rs.getInt(14);
+                AccountUser au = new AccountUser(user_id, email, password, descyourself, fullName, image, display_name, created_date, address, dob, academiclevel, modify_date, gender, role_id);
+                vector.add(au);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return vector;
     }
 
 

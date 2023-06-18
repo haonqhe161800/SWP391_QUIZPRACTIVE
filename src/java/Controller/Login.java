@@ -66,7 +66,7 @@ public class Login extends HttpServlet {
             if (aa != null && au == null && am == null && ame == null) {
                 session.setAttribute("accountAdmin", aa);
                 //tra ve Dashboard admin
-                response.sendRedirect("cbl");
+                response.sendRedirect("AdminController");
             } else if (am != null && au == null && ame == null && aa == null) {
                 session.setAttribute("accountMarketer", am);
                 //tra ve Dashboard marketing
@@ -131,7 +131,7 @@ public class Login extends HttpServlet {
         if (aa != null && au == null && am == null && ame == null) {
             session.setAttribute("accountAdmin", aa);
             //tra ve Dashboard admin
-            response.sendRedirect("HomeController");
+            response.sendRedirect("User");
         } else if (au != null && am == null && ame == null) {
             session.setAttribute("accountUser", au);
             //tra ve home
