@@ -5,6 +5,7 @@
 
 package Controller;
 
+import DAO.DAOSubject;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,6 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.ResultSet;
 
 /**
  *
@@ -31,16 +33,13 @@ public class Subject extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Subject</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Subject at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            DAOSubject dao = new DAOSubject();
+            ResultSet rsSubject = dao.getData("SELECT [Subject].subject_name, [Subject].subject_id, [Subject].[image], COUNT(Course.course_id) AS quantity_of_course\n"
+                        + "FROM Subject\n"
+                        + "LEFT JOIN Course ON Subject.subject_id = Course.subject_id\n"
+                        + "GROUP BY [Subject].subject_id,  [Subject].subject_name, [Subject].[image]");
+            request.setAttribute("rsSubject", rsSubject);
+            request.getRequestDispatcher("jspClient/HomeForAdmin.jsp").forward(request, response);
         }
     } 
 

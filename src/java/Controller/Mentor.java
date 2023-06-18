@@ -34,9 +34,25 @@ public class Mentor extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             DAOMentor dao = new DAOMentor();
-            ResultSet rsMentor = dao.getData("select * from Mentor_type");
-            request.setAttribute("rsMentor", rsMentor);
-            request.getRequestDispatcher("jspClient/HomeForAdmin.jsp").forward(request, response);
+            
+            String service = request.getParameter("service");
+            
+            if(service == null) {
+                service = "show";
+            }
+            
+            if(service.equals("show")) {
+                ResultSet rsMentor = dao.getData("select * from Mentor_type");
+                request.setAttribute("rsMentor", rsMentor);
+                request.getRequestDispatcher("jspClient/HomeForAdmin.jsp").forward(request, response);
+            }
+            
+            if(service.equals("search")) {
+                String name = request.getParameter("name");
+                ResultSet rsMentor = dao.getData("select * from Mentor_type where fullname like '%" + name + "%'");
+                request.setAttribute("rsMentor", rsMentor);
+                request.getRequestDispatcher("jspClient/HomeForAdmin.jsp").forward(request, response);
+            }
         }
     } 
 

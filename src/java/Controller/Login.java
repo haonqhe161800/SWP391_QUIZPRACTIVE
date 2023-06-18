@@ -66,7 +66,7 @@ public class Login extends HttpServlet {
             if (aa != null && au == null && am == null && ame == null) {
                 session.setAttribute("accountAdmin", aa);
                 //tra ve Dashboard admin
-                response.sendRedirect("AdminController");
+                response.sendRedirect("User");
             } else if (am != null && au == null && ame == null && aa == null) {
                 session.setAttribute("accountMarketer", am);
                 //tra ve Dashboard marketing

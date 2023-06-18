@@ -5,8 +5,6 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.util.*"%>
-<%@page import="Entities.AccountUser"%>
 <%@page import="java.sql.ResultSet"%>
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
@@ -52,10 +50,19 @@
         <jsp:include page="Sidebar.jsp"></jsp:include>
         
         <div class="content" style="margin-left: 50px; flex: 2">
-            <%if(request.getAttribute("listUser") != null) {
-                Vector<AccountUser> listUser = (Vector<AccountUser>) request.getAttribute("listUser");
+            <%if(request.getAttribute("rsUser") != null) {
+                ResultSet rsUser = (ResultSet) request.getAttribute("rsUser");
             %>
-            <h3>User list</h3>
+            <h3 style="margin-bottom: 12px">User list</h3>
+            <form method="post" action="User">
+                <input type="hidden" name="service" value="search">
+                <div style="display: flex">
+                    <input style="padding: 4px 4px; width: 300px; margin-right: 12px" type="text" name="name" placeholder="Enter user name need to search...">
+                    <div class="bottom-content">
+                        <input class="btn btn-block btn-primary" type="submit" value="Submit">
+                    </div>
+                </div>
+            </form>
             <table class="table">
                 <tr>
                     <th scope="col">ID</th>
@@ -66,20 +73,20 @@
                     <th scope="col">Address</th>
                 </tr>
                 
-               <%for (AccountUser accountUser : listUser) {%>
+               <%while(rsUser.next()) {%>
                 <tr>
-                    <td><%=accountUser.getUser_id()%></td>
-                    <td><%=accountUser.getFullName()%></td>
+                    <td><%=rsUser.getInt(1)%></td>
+                    <td><%=rsUser.getString(5)%></td>
                     <td>
-                        <%if(accountUser.getGender() == 1) {%>
+                        <%if(rsUser.getInt(13) == 1) {%>
                         <i class="fas fa-mars"></i>
                         <% } else { %>
                         <i class="fas fa-venus"></i>
                         <%}%>
                     </td>
-                    <td><%=accountUser.getEmail()%></td>
-                    <td><%=accountUser.getPassword()%></td>
-                    <td><%=accountUser.getAddress()%></td>
+                    <td><%=rsUser.getString(2)%></td>
+                    <td><%=rsUser.getString(3)%></td>
+                    <td><%=rsUser.getString(9)%></td>
                 </tr>
                <%}%>
             </table>
@@ -88,6 +95,16 @@
             <%if(request.getAttribute("rsMentor") != null) {
                 ResultSet rsMentor = (ResultSet) request.getAttribute("rsMentor");
             %>
+            <h3 style="margin-bottom: 12px">Mentor list</h3>
+            <form method="post" action="Mentor">
+                <input type="hidden" name="service" value="search">
+                <div style="display: flex">
+                    <input style="padding: 4px 4px; width: 300px; margin-right: 12px" type="text" name="name" placeholder="Enter mentor name need to search...">
+                    <div class="bottom-content">
+                        <input class="btn btn-block btn-primary" type="submit" value="Submit">
+                    </div>
+                </div>
+            </form>
             <table class="table">
                 <tr>
                     <th scope="col">ID</th>
@@ -120,6 +137,16 @@
             <%if(request.getAttribute("rsMarketer") != null) {
                 ResultSet rsMarketer = (ResultSet) request.getAttribute("rsMarketer");
             %>
+            <h3 style="margin-bottom: 12px">Marketer list</h3>
+            <form method="post" action="Marketer">
+                <input type="hidden" name="service" value="search">
+                <div style="display: flex">
+                    <input style="padding: 4px 4px; width: 300px; margin-right: 12px" type="text" name="name" placeholder="Enter nmarketer name need to search...">
+                    <div class="bottom-content">
+                        <input class="btn btn-block btn-primary" type="submit" value="Submit">
+                    </div>
+                </div>
+            </form>
             <table class="table">
                 <tr>
                     <th scope="col">ID</th>
@@ -144,6 +171,62 @@
                     <td><%=rsMarketer.getString(2)%></td>
                     <td><%=rsMarketer.getString(3)%></td>
                     <td><%=rsMarketer.getString(9)%></td>
+                </tr>
+               <%}%>
+            </table>
+            <%}%>
+            
+            <%if(request.getAttribute("rsSubject") != null) {
+                ResultSet rsSubject = (ResultSet) request.getAttribute("rsSubject");
+            %>
+            <h3 style="margin-bottom: 12px">Subject list</h3>
+            <form>
+                <div style="display: flex">
+                    <input style="padding: 4px 4px; width: 300px; margin-right: 12px" type="text" name="user" placeholder="Enter subject name need to search...">
+                    <div class="bottom-content">
+                        <input class="btn btn-block btn-primary" type="submit" value="Submit">
+                    </div>
+                </div>
+            </form>
+            <table class="table">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Number of courses</th>
+                </tr>
+                
+               <%while(rsSubject.next()) {%>
+                <tr>
+                    <td><%=rsSubject.getInt(2)%></td>
+                    <td><%=rsSubject.getString(1)%></td>
+                    <td><img style="width: 50px; height: 50px" src="<%=rsSubject.getString(3)%>"></td>
+                    <td><%=rsSubject.getInt(4)%></td>
+                </tr>
+               <%}%>
+            </table>
+            <%}%>
+            
+            <%if(request.getAttribute("rsCourse") != null) {
+                ResultSet rsCourse = (ResultSet) request.getAttribute("rsCourse");
+            %>
+            <h3 style="margin-bottom: 12px">Course list</h3>
+            <table class="table">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Subject name</th>
+                    <th scope="col">Course name</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Number of question</th>
+                </tr>
+                
+               <%while(rsCourse.next()) {%>
+                <tr>
+                    <td><%=rsCourse.getInt(1)%></td>
+                    <td><%=rsCourse.getString(2)%></td>
+                    <td><%=rsCourse.getString(3)%></td>
+                    <td><img style="width: 50px; height: 50px" src="<%=rsCourse.getString(4)%>"></td>
+                    <td><%=rsCourse.getInt(5)%></td>
                 </tr>
                <%}%>
             </table>

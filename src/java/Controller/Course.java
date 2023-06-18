@@ -5,6 +5,7 @@
 
 package Controller;
 
+import DAO.DAOCourse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,6 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.ResultSet;
 
 /**
  *
@@ -31,16 +33,10 @@ public class Course extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Course</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Course at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            DAOCourse dao = new DAOCourse();
+            ResultSet rsCourse = dao.getData("select c.course_id, s.subject_name, c.course_name, c.[image], Count(q.question_name) as number_of_questions from [Course] c join [Subject] s on c.subject_id = s.subject_id join Question q on q.course_id = c.course_id group by c.course_id, s.subject_name, c.course_name, c.[image]");
+            request.setAttribute("rsCourse", rsCourse);
+            request.getRequestDispatcher("jspClient/HomeForAdmin.jsp").forward(request, response);
         }
     } 
 

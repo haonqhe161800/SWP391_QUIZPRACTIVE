@@ -34,9 +34,25 @@ public class Marketer extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             DAOMarketer dao = new DAOMarketer();
-            ResultSet rsMarketer = dao.getData("select * from Marketer_type");
-            request.setAttribute("rsMarketer", rsMarketer);
-            request.getRequestDispatcher("jspClient/HomeForAdmin.jsp").forward(request, response);
+            
+            String service = request.getParameter("service");
+            
+            if(service == null) {
+                service = "show";
+            }
+            
+            if(service.equals("show")) {
+                ResultSet rsMarketer = dao.getData("select * from Marketer_type");
+                request.setAttribute("rsMarketer", rsMarketer);
+                request.getRequestDispatcher("jspClient/HomeForAdmin.jsp").forward(request, response);
+            }
+            
+            if(service.equals("search")) {
+                String name = request.getParameter("name");
+                ResultSet rsMarketer = dao.getData("select * from Marketer_type where fullname like '%" + name + "%'");
+                request.setAttribute("rsMarketer", rsMarketer);
+                request.getRequestDispatcher("jspClient/HomeForAdmin.jsp").forward(request, response);
+            }
         }
     } 
 

@@ -6,7 +6,6 @@
 package Controller;
 
 import DAO.DAOUser;
-import Entities.AccountUser;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,7 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.Vector;
+import java.sql.ResultSet;
 
 /**
  *
@@ -35,9 +34,25 @@ public class User extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             DAOUser dao = new DAOUser();
-            Vector<AccountUser> listUser = dao.getAll("select * from User_type");
-            request.setAttribute("listUser", listUser);
-            request.getRequestDispatcher("jspClient/HomeForAdmin.jsp").forward(request, response);
+            
+            String service = request.getParameter("service");
+            
+            if(service == null) {
+                service = "show";
+            }
+            
+            if(service.equals("show")) {
+                ResultSet rsUser = dao.getData("select * from User_type");
+                request.setAttribute("rsUser", rsUser);
+                request.getRequestDispatcher("jspClient/HomeForAdmin.jsp").forward(request, response);
+            }
+            
+            if(service.equals("search")) {
+                String name = request.getParameter("name");
+                ResultSet rsUser = dao.getData("select * from User_type where fullname like '%" + name + "%'");
+                request.setAttribute("rsUser", rsUser);
+                request.getRequestDispatcher("jspClient/HomeForAdmin.jsp").forward(request, response);
+            }
         }
     } 
 
