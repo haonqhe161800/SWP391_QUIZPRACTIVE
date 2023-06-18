@@ -16,17 +16,8 @@
 
                         <h1 class="title-forgot">Reset your password</h1>
                         <%
-                            String m = (String) request.getAttribute("msg");
                             String merror = (String) request.getAttribute("msgerror");
-                            if(m != null){
                         %>
-                        <div id="message" style="color: green">
-                            <ul>
-                                <li><%=m%></li>
-                            </ul>
-                        </div>
-
-                        <%}%>
                         <%if(merror != null){%>
                         <div id="message" style="color: red">
                             <ul>

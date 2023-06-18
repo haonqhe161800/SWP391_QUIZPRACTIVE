@@ -89,17 +89,6 @@
                         </div>
                     </form>        
                 </div>
-
-                <div class="col-md-4 border-right">
-
-                    <div class="p-3 py-5" style="border-top: 2px solid black;">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h6 class="text-right">Change Password</h6>
-                        </div>
-                        <div><p style="font-size: 14px; margin-top: 10px">If you forget your password, you can <a href="restpassword">reset password.</a></p></div>
-                    </div>
-
-                </div>            
             </div>
         </div>
     </div>

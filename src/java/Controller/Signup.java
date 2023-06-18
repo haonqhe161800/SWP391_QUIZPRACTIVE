@@ -43,7 +43,6 @@ public class Signup extends HttpServlet {
             throws ServletException, IOException {
         try {
             String dob = request.getParameter("dob");
-
             String email = request.getParameter("email");
             String fullname = request.getParameter("fullname");
             String pass = request.getParameter("pass");

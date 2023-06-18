@@ -20,7 +20,7 @@
                         <h2 class="title-forgot">Reset your password for ${sessionScope.eemail}</h2>
                     </div>
                     <div class="forgot-form">
-                        <form action="changepsw" method="POST">
+                        <form action="forgotten" method="POST">
                             <div class="form-input">
                                 <input type="password" placeholder="password" id="password" name="password" required onkeyup="mycheck()"/>
                                 <span class="UIInput-border"></span>
