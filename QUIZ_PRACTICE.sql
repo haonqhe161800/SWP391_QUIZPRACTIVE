@@ -223,8 +223,14 @@ INSERT INTO [dbo].[Mentor_type]
      VALUES
            ('TranQuyBan@gmail.com','12345','BanKelly','QuyTran',N'Việt Nam','1990-01-01',0,2)
 
-
-insert into [Subject] values ('C', './assets/images/categories/C.png', 0, N'C - Ngôn ngữ cơ bản cho người mới bắt đầu', 'Hiểu và áp dụng những kiến thức nền tảng cần thiết cho developer'),
+[subject_id] [int] IDENTITY (1,1) PRIMARY KEY not null,
+	[subject_name] [nvarchar] (250) not null,
+	[image] [nvarchar] (250),
+	-----Add-------
+	[status] [BIT] not null DEFAULT 0,
+	[description] [nvarchar] (max)
+insert into [Subject] ([subject_name], [image], [status], [description]) 
+	values ('C', './assets/images/categories/C.png', 0, N'C - Ngôn ngữ cơ bản cho người mới bắt đầu', 'Hiểu và áp dụng những kiến thức nền tảng cần thiết cho developer'),
 							 ('C++', './assets/images/categories/C++.png',0, N'C++ - Ngôn ngữ cơ bản cho người mới bắt đầu', 'Hiểu và áp dụng những kiến thức nền tảng cần thiết cho developer'),
 							 ('C#', './assets/images/categories/CSharp.png' ,0, N'C# - Ngôn ngữ cơ bản cho người mới bắt đầu', 'Hiểu và áp dụng những kiến thức nền tảng cần thiết cho developer'),
 							 ('Java', './assets/images/categories/Java.png',0, N'Java - Ngôn ngữ cơ bản cho người mới bắt đầu', 'Hiểu và áp dụng những kiến thức nền tảng cần thiết cho developer'),
