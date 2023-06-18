@@ -48,7 +48,7 @@ CREATE TABLE [Subject] (
 	[subject_name] [nvarchar] (250) not null,
 	[image] [nvarchar] (250),
 	-----Add-------
-	[title] [nvarchar] (max)
+	[title] [nvarchar] (max),
 	[status] [BIT] not null DEFAULT 0,
 	[description] [nvarchar] (max)
 )
