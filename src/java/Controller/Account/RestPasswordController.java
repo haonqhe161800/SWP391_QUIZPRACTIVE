@@ -8,10 +8,6 @@ import DAO.DAOAdmin;
 import DAO.DAOMarketer;
 import DAO.DAOMentor;
 import DAO.DAOUser;
-import Entities.AccountAdmin;
-import Entities.AccountMarketer;
-import Entities.AccountMentor;
-import Entities.AccountUser;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -68,7 +64,7 @@ public class RestPasswordController extends HttpServlet {
         } else if (new DAOUser().checkExist(email) != null) {
             sendDocumentHTML(email, 4);
             request.setAttribute("msg", "Check your email and verify!");
-            System.out.println(session.getId());
+//            System.out.println(session.getId());
         } else {
             request.setAttribute("msgerror", "Invalid email!");
             request.getRequestDispatcher("view/forgotpsw/forgotpassword.jsp").forward(request, response);
