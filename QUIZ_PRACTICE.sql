@@ -49,7 +49,6 @@ CREATE TABLE [Subject] (
 	[image] [nvarchar] (250),
 	-----Add-------
 	[status] [BIT] not null DEFAULT 0,
-	[tittle] [nvarchar] (max),
 	[description] [nvarchar] (max)
 )
 
