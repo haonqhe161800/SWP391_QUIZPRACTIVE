@@ -33,9 +33,17 @@
         <link rel="stylesheet" href="./assets/css/tiny-slider.css" />
         <link rel="stylesheet" href="./assets/css/glightbox.min.css" />
         <link rel="stylesheet" href="./assets/css/main.css" />
+
+        <!--popup of -->
+        <link rel="stylesheet" href="./assets/css/newcss.css"/>
+        <!-- fontanswer icons -->
+        <script src="https://kit.fontawesome.com/fe000f9b2a.js" crossorigin="anonymous"></script>
+
+        <!-- jquery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     </head>
     <body>
-        
+
         <%
         Vector<Question> listQuestion = (Vector<Question>) request.getAttribute("listQuestion");
         Vector<Answer> listAnswer = (Vector<Answer>) request.getAttribute("listAnswer");
@@ -43,15 +51,15 @@
         ResultSet listEd = (ResultSet) request.getAttribute("listEd");
         int id = (int) request.getAttribute("id");
         %>
-        
+
         <div style="margin-bottom: 150px ">
             <jsp:include page="Header.jsp"></jsp:include>
+            </div>
+
+            <div style="text-align: center; margin-bottom: 20px">
+                <h2><%=nameCourse%></h2>
         </div>
-        
-        <div style="text-align: center; margin-bottom: 20px">
-            <h2><%=nameCourse%></h2>
-        </div>
-        
+
         <div class="container" style="margin-bottom: 100px">
             <%for (Question question : listQuestion) {%>
             <div style="margin-bottom: 12px">
@@ -59,15 +67,15 @@
                 <%for (Answer answer : listAnswer) {
                     if(answer.getQuestion_id() == question.getQuestion_id()) {
                         if(answer.getIs_correct() == 1) {%>
-                        <input style="margin-bottom:8px" type="radio" checked /><%=answer.getAnswer_name()%><br>
-                        <%} else {%>
-                        <input style="margin-bottom:8px" type="radio" disabled /><%=answer.getAnswer_name()%><br>
-                        <%}
-                        }
-                }%>
+                <input style="margin-bottom:8px" type="radio" checked /><%=answer.getAnswer_name()%><br>
+                <%} else {%>
+                <input style="margin-bottom:8px" type="radio" disabled /><%=answer.getAnswer_name()%><br>
+                <%}
+                }
+        }%>
             </div>
             <%}%>
-            
+
             <%if(!listEd.next()) {%>
             <div class="bottom-content">
                 <a href="CourseController?service=exam&id=<%=id%>" class="btn btn-block btn-primary">Exam</a>
@@ -78,10 +86,10 @@
             </div>
             <%}%>
         </div>
-        
 
 
-            
+
+
 
         <jsp:include page="Footer.jsp"></jsp:include>
 

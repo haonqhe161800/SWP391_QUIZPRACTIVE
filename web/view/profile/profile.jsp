@@ -18,6 +18,14 @@
 
         <!--link sweetAlert-->
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+        <!--popup of -->
+        <link rel="stylesheet" href="./assets/css/newcss.css"/>
+        <!-- fontanswer icons -->
+        <script src="https://kit.fontawesome.com/fe000f9b2a.js" crossorigin="anonymous"></script>
+
+        <!-- jquery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <style>
             .space{
                 margin-top: 5%;

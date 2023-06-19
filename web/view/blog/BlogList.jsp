@@ -19,6 +19,14 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        
+         <!--popup of Marketer-->
+    <link rel="stylesheet" href="./assets/css/newcss.css"/>
+        <!-- fontanswer icons -->
+    <script src="https://kit.fontawesome.com/fe000f9b2a.js" crossorigin="anonymous"></script>
+
+     <!-- jquery -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <style>
             .content {
                 padding-left: 0px;
