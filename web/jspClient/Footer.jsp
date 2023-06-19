@@ -142,6 +142,6 @@
                 </div>
             </div>
             <!-- End Footer Middle -->
-        </footer>
+        </footer>        
     </body>
 </html>

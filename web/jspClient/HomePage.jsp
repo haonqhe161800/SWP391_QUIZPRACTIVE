@@ -35,7 +35,15 @@
     <link rel="stylesheet" href="./assets/css/animate.css" />
     <link rel="stylesheet" href="./assets/css/tiny-slider.css" />
     <link rel="stylesheet" href="./assets/css/glightbox.min.css" />
-    <link rel="stylesheet" href="./assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    
+    <!--popup of Marketer-->
+    <link rel="stylesheet" href="./assets/css/newcss.css"/>
+        <!-- fontanswer icons -->
+    <script src="https://kit.fontawesome.com/fe000f9b2a.js" crossorigin="anonymous"></script>
+
+     <!-- jquery -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 
 <body>
@@ -508,6 +516,7 @@
             }
         });
     </script>
+   
 </body>
 
 </html>
