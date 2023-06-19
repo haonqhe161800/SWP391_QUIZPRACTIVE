@@ -5,7 +5,6 @@
 package Controller;
 
 import DAO.DAOCourse;
-import DAO.DAOMarketer;
 import DAO.DAOMentor;
 import DAO.DAOPost;
 import DAO.DAOSubject;

@@ -52,6 +52,20 @@ public class DAOSubject extends DBConnect {
         }
         return null;
     }
+    //delete
+    public int deleteSubject(int id) {
+        int n = 0;
+        String sql = "delete from Subject\n "
+                + "where id =?";
+        try {
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setInt(1, id);
+            n = st.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return n;
+    }
 
     //add
     public int addSubject(Subject subject) {

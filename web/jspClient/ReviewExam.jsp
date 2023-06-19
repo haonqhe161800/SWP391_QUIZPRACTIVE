@@ -47,7 +47,7 @@
             </div>
         </div>
         
-        <div style="padding: 0 400px; margin-bottom: 20px">
+        <div style="padding: 0 300px; margin-bottom: 20px">
             <div class="content_exam">
                     <%int i = 0, j = 0;
                     for (Question question : listQuestion) {
@@ -61,7 +61,7 @@
                                 <span class="icon" id="icon_<%=i%>"></span>
                                 <input style="margin-bottom:8px" class="result" value="<%=er.getIs_correct()%>" type="radio" checked><span style="margin-left: 4px"><%=er.getAnswer_name()%></span><br>
                                 <%} else {%>
-                                <span id="icon_<%=er.getAnswer_id()%>"></span>
+                                <span id="icon_<%=i%>"></span>
                                 <input style="margin-bottom:8px" class="result" value="<%=er.getIs_correct()%>" type="radio"><span style="margin-left: 4px"><%=er.getAnswer_name()%></span><br>
                                 <%}
                             }
