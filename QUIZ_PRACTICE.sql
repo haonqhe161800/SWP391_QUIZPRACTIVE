@@ -180,12 +180,10 @@ CREATE TABLE Post (
 	[image] [nvarchar] (250) not null,
 	[content] [nvarchar] (max) not null,
 	[short_content] [nvarchar] (250) not null,
-	status NVARCHAR(20) DEFAULT 'pending',
+	[status] [NVARCHAR] (20) DEFAULT 'pending',
 	
 )
 
-ALTER TABLE Post
-ADD status NVARCHAR(20) DEFAULT 'pending'
 ---------------------------------------------------------------add
 --add role	
 INSERT INTO Role(role_id,role_name) VALUES(1,'admin')

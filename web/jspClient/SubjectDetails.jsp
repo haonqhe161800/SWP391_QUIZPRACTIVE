@@ -43,6 +43,8 @@
         <%
         ResultSet rsSubject = (ResultSet) request.getAttribute("rsSubject");
         ResultSet rsCourse = (ResultSet) request.getAttribute("rsCourse");
+        ResultSet rsSubjectDetails = (ResultSet) request.getAttribute("rsSubjectDetails");
+        ResultSet countCourse = (ResultSet) request.getAttribute("countCourse");
         int subject_id = (int) request.getAttribute("subject_id");
         %>
 
@@ -117,43 +119,85 @@
             <div class="container">
                 <div class="single-head">
                     <div class="row">
-                        <%while(rsCourse.next()) {%>
-                        <div class="col-lg-4 col-md-6 col-12">
-                            <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
-                                <div class="image"> <!--ảnh course-->
-                                    <!--Click vào ảnh cũng giống như click vào phần details -->
-                                    <a href="#" class="thumbnail">
-                                        <img height="218px" src="<%=rsCourse.getString(6)%>" alt="#">
-                                    </a>
-                                    <div class="author">
-                                        <div class="author-image">    <!--ảnh mentor-->
-                                            <a href="#">
-                                                <img src="./assets/images/items-grid/author-1.jpg" alt="#">
-                                                <span>Mentor name</span>
+                        <div class="col-lg-7 col-md-7 col-12">
+                            <div class="row">
+                            <%while(rsCourse.next()) {%>
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
+                                        <div class="image">
+                                            <a href="#" class="thumbnail">
+                                                <img height="218px" src="<%=rsCourse.getString(6)%>" alt="#">
                                             </a>
+                                            <div class="author">
+                                                <div class="author-image">    <!--ảnh mentor-->
+                                                    <a href="#">
+                                                        <img src="./assets/images/items-grid/author-1.jpg" alt="#">
+                                                        <span>Mentor name</span>
+                                                    </a>
+                                                </div>
+                                                <a href="#" class="sale"> Join to study </a>
+                                            </div>
                                         </div>
-                                        <a href="#" class="sale"> Join to study </a>
+                                        <div class="content">
+                                            <div class="top-content">
+                                                <p><%=rsCourse.getString(4)%></p>
+                                                <h3 class="title"> <%=rsCourse.getString(12)%>  </h3>
+                                                <p class="update-time">Ngày update gần nhất <%=rsCourse.getString(9)%></p>
+                                                <ul class="rating">
+                                                    <li>số người joined (<%=rsCourse.getInt(8)%>)</li>
+                                                </ul>
+                                                <ul class="info-list">
+                                                    <li><i class="lni lni-timer"></i> Ngày đăng khóa học <%=rsCourse.getString(9)%></li>
+                                                </ul>
+                                            </div>
+                                            <div class="bottom-content">
+                                                <a href="CourseController?service=details&course_id=<%=rsCourse.getInt(1)%>" class="btn btn-block btn-primary">Details</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="content">
-                                    <div class="top-content">
-                                        <p><%=rsCourse.getString(4)%></p>
-                                        <h3 class="title"> <%=rsCourse.getString(12)%>  </h3>
-                                        <p class="update-time">Ngày update gần nhất <%=rsCourse.getString(9)%></p>
-                                        <ul class="rating">
-                                            <li>số người joined (<%=rsCourse.getInt(8)%>)</li>
-                                        </ul>
-                                        <ul class="info-list">
-                                            <li><i class="lni lni-timer"></i> Ngày đăng khóa học <%=rsCourse.getString(9)%></li>
-                                        </ul>
-                                    </div>
-                                    <div class="bottom-content">
-                                        <a href="CourseController?service=details&course_id=<%=rsCourse.getInt(1)%>" class="btn btn-block btn-primary">Details</a>
-                                    </div>
-                                </div>
+                            <% } %>
                             </div>
                         </div>
-                        <% } %>
+                           
+                        <div class="col-lg-1 col-md-1"></div>
+                        
+                        
+                        <!--Subject details-->
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <%while(rsSubjectDetails.next()) {%>
+                            <div class="col-lg-12 col-md-12 col-12">
+                                    <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
+                                        <div class="image"> <!--ảnh course-->
+                                            <a href="#" class="thumbnail">
+                                                <img height="100%" src="<%=rsSubjectDetails.getString(3)%>" alt="#">
+                                            </a>
+                                            <div class="author">
+                                                <div class="author-image"> 
+                                                    <a href="#">
+                                                        <span><h4 class="text-white">Môn học: <%=rsSubjectDetails.getString(2)%></h4></span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="content">
+                                            <div class="top-content">
+                                                <p>Giới thiệu: <%=rsSubjectDetails.getString(4)%></p>
+                                                <p class="title"> <strong>Chi tiết: <%=rsSubjectDetails.getString(6)%> </strong> </p>
+                                                <%while (countCourse.next()) {%>
+                                                    <h6>Số khóa học: (<%=countCourse.getInt(1)%>)</h6>
+                                                <%}%>
+                                            </div>
+                                            <% if(session.getAttribute("accountUser") != null) {%>
+                                            <div class="bottom-content">
+                                                <a href="#" class="btn btn-block btn-primary">Update</a>
+                                            </div>
+                                            <% } %>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% } %>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -162,24 +206,6 @@
 
 
 
-        <%
-    int endP = (int)request.getAttribute("endP");
-    int indexP = (int)request.getAttribute("indexP");
-    String href = (String)request.getAttribute("href");
-        %>
-        <p class="paging text-center" style="margin: 20px 0 20px 0">
-            <a href="<%=href%>&index=<%=(indexP-1)%>" style="<%=indexP > 1 && indexP <= endP ? "display: inline-block" : "display: none"%>"> 
-                <i class="fas fa-chevron-left btn_prev"></i>
-            </a>
-
-            <%for(int i = 1; i <= endP; i++) {%>
-            <a class="paging_link <%=indexP == i ? "active" : ""%>" href="<%=href%>&index=<%=i%>"><%=i%></a>
-            <%}%>
-
-            <a href="<%=href%>&index=<%=(indexP+1)%>" style="<%=indexP < endP && indexP >= 1 ? "display: inline-block" : "display: none"%>"> 
-                <i class="fas fa-chevron-right btn_next"></i>
-            </a>
-        </p>       
 
 
         <!--Footer-->
