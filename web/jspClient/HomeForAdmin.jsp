@@ -17,7 +17,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
     <!-- Place favicon.ico in the root directory -->
-    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!--Link icon-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-pfMvQ9Z7V5BJI7QVJjwfnYGAKBtUxjlh2R8lG4b/ZzWWTd1kApqFw3L8eB0jo+0gQvO4+6N0x5sqi/qXZMvG1Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
@@ -59,7 +64,7 @@
                 <div style="display: flex">
                     <input style="padding: 4px 4px; width: 300px; margin-right: 12px" type="text" name="name" placeholder="Enter user name need to search...">
                     <div class="bottom-content">
-                        <input class="btn btn-block btn-primary" type="submit" value="Submit">
+                        <input class="btn btn-block btn-primary" type="submit" value="Search">
                     </div>
                 </div>
             </form>
@@ -101,7 +106,7 @@
                 <div style="display: flex">
                     <input style="padding: 4px 4px; width: 300px; margin-right: 12px" type="text" name="name" placeholder="Enter mentor name need to search...">
                     <div class="bottom-content">
-                        <input class="btn btn-block btn-primary" type="submit" value="Submit">
+                        <input class="btn btn-block btn-primary" type="submit" value="Search">
                     </div>
                 </div>
             </form>
@@ -143,7 +148,7 @@
                 <div style="display: flex">
                     <input style="padding: 4px 4px; width: 300px; margin-right: 12px" type="text" name="name" placeholder="Enter nmarketer name need to search...">
                     <div class="bottom-content">
-                        <input class="btn btn-block btn-primary" type="submit" value="Submit">
+                        <input class="btn btn-block btn-primary" type="submit" value="Search">
                     </div>
                 </div>
             </form>
@@ -184,7 +189,7 @@
                 <div style="display: flex">
                     <input style="padding: 4px 4px; width: 300px; margin-right: 12px" type="text" name="user" placeholder="Enter subject name need to search...">
                     <div class="bottom-content">
-                        <input class="btn btn-block btn-primary" type="submit" value="Submit">
+                        <input class="btn btn-block btn-primary" type="submit" value="Search">
                     </div>
                 </div>
             </form>
@@ -194,6 +199,7 @@
                     <th scope="col">Name</th>
                     <th scope="col">Image</th>
                     <th scope="col">Number of courses</th>
+                    <th scope="col">Action</th>
                 </tr>
                 
                <%while(rsSubject.next()) {%>
@@ -202,6 +208,9 @@
                     <td><%=rsSubject.getString(1)%></td>
                     <td><img style="width: 50px; height: 50px" src="<%=rsSubject.getString(3)%>"></td>
                     <td><%=rsSubject.getInt(4)%></td>
+                    <td>
+                         <a href="" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                    </td>
                 </tr>
                <%}%>
             </table>
