@@ -32,7 +32,10 @@
         <servlet-name>ControllDashboardMarketer</servlet-name>
         <servlet-class>Controller.Marketer.ControllDashboardMarketer</servlet-class>
     </servlet>
-  
+    <servlet>
+        <servlet-name>SliderListController</servlet-name>
+        <servlet-class>Controller.SliderCRUD.SliderListController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControllBlogList</servlet-name>
         <url-pattern>/listpost</url-pattern>
@@ -65,7 +68,10 @@
         <servlet-name>ControllDashboardMarketer</servlet-name>
         <url-pattern>/dashboardmarketer</url-pattern>
     </servlet-mapping>
- 
+    <servlet-mapping>
+        <servlet-name>SliderListController</servlet-name>
+        <url-pattern>/listslider</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

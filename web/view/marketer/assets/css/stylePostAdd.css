@@ -337,10 +337,35 @@
   padding: 10px;
 }
 
-.add-slider{
-  padding: 4px;
+
+
+.form-group{
+
+}
+
+.item-input input[type='text']{
+ width: 100%;
+}
+
+.item-input select {
+  width: 50%;
+}
+
+.item-input input[type='radio']{
+  margin: 0 10px;
+}
+.btn-dark{
+  padding: 10px;
   cursor: pointer;
 }
+
+.frame{
+  width: 417px;
+  height: 105px;
+  border: 1px solid black;
+
+}
+
 
 .visiblle,
 .hide,

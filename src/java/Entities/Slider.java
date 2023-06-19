@@ -9,20 +9,32 @@ package Entities;
  * @author Admin
  */
 public class Slider {
-    private String url,content,note;
+
+    private String url, content, note;
     private boolean isShow;
-    private int slider_id,subject_id;
+    private int slider_id, subject_id;
+    Subject s;
 
     public Slider() {
     }
 
-    public Slider(int slider_id,String url, String content, String note, boolean isShow, int subject_id) {
-       this.slider_id = slider_id;
+    public Slider(int slider_id, String url, String content, String note, boolean isShow, int subject_id) {
+        this.slider_id = slider_id;
         this.url = url;
         this.content = content;
         this.note = note;
         this.isShow = isShow;
         this.subject_id = subject_id;
+    }
+
+    public Slider(int slider_id, String url, String content, String note, boolean isShow, int subject_id, Subject s) {
+        this.slider_id = slider_id;
+        this.url = url;
+        this.content = content;
+        this.note = note;
+        this.isShow = isShow;
+        this.subject_id = subject_id;
+        this.s = s;
     }
 
     public String getUrl() {
@@ -72,6 +84,13 @@ public class Slider {
     public void setSlider_id(int slider_id) {
         this.slider_id = slider_id;
     }
-    
-    
+
+    public Subject getS() {
+        return s;
+    }
+
+    public void setS(Subject s) {
+        this.s = s;
+    }
+
 }

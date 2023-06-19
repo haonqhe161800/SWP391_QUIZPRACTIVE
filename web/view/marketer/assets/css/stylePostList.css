@@ -270,6 +270,7 @@
   top: 100%;
   right: 0%;
   border-radius: 8px;
+  z-index: 1;
 }
 
 .quote {
@@ -297,7 +298,6 @@
   display: flex;
   list-style: none;
   padding: 10px;
-  border-bottom: 1px solid #ccc ;
   color: white;
   font-size: 14px;
 }
@@ -337,13 +337,14 @@
   padding: 10px;
 }
 
-.add-slider{
+.add-post{
   padding: 4px;
   cursor: pointer;
 }
 
-.visiblle,
-.hide,
+.fa-thumbs-up,
+.fa-exclamation,
+.fa-hourglass-start,
 .delete,
 .edit {
   border: 1px solid black;

@@ -182,7 +182,6 @@ public class DAOPost extends DBConnect {
                 return rs.getInt(1);
             }
         } catch (Exception e) {
-            System.out.println(e);
         }
         return 0;
     }

@@ -72,7 +72,7 @@
                 <div class="carousel-inner">
                     <c:forEach var="ss" items="${sessionScope.listslider}">
                         <div class="carousel-item ${ss.slider_id == 1 ? "active" : ""}">
-                            <a href="#" style="width: 100%;"><img src="view/blog/assets/slider/${ss.url}" alt="" class="d-block w-100"></a>
+                            <a href="#" style="width: 100%;"><img src="view/slider/${ss.url}" alt="" class="d-block w-100"></a>
                         </div>
                     </c:forEach>
                 </div>
