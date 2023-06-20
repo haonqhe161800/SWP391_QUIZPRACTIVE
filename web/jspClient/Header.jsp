@@ -28,7 +28,7 @@
                                        aria-label="Toggle navigation">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" aria-label="Toggle navigation">Activity</a>
+                                    <a href="Activity" aria-label="Toggle navigation">Activity</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class=" dd-menu collapsed" href="#"
