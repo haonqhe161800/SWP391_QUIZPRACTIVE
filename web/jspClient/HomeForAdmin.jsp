@@ -41,6 +41,7 @@
         <link rel="stylesheet" href="./assets/css/tiny-slider.css" />
         <link rel="stylesheet" href="./assets/css/glightbox.min.css" />
         <link rel="stylesheet" href="./assets/css/main.css" />
+        <link rel="stylesheet" href="./assets/css/admin.css" />
 
         <!--popup of Marketer-->
         <link rel="stylesheet" href="./assets/css/newcss.css"/>
@@ -59,7 +60,7 @@
             </div>
 
 
-            <div class="container" style="display: flex">
+            <div class="container" style="display: flex; position: relative">
             <jsp:include page="Sidebar.jsp"></jsp:include>
 
                 <div class="content" style="margin-left: 50px; flex: 2">
@@ -192,15 +193,18 @@
                 <%if(request.getAttribute("rsSubject") != null) {
                     ResultSet rsSubject = (ResultSet) request.getAttribute("rsSubject");
                 %>
-                <h3 style="margin-bottom: 12px">Subject list</h3>
-                <form>
-                    <div style="display: flex">
-                        <input style="padding: 4px 4px; width: 300px; margin-right: 12px" type="text" name="user" placeholder="Enter subject name need to search...">
-                        <div class="bottom-content">
-                            <input class="btn btn-block btn-primary" type="submit" value="Search">
+                <div style="display: flex">
+                    <h3 style="margin-bottom: 12px">Subject list</h3>
+                    <form style="margin-bottom: 12px; padding: 12px">
+                        <div style="display: flex; align-items: center">
+                            <input style="padding: 4px 4px; width: 300px; margin-right: 12px" type="text" name="user" placeholder="Enter subject name need to search...">
+                            <div class="bottom-content">
+                                <input id="submit" class="btn btn-block btn-primary" type="submit" value="Search">
+                            </div>
+                            <span class="btn-open-modal">Create subject</span>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
                 <table class="table">
                     <tr>
                         <th scope="col">ID</th>
@@ -216,12 +220,41 @@
                         <td><%=rsSubject.getString(1)%></td>
                         <td><img style="width: 50px; height: 50px" src="<%=rsSubject.getString(3)%>"></td>
                         <td><%=rsSubject.getInt(4)%></td>
-                        <td>
-                            <a href="" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                        <td style="display: flex; align-content: center">
+                            <a style="margin-right: 8px" href="" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                         </td>
                     </tr>
                     <%}%>
                 </table>
+                <div class="modal-subject">
+                    <div class="modal-container-subject">
+                        <div class="modal-subject-title">
+                            <h4>Create new subject</h4>
+                        </div>
+                        <form class="form-creatte-subject">
+                            <div class="input">
+                                <label for="subject-name">Subject name</label><br>
+                                <input type="text" name="name" />
+                            </div>
+                            <div class="input"> 
+                                <label for="subject-image">Image</label><br>
+                                <input type="text" name="image" />
+                            </div>
+                            <div class="input">
+                                <label for="subject-title">Title</label><br>
+                                <input type="text" name="title" />
+                            </div>
+                            <div class="input">
+                                <label for="subject-description">Description</label><br>
+                                <input type="text" name="description" />
+                            </div>
+                            <div class="button">
+                                <span class="btn-cancel">Cancel</span>
+                                <button style="margin-left: 6px" class="btn-create">Create</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 <%}%>
 
                 <%if(request.getAttribute("rsCourse") != null) {

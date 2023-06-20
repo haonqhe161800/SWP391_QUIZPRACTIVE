@@ -9,7 +9,20 @@ var windowPathname = window.location.pathname;
 
 for (var i = 0; i < itemLinks.length; i++) {
     var itemLinkPathname = new URL(itemLinks[i].href).pathname;
-    if(windowPathname === itemLinkPathname) {
+    if (windowPathname === itemLinkPathname) {
         itemLinks[i].classList.add('active');
     }
+}
+
+
+var btnOpenModal = document.querySelector('.btn-open-modal');
+var btnCancel = document.querySelector('.btn-cancel');
+var modal = document.querySelector('.modal-subject');
+
+btnOpenModal.onclick = function () {
+    modal.classList.add('open');
+}
+
+btnCancel.onclick = function () {
+    modal.classList.remove('open');
 }
