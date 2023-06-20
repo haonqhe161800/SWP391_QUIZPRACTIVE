@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import module.DBConnect;
 
 /**
@@ -52,21 +53,19 @@ public class DAOSubject extends DBConnect {
         }
         return null;
     }
-    //delete
-    public int deleteSubject(int id) {
-        int n = 0;
-        String sql = "delete from Subject\n "
-                + "where id =?";
-        try {
+public int deleteSubject(int id){
+    int n=0;
+    String sql ="delete from Subject\n "
+            +"where subject_id =?";
+    try {
             PreparedStatement st = conn.prepareStatement(sql);
             st.setInt(1, id);
-            n = st.executeUpdate();
+           n= st.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);
         }
-        return n;
-    }
-
+    return n;
+}
     //add
     public int addSubject(Subject subject) {
         int n = 0;
@@ -84,4 +83,40 @@ public class DAOSubject extends DBConnect {
 
         return n;
     }
+   public static void main(String[] args) {
+        try {
+            // Nhập thông tin môn học từ người dùng
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Enter subject name: ");
+            String name = scanner.nextLine();
+            System.out.print("Enter subject image: ");
+            String image = scanner.nextLine();
+
+            // Khởi tạo đối tượng Subject
+            Subject newSubject = new Subject(name, image);
+
+            // Thêm môn học mới vào database
+            DAOSubject ds = new DAOSubject();
+            int result = ds.addSubject(newSubject);
+
+            // Xử lý kết quả trả về
+            if (result > 0)
+                System.out.println("Thêm môn học thành công!");
+            else
+                System.out.println("Thêm môn học thất bại!");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        
+    
 }
+
+//        DAOSubject subjectDAO = new DAOSubject();
+//        
+//        // Example usage
+//        int idToDelete = 7 ; // Replace with the actual ID you want to delete
+//        int rowsAffected = subjectDAO.deleteSubject(idToDelete);
+//        System.out.println("Rows deleted: " + rowsAffected);
+    }
+
+}
+  

@@ -16,6 +16,11 @@
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
+
+        <!--model-->
+
+
+        <!-- model -->
         <!-- Place favicon.ico in the root directory -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -42,14 +47,6 @@
         <link rel="stylesheet" href="./assets/css/glightbox.min.css" />
         <link rel="stylesheet" href="./assets/css/main.css" />
         <link rel="stylesheet" href="./assets/css/admin.css" />
-
-        <!--popup of Marketer-->
-        <link rel="stylesheet" href="./assets/css/newcss.css"/>
-        <!-- fontanswer icons -->
-        <script src="https://kit.fontawesome.com/fe000f9b2a.js" crossorigin="anonymous"></script>
-
-        <!-- jquery -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     </head>
 
     <body>
@@ -60,7 +57,7 @@
             </div>
 
 
-            <div class="container" style="display: flex; position: relative">
+             <div class="container" style="display: flex; position: relative">
             <jsp:include page="Sidebar.jsp"></jsp:include>
 
                 <div class="content" style="margin-left: 50px; flex: 2">
@@ -75,6 +72,7 @@
                         <div class="bottom-content">
                             <input class="btn btn-block btn-primary" type="submit" value="Search">
                         </div>
+
                     </div>
                 </form>
                 <table class="table">
@@ -117,6 +115,7 @@
                         <div class="bottom-content">
                             <input class="btn btn-block btn-primary" type="submit" value="Search">
                         </div>
+
                     </div>
                 </form>
                 <table class="table">
@@ -201,7 +200,7 @@
                             <div class="bottom-content">
                                 <input id="submit" class="btn btn-block btn-primary" type="submit" value="Search">
                             </div>
-                            <span class="btn-open-modal">Create subject</span>
+                            <span href="SubjectController" class="btn-open-modal">Create subject</span>
                         </div>
                     </form>
                 </div>
@@ -211,7 +210,7 @@
                         <th scope="col">Name</th>
                         <th scope="col">Image</th>
                         <th scope="col">Number of courses</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Action</th>                    
                     </tr>
 
                     <%while(rsSubject.next()) {%>
@@ -220,33 +219,38 @@
                         <td><%=rsSubject.getString(1)%></td>
                         <td><img style="width: 50px; height: 50px" src="<%=rsSubject.getString(3)%>"></td>
                         <td><%=rsSubject.getInt(4)%></td>
-                        <td style="display: flex; align-content: center">
-                            <a style="margin-right: 8px" href="" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                        <td>
+                            <form action="SubjectController" method="POST">
+                                <input type="hidden" name="service" value="delete">
+                                <input type="hidden" name="subject_id" value="<%=rsSubject.getInt(2)%>">
+<!--                                 <button type="submit" class="edit-btn" data-toggle="modal" onclick="return confirm('Are you sure you want to edit this subject?')">
+                                  <i class="material-icons" data-toggle="tooltip" title="edit">&#xE254;</i>
+                                 </button>-->
+                                <button type="submit" class="delete-btn" data-toggle="modal" onclick="return confirm('Are you sure you want to delete this subject?')">                                   
+                                    <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+                                </button>
+                            </form>
                         </td>
+                        
                     </tr>
                     <%}%>
+
                 </table>
-                <div class="modal-subject">
+                    
+                        <div class="modal-subject">
                     <div class="modal-container-subject">
                         <div class="modal-subject-title">
                             <h4>Create new subject</h4>
                         </div>
-                        <form class="form-creatte-subject">
+                        <form <form action="SubjectController" method="POST">
+                            <input type="hidden" name="service" value="addSubject">
                             <div class="input">
                                 <label for="subject-name">Subject name</label><br>
                                 <input type="text" name="name" />
                             </div>
-                            <div class="input"> 
-                                <label for="subject-image">Image</label><br>
-                                <input type="text" name="image" />
-                            </div>
-                            <div class="input">
-                                <label for="subject-title">Title</label><br>
-                                <input type="text" name="title" />
-                            </div>
-                            <div class="input">
-                                <label for="subject-description">Description</label><br>
-                                <input type="text" name="description" />
+                              <div class="input">
+                                <label>Image</label>
+                                <input name="image" type="text" class="form-control" required>
                             </div>
                             <div class="button">
                                 <span class="btn-cancel">Cancel</span>
@@ -255,6 +259,7 @@
                         </form>
                     </div>
                 </div>
+                    
                 <%}%>
 
                 <%if(request.getAttribute("rsCourse") != null) {
@@ -300,35 +305,35 @@
         <script src="./assets/js/main.js"></script>
         <script src="./assets/js/admin.js"></script>
         <script type="text/javascript">
-            //========= Category Slider 
-            tns({
-                container: '.category-slider',
-                items: 3,
-                slideBy: 'page',
-                autoplay: false,
-                mouseDrag: true,
-                gutter: 0,
-                nav: false,
-                controls: true,
-                controlsText: ['<i class="lni lni-chevron-left"></i>', '<i class="lni lni-chevron-right"></i>'],
-                responsive: {
-                    0: {
-                        items: 1,
-                    },
-                    540: {
-                        items: 2,
-                    },
-                    768: {
-                        items: 4,
-                    },
-                    992: {
-                        items: 5,
-                    },
-                    1170: {
-                        items: 6,
-                    }
-                }
-            });
+                                    //========= Category Slider 
+                                    tns({
+                                        container: '.category-slider',
+                                        items: 3,
+                                        slideBy: 'page',
+                                        autoplay: false,
+                                        mouseDrag: true,
+                                        gutter: 0,
+                                        nav: false,
+                                        controls: true,
+                                        controlsText: ['<i class="lni lni-chevron-left"></i>', '<i class="lni lni-chevron-right"></i>'],
+                                        responsive: {
+                                            0: {
+                                                items: 1,
+                                            },
+                                            540: {
+                                                items: 2,
+                                            },
+                                            768: {
+                                                items: 4,
+                                            },
+                                            992: {
+                                                items: 5,
+                                            },
+                                            1170: {
+                                                items: 6,
+                                            }
+                                        }
+                                    });
         </script>
     </body>
 
