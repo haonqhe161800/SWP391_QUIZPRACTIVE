@@ -193,15 +193,18 @@
                 <%if(request.getAttribute("rsSubject") != null) {
                     ResultSet rsSubject = (ResultSet) request.getAttribute("rsSubject");
                 %>
-                <h3 style="margin-bottom: 12px">Subject list</h3>
-                <form style="margin-bottom: 12px; padding: 12px">
-                    <div style="display: flex">
-                        <input style="padding: 4px 4px; width: 300px; margin-right: 12px" type="text" name="user" placeholder="Enter subject name need to search...">
-                        <div class="bottom-content">
-                        <input id="submit" class="btn btn-block btn-primary" type="submit" value="Search">
-                    </div>
-                    </div>
-                </form>
+                <div style="display: flex">
+                    <h3 style="margin-bottom: 12px">Subject list</h3>
+                    <form style="margin-bottom: 12px; padding: 12px">
+                        <div style="display: flex; align-items: center">
+                            <input style="padding: 4px 4px; width: 300px; margin-right: 12px" type="text" name="user" placeholder="Enter subject name need to search...">
+                            <div class="bottom-content">
+                                <input id="submit" class="btn btn-block btn-primary" type="submit" value="Search">
+                            </div>
+                            <span class="btn-open-modal">Create subject</span>
+                        </div>
+                    </form>
+                </div>
                 <table class="table">
                     <tr>
                         <th scope="col">ID</th>
@@ -219,7 +222,6 @@
                         <td><%=rsSubject.getInt(4)%></td>
                         <td style="display: flex; align-content: center">
                             <a style="margin-right: 8px" href="" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                            <button class="btn-open-modal">Create subject</button>
                         </td>
                     </tr>
                     <%}%>

@@ -37,12 +37,20 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 
 .btn-open-modal, .btn-cancel, .btn-create {
     border-color: transparent;
-    padding: 4px; 
+    padding: 8px; 
     border-radius: 8px
 }
 
+.btn-open-modal {
+    margin-left: 8px;
+    cursor: pointer;
+    background-color: rgb(202, 194, 194);
+    color: white;
+}
+
+
 .btn-open-modal:hover {
-    background-color: rgb(231, 225, 225);
+    background-color: rgb(167, 160, 160);
 }
 
 .btn-cancel:hover {
