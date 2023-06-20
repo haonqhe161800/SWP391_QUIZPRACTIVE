@@ -61,9 +61,11 @@
         </div>
 
         <div class="container" style="margin-bottom: 100px">
-            <%for (Question question : listQuestion) {%>
+            <%int i = 0;
+            for (Question question : listQuestion) {
+             i++;%>
             <div style="margin-bottom: 12px">
-                <p style="margin-bottom: 8px"><%=question.getQuestion_id()%>. <%=question.getQuestion_name()%></p>
+                <p style="margin-bottom: 8px"><%=i%>. <%=question.getQuestion_name()%></p>
                 <%for (Answer answer : listAnswer) {
                     if(answer.getQuestion_id() == question.getQuestion_id()) {
                         if(answer.getIs_correct() == 1) {%>
