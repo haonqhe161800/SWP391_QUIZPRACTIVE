@@ -60,7 +60,7 @@ public class SliderListController extends HttpServlet {
             request.setAttribute("numberPage", numberPage);
             request.setAttribute("search",search);
             request.setAttribute("index",index);
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
         }
 
         request.getRequestDispatcher("view/marketer/dashboard-sliderlist.jsp").forward(request, response);

@@ -35,39 +35,45 @@
         </style>
     </head>
     <body>
-        <jsp:include page="/jspClient/Header.jsp" ></jsp:include>
-            <div class="space"></div>
-            <div class="container rounded bg-white mt-5 mb-5">
-                <div class="row">
-                <%-- Bootstrap to center form --%>
+        <jsp:include page="/jspClient/Header.jsp" />
+        <div class="space"></div>
+        <div class="container rounded bg-white mt-5 mb-5">
+            <div class="row">
+                <!-- Bootstrap to center form -->
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
-                    <%-- Start form --%>
-                    <form action="${pageContext.request.contextPath}/ChangePasswordController" method="POST" name="ChangePassword" id="ChangePassword">
-                        <%--Input old password--%>
+                    <!-- Start form -->
+                    <form action="${pageContext.request.contextPath}/ChangePassword" method="POST" name="ChangePassword" id="ChangePassword">
+                        <!-- Input old password -->
                         <div class="row" style="margin-top: 3vh;">
-                            <div class="col-md-4" style="text-align: right"><label class="label control-label">Old Password</label></div>
+                            <div class="col-md-4" style="text-align: right">
+                                <label class="label control-label">Old Password</label>
+                            </div>
                             <div class="col-md-8">
                                 <input type="password" class="form-control" name="oldPassword" placeholder="Enter old password" required>
                             </div>
                         </div>
-                        <%--Input new password--%>
+                        <!-- Input new password -->
                         <div class="row" style="margin-top: 3vh;">
-                            <div class="col-md-4" style="text-align: right"><label class="label control-label">New Password</label></div>
+                            <div class="col-md-4" style="text-align: right">
+                                <label class="label control-label">New Password</label>
+                            </div>
                             <div class="col-md-8">
-                                <input type="password" class="form-control" name="newPassword" id="newPassword" placeholder="Enter new password" onkeyup='check();' required>
+                                <input type="password" class="form-control" name="newPassword" id="newPassword" placeholder="Enter new password" onkeyup="check();" required>
                             </div>
                         </div>
-                        <%--Input confirm new password--%>
+                        <!-- Input confirm new password -->
                         <div class="row" style="margin-top: 3vh;">
-                            <div class="col-md-4" style="text-align: right"><label class="label control-label">Confirm Password</label></div>
+                            <div class="col-md-4" style="text-align: right">
+                                <label class="label control-label">Confirm Password</label>
+                            </div>
                             <div class="col-md-8">
-                                <input type="password" class="form-control" name="rePassword" id="rePassword" placeholder="Confirm new password" onkeyup='check();' required>
+                                <input type="password" class="form-control" name="rePassword" id="rePassword" placeholder="Confirm new password" onkeyup="check();" required>
                             </div>
                         </div>
                         <div id="message" style="text-align: center; margin-top: 2vh"></div>
                         <br>
-                        <%-- Submit form --%>
+                        <!-- Submit form -->
                         <div class="row">
                             <div class="col-md-4"></div>
                             <div class="col-md-4">
@@ -75,16 +81,16 @@
                             </div>
                             <div class="col-md-4"></div>
                         </div>
-
                     </form>
-                    <%-- Display messages, if any --%>
+                    <!-- Display messages, if any -->
                     <div style="text-align: center; margin-top: 2vh">
-                        <h6 style="color:${color}"><c:out value="${message}"/></h6>
+                        <h6 style="color:${messageColor}"><c:out value="${message}"/></h6>
                     </div>
                 </div>
                 <div class="col-md-3"></div>
-            </div>        
+            </div>
         </div>
+
         <jsp:include page="/jspClient/Footer.jsp" />
         <script>
             <%-- Check if new password and re-enter password match or not --%>
