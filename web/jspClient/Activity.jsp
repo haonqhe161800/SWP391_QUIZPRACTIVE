@@ -13,6 +13,7 @@
         <title>JSP Page</title>
         <link rel="stylesheet" href="./assets/css/result.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+        <link rel="stylesheet" href="./assets/css/activity.css" />
 
         <!--popup of -->
         <link rel="stylesheet" href="./assets/css/newcss.css"/>
@@ -32,10 +33,31 @@
             <jsp:include page="Header.jsp"></jsp:include>
         </div>
 
-        <div>
-            <%while(rs.next()) {%>
-            <div>
-                
+        <div class="container" style="margin-bottom: 150px ">
+            <div class="row">
+                <%while(rs.next()) {%>
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                    <div class="activity">
+                        <a class="activity-link" href="CourseController?service=review&id=<%=rs.getInt(1)%>">
+                            <p class="activity-title"><%=rs.getString(2)%></p>
+                            <div class="activity-content">
+                                <p class="activity-number">Số lượng câu hỏi: <%=rs.getInt(5)%></p>
+                                <div class="activity-score" style="
+                                    <%if(rs.getInt(4) < 50) {%>
+                                        background-color: rgb(238, 134, 134); 
+                                    <%} else if(rs.getInt(4) >= 50 && rs.getInt(4) < 85) {%>
+                                        background-color: rgb(239, 185, 86);
+                                    <%} else {%>
+                                        background-color: rgb(100, 231, 100);
+                                    <%}%>
+                                     ">
+                                    <p>Grade: <%=rs.getInt(4)%>%</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>  
+                </div>
+            <%}%>
             </div>
         </div>
 

@@ -46,7 +46,7 @@ public class Activity extends HttpServlet {
                 response.sendRedirect("login");
             } else {
                 AccountUser au = (AccountUser) session.getAttribute("accountUser");
-                ResultSet rs = dao.getData("select c.course_name, r.status, r.score, Count(q.question_name) from Result_test r join Course c on r.course_id = c.course_id join Question q on c.course_id = q.course_id where r.user_id = " + au.getUser_id() + " group by c.course_name, r.status, r.score");
+                ResultSet rs = dao.getData("select c.course_id, c.course_name, r.status, r.score, Count(q.question_name) from Result_test r join Course c on r.course_id = c.course_id join Question q on c.course_id = q.course_id where r.user_id = " + au.getUser_id() + " group by c.course_id, c.course_name, r.status, r.score");
                 request.setAttribute("rs", rs);
                 request.getRequestDispatcher("jspClient/Activity.jsp").forward(request, response);
             }
