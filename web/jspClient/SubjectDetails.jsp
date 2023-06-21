@@ -188,7 +188,7 @@
                                                     <h6>Số khóa học: (<%=countCourse.getInt(1)%>)</h6>
                                                 <%}%>
                                             </div>
-                                            <% if(session.getAttribute("accountUser") != null) {%>
+                                            <% if(session.getAttribute("accountAdmin") != null) {%>
                                             <div class="bottom-content">
                                                 <a href="#" class="btn btn-block btn-primary">Update</a>
                                             </div>
