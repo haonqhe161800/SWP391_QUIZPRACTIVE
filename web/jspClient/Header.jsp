@@ -101,7 +101,7 @@
                                     </li>
                                     <li class="dropdown-i">Home</li>
                                     <li class="dropdown-i">Profile Setting</li>
-                                    <li class="dropdown-i">Sign out</li>
+                                    <li class="dropdown-i"><a class="text-white" href="signout">Sign out</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -126,7 +126,7 @@
                                     <li class="dropdown-i">Home</li>
                                     <li class="dropdown-i"><a href="dashboardmarketer">Dashboard</a></li>
                                     <li class="dropdown-i">Profile Setting</li>
-                                    <li class="dropdown-i">Sign out</li>
+                                    <li class="dropdown-i"><a class="text-white" href="signout">Sign out</a></li>
                                 </ul>
                             </nav>
                         </div>
