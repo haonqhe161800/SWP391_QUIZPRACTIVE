@@ -36,12 +36,29 @@
 
                 var searchInput = document.getElementById('searchInput').value;
                 var selectInput = document.getElementById('selectInput').value;
-                var url = 'listslider?search=' + encodeURIComponent(searchInput) + '&entry=' + encodeURIComponent(selectInput) + '&index=1';
+
+                var url;
+                if (searchInput === '' && selectInput !== '') {
+                    url = 'listslider?entry=' + encodeURIComponent(selectInput);
+                } else if (searchInput !== '' && selectInput === '') {
+                    url = 'listslider?search=' + encodeURIComponent(searchInput);
+                } else {
+                    url = 'listslider?search=' + encodeURIComponent(searchInput) + '&entry=' + encodeURIComponent(selectInput);
+                }
                 window.location.href = url;
+            }
+            
+            function redirect(){
+                 window.location.href = 'addslider';
             }
 
 
         </script>
+        <style>
+            .active{
+                pointer-events:none;
+            }      .
+        </style>
     </head>
 
     <body>
@@ -159,7 +176,7 @@
                         </form>
                     </div>
                     <div class="btn-add">
-                        <button class="btn-warning add-slider">Add Slider</button>
+                        <button class="btn-warning add-slider" onclick="redirect()">Add Slider</button>
                     </div>
                 </div>
                 <div class="row">
@@ -193,23 +210,29 @@
                     </table>
                 </div>
             </div>
-            <div class="container pt-2">
+            <div class="container-fluid pt-2">
                 <div class="row justify-content-md-center">
                     <nav class="num-page">
                         <ul class="pagination justify-content-end">
-                            <li class="page-item"><a class="page-link ${param['index']==1 ? 'disabled' : ''}" href="listslider?search=${requestScope.search}&entry=${param['entry']}&index=${param['index']-1}">Previous</a></li>
-                                <c:forEach var = "i" begin = "1" end = "${numberPage}">
+                            <c:if test="${index > 1}">
+                               <li class="page-item">
+                                    <a class="page-link" href="listslider?search=${requestScope.search}&entry=${param['entry']}&index=${param['index']-1}">Previous</a>
+                            </li> 
+                            </c:if>
+                            <c:forEach var = "i" begin = "1" end = "${numberPage}">
                                 <li class="${param['index']==i?'page-item active':'page-item'}"><a href="listslider?search=${requestScope.search}&entry=${param['entry']}&index=${i}" class="page-link">${i}</a></li>
                                 </c:forEach>
-                            <li class="page-item"><a class="page-link ${param['index'] == numberPage ? 'disabled' : ''}" href="listslider?search=${requestScope.search}&entry=${param['entry']}&index=${param['index']+1}">Next</a></li>
+                                <c:if test="${ index < numberPage}">
+                                <li class="page-item"><a class="page-link" href="listslider?search=${requestScope.search}&entry=${param['entry']}&index=${param['index']+1}">Next</a></li>
+                            </c:if>
                         </ul>
                     </nav>
                 </div>
             </div>
-            <div class="footer mt-3">
-                <p>@Copyright by NamNH</p>
-            </div>
         </section>
+        <Footer class="footer">
+            <p>@Copyright by NamNH</p>
+        </Footer>
         <script>
             let sidebar = document.querySelector(".sidebar");
             let closeBtn = document.querySelector("#btn");

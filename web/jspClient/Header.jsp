@@ -124,6 +124,7 @@
                                         </span>
                                     </li>
                                     <li class="dropdown-i">Home</li>
+                                    <li class="dropdown-i"><a href="dashboardmarketer">Dashboard</a></li>
                                     <li class="dropdown-i">Profile Setting</li>
                                     <li class="dropdown-i">Sign out</li>
                                 </ul>
@@ -132,7 +133,7 @@
                         <%} else if(session.getAttribute("accountMentor") != null) {
                             AccountMentor amor = (AccountMentor) session.getAttribute("accountMentor");
                         %>
-                       <h6 style="padding: 1rem;color: #081828;">Hello,<span><%=amor.getDisplay_name()%></span> </h6>
+                        <h6 style="padding: 1rem;color: #081828;">Hello,<span><%=amor.getDisplay_name()%></span> </h6>
                         <div style="display: flex;">
                             <img src="https://th.bing.com/th/id/OIP.mDMuXjKAMMflGF_1y8keZAHaEo?pid=ImgDet&rs=1" alt=""  style="border-radius: 50%;height: 3em;object-fit: cover;width: 3em;cursor: pointer;">
                             <i class="fa-solid fa-chevron-down" style="padding: 1rem;cursor: pointer"></i>
@@ -170,8 +171,8 @@
             </div>
         </div> <!-- row -->
     </div> <!-- container -->
-     <script>
-     // dialog menu
+    <script>
+        // dialog menu
         let iconUp = document.querySelector(".fa-chevron-down");
         let dialogMenu = document.querySelector(".dropdown-ofme");
         iconUp.addEventListener("click", () => {
