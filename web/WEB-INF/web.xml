@@ -29,12 +29,16 @@
         <servlet-class>Controller.ControllBlogDetail</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ControllDashboardMarketer</servlet-name>
-        <servlet-class>Controller.Marketer.ControllDashboardMarketer</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>SliderListController</servlet-name>
         <servlet-class>Controller.SliderCRUD.SliderListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DashboardMarketerController</servlet-name>
+        <servlet-class>DashboardMarketerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddSliderController</servlet-name>
+        <servlet-class>Controller.SliderCRUD.AddSliderController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ControllBlogList</servlet-name>
@@ -65,12 +69,16 @@
         <url-pattern>/detailpost</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ControllDashboardMarketer</servlet-name>
+        <servlet-name>SliderListController</servlet-name>
+        <url-pattern>/listslider</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DashboardMarketerController</servlet-name>
         <url-pattern>/dashboardmarketer</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>SliderListController</servlet-name>
-        <url-pattern>/listslider</url-pattern>
+        <servlet-name>AddSliderController</servlet-name>
+        <url-pattern>/addslider</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
