@@ -206,7 +206,18 @@ public class DAOMarketer extends DBConnect {
             System.out.println(e);
         }
     }
-
+//deleteMarketer
+public void deleteMarketer(int marketerId) {
+    String sql = "DELETE FROM Marketer_type WHERE marketer_id = ?";
+    
+    try {
+        PreparedStatement st = conn.prepareStatement(sql);
+        st.setInt(1, marketerId);
+        st.executeUpdate();
+    } catch (SQLException e) {
+        System.out.println(e);
+    }
+}
 
 
     public static void main(String args[]) {

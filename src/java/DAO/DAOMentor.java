@@ -189,7 +189,18 @@ public class DAOMentor extends DBConnect {
     }
 
 
+//delete
+    public void deleteMentor(int mentorId) {
+        String sql = "DELETE FROM [Mentor_type] WHERE mentor_id = ?";
 
+        try {
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setInt(1, mentorId);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
     public static void main(String args[]) {
         DAOMentor dudb = new DAOMentor();
         AccountMentor au = dudb.checkLogin("TranQuyBan@gmail.com", "12345");

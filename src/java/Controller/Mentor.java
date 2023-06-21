@@ -17,7 +17,7 @@ import java.sql.ResultSet;
 
 /**
  *
- * @author admin
+ * @author QUANG HAO
  */
 @WebServlet(name="Mentor", urlPatterns={"/Mentor"})
 public class Mentor extends HttpServlet {
@@ -29,32 +29,38 @@ public class Mentor extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            DAOMentor dao = new DAOMentor();
-            
+        try ( PrintWriter out = response.getWriter()) {
+            DAOMentor daoMentor = new DAOMentor();
+
             String service = request.getParameter("service");
-            
-            if(service == null) {
+
+            if (service == null) {
                 service = "show";
             }
-            
-            if(service.equals("show")) {
-                ResultSet rsMentor = dao.getData("select * from Mentor_type");
+
+            if (service.equals("show")) {
+                ResultSet rsMentor = daoMentor.getData("select * from Mentor_type");
                 request.setAttribute("rsMentor", rsMentor);
                 request.getRequestDispatcher("jspClient/HomeForAdmin.jsp").forward(request, response);
             }
-            
-            if(service.equals("search")) {
+
+            if (service.equals("search")) {
                 String name = request.getParameter("name");
-                ResultSet rsMentor = dao.getData("select * from Mentor_type where fullname like '%" + name + "%'");
+                ResultSet rsMentor = daoMentor.getData("select * from Mentor_type where fullname like '%" + name + "%'");
                 request.setAttribute("rsMentor", rsMentor);
                 request.getRequestDispatcher("jspClient/HomeForAdmin.jsp").forward(request, response);
             }
+            if (service.equals("deleteMentor")) {
+                int deleteMentor = Integer.parseInt(request.getParameter("mentor_id"));
+                daoMentor.deleteMentor(deleteMentor);
+                response.sendRedirect("Mentor");
+            }
+
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 

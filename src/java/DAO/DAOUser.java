@@ -202,7 +202,18 @@ public class DAOUser extends DBConnect {
         }
         return vector;
     }
+  //deleteUser
+    public void deleteUser(int userId) {
+        String sql = "DELETE FROM [User_type] WHERE user_id = ?";
 
+        try {
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setInt(1, userId);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
 
     public static void main(String[] args) {
         DAOUser dudb = new DAOUser();

@@ -33,7 +33,7 @@ public class User extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            DAOUser dao = new DAOUser();
+            DAOUser daoUser = new DAOUser();
             
             String service = request.getParameter("service");
             
@@ -42,16 +42,24 @@ public class User extends HttpServlet {
             }
             
             if(service.equals("show")) {
-                ResultSet rsUser = dao.getData("select * from User_type");
+                ResultSet rsUser = daoUser.getData("select * from User_type");
                 request.setAttribute("rsUser", rsUser);
                 request.getRequestDispatcher("jspClient/HomeForAdmin.jsp").forward(request, response);
             }
             
             if(service.equals("search")) {
                 String name = request.getParameter("name");
-                ResultSet rsUser = dao.getData("select * from User_type where fullname like '%" + name + "%'");
+                ResultSet rsUser = daoUser.getData("select * from User_type where fullname like '%" + name + "%'");
                 request.setAttribute("rsUser", rsUser);
                 request.getRequestDispatcher("jspClient/HomeForAdmin.jsp").forward(request, response);
+            }
+             if (service.equals("deleteUser")) {
+                String UserId = request.getParameter("UserId");
+                if (UserId != null) {
+                    int id = Integer.parseInt(UserId);
+                    daoUser.deleteUser(id);
+                }
+                response.sendRedirect("User?service=show");
             }
         }
     } 

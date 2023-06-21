@@ -83,6 +83,7 @@
                         <th scope="col">Email</th>
                         <th scope="col">Password</th>
                         <th scope="col">Address</th>
+                        <th scope="col">Actions</th>
                     </tr>
 
                     <%while(rsUser.next()) {%>
@@ -99,6 +100,15 @@
                         <td><%=rsUser.getString(2)%></td>
                         <td><%=rsUser.getString(3)%></td>
                         <td><%=rsUser.getString(9)%></td>
+                          <td>
+                            <form method="POST" action="User">
+                                <input type="hidden" name="service" value="deleteUser">
+                                <input type="hidden" name="UserId" value="<%= rsUser.getInt("user_id") %>">
+                                <button type="submit" class="delete-btn" data-toggle="modal" onclick="return confirm('Are you sure you want to delete this user?')">
+                                    <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                     <%}%>
                 </table>
@@ -126,6 +136,7 @@
                         <th scope="col">Email</th>
                         <th scope="col">Password</th>
                         <th scope="col">Address</th>
+                        <th scope="col">Actions</th>
                     </tr>
 
                     <%while(rsMentor.next()) {%>
@@ -142,6 +153,16 @@
                         <td><%=rsMentor.getString(2)%></td>
                         <td><%=rsMentor.getString(3)%></td>
                         <td><%=rsMentor.getString(9)%></td>
+                        <td>
+                            <form method="POST" action="Mentor">
+                                <input type="hidden" name="service" value="deleteMentor">
+                                <input type="hidden" name="mentor_id" value="<%= rsMentor.getInt("mentor_id") %>">
+                                <button type="submit" class="delete-btn" data-toggle="modal" onclick="return confirm('Are you sure you want to delete this mentor?')">
+                                    <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+                                </button>
+                            </form>
+                        </td>
+
                     </tr>
                     <%}%>
                 </table>
@@ -158,9 +179,10 @@
                         <div class="bottom-content">
                             <input class="btn btn-block btn-primary" type="submit" value="Search">
                         </div>
+                       
                     </div>
                 </form>
-                <table class="table">
+                 <table class="table">
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Name</th>
@@ -168,6 +190,7 @@
                         <th scope="col">Email</th>
                         <th scope="col">Password</th>
                         <th scope="col">Address</th>
+                        <th scope="col">Action</th>
                     </tr>
 
                     <%while(rsMarketer.next()) {%>
@@ -184,9 +207,19 @@
                         <td><%=rsMarketer.getString(2)%></td>
                         <td><%=rsMarketer.getString(3)%></td>
                         <td><%=rsMarketer.getString(9)%></td>
+                        <td>
+                            <form method="POST" action="Marketer">
+                                <input type="hidden" name="service" value="deleteMarketer">
+                                <input type="hidden" name="marketerId" value="<%= rsMarketer.getInt("marketer_id") %>">
+                                <button type="submit" class="delete-btn" data-toggle="modal" onclick="return confirm('Are you sure you want to delete this marketer?')">
+                                    <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                     <%}%>
-                </table>
+                 </table>
+                
                 <%}%>
 
                 <%if(request.getAttribute("rsSubject") != null) {
@@ -223,15 +256,14 @@
                             <form action="SubjectController" method="POST">
                                 <input type="hidden" name="service" value="delete">
                                 <input type="hidden" name="subject_id" value="<%=rsSubject.getInt(2)%>">
-<!--                                 <button type="submit" class="edit-btn" data-toggle="modal" onclick="return confirm('Are you sure you want to edit this subject?')">
-                                  <i class="material-icons" data-toggle="tooltip" title="edit">&#xE254;</i>
-                                 </button>-->
+
                                 <button type="submit" class="delete-btn" data-toggle="modal" onclick="return confirm('Are you sure you want to delete this subject?')">                                   
                                     <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
                                 </button>
                             </form>
+
                         </td>
-                        
+
                     </tr>
                     <%}%>
 
