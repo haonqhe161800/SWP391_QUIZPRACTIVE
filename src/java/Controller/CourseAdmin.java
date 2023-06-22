@@ -6,6 +6,7 @@
 package Controller;
 
 import DAO.DAOCourse;
+import Entities.Course;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -20,7 +21,7 @@ import java.sql.ResultSet;
  * @author admin
  */
 @WebServlet(name="Course", urlPatterns={"/Course"})
-public class Course extends HttpServlet {
+public class CourseAdmin extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -34,9 +35,41 @@ public class Course extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             DAOCourse dao = new DAOCourse();
-            ResultSet rsCourse = dao.getData("select c.course_id, s.subject_name, c.course_name, c.[image], Count(q.question_name) as number_of_questions from [Course] c join [Subject] s on c.subject_id = s.subject_id join Question q on q.course_id = c.course_id group by c.course_id, s.subject_name, c.course_name, c.[image]");
-            request.setAttribute("rsCourse", rsCourse);
-            request.getRequestDispatcher("jspClient/HomeForAdmin.jsp").forward(request, response);
+            
+            String service = request.getParameter("service");
+            
+            if(service == null) {
+                service = "show";
+            }
+            
+            if(service.equals("show")) {
+                ResultSet rsCourse = dao.getData("select c.course_id, s.subject_name, c.course_name, c.[image], Count(q.question_name) as number_of_questions from [Course] c join [Subject] s on c.subject_id = s.subject_id left join Question q on q.course_id = c.course_id group by c.course_id, s.subject_name, c.course_name, c.[image]");
+                ResultSet subjectName = dao.getData("select subject_id, subject_name from Subject");
+                request.setAttribute("subjectName", subjectName);
+                request.setAttribute("rsCourse", rsCourse);
+                request.getRequestDispatcher("jspClient/HomeForAdmin.jsp").forward(request, response);
+            }
+            
+            if(service.equals("add")) {
+                String course_name = request.getParameter("name");
+                String description = request.getParameter("description");
+                String image = request.getParameter("image");
+                int publish = Integer.parseInt(request.getParameter("publish"));
+                int subject_id = Integer.parseInt(request.getParameter("subject_id"));
+                Course course = new Course(course_name, description, image, publish);
+                int n = dao.addCourse(subject_id, course);
+                if(n > 0) {
+                    response.sendRedirect("Course");
+                }
+            }
+            
+            if(service.equals("delete")) {
+                int course_id = Integer.parseInt(request.getParameter("course_id"));
+                int n = dao.deleteCourseByCourseID(course_id);
+                if(n > 0) {
+                    response.sendRedirect("Course");
+                }
+            }
         }
     } 
 
