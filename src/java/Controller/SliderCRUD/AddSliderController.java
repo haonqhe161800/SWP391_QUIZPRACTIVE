@@ -86,7 +86,7 @@ public class AddSliderController extends HttpServlet {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        response.sendRedirect(url);
+        request.getRequestDispatcher(url).forward(request, response);
         return;
     }
 

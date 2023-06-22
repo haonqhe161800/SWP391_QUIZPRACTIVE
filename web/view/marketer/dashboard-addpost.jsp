@@ -5,13 +5,14 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!-- Boxicons CDN Link -->
         <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-        <link rel="stylesheet" href="view/marketer/assets/css/stylePostAdd.css">
+        <link rel="stylesheet" href="view/marketer/assets/css/styleSliderAdd.css">       
 
         <!-- Bootstrap 4 -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -29,15 +30,15 @@
         <!-- fontanswer icons -->
         <script src="https://kit.fontawesome.com/fe000f9b2a.js" crossorigin="anonymous"></script>
 
-        <!-- jquery -->
+        <!--Ajax-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
     </head>
     <body>
         <jsp:include page="sidebar-dashboard.jsp"></jsp:include>
             <section class="home-section">
             <jsp:include page="sidebar-top.jsp"></jsp:include>
-
-                <c:if test="${requestScope.message != null}">
+            <c:if test="${param.message != null}">
                 <div class=" container alert alert-danger alert-dismissible mt-3">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <strong>Failure!</strong> Subject invalid or Blog invalid Please re-choose.
@@ -47,11 +48,11 @@
             <div class="content container-fluid mt-3" style="width: 95%;">
                 <div class="row filter">
                     <div class="num-entry">
-                        <label><a href="#">DashBoard</a> / <a href="listpost">List Post</a> / <a>Add Post</a></label>
+                        <label><a href="#">DashBoard</a> / <a href="dashboardlistpost">List Post</a> / <a>Add Post</a></label>
                     </div>
                 </div>
                 <form class="row" action="addpost" method="POST" enctype="multipart/form-data" >
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="">Title:</label>
@@ -70,26 +71,11 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="">Content:</label>
-                                <div class="item-input">
-                                    <textarea name="message" id="message"></textarea><br>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="col-md-6">
-                        <div class="col-md-12">
-                            <div class="form-group">
                                 <label for="">Image:</label>
                                 <div class="item-input">
-                                      <input type="file" id="file-input" accept="image/*" name="upfile">
+                                    <input type="file" id="file-input" accept="image/*" name="upfile">
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-12">
-                            <label for="">1920x480</label>
-                            <img class="frame" id="img-preview">
                         </div>
                         <div class="col-md-12">
                             <label for="">1920x480</label>
@@ -138,6 +124,17 @@
 
                             </div>
                         </div>
+
+                    </div>
+                    <div class="col-md-7">                        
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="">Content:</label>
+                                <div class="item-input">
+                                    <textarea name="message" id="message"></textarea><br>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
@@ -147,18 +144,18 @@
                         </div>
                     </div>
                 </form>
-                 <!-- The Modal -->
+                <!-- The Modal -->
                 <div id="myModal" class="mmodal">
                     <span class="close">&times;</span>
                     <img class="modal-ccontent" id="img01">
                     <div id="caption">alt.png</div>
-            </div>
-            <div class="footer mt-3">
-                <p>@Copyright by NamNH</p>
+                </div>
             </div>
         </section>
+        <Footer class="footer mt-3">
+            <p>@Copyright by NamNH</p>
+        </Footer>        
         <script src="tinymce/tinymce.min.js"></script>
-       <script src="tinymce/tinymce.min.js"></script>
         <script>
             tinymce.init({
                 selector: "textarea",
@@ -252,7 +249,7 @@
                 }
             });
         </script>
-         <script type="text/javascript">
+        <script type="text/javascript">
             const modal = document.getElementById("myModal");
 
             const img = document.getElementById("img-preview");

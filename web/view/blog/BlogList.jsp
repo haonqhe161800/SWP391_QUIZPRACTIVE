@@ -5,9 +5,6 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-        <meta http-equiv="Pragma" content="no-cache">
-        <meta http-equiv="Expires" content="0">
         <!--FIXXED-->
         <link rel="stylesheet" href="view/blog/assets/blog-css/blogstyle.css"/>
         <!--favicon-->
@@ -199,7 +196,6 @@
                                 <a class="page-link" href="listpost?search=${requestScope.search}&sort=${param['sort']}&index=${param['index']-1}">Previous</a>
                             </li> 
                         </c:if>
-                        <c:forEach var = "i" begin = "1" end = "${numberPage}">
                             <c:forEach var = "i" begin = "1" end = "${numberPage}">
                                 <li class="${param['index']==i?'page-item active':'page-item'}"><a href="listpost?search=${requestScope.search}&sort=${param['sort']}&index=${i}" class="page-link">${i}</a></li>
                                 </c:forEach>

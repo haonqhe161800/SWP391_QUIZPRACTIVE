@@ -47,7 +47,6 @@ public class DAOPost extends DBConnect {
                         rs.getInt("gender"),
                         rs.getInt("role_id"));
                  Post p = new Post(rs.getInt("post_id"), rs.getInt("marketer_id"), rs.getInt("blog_id"), rs.getInt("subject_id"), rs.getString("tittle"), rs.getDate("posted_date"), rs.getDate("updated_date"), rs.getString("image"), rs.getString("content"), rs.getString("short_content"), rs.getString("status"), b, am);
-                 
                 return p;
             }
         } catch (Exception e) {
@@ -142,7 +141,7 @@ public class DAOPost extends DBConnect {
         ArrayList<Post> list = new ArrayList<>();
         String sql = "SELECT * FROM Post p INNER JOIN Marketer_type ma ON p.marketer_id = ma.marketer_id\n"
                 + "INNER JOIN Blog b ON p.blog_id = b.blog_id\n"
-                + "WHERE b.blog_name LIKE ? " + sortby + "  OFFSET ? ROWS FETCH NEXT 3 ROWS ONLY";
+                + "WHERE p.tittle LIKE ? " + sortby + "  OFFSET ? ROWS FETCH NEXT 3 ROWS ONLY";
 
         try {
             PreparedStatement st = conn.prepareStatement(sql);
@@ -309,14 +308,14 @@ public class DAOPost extends DBConnect {
 //        System.out.println(dpdb.getNumberPost("C"));
 //        ArrayList<Post> list = dpdb.selectBlogList("1", "", 1);
 //        for (Post post : list) {
-//            System.out.println(post);
+//            System.out.println(post.getShort_content());
 //        }
 
 //        Post p = dpdb.getTop1Post();
 //        System.out.println(p.getB().getBlog_name());
-
-        Post p = dpdb.getById(13);
-        System.out.println(p.getStatus());
+//
+        Post p = dpdb.getById(1);
+        System.out.println(p.getContent());
     }
 
 }
