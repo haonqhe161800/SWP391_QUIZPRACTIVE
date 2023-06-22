@@ -39,7 +39,7 @@
 
         <jsp:include page="sidebar-dashboard.jsp"></jsp:include>
             <section class="home-section">
-            <jsp:include page="sidebar-top.jsp"></jsp:include>
+            <jsp:include page="sidebar-top.jsp"></jsp:include>              
 
             <c:if test="${requestScope.message != null}">
                 <div class=" container alert alert-danger alert-dismissible mt-3">
@@ -193,30 +193,30 @@
     <script>
         <script>
         const input = document.getElementById('file-input');
-        const image = document.getElementById('img-preview');
-                
-        input.addEventListener('change', (e) => {                 if (e.target.files.length) {
+            const image = document.getElementById('img-preview');
+        
+            input.addEventListener('change', (e) => {                 if (e.target.files.length) {
         const src = URL.createObjectURL(e.target.files[0]);
         image.src = src;
         }
                     });
-             </script>
-                <script type="text/javascript">
+                    </script>
+                    <script type="text/javascript">
                     const modal = document.getElementById("myModal");
-            
-                    const img = document.getElementById("img-preview");
-                    const modalImg = document.getElementById("img01");
-                    img.onclick = function () {
-                    modal.style.display = "block";
+                        
+                        const img = document.getElementById("img-preview");
+            const modalImg = document.getElementById("img01");
+                        img.onclick = function () {
+                modal.style.display = "block";
         modalImg.src = this.src;
                     };
-            // Get the <span> element that closes the modal
-                    var span = document.getElementsByClassName("close")[0];
-                    
-                    // When the user clicks on <span> (x), close the modal
+                        // Get the <span> element that closes the modal
+                        var span = document.getElementsByClassName("close")[0];
+            
+                        // When the user clicks on <span> (x), close the modal
                         span.onclick = function () {
                 modal.style.display = "none";
-                };
-                </script>
+                        };
+                        </script>
 </body>
 </html>

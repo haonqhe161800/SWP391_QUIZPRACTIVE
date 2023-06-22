@@ -88,7 +88,7 @@
                                     </form>
                                 </div>
                                 <div class="btn-add">
-                                    <button class="btn-warning add-post">Add Post</button>
+                                    <button class="btn-warning add-post" onclick=redirect() >Add Post</button>
                                 </div>
                             </div>            
                             <div class="row">

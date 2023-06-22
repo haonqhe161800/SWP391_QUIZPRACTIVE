@@ -31,6 +31,10 @@ public class Post {
         this.posted_date = posted_date;
         this.update_date = update_date;
         this.image = image;
+        this.content = content;
+        this.short_content = short_content;
+        this.status = status;
+        this.b = b;
         this.am = am;
 
     }
@@ -148,5 +152,6 @@ public class Post {
     public void setAm(AccountMarketer am) {
         this.am = am;
     }
-
+    
+    
 }
