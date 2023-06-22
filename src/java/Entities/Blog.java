@@ -9,26 +9,20 @@ package Entities;
  * @author Admin
  */
 public class Blog {
-    private int blog_id,subject_id;
+     private int blog_id;
     private String blog_name;
     public Blog() {
     }
 
-    public Blog(int blog_id, int subject_id, String blog_name) {
+    public Blog(int blog_id, String blog_name) {
         this.blog_id = blog_id;
-        this.subject_id = subject_id;
         this.blog_name = blog_name;
     }
 
 
-    public int getSubject_id() {
-        return subject_id;
-    }
+   
 
-    public void setSubject_id(int subject_id) {
-        this.subject_id = subject_id;
-    }
-
+   
     public String getBlog_name() {
         return blog_name;
     }

@@ -4,6 +4,7 @@
  */
 package Controller.SliderCRUD;
 
+import DAO.DAOSlider;
 import jakarta.servlet.ServletContext;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -26,6 +27,9 @@ import java.nio.file.Paths;
 
 public class AddSliderController extends HttpServlet {
 
+    public final String FAILURE = "view/marketer/dashboard-addslider.jsp";
+    public final String SUCCESS = "listslider";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -37,29 +41,53 @@ public class AddSliderController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        request.getRequestDispatcher("view/marketer/dashboard-addslider.jsp").forward(request, response);
-        request.getRequestDispatcher("view/test.jsp").forward(request, response);
-//       
+
+        request.getRequestDispatcher("view/marketer/dashboard-addslider.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String realPath = "";
+        String url = "";
+        DAOSlider sdb = new DAOSlider();
+        String content = request.getParameter("content");
+        String note = request.getParameter("note");
+        String subject = request.getParameter("subject");
+        String status = request.getParameter("status");
+
+        String fileName = "";
         try {
             Part part = request.getPart("upfile");
-            realPath = getServletContext().getRealPath("") + "/uploadslider";
-            String filename = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+            String realPath = getServletContext().getRealPath("/uploadslider");
+
+            if (part != null && part.getSize() > 0) {
+                fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+            } else {
+                fileName = "broken-image.png";
+            }
 
             if (!Files.exists(Paths.get(realPath))) {
                 Files.createDirectory(Paths.get(realPath));
             }
-            part.write(realPath + "/" + filename);
-        } catch (Exception e) {
-            realPath = "failure " + e.getMessage();
-        }
+            if (part != null && part.getSize() > 0) {
+                part.write(realPath + "/" + fileName);
+            }
 
-        response.getWriter().print(realPath);
+            //check subject not -1
+            if ("-1".equals(subject)) {
+                url = FAILURE;
+                request.setAttribute("message", "error");
+            } else {
+                url = SUCCESS;
+                //execute insert
+                sdb.insertSilder(Integer.parseInt(subject), fileName, content, note, status == "1" ? true : false);
+            }
+//            request.getRequestDispatcher(url).forward(request, response);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        response.sendRedirect(url);
+        return;
     }
 
     @Override

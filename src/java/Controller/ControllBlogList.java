@@ -52,6 +52,7 @@ public class ControllBlogList extends HttpServlet {
         request.setAttribute("plist", plist);
         request.setAttribute("totalSliderShow", count);
         request.setAttribute("search",search);
+        request.setAttribute("blist", bdb.getAll());
         request.getSession().setAttribute("listslider", listsilder);
         request.getRequestDispatcher("view/blog/BlogList.jsp").forward(request, response);
 

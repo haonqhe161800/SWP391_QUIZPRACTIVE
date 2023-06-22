@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import DAO.DAOBlog;
 import DAO.DAOPost;
 import Entities.Post;
 import java.io.IOException;
@@ -23,12 +24,14 @@ public class ControllBlogDetail extends HttpServlet {
             throws ServletException, IOException {
         String postdetail = request.getParameter("detailpost");
         DAOPost pdb = new DAOPost();
+        DAOBlog bdb = new DAOBlog();
         int postId;
         try {
             postId = Integer.parseInt(postdetail);
             Post p = pdb.getById(postId);
 
             request.setAttribute("latestp", pdb.getTop1Post());
+            request.setAttribute("blist", bdb.getAll());
             request.setAttribute("listpexcept", pdb.ListPostExceptCurrent(postId));
             request.setAttribute("postfollow", p);
 

@@ -1,6 +1,10 @@
 
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="Entities.Subject"%>
+<%@page import="java.util.List"%>
+<%@page import="DAO.DAOSubject"%>
 <!DOCTYPE html>
 <html lang="vn">
     <head>
@@ -13,6 +17,14 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
               integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+        
         <!--Ajax-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
@@ -21,107 +33,22 @@
 
     </head>
     <body>
-        <div class="sidebar" id="style-1">
-            <div class="logo-details">
-                <div class="logo_name">Quiz Practice</div>
-            </div>
-            <ul class="nav-list">
-                <li>
-                    <a href="#">
-                        <i class='bx bx-grid-alt'></i>
-                        <span class="links_name">Dashboard</span>
-                    </a>
-                    <span class="tooltip">Dashboard</span>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class='bx bx-user'></i>
-                        <span class="links_name">Subject</span>
-                    </a>
-                    <span class="tooltip">Subject</span>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class='bx bx-chat'></i>
-                        <span class="links_name">Messages</span>
-                    </a>
-                    <span class="tooltip">Messages</span>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class='bx bx-pie-chart-alt-2'></i>
-                        <span class="links_name">Analytics</span>
-                    </a>
-                    <span class="tooltip">Analytics</span>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class='bx bx-folder'></i>
-                        <span class="links_name">File Manager</span>
-                    </a>
-                    <span class="tooltip">Files</span>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class='bx bx-cart-alt'></i>
-                        <span class="links_name">Order</span>
-                    </a>
-                    <span class="tooltip">Order</span>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class='bx bx-heart'></i>
-                        <span class="links_name">Saved</span>
-                    </a>
-                    <span class="tooltip">Saved</span>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class='bx bx-cog'></i>
-                        <span class="links_name">Setting</span>
-                    </a>
-                    <span class="tooltip">Setting</span>
-                </li>
-            </ul>
-            <div class="force-overflow"></div>
-        </div>
-        <section class="home-section">
-            <div class="menu">
-                <nav class="nav-left_attr">
-                    <i class='bx bx-menu' id="btn" style="text-align: center; padding: 1rem; font-size: 2rem;"></i>
-                </nav>
-                <nav class="nav-right_attr">
-                    <span style="line-height: 60px;
-                          padding: 0 10px;">NamNH</span>
-                    <div class="avatarr dropdown">
-                        <img src="https://th.bing.com/th/id/OIP.mDMuXjKAMMflGF_1y8keZAHaEo?pid=ImgDet&rs=1" alt="">
-                        <i class="fa-solid fa-chevron-down" style="padding: 8px;"></i>
-                        <nav class="dropdown-ofme quote show">
-                            <ul class="nav-dropdown">
-                                <li class="dropdown-i">
-                                    <span class="avatarr"><img
-                                            src="https://th.bing.com/th/id/OIP.mDMuXjKAMMflGF_1y8keZAHaEo?pid=ImgDet&rs=1"
-                                            alt=""></span>
-                                    <span>
-                                        <p id="d-name">DisplayName</p>
-                                        <p id="role">Marketer</p>
-                                    </span>
-                                </li>
-                                <li class="dropdown-i">Home</li>
-                                <li class="dropdown-i">Profile Setting</li>
-                                <li class="dropdown-i">Sign out</li>
-                            </ul>
-                        </nav>
-
-                    </div>
-                </nav>
-            </div>
+        <jsp:include page="sidebar-dashboard.jsp"></jsp:include>
+            <section class="home-section">
+            <jsp:include page="sidebar-top.jsp"></jsp:include>
+            
+            <c:if test="${requestScope.message != null}">
+                <div class=" container alert alert-danger alert-dismissible mt-3">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Failure!</strong> Subject invalid Please re-choose.
+                </div>
+            </c:if>
 
 
             <div class="content container-fluid mt-3" style="width: 95%;">
                 <div class="row filter">
                     <div class="num-entry">
-                        <label><a href="#">DashBoard</a> / <a>List Slider</a> / <a>Add Slider</a></label>
+                       <label><a href="#">DashBoard</a> / <a href="listslider">List Slider</a> / <a>Add Slider</a></label>
                     </div>
                 </div>
                 <form class="row" action="addslider" method="POST" enctype="multipart/form-data" >
@@ -130,7 +57,7 @@
                             <div class="form-group">
                                 <label for="">Content:</label>
                                 <div class="item-input">
-                                    <input type="text" name="content">
+                                   <input type="text" name="content" required>
                                 </div>
                             </div>
                         </div>
@@ -138,7 +65,7 @@
                             <div class="form-group">
                                 <label for="">Note:</label>
                                 <div class="item-input">
-                                    <input type="text" name="note"> 
+                                     <input type="text" name="note" required> 
                                 </div>
                             </div>
                         </div>
@@ -147,9 +74,14 @@
                                 <label for="">Relative Subject:</label>
                                 <div class="item-input">
                                     <Select name="subject">
-                                        <option value="">A</option>
-                                        <option value="">B</option>
-                                        <option value="">C</option>
+                                        <option value="-1">Select subject</option>
+                                        <%
+                                        DAOSubject sdb = new DAOSubject();    
+                                        List<Subject> list = sdb.getAll();
+                                        for(Subject s : list){
+                                        %>
+                                        <option value="<%=s.getSubject_id()%>"><%=s.getSubject_name()%></option>
+                                        <% }%>
                                     </Select>
                                 </div>
                             </div>
@@ -157,8 +89,8 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <div class="item-input">
-                                    <input type="radio" name="status" checked> visable
-                                    <input type="radio" name="status"> hide
+                                       <input type="radio" name="status" value="1" checked> visable
+                                    <input type="radio" name="status" value="0"> hide
                                 </div>
                             </div>
                         </div>

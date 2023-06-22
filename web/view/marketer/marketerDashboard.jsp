@@ -36,106 +36,11 @@
     </head>
 
     <body>
-        <div class="sidebar" id="style-1">
-            <div class="logo-details">
-                <div class="logo_name">Quiz Practice</div>
-            </div>
-            <ul class="nav-list">
-                <li>
-                    <a href="#">
-                        <i class='bx bx-grid-alt'></i>
-                        <span class="links_name">Dashboard</span>
-                    </a>
-                    <span class="tooltip">Dashboard</span>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class='bx bx-user'></i>
-                        <span class="links_name">Subject</span>
-                    </a>
-                    <span class="tooltip">Subject</span>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class='bx bx-chat'></i>
-                        <span class="links_name">Messages</span>
-                    </a>
-                    <span class="tooltip">Messages</span>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class='bx bx-pie-chart-alt-2'></i>
-                        <span class="links_name">Analytics</span>
-                    </a>
-                    <span class="tooltip">Analytics</span>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class='bx bx-folder'></i>
-                        <span class="links_name">File Manager</span>
-                    </a>
-                    <span class="tooltip">Files</span>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class='bx bx-cart-alt'></i>
-                        <span class="links_name">Order</span>
-                    </a>
-                    <span class="tooltip">Order</span>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class='bx bx-heart'></i>
-                        <span class="links_name">Saved</span>
-                    </a>
-                    <span class="tooltip">Saved</span>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class='bx bx-cog'></i>
-                        <span class="links_name">Setting</span>
-                    </a>
-                    <span class="tooltip">Setting</span>
-                </li>
-            </ul>
-            <div class="force-overflow"></div>
-        </div>
-        <section class="home-section">
-            <div class="menu">
-                <nav class="nav-left_attr">
-                    <i class='bx bx-menu' id="btn" style="text-align: center; padding: 1rem; font-size: 2rem;"></i>
-                </nav>
-                <nav class="nav-right_attr">
-                    <span style="line-height: 60px;
-                          padding: 0 10px;">NamNH</span>
-                    <div class="avatarr dropdown">
-                        <!-- <img src="https://th.bing.com/th/id/OIP.mDMuXjKAMMflGF_1y8keZAHaEo?pid=ImgDet&rs=1" alt=""
-                            role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false"> -->
-                        <!-- <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div> -->
-                        <img src="https://th.bing.com/th/id/OIP.mDMuXjKAMMflGF_1y8keZAHaEo?pid=ImgDet&rs=1" alt="">
-                        <i class="fa-solid fa-chevron-down" style="padding: 8px;"></i>
-                        <nav class="dropdown-ofme quote show">
-                            <ul class="nav-dropdown">
-                                <li class="dropdown-i">
-                                    <span class="avatarr"><img src="https://th.bing.com/th/id/OIP.mDMuXjKAMMflGF_1y8keZAHaEo?pid=ImgDet&rs=1" alt=""></span>
-                                    <span> <p id="d-name">DisplayName</p>
-                                        <p id="role">Marketer</p>
-                                    </span>
-                                </li>
-                                <li class="dropdown-i">Home</li>
-                                <li class="dropdown-i">Profile Setting</li>
-                                <li class="dropdown-i">Sign out</li>
-                            </ul>                           
-                        </nav>
-
-                    </div>
-                </nav>
+        <jsp:include page="sidebar-dashboard.jsp"></jsp:include>
+            <section class="home-section">
+            <jsp:include page="sidebar-top.jsp"></jsp:include>
+            <div class="content container-fluid mt-3 " style="width: 95%;">
+                <div class="d-flex justify-content-center">BLANK PAGE</div>
             </div>
         </section>
         <Footer class="footer mt-3">

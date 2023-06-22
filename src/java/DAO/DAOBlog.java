@@ -8,6 +8,7 @@ import Entities.Blog;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import module.DBConnect;
 
 /**
@@ -42,7 +43,7 @@ public class DAOBlog extends DBConnect {
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                Blog b = new Blog(rs.getInt("blog_id"), rs.getInt("subject_id"), rs.getString("blog_name"));
+                Blog b = new Blog(rs.getInt("blog_id"), rs.getString("blog_name"));
                 return b;
             }
         } catch (Exception e) {
@@ -51,12 +52,26 @@ public class DAOBlog extends DBConnect {
 
         return null;
     }
-    
 
-   
-    
+    //getAll
+    public ArrayList<Blog> getAll() {
+        ArrayList<Blog> list = new ArrayList<>();
+        String sql = "SELECT * FROM Blog";
+        try {
+            PreparedStatement st = conn.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Blog b = new Blog(rs.getInt("blog_id"), rs.getString("blog_name"));
+                list.add(b);
+            }
+            return list;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
-        
-        
+
     }
 }

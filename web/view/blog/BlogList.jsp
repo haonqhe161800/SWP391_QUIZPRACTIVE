@@ -19,14 +19,14 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        
-         <!--popup of Marketer-->
-    <link rel="stylesheet" href="./assets/css/newcss.css"/>
-        <!-- fontanswer icons -->
-    <script src="https://kit.fontawesome.com/fe000f9b2a.js" crossorigin="anonymous"></script>
 
-     <!-- jquery -->
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <!--popup of Marketer-->
+        <link rel="stylesheet" href="./assets/css/newcss.css"/>
+        <!-- fontanswer icons -->
+        <script src="https://kit.fontawesome.com/fe000f9b2a.js" crossorigin="anonymous"></script>
+
+        <!-- jquery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <style>
             .content {
                 padding-left: 0px;
@@ -80,7 +80,7 @@
                 <div class="carousel-inner">
                     <c:forEach var="ss" items="${sessionScope.listslider}">
                         <div class="carousel-item ${ss.slider_id == 1 ? "active" : ""}">
-                            <a href="#" style="width: 100%;"><img src="view/slider/${ss.url}" alt="" class="d-block w-100"></a>
+                            <a href="#" style="width: 100%;"><img src="uploadslider/${ss.url}" alt="" class="d-block w-100"></a>
                         </div>
                     </c:forEach>
                 </div>
@@ -133,7 +133,7 @@
                             </div>
                             <div class="body-item">
                                 <div class="content_blog_item">
-                                    <h2 class="title_blog"> <a href="detailpost?detailpost=${p.getPost_id()}">${p.getB().getBlog_name()}</a></h2>
+                                    <h2 class="title_blog"> <a href="detailpost?detailpost=${p.getPost_id()}">${p.getTittle()}</a></h2>
                                     <p class="sub_paraph">${p.getShort_content()}</p>
                                     <div class="blog_infor">
                                         <div class="create_at"><p style="margin-top: 23%;padding: 0 5px; border-bottom: 2px solid black;">${p.getPosted_date()}</p></div>
@@ -161,7 +161,7 @@
                                 </div>
                                 <div class="lpa-left media-body">
                                     <div class="lpa-title">
-                                        <h5><a href="detailpost?detailpost=${latestp.getPost_id()}">${latestp.getB().getBlog_name()}</a></h5>
+                                        <h5><a href="detailpost?detailpost=${latestp.getPost_id()}">${latestp.getTittle()}</a></h5>
                                         <p class="sub_paraph" style="font-size: 10px;">${latestp.getShort_content()}</p>
                                     </div>
                                     <div class="lpa-meta">
@@ -178,17 +178,14 @@
                         <div class="widget-title">
                             <h3>Tags</h3>
                         </div>
-                        <!--                        <div class="widget-body">
-                                                    <div class="nav tag-cloud">
-                                                        <a href="#">Design</a>
-                                                        <a href="#">Development</a>
-                                                        <a href="#">Travel</a>
-                                                        <a href="#">Web Design</a>
-                                                        <a href="#">Marketing</a>
-                                                        <a href="#">Research</a>
-                                                        <a href="#">Managment</a>
-                                                    </div>
-                                                </div>-->
+                        <div class="widget-body">
+                            <div class="nav tag-cloud">
+                                <c:forEach items="${blist}" var="b">
+                                    <a href="#">${b.getBlog_name()}<span>(${100})</span></a>
+
+                                </c:forEach>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
@@ -197,70 +194,77 @@
             <div class="transfor_page row-cols-1 mt-md-3  mb-sm-3">
                 <nav aria-label="Page navigation example">
                     <ul class="okok paginationn justify-content-center">
-                        <li class="page-item"><a class="page-link ${param['index']==1 ? 'disabled' : ''}" href="listpost?search=${requestScope.search}&sort=${param['sort']}&index=${param['index']-1}">Previous</a></li>
+                        <c:if test="${index > 1}">
+                            <li class="page-item">
+                                <a class="page-link" href="listpost?search=${requestScope.search}&sort=${param['sort']}&index=${param['index']-1}">Previous</a>
+                            </li> 
+                        </c:if>
+                        <c:forEach var = "i" begin = "1" end = "${numberPage}">
                             <c:forEach var = "i" begin = "1" end = "${numberPage}">
-                            <li class="${param['index']==i?'page-item active':'page-item'}"><a href="listpost?search=${requestScope.search}&sort=${param['sort']}&index=${i}" class="page-link">${i}</a></li>
-                            </c:forEach>
-                        <li class="page-item"><a class="page-link ${param['index'] == numberPage ? 'disabled' : ''}" href="listpost?search=${requestScope.search}&sort=${param['sort']}&index=${param['index']+1}">Next</a></li>
-                    </ul>
-                </nav>
+                                <li class="${param['index']==i?'page-item active':'page-item'}"><a href="listpost?search=${requestScope.search}&sort=${param['sort']}&index=${i}" class="page-link">${i}</a></li>
+                                </c:forEach>
+                                <c:if test="${ index < numberPage}">
+                                <li class="page-item"><a class="page-link" href="listpost?search=${requestScope.search}&sort=${param['sort']}&index=${param['index']+1}">Next</a></li>
+                                </c:if>
+                        </ul>
+                    </nav>
+                </div>
             </div>
-        </div>
 
-        <jsp:include page="/jspClient/Footer.jsp" />
-        <!--/ End Footer Area -->
-        <!-- ========================= scroll-top ========================= -->
+            <jsp:include page="/jspClient/Footer.jsp" />
+            <!--/ End Footer Area -->
+            <!-- ========================= scroll-top ========================= -->
 
 
-        <!-- ========================= JS here ========================= -->
-        <script src="assets/js/bootstrap.min.js"></script>
-        <script src="assets/js/wow.min.js"></script>
-        <script src="assets/js/tiny-slider.js"></script>
-        <script src="assets/js/glightbox.min.js"></script>
-        <script src="assets/js/main.js"></script>
-        <script type="text/javascript">
-                                        //========= Category Slider 
-                                        tns({
-                                            container: '.category-slider',
-                                            items: 3,
-                                            slideBy: 'page',
-                                            autoplay: false,
-                                            mouseDrag: true,
-                                            gutter: 0,
-                                            nav: false,
-                                            controls: true,
-                                            controlsText: ['<i class="lni lni-chevron-left"></i>', '<i class="lni lni-chevron-right"></i>'],
-                                            responsive: {
-                                                0: {
-                                                    items: 1
-                                                },
-                                                540: {
-                                                    items: 2
-                                                },
-                                                768: {
-                                                    items: 4
-                                                },
-                                                992: {
-                                                    items: 5
-                                                },
-                                                1170: {
-                                                    items: 6
-                                                }
-                                            }
-                                        }
-                                        );
-        </script>
+            <!-- ========================= JS here ========================= -->
+            <script src="assets/js/bootstrap.min.js"></script>
+            <script src="assets/js/wow.min.js"></script>
+            <script src="assets/js/tiny-slider.js"></script>
+            <script src="assets/js/glightbox.min.js"></script>
+            <script src="assets/js/main.js"></script>
+            <script type="text/javascript">
+                    //========= Category Slider 
+                    tns({
+                        container: '.category-slider',
+                        items: 3,
+                        slideBy: 'page',
+                        autoplay: false,
+                        mouseDrag: true,
+                        gutter: 0,
+                        nav: false,
+                        controls: true,
+                        controlsText: ['<i class="lni lni-chevron-left"></i>', '<i class="lni lni-chevron-right"></i>'],
+                        responsive: {
+                            0: {
+                                items: 1
+                            },
+                            540: {
+                                items: 2
+                            },
+                            768: {
+                                items: 4
+                            },
+                            992: {
+                                items: 5
+                            },
+                            1170: {
+                                items: 6
+                            }
+                        }
+                    }
+                    );
+            </script>
 
-        <script type="text/Javascript">
+            <script type="text/javascript">
             
-             function checkImage(img) {
+               function checkImage(img) {
                 if (img.naturalWidth === 0 || img.naturalHeight === 0) {
                 replaceImage(img);
                 }
-  }
-                function replaceImage(img) {
-                    img.src = "view/blog/assets/img/broken-image.png";
                 }
-        </script>
-    </body>
-</html>
+                function replaceImage(img) {
+                img.src = "view/blog/assets/img/broken-image.png";
+                }
+            </script>
+        </body>
+    </html>

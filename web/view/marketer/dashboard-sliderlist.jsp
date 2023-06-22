@@ -1,8 +1,4 @@
-<%-- 
-    Document   : dashboard-sliderlist
-    Created on : 15-Jun-2023, 04:52:13
-    Author     : Admin
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -47,122 +43,42 @@
                 }
                 window.location.href = url;
             }
-            
-            function redirect(){
-                 window.location.href = 'addslider';
+
+            function redirect() {
+                window.location.href = 'addslider';
             }
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('.ddelete').on('click', function () {
+                    var id = $(this).parent().find('#id').val();
+                    $('#hiid').val(id);
+                });
+            });
 
 
         </script>
         <style>
             .active{
                 pointer-events:none;
-            }      .
+            }
+            .
         </style>
     </head>
 
     <body>
-        <div class="sidebar" id="style-1">
-            <div class="logo-details">
-                <div class="logo_name">QUIZ PRACTICE</div>
-            </div>
-            <ul class="nav-list">
-                <li>
-                    <a href="#">
-                        <i class='bx bx-grid-alt'></i>
-                        <span class="links_name">Dashboard</span>
-                    </a>
-                    <span class="tooltip">Dashboard</span>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class='bx bx-user'></i>
-                        <span class="links_name">Subject</span>
-                    </a>
-                    <span class="tooltip">Subject</span>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class='bx bx-chat'></i>
-                        <span class="links_name">Messages</span>
-                    </a>
-                    <span class="tooltip">Messages</span>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class='bx bx-pie-chart-alt-2'></i>
-                        <span class="links_name">Analytics</span>
-                    </a>
-                    <span class="tooltip">Analytics</span>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class='bx bx-folder'></i>
-                        <span class="links_name">File Manager</span>
-                    </a>
-                    <span class="tooltip">Files</span>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class='bx bx-cart-alt'></i>
-                        <span class="links_name">Order</span>
-                    </a>
-                    <span class="tooltip">Order</span>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class='bx bx-heart'></i>
-                        <span class="links_name">Saved</span>
-                    </a>
-                    <span class="tooltip">Saved</span>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class='bx bx-cog'></i>
-                        <span class="links_name">Setting</span>
-                    </a>
-                    <span class="tooltip">Setting</span>
-                </li>
-            </ul>
-            <div class="force-overflow"></div>
-        </div>
-        <section class="home-section">
-            <div class="menu">
-                <nav class="nav-left_attr">
-                    <i class='bx bx-menu' id="btn" style="text-align: center; padding: 1rem; font-size: 2rem;"></i>
-                </nav>
-                <nav class="nav-right_attr">
-                    <span style="line-height: 60px;
-                          padding: 0 10px;">NamNH</span>
-                    <div class="avatarr dropdown">
-                        <img src="https://th.bing.com/th/id/OIP.mDMuXjKAMMflGF_1y8keZAHaEo?pid=ImgDet&rs=1" alt="">
-                        <i class="fa-solid fa-chevron-down" style="padding: 8px;"></i>
-                        <nav class="dropdown-ofme quote show">
-                            <ul class="nav-dropdown">
-                                <li class="dropdown-i">
-                                    <span class="avatarr"><img src="https://th.bing.com/th/id/OIP.mDMuXjKAMMflGF_1y8keZAHaEo?pid=ImgDet&rs=1" alt=""></span>
-                                    <span> <p id="d-name">DisplayName</p>
-                                        <p id="role">Marketer</p>
-                                    </span>
-                                </li>
-                                <li class="dropdown-i">Home</li>
-                                <li class="dropdown-i">Profile Setting</li>
-                                <li class="dropdown-i">Sign out</li>
-                            </ul>                           
-                        </nav>
-
-                    </div>
-                </nav>
-            </div>
+        <jsp:include page="sidebar-dashboard.jsp"></jsp:include>
+            <section class="home-section">
+            <jsp:include page="sidebar-top.jsp"></jsp:include>
 
 
-            <div class="content container-fluid mt-3" style="width: 95%;">
-                <div class="row filter">
-                    <div class="num-entry">
-                        <form action="" onchange="change()" id="f1">
-                            <label>Show</label>
-                            <select name="entry" id="selectInput" >
-                                <option value="10" ${param['entry']==10?"selected":""}>10</option>
+                <div class="content container-fluid mt-3" style="width: 95%;">
+                    <div class="row filter">
+                        <div class="num-entry">
+                            <form action="" onchange="change()" id="f1">
+                                <label>Show</label>
+                                <select name="entry" id="selectInput" >
+                                    <option value="10" ${param['entry']==10?"selected":""}>10</option>
                                 <option value="5" ${param['entry']==5?"selected":""}>5</option>
                                 <option value="3" ${param['entry']==3?"selected":""}>3</option>
                             </select>
@@ -183,27 +99,30 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">Id <i class="fa-solid fa-arrow-up"></i></th>
-                                <th scope="col">Content <i class="fa-solid fa-arrow-up-a-z"></i></th>
+                                <th scope="col">Id <i class="fa-solid fa-arrow-up" style="float: right; margin-top: 4px;"></i></th>
+                                <th scope="col">Content <i class="fa-solid fa-arrow-up-a-z" style="float: right; margin-top: 4px;"></i></th>
                                 <th scope="col">Slider_url</th>
                                 <th scope="col">Status</th>
                                 <th scope="col" style="text-align: center;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="l" items="${requestScope.listslider}">
+                            <c:forEach var="l" items="${requestScope.listslider}" varStatus="i">
                                 <tr>
-                                    <th scope="row">${l.slider_id}</th>
+                                    <td scope="row">${i.index + 1}</td>
                                     <td>${l.content}</td>
-                                    <td style="width: 30%;"><img src="view/slider/${l.url}" alt="${l.url}" width="90%"></td>
+                                    <td style="width: 30%;"><img src="uploadslider/${l.url}" alt="${l.url}" width="90%"></td>
                                     <td style="width: 12%;">
-                                        <span><i class="visiblle fa-regular fa-eye"></i> </span>
-                                        <span><i class="hide fa-regular fa-eye-slash"></i></span>
+                                        <span ><i class="visiblle fa-regular fa-eye" style="cursor: not-allowed"></i> </span>
+                                        <span ><i class="hide fa-regular fa-eye-slash" style="cursor: not-allowed"></i></span>
                                     </td>
                                     <td style="text-align: center;">
-                                        <span><i class=" delete fa-regular fa-trash-can"></i></span>
-                                        <span><i class="edit fa-regular fa-pen-to-square"></i></span>
-                                    </td>
+                                        <span><a href="#" data-toggle="modal"
+                                                 data-target="#exampleModal" class="ddelete"><i class=" delete fa-regular fa-trash-can"></i></a>
+                                            <input type="hidden" name="id" id="id" value="${l.slider_id}">
+                                        </span>
+                                        <span><a href="updateslider?id=${l.slider_id}"><i class="edit fa-regular fa-pen-to-square"></i></a></span>
+                                    </td> 
                                 </tr>
                             </c:forEach>
                         </tbody>
@@ -215,20 +134,50 @@
                     <nav class="num-page">
                         <ul class="pagination justify-content-end">
                             <c:if test="${index > 1}">
-                               <li class="page-item">
+                                <li class="page-item">
                                     <a class="page-link" href="listslider?search=${requestScope.search}&entry=${param['entry']}&index=${param['index']-1}">Previous</a>
-                            </li> 
+                                </li> 
                             </c:if>
                             <c:forEach var = "i" begin = "1" end = "${numberPage}">
                                 <li class="${param['index']==i?'page-item active':'page-item'}"><a href="listslider?search=${requestScope.search}&entry=${param['entry']}&index=${i}" class="page-link">${i}</a></li>
                                 </c:forEach>
                                 <c:if test="${ index < numberPage}">
                                 <li class="page-item"><a class="page-link" href="listslider?search=${requestScope.search}&entry=${param['entry']}&index=${param['index']+1}">Next</a></li>
-                            </c:if>
+                                </c:if>
                         </ul>
                     </nav>
                 </div>
             </div>
+            <!--Delete Modal HTML-->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form action="${pageContext.request.contextPath}/deleteslider" method="POST">
+
+                            <div class="modal-header">
+                                <div class="container d-flex pl-0">
+                                    <h5 class="modal-title ml-2" id="exampleModalLabel">Delete this slider?</h5>
+                                </div>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p class="text-muted">If you delete this slider will be gone forever. Are you sure you want to proceed?
+                                </p>
+                            </div>
+                            <input type="hidden" name="id" id="hiid">
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
         </section>
         <Footer class="footer">
             <p>@Copyright by NamNH</p>

@@ -1,4 +1,4 @@
-@import "styleLeftnavDashboard.css"; 
+@import "styleLeftnavDashboard.css";
 
 .menu {
     display: flex;
@@ -132,6 +132,34 @@
 
 .edit:hover {
     background-color: chocolate;
+}
+.close:focus {
+    outline: none;
+}
+
+.modal {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-header {
+    border: none;
+}
+
+.modal-footer {
+    border: none;
+}
+
+.btn-danger {
+    background: #DD2750;
+    border: 1px solid #C43352;
+}
+
+.btn-light {
+    border: 1px solid #E7E7E9;
+}
+
+.btn:focus {
+    box-shadow: none;
 }
 
 .footer {
