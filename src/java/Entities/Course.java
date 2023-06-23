@@ -24,6 +24,13 @@ public class Course {
     public Course() {
     }
 
+    public Course(String course_name, String description, String image, int is_publish) {
+        this.course_name = course_name;
+        this.description = description;
+        this.image = image;
+        this.is_publish = is_publish;
+    }  
+
     public Course(int course_id, int subject_id, int mentor_id, String course_name, String description, String image, int is_publish, int quantity, String created_date, String updated_date) {
         this.course_id = course_id;
         this.subject_id = subject_id;

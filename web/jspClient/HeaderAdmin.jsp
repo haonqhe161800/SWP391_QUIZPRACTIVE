@@ -19,7 +19,7 @@
                 <div class="col-lg-12">
                     <div class="nav-inner">
                         <nav class="navbar navbar-expand-lg" style="display: flex; justify-content: space-between">
-                            <a class="navbar-brand" href="HomeController">
+                            <a class="navbar-brand" href="User">
                                QUIZPRACTICE
                             </a>
                             <%
