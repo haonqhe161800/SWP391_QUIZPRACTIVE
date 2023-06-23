@@ -1,21 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package Controller.SliderCRUD;
 
 import DAO.DAOSlider;
-import jakarta.servlet.ServletContext;
-import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
-import java.io.InputStream;
-import java.net.URL;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -29,14 +21,6 @@ public class AddSliderController extends HttpServlet {
 
     public final String FAILURE = "view/marketer/dashboard-addslider.jsp";
     public final String SUCCESS = "listslider";
-
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-
-        }
-    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -82,17 +66,12 @@ public class AddSliderController extends HttpServlet {
                 //execute insert
                 sdb.insertSilder(Integer.parseInt(subject), fileName, content, note, status == "1" ? true : false);
             }
-//            request.getRequestDispatcher(url).forward(request, response);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        request.getRequestDispatcher(url).forward(request, response);
-        return;
+//        request.getRequestDispatcher(url).forward(request, response);
+          response.sendRedirect(url);
+          return;
     }
-
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
 }

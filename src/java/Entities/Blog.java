@@ -18,7 +18,7 @@ public class Blog {
         this.blog_id = blog_id;
         this.blog_name = blog_name;
     }
-   
+
     public String getBlog_name() {
         return blog_name;
     }

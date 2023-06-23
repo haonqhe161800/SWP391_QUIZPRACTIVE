@@ -52,6 +52,7 @@ public class DAOBlog extends DBConnect {
 
         return null;
     }
+    
 
     //getAll
     public ArrayList<Blog> getAll() {

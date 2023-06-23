@@ -7,6 +7,8 @@ package DAO;
 import Entities.AccountMarketer;
 import Entities.Blog;
 import Entities.Post;
+import Entities.Slider;
+import Entities.Subject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -54,16 +56,16 @@ public class DAOPost extends DBConnect {
         }
         return null;
     }
-    
+
 //    getByid and except id of blog detail current
-    public ArrayList<Post> ListPostExceptCurrent(int id){
+    public ArrayList<Post> ListPostExceptCurrent(int id) {
         ArrayList<Post> list = new ArrayList<>();
         String sql = "SELECT TOP(5)* FROM Post p INNER JOIN Marketer_type ma ON p.marketer_id = ma.marketer_id INNER JOIN Blog b ON p.blog_id = b.blog_id WHERE p.post_id != ?";
         try {
             PreparedStatement st = conn.prepareStatement(sql);
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
-            while(rs.next()) {
+            while (rs.next()) {
                 Blog b = new Blog(rs.getInt("blog_id"), rs.getString("blog_name"));
                 AccountMarketer am = new AccountMarketer(
                         rs.getInt("marketer_id"),
@@ -81,7 +83,6 @@ public class DAOPost extends DBConnect {
                         rs.getInt("gender"),
                         rs.getInt("role_id"));
                 list.add(new Post(rs.getInt("post_id"), rs.getInt("marketer_id"), rs.getInt("blog_id"), rs.getInt("subject_id"), rs.getString("tittle"), rs.getDate("posted_date"), rs.getDate("updated_date"), rs.getString("image"), rs.getString("content"), rs.getString("short_content"), rs.getString("status"), b, am));
-            
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -115,7 +116,6 @@ public class DAOPost extends DBConnect {
                         rs.getInt("gender"),
                         rs.getInt("role_id"));
                 Post p = new Post(rs.getInt("post_id"), rs.getInt("marketer_id"), rs.getInt("blog_id"), rs.getInt("subject_id"), rs.getString("tittle"), rs.getDate("posted_date"), rs.getDate("updated_date"), rs.getString("image"), rs.getString("content"), rs.getString("short_content"), rs.getString("status"), b, am);
-                 
                 return p;
             }
         } catch (Exception e) {
@@ -166,7 +166,6 @@ public class DAOPost extends DBConnect {
                         rs.getInt("gender"),
                         rs.getInt("role_id"));
                 list.add(new Post(rs.getInt("post_id"), rs.getInt("marketer_id"), rs.getInt("blog_id"), rs.getInt("subject_id"), rs.getString("tittle"), rs.getDate("posted_date"), rs.getDate("updated_date"), rs.getString("image"), rs.getString("content"), rs.getString("short_content"), rs.getString("status"), b, am));
-            
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -204,7 +203,6 @@ public class DAOPost extends DBConnect {
                         rs.getInt("gender"),
                         rs.getInt("role_id"));
                 list.add(new Post(rs.getInt("post_id"), rs.getInt("marketer_id"), rs.getInt("blog_id"), rs.getInt("subject_id"), rs.getString("tittle"), rs.getDate("posted_date"), rs.getDate("updated_date"), rs.getString("image"), rs.getString("content"), rs.getString("short_content"), rs.getString("status"), b, am));
-
             }
             return list;
         } catch (SQLException e) {
@@ -229,8 +227,9 @@ public class DAOPost extends DBConnect {
         }
         return 0;
     }
-    
-      //insert
+
+
+    //insert
     public void insertPost(int marketerid, String tittle, String shortcontent, String content, int blogId, int subjectId, String status, Date postedPost, String thumbnail) {
         String sql = "INSERT INTO [dbo].[Post]\n"
                 + "           ([marketer_id]\n"
@@ -316,6 +315,11 @@ public class DAOPost extends DBConnect {
 //
         Post p = dpdb.getById(1);
         System.out.println(p.getContent());
+//        Post p = dpdb.getTop1Post();
+//        System.out.println(p.getB().getBlog_name());
+
+//        Post p = dpdb.getById(13);
+//        System.out.println(p.getStatus());
     }
 
 }

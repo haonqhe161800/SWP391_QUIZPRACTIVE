@@ -27,12 +27,14 @@
 
         <!-- fontanswer icons -->
         <script src="https://kit.fontawesome.com/fe000f9b2a.js" crossorigin="anonymous"></script>
-        <script>
+
+
+        <script type="text/javascript">
             function change() {
 
                 var searchInput = document.getElementById('searchInput').value;
                 var selectInput = document.getElementById('selectInput').value;
-
+                
                 var url;
                 if (searchInput === '' && selectInput !== '') {
                     url = 'listslider?entry=' + encodeURIComponent(selectInput);
@@ -55,8 +57,6 @@
                     $('#hiid').val(id);
                 });
             });
-
-
         </script>
         <style>
             .active{
@@ -70,7 +70,6 @@
         <jsp:include page="sidebar-dashboard.jsp"></jsp:include>
             <section class="home-section">
             <jsp:include page="sidebar-top.jsp"></jsp:include>
-
 
                 <div class="content container-fluid mt-3" style="width: 95%;">
                     <div class="row filter">
@@ -96,7 +95,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <table class="table table-striped">
+                    <table class="table table-striped table-active">
                         <thead>
                             <tr>
                                 <th scope="col">Id <i class="fa-solid fa-arrow-up" style="float: right; margin-top: 4px;"></i></th>
@@ -148,6 +147,7 @@
                     </nav>
                 </div>
             </div>
+
             <!--Delete Modal HTML-->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                  aria-hidden="true">

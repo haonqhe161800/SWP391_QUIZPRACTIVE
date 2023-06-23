@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import module.DBConnect;
 
 /**
@@ -31,7 +30,7 @@ public class DAOSubject extends DBConnect {
                 list.add(s);
             }
             return list;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
         return null;
@@ -84,29 +83,35 @@ public int deleteSubject(int id){
         return n;
     }
    public static void main(String[] args) {
-        try {
-            // Nhập thông tin môn học từ người dùng
-            Scanner scanner = new Scanner(System.in);
-            System.out.print("Enter subject name: ");
-            String name = scanner.nextLine();
-            System.out.print("Enter subject image: ");
-            String image = scanner.nextLine();
+//        try {
+//            // Nhập thông tin môn học từ người dùng
+//            Scanner scanner = new Scanner(System.in);
+//            System.out.print("Enter subject name: ");
+//            String name = scanner.nextLine();
+//            System.out.print("Enter subject image: ");
+//            String image = scanner.nextLine();
+//
+//            // Khởi tạo đối tượng Subject
+//            Subject newSubject = new Subject(name, image);
+//
+//            // Thêm môn học mới vào database
+//            DAOSubject ds = new DAOSubject();
+//            int result = ds.addSubject(newSubject);
+//
+//            // Xử lý kết quả trả về
+//            if (result > 0)
+//                System.out.println("Thêm môn học thành công!");
+//            else
+//                System.out.println("Thêm môn học thất bại!");
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
 
-            // Khởi tạo đối tượng Subject
-            Subject newSubject = new Subject(name, image);
-
-            // Thêm môn học mới vào database
-            DAOSubject ds = new DAOSubject();
-            int result = ds.addSubject(newSubject);
-
-            // Xử lý kết quả trả về
-            if (result > 0)
-                System.out.println("Thêm môn học thành công!");
-            else
-                System.out.println("Thêm môn học thất bại!");
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        
+           
+            DAOSubject sdb = new DAOSubject();
+            List<Subject> list = sdb.getAll();
+            for (Subject subject : list) {
+                System.out.println(subject);
+       }
     
 }
 
@@ -118,5 +123,4 @@ public int deleteSubject(int id){
 //        System.out.println("Rows deleted: " + rowsAffected);
     }
 
-}
   

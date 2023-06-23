@@ -205,20 +205,19 @@
                         </ul>
                     </nav>
                 </div>
-            </div>
-
+</div>
             <jsp:include page="/jspClient/Footer.jsp" />
             <!--/ End Footer Area -->
             <!-- ========================= scroll-top ========================= -->
 
 
-            <!-- ========================= JS here ========================= -->
-            <script src="assets/js/bootstrap.min.js"></script>
-            <script src="assets/js/wow.min.js"></script>
-            <script src="assets/js/tiny-slider.js"></script>
-            <script src="assets/js/glightbox.min.js"></script>
-            <script src="assets/js/main.js"></script>
-            <script type="text/javascript">
+        <!-- ========================= JS here ========================= -->
+        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="assets/js/wow.min.js"></script>
+        <script src="assets/js/tiny-slider.js"></script>
+        <script src="assets/js/glightbox.min.js"></script>
+        <script src="assets/js/main.js"></script>
+        <script type="text/javascript">
                     //========= Category Slider 
                     tns({
                         container: '.category-slider',
@@ -250,7 +249,6 @@
                     }
                     );
             </script>
-
             <script type="text/javascript">
             
                function checkImage(img) {
@@ -264,3 +262,5 @@
             </script>
         </body>
     </html>
+
+

@@ -41,7 +41,7 @@ body {
     margin-bottom: 0px;
     font-family: 'Segoe UI';
     font-size: 2rem;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .login {
@@ -73,7 +73,7 @@ body {
     line-height: 3em;
     font-family: 'Ubuntu', sans-serif;
     border-radius: 5px;
-    border: 2px solid skyblue;
+    border: 2px solid #5830E0;
 }
 
 .checkbox {
@@ -84,14 +84,14 @@ body {
     text-decoration: none;
     list-style: none;
     color: #181b39;
-    font-weight: 900;
+    font-weight: 600;
 
 }
 
 .form-signin button {
 
     width: 87%;
-    background: #4255ff;
+    background: #0d6efd;
     border: none;
     border-radius: 8px;
     color: slategrey;
@@ -118,7 +118,7 @@ body {
     text-decoration: none;
     color: black;
     font-size: 15px;
-    font-weight: 900;
+    font-weight: 600;
 }
 
 /*responsive : */

@@ -1,9 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 
 package Controller.PostCRUD;
+
+
 
 
 import java.io.File;
@@ -19,14 +17,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 
-import jakarta.servlet.annotation.WebServlet;
-
-import jakarta.servlet.annotation.MultipartConfig;
-
-/**
- *
- * @author Admin
- */
 @WebServlet(name="ImageUploadServlet", urlPatterns={"/ImageUploadServlet"})
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024 * 10,

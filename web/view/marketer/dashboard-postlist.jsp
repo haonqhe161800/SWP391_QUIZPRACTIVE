@@ -1,8 +1,3 @@
-<%-- 
-    Document   : dashboard-postlist
-    Created on : 15-Jun-2023, 04:58:03
-    Author     : Admin
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -30,11 +25,11 @@
         <!-- fontanswer icons -->
         <script src="https://kit.fontawesome.com/fe000f9b2a.js" crossorigin="anonymous"></script>
         <script type="text/javascript">
+
             function change() {
 
                 var searchInput = document.getElementById('searchInput').value;
                 var selectInput = document.getElementById('selectInput').value;
-
                 var url;
                 if (searchInput === '' && selectInput !== '') {
                     url = 'dashboardlistpost?entry=' + encodeURIComponent(selectInput);
@@ -63,7 +58,6 @@
         <jsp:include page="sidebar-dashboard.jsp"></jsp:include>
             <section class="home-section">
             <jsp:include page="sidebar-top.jsp"></jsp:include>
-
 
                 <div class="content container-fluid mt-3" style="width: 95%;">
                     <div class="row filter">
@@ -183,18 +177,18 @@
 
                                 closeBtn.addEventListener("click", () => {
                                     sidebar.classList.toggle("open");
-                                    menuBtnChange();//calling the function(optional)
+                                    menuBtnChange(); //calling the function(optional)
                                 });
 
                                 // following are the code to change sidebar button(optional)
                                 function menuBtnChange() {
                                     if (sidebar.classList.contains("open")) {
-                                        closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
+                                        closeBtn.classList.replace("bx-menu", "bx-menu-alt-right"); //replacing the iocns class
                                     } else {
-                                        closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");//replacing the iocns class
+                                        closeBtn.classList.replace("bx-menu-alt-right", "bx-menu"); //replacing the iocns c                                                                                            lass
                                     }
                                 }
-
+                                
                                 // dialog menu
                                 let iconUp = document.querySelector(".fa-chevron-down");
                                 let dialogMenu = document.querySelector(".dropdown-ofme");

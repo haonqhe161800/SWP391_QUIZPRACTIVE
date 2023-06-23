@@ -7,7 +7,6 @@ package Controller.SliderCRUD;
 import DAO.DAOSlider;
 import Entities.Slider;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -35,7 +34,7 @@ public class UpdateSliderController extends HttpServlet {
 
     public final String NOTKNOW = "listslider";
     public final String KNOW = "view/marketer/dashboard-editslider.jsp";
-   
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -57,8 +56,8 @@ public class UpdateSliderController extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String url = "";
         DAOSlider sdb = new DAOSlider();
         String slider_id = (String) request.getSession().getAttribute("id");
@@ -94,7 +93,7 @@ public class UpdateSliderController extends HttpServlet {
                 if (!file.exists()) {
                     InputStream fileContent = part.getInputStream();
                     Files.copy(fileContent, Paths.get(fileimg));
-                }
+                } 
             }
 
             //check subject not -1
@@ -113,11 +112,11 @@ public class UpdateSliderController extends HttpServlet {
 
                 request.setAttribute("notification", "success");
             }
-            
+            request.getRequestDispatcher(KNOW).forward(request, response);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        request.getRequestDispatcher(KNOW).forward(request, response);
     }
+ 
 }
 

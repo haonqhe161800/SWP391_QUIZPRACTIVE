@@ -71,8 +71,8 @@ public class Subject {
     public void setStatus(boolean status) {
         this.status = status;
     }
-    
-       public int getSubject_id() {
+
+    public int getSubject_id() {
         return subject_id;
     }
 

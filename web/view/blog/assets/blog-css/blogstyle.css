@@ -7,7 +7,7 @@
 
 /*các thể có letter sẽ kế thừa*/
 html {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Jost';
 }
 
 
@@ -44,7 +44,7 @@ html {
 
 
 .blog_item {
-    border: 2px solid #2e3856;
+    border: 1px solid #2e3856;
     border-radius: 10px;
     width: 100%;
     padding: 20px;

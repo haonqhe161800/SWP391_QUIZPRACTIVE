@@ -17,10 +17,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Date;
 
-/**
- *
- * @author Admin
- */
 @WebServlet(name = "AddPostController", urlPatterns = {"/addpost"})
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024 * 3,
@@ -28,11 +24,6 @@ import java.util.Date;
         maxRequestSize = 1024 * 1024 * 11
 )
 public class AddPostController extends HttpServlet {
-
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-       
-    }
 
     public final String FAILURE = "view/marketer/dashboard-addpost.jsp";
     public final String SUCCESS = "listpost";
@@ -42,6 +33,7 @@ public class AddPostController extends HttpServlet {
             throws ServletException, IOException {
        request.getRequestDispatcher("view/marketer/dashboard-addpost.jsp").forward(request, response);
     }
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -87,8 +79,7 @@ public class AddPostController extends HttpServlet {
         response.sendRedirect(url);
         return;
     }
-    
-        public Date postedPost() {
+    public Date postedPost() {
         long millis = System.currentTimeMillis();
         java.sql.Date date = new java.sql.Date(millis);
         return date;
