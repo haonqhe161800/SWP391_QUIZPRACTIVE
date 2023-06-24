@@ -5,6 +5,7 @@
 <%@page import="Entities.AccountMentor"%> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
 <header class="header navbar-area">
     <div class="container">
         <div class="row align-items-center">
@@ -80,7 +81,7 @@
                         <h6 style="padding: 1rem;color: #081828;">Hello,<span><%=au.getDisplay_name()%></span> </h6>
                         <div style="display: flex;">
                             <img src="https://th.bing.com/th/id/OIP.mDMuXjKAMMflGF_1y8keZAHaEo?pid=ImgDet&rs=1" alt=""  style="border-radius: 50%;height: 3em;object-fit: cover;width: 3em;cursor: pointer;">
-                            <i class="fa-solid fa-chevron-down" style="padding: 1rem;cursor: pointer"></i>
+                            <i class="fa-solid fa-chevron-down" style="padding: 1rem;"></i>
                             <nav class="dropdown-ofme quote show">
                                 <ul class="nav-dropdown">
                                     <li class="dropdown-i">
@@ -115,6 +116,9 @@
                                             <p id="role">Marketer</p>
                                         </span>
                                     </li>
+                                    <li class="dropdown-i">Home</li>
+                                    <li class="dropdown-i">Home</li>
+                                    <li class="dropdown-i">Home</li>
                                     <li class="dropdown-i">Home</li>
                                     <li class="dropdown-i"><a href="dashboardmarketer">Dashboard</a></li>
                                     <li class="dropdown-i"><a href="profile">Profile Setting</a></li>
@@ -169,15 +173,7 @@
         let dialogMenu = document.querySelector(".dropdown-ofme");
         iconUp.addEventListener("click", () => {
             dialogMenu.classList.toggle("show");
-            dialogChange();
         })
-        function dialogChange() {
-            if (dialogMenu.classList.contains("show")) {
-                iconUp.classList.replace("fa-chevron-down", "fa-chevron-up");
-            } else {
-                iconUp.classList.replace("fa-chevron-up", "fa-chevron-down");
-            }
-        }
     </script>
 </header>
 <!-- End Header Area -->

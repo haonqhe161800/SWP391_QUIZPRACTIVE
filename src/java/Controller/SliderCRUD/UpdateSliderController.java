@@ -48,6 +48,7 @@ public class UpdateSliderController extends HttpServlet {
 
                 request.setAttribute("slider", s);
                 request.getSession().setAttribute("id", slider_id);
+                request.setAttribute("pageslider", "updateslider");
             } catch (Exception e) {
                 response.getWriter().print(e.getMessage());
             }
@@ -68,8 +69,6 @@ public class UpdateSliderController extends HttpServlet {
 
         String fileName = request.getParameter("upfilehide");;
 
-        //1 van de dien ra o day do la anh cu neu ma dc them vao thi se xay ra loi ?
-        //1 van de dien ra o day la lay anh o trong thu muc chua thi bi loi
         try {
             String fileimg = "";
             Part part = request.getPart("upfile");
@@ -78,11 +77,10 @@ public class UpdateSliderController extends HttpServlet {
             if (part != null && part.getSize() > 0) {
                 fileimg = realPath + "\\" + part.getSubmittedFileName();
                 fileName = part.getSubmittedFileName();
-            } else if (part == null && part.getSize() > 0) {
+            } 
+            else{
                 fileimg = realPath + "\\" + fileName;
-            } else {
-                fileName = "broken-image.png";
-            }
+            } 
 
             Path directoryPath = Paths.get(realPath);
             if (!Files.isDirectory(directoryPath)) {

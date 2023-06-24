@@ -33,7 +33,7 @@ public class ControllBlogList extends HttpServlet {
 
         //pagination
         int totalPost = pdb.getNumberPost(search);
-        int numberPage = (int) Math.ceil((double) totalPost / 3);
+        int numberPage = (int) Math.ceil((double) totalPost / 4);
         int index;
         String currentPage = request.getParameter("index");
         if (currentPage == "0" || currentPage == null) {

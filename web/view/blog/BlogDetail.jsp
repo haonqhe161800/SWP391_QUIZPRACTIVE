@@ -54,84 +54,154 @@
 
             <div class="space"></div>
             <div class="space"></div>
-            <div class="space"></div>
-
-            <div class="content container">
-                <div class="row">
-                    <div class="left-content col-md-8 ">
-
-                        <div class="article_img">
-                            <img src="view/blog/assets/img/imgPost/${postfollow.getImage()}" alt="" onerror="this.src='view/blog/assets/img/broken-image.png'">
-                    </div>                        
-                    <div class="title_article">
-                        <h3>${postfollow.getTittle()}</h3>
-                    </div>
-                    <div class="intro_author">
-                        <div class="avatar_author" style="font-size: 2.9px;">
-                            <img src="view/avatar/${postfollow.getAm().getImage()}" alt="" onerror="this.src='view/blog/assets/img/broken-image.png'">
-                        </div>
-                        <div class="name_author">
-                            ${postfollow.getAm().getDisplay_name()}
-                        </div>
-                    </div>
-                    <div class="article_content">
-                        <div class="paraph_content">
-                            <p>${postfollow.getContent()}</p>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="right-content col-md-4 ">
-                    <div class="widget widget-latest-post">
-                        <div class="widget-title">
-                            <h3>Latest Post</h3>
-                        </div>
-                        <div class="widget-body">
-                            <div class="latest-post-aside media">
-                                <div class="lpa-right">
-                                    <a href="cbd?detailpost=${latestp.getPost_id()}" style="width: 100%;">
-                                        <img src="view/blog/assets/img/imgPost/${latestp.getImage()}" onerror="this.src='view/blog/assets/img/broken-image.png'">
-                                    </a>
-                                </div>
-                                <div class="lpa-left media-body">
-                                    <div class="lpa-title">
-                                        <h5><a href="cbd?detailpost=${latestp.getPost_id()}">${latestp.getTittle()}</a></h5>
-                                        <p class="sub_paraph" style="font-size: 10px;">${latestp.getShort_content()}</p>
-                                    </div>
-                                    <div class="lpa-meta">
-                                        <a class="name" href="#">
-                                            ${latestp.getAm().getDisplay_name()}
-                                        </a>
-                                        ${latestp.getPosted_date()}
-                                    </div>
-                                </div>
+            <!----breadcrumbs-->
+            <div class="breadcrumbs">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="breadcrumbs-content">
+                                <h1 class="page-title" style="color: #000;">Featured Posts</h1>
                             </div>
                         </div>
-                    </div>
-                    <div class="widget widget-tags">
-                        <div class="widget-title">
-                            <h3>Tags</h3>
-                        </div>
-                        <div class="widget-body">
-                            <div class="nav tag-cloud">
-                                <c:forEach items="${blist}" var="b">
-                                    <a href="#">${b.getBlog_name()}<span>(${100})</span></a>
-                                </c:forEach>
-                            </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <ul class="breadcrumb-nav">
+                                <li><a href="index.html">Home</a></li>
+                                <li>Blog List</li>
+                                <li>Overview Blog</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
+            <!----breadcrumbs-->
 
-            <!--test casourel-->
-            <section class="pt-5 pb-5">
-                <div class="row justify-content-end">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h3 class="mb-3">Similar Posts</h3>
+        <section class="section blog-single" style="padding-top: 10px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-12 col-12">
+                        <div class="single-inner">
+                            <div class="post-thumbnils">
+                                <img src="assets/images/thumbnail-post/${postfollow.getImage()}" alt="#" onerror="this.src='assets/images/thumbnail-post/broken-image.png'" data-pagespeed-url-hash="3717390680">
+                            </div>
+                            <div class="post-details">
+                                <div class="detail-inner">
+                                    <h2 class="post-title">
+                                        <a href="#">${postfollow.getTittle()}</a>
+                                    </h2>
+
+                                    <ul class="custom-flex post-meta">
+                                        <li>
+                                            <a href="javascript:void(0)">
+                                                <div class="intro_author">
+                                                    <div class="avatar_author" style="font-size: 2.9px;">
+                                                        <img src="assets/avatar/${postfollow.getAm().getImage()}" alt="" onerror="this.src='view/blog/assets/img/broken-image.png'">
+                                                    </div>
+                                                    <div class="name_author">
+                                                        ${postfollow.getAm().getDisplay_name()}
+                                                    </div>
+                                                </div> 
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)">
+                                                <i class="lni lni-calendar"></i>
+                                                20th March 2023
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <p>${postfollow.getContent()}</p>
+
+                                    <div class="post-social-media">
+                                        <h5 class="share-title">Social Share</h5>
+                                        <ul>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="lni lni-facebook-filled"></i>
+                                                    <span>facebook</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="lni lni-twitter-original"></i>
+                                                    <span>twitter</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="lni lni-google"></i>
+                                                    <span>google+</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="lni lni-linkedin-original"></i>
+                                                    <span>linkedin</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="lni lni-pinterest"></i>
+                                                    <span>pinterest</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <aside class="col-lg-4 col-md-12 col-12">
+                        <div class="sidebar blog-grid-page">
 
+                            <div class="widget popular-feeds" style="margin-top: 0;">
+                                <h5 class="widget-title"><span>Latest Post</span></h5>
+                                <div class="popular-feed-loop">
+                                    <div class="single-popular-feed">
+                                        <div class="feed-desc">
+                                            <h6 class="post-title"><a href="detailpost?detailpost=${latestp.getPost_id()}">${latestp.getTittle()}</a></h6>
+                                            <span class="time"><i class="lni lni-calendar"></i> ${latestp.getPosted_date()}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="widget popular-feeds" style="margin-top: 0;">
+                                <h5 class="widget-title"><span>Popular Feeds</span></h5>
+                                <div class="popular-feed-loop">
+                                    <div class="single-popular-feed">
+                                        <div class="feed-desc">
+                                            <h6 class="post-title"><a href="javascript:void(0)">NULL</a></h6>
+                                            <span class="time"><i class="lni lni-calendar"></i> 05th Nov 2023</span>
+                                        </div>
+                                    </div>
+                                    <div class="single-popular-feed">
+                                        <div class="feed-desc">
+                                            <h6 class="post-title"><a href="javascript:void(0)">NULL</a></h6>
+                                            <span class="time"><i class="lni lni-calendar"></i> 24th March 2023</span>
+                                        </div>
+                                    </div>
+                                    <div class="single-popular-feed">
+                                        <div class="feed-desc">
+                                            <h6 class="post-title"><a href="javascript:void(0)">NULL</a></h6>
+                                            <span class="time"><i class="lni lni-calendar"></i> 30th Jan 2023</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="widget categories-widget">
+                                <h5 class="widget-title"><span>Categories Blog</span></h5>
+                                <ul class="custom">
+                                    <c:forEach items="${blist}" var="b">
+                                        <li>
+                                            <a href="javascript:void(0)">${b.getBlog_name()}<span>${100}</span></a>
+                                        </li>
+                                    </c:forEach>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </aside>
                     <div class="row">
                         <div class="card-deck col-md-12" style="display: flex; flex-flow: wrap;">
                             <c:forEach var="e" items="${listpexcept}">
@@ -152,9 +222,9 @@
                             </div>
                         </div>
                     </div>
-            </section>
-
-        </div>
+                </div>
+            </div>
+        </section>
 
         <jsp:include page="/jspClient/Footer.jsp" />
 

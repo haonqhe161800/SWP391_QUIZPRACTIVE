@@ -57,9 +57,8 @@
     <body>
         <jsp:include page="/jspClient/Header.jsp" />
 
-        <div class="space"></div>
-        <div class="space"></div>
-
+                <div class="space"></div>
+                <div class="space"></div>
 
         <!-- slider -->
         <section class="page-section bg-light " id="sliders">
@@ -92,99 +91,133 @@
             </div>
         </section>
         <!-- end slider -->
-
-        <div class="content container">
-            <div class="row">
-                <form action="listpost?index=1&" id="f1" style="display: flex" onchange="change()">
-                    <div class="col-sm-4 col-lg-6 pt-3" style="width: 33%;">
-                        <h6 style="color: #055160; font-weight: 400; padding: 10px 0">Search By Name</h6>
-
-                        <div class="input-group" style="width: 60%;">
-                            <input type="search" class="form-control rounded" placeholder="Search" value="${requestScope.search}" aria-label="Search"
-                                   aria-describedby="search-addon" name="search" id="searchInput"/>
-
+        
+        <!----breadcrumbs-->
+         <div class="breadcrumbs">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 col-md-6 col-12">
+                        <div class="breadcrumbs-content">
+                            <h1 class="page-title" style="color: #000;">Featured Posts</h1>
                         </div>
                     </div>
-                    <div class="col-sm-4 col-lg-6 pt-3" style="width: 33%;">
-                        <h6 style="color: #055160; font-weight: 400; padding: 10px 0">Sort By</h6>
-                        <select class="form-select" name="sort" aria-label=".form-select-sm example" style="width: 60%;" id="selectInput">
-                            <option value="0" ${param['sort']==0?"selected":""}>Default</option>
-                            <option value="1" ${param['sort']==1?"selected":""}>Latest Post</option>
-                            <option value="2" ${param['sort']==2?"selected":""}>Latest Date</option>
-                        </select>
+                    <div class="col-lg-6 col-md-6 col-12">
+                        <ul class="breadcrumb-nav">
+                            <li><a href="index.html">Home</a></li>
+                            <li>Blog List</li>
+                        </ul>
                     </div>
-                </form>
+                </div>
+            </div>
+        </div>
+         <!----breadcrumbs-->
+         
+        <div class="content container">
+            <div class="row">
             </div>
 
             <div class="row" id="content">
-                <div class="blog_list col-md-8 mt-sm-7">
+                <div class="blog_list col-md-8">
                     <c:forEach var="p" items="${requestScope.plist}">
                         <div class="blog_item">
+                            <h2 class="title_blog" style="font-size: 32px; font-weight: 400;"> <a href="detailpost?detailpost=${p.getPost_id()}">${p.getTittle()}</a></h2>
                             <div class="intro_author">
                                 <div class="avatar_author" style="font-size: 2.9px;">
-                                    <img src="../avatar/${p.getAm().getImage()}" alt="">
+                                    <img src="assets/avatar/${p.getAm().getImage()}" alt="">
                                 </div>
                                 <div class="name_author">
                                     ${p.getAm().getDisplay_name()}
                                 </div>
-                            </div>
-                            <div class="body-item">
-                                <div class="content_blog_item">
-                                    <h2 class="title_blog"> <a href="detailpost?detailpost=${p.getPost_id()}">${p.getTittle()}</a></h2>
-                                    <p class="sub_paraph">${p.getShort_content()}</p>
-                                    <div class="blog_infor">
-                                        <div class="create_at"><p style="margin-top: 23%;padding: 0 5px; border-bottom: 2px solid black;">${p.getPosted_date()}</p></div>
-                                    </div>
+                                <div class="blog_infor">
+                                    <div class="create_at"><p style="padding: 0 5px;">${p.getPosted_date()}</p></div>
                                 </div>
-                                <div class="image-blog">
-                                    <img src="view/blog/assets/img/imgPost/${p.getImage()}" alt="banner.png" onerror="this.src='view/blog/assets/img/broken-image.png'" width="200px" height="120px" style="border-radius: 6px">
+                            </div>
+
+                            <div class="body-item">
+                                <div class="row">
+                                    <div class="col-md-7 content_blog_item px-0">
+                                        <p class="sub_paraph" style="text-align: justify;margin-left: 15px;color: black;">${p.getShort_content()}</p>
+                                    </div>
+                                    <div class="col-md-5 image-blog">
+                                        <a href="detailpost?detailpost=${p.getPost_id()}"><img src="assets/images/thumbnail-post/${p.getImage()}" alt="banner.png" onerror="this.src='assets/images/thumbnail-post/broken-image.png'" style="border-radius: 6px; width: 100%;"></a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </c:forEach>
                 </div>
-                <div class="blog_right col-md-4 mt-sm-7">
+                <div class="blog_right col-lg-4 col-md-5 col-12">
 
-                    <div class="widget widget-latest-post">
-                        <div class="widget-title">
-                            <h3>Latest Post</h3>
-                        </div>
-                        <div class="widget-body">
-                            <div class="latest-post-aside media">
-                                <div class="lpa-right">
-                                    <a href="detailpost?detailpost=${latestp.getPost_id()}" style="width: 100%;">
-                                        <img src="view/blog/assets/img/imgPost/${latestp.getImage()}" onerror="this.src='view/blog/assets/img/broken-image.png'">
-                                    </a>
-                                </div>
-                                <div class="lpa-left media-body">
-                                    <div class="lpa-title">
-                                        <h5><a href="detailpost?detailpost=${latestp.getPost_id()}">${latestp.getTittle()}</a></h5>
-                                        <p class="sub_paraph" style="font-size: 10px;">${latestp.getShort_content()}</p>
+                    <aside class="">
+                        <div class="sidebar blog-grid-page">
+
+                            <div class="widget search-widget">
+                                <h5 class="widget-title"><span>Search By Name </span></h5>
+                                <form action="listpost?index=1&" id="f1" onchange="change()">
+                                    <div class="input"> <input type="text" placeholder="Search Here..." value="${requestScope.search}" name="search" id="searchInput">
                                     </div>
-                                    <div class="lpa-meta">
-                                        <a class="name" href="#">
-                                            ${latestp.getAm().getDisplay_name()}
-                                        </a>
-                                        ${latestp.getPosted_date()}
+                                    <div class="search-input">
+                                        <h5 class="widget-title mt-30"><span>Filter</span></h5>
+                                        <select class="form-select" name="sort" id="selectInput">
+                                            <option value="0" ${param['sort']==0?"selected":""}>Default</option>
+                                            <option value="1" ${param['sort']==1?"selected":""}>Latest Post</option>
+                                            <option value="2" ${param['sort']==2?"selected":""}>Latest Date</option>
+                                        </select>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="widget popular-feeds" style="margin-top: 0;">
+                                <h5 class="widget-title"><span>Latest Post</span></h5>
+                                <div class="popular-feed-loop">
+                                    <div class="single-popular-feed">
+                                        <div class="feed-desc">
+                                            <h6 class="post-title"><a href="detailpost?detailpost=${latestp.getPost_id()}">${latestp.getTittle()}</a></h6>
+                                            <span class="time"><i class="lni lni-calendar"></i> ${latestp.getPosted_date()}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="widget widget-tags">
-                        <div class="widget-title">
-                            <h3>Tags</h3>
-                        </div>
-                        <div class="widget-body">
-                            <div class="nav tag-cloud">
-                                <c:forEach items="${blist}" var="b">
-                                    <a href="#">${b.getBlog_name()}<span>(${100})</span></a>
-
-                                </c:forEach>
+                                        
+                            <div class="widget popular-feeds">
+                                <h5 class="widget-title"><span>Popular Feeds</span></h5>
+                                <div class="popular-feed-loop">
+                                    <div class="single-popular-feed">
+                                        <div class="feed-desc">
+                                            <h6 class="post-title"><a href="javascript:void(0)">Tips to write an impressive resume online for
+                                                    beginner</a></h6>
+                                            <span class="time"><i class="lni lni-calendar"></i> 05th Nov 2023</span>
+                                        </div>
+                                    </div>
+                                    <div class="single-popular-feed">
+                                        <div class="feed-desc">
+                                            <h6 class="post-title"><a href="javascript:void(0)">10 most important SEO focus areas for
+                                                    colleges
+                                                    and universities</a></h6>
+                                            <span class="time"><i class="lni lni-calendar"></i> 24th March 2023</span>
+                                        </div>
+                                    </div>
+                                    <div class="single-popular-feed">
+                                        <div class="feed-desc">
+                                            <h6 class="post-title"><a href="javascript:void(0)">7 things you should never say to your boss in
+                                                    your joblife</a></h6>
+                                            <span class="time"><i class="lni lni-calendar"></i> 30th Jan 2023</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="widget categories-widget">
+                                <h5 class="widget-title"><span>Blog Categories</span></h5>
+                                <ul class="custom">
+                                    <c:forEach items="${blist}" var="b">
+                                        <li>
+                                            <a href="javascript:void(0)">${b.getBlog_name()} <span>${100}</span></a>
+                                        </li>
+                                    </c:forEach>
+                                </ul>
                             </div>
                         </div>
-                    </div>
-
+                    </aside>
                 </div>
             </div>
 
@@ -196,19 +229,19 @@
                                 <a class="page-link" href="listpost?search=${requestScope.search}&sort=${param['sort']}&index=${param['index']-1}">Previous</a>
                             </li> 
                         </c:if>
-                            <c:forEach var = "i" begin = "1" end = "${numberPage}">
-                                <li class="${param['index']==i?'page-item active':'page-item'}"><a href="listpost?search=${requestScope.search}&sort=${param['sort']}&index=${i}" class="page-link">${i}</a></li>
-                                </c:forEach>
-                                <c:if test="${ index < numberPage}">
-                                <li class="page-item"><a class="page-link" href="listpost?search=${requestScope.search}&sort=${param['sort']}&index=${param['index']+1}">Next</a></li>
-                                </c:if>
-                        </ul>
-                    </nav>
-                </div>
-</div>
-            <jsp:include page="/jspClient/Footer.jsp" />
-            <!--/ End Footer Area -->
-            <!-- ========================= scroll-top ========================= -->
+                        <c:forEach var = "i" begin = "1" end = "${numberPage}">
+                            <li class="${param['index']==i?'page-item active':'page-item'}"><a href="listpost?search=${requestScope.search}&sort=${param['sort']}&index=${i}" class="page-link">${i}</a></li>
+                            </c:forEach>
+                            <c:if test="${ index < numberPage}">
+                            <li class="page-item"><a class="page-link" href="listpost?search=${requestScope.search}&sort=${param['sort']}&index=${param['index']+1}">Next</a></li>
+                            </c:if>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <jsp:include page="/jspClient/Footer.jsp" />
+        <!--/ End Footer Area -->
+        <!-- ========================= scroll-top ========================= -->
 
 
         <!-- ========================= JS here ========================= -->
@@ -218,49 +251,38 @@
         <script src="assets/js/glightbox.min.js"></script>
         <script src="assets/js/main.js"></script>
         <script type="text/javascript">
-                    //========= Category Slider 
-                    tns({
-                        container: '.category-slider',
-                        items: 3,
-                        slideBy: 'page',
-                        autoplay: false,
-                        mouseDrag: true,
-                        gutter: 0,
-                        nav: false,
-                        controls: true,
-                        controlsText: ['<i class="lni lni-chevron-left"></i>', '<i class="lni lni-chevron-right"></i>'],
-                        responsive: {
-                            0: {
-                                items: 1
-                            },
-                            540: {
-                                items: 2
-                            },
-                            768: {
-                                items: 4
-                            },
-                            992: {
-                                items: 5
-                            },
-                            1170: {
-                                items: 6
-                            }
-                        }
-                    }
-                    );
-            </script>
-            <script type="text/javascript">
-            
-               function checkImage(img) {
-                if (img.naturalWidth === 0 || img.naturalHeight === 0) {
-                replaceImage(img);
-                }
-                }
-                function replaceImage(img) {
-                img.src = "view/blog/assets/img/broken-image.png";
-                }
-            </script>
-        </body>
-    </html>
+                                    //========= Category Slider 
+                                    tns({
+                                        container: '.category-slider',
+                                        items: 3,
+                                        slideBy: 'page',
+                                        autoplay: false,
+                                        mouseDrag: true,
+                                        gutter: 0,
+                                        nav: false,
+                                        controls: true,
+                                        controlsText: ['<i class="lni lni-chevron-left"></i>', '<i class="lni lni-chevron-right"></i>'],
+                                        responsive: {
+                                            0: {
+                                                items: 1
+                                            },
+                                            540: {
+                                                items: 2
+                                            },
+                                            768: {
+                                                items: 4
+                                            },
+                                            992: {
+                                                items: 5
+                                            },
+                                            1170: {
+                                                items: 6
+                                            }
+                                        }
+                                    }
+                                    );
+        </script>
+    </body>
+</html>
 
 

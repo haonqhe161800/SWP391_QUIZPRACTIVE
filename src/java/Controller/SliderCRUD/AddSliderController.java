@@ -19,19 +19,20 @@ import java.nio.file.Paths;
 
 public class AddSliderController extends HttpServlet {
 
-    public final String FAILURE = "view/marketer/dashboard-addslider.jsp";
+    public final String FAILURE = "addslider";
     public final String SUCCESS = "listslider";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        request.setAttribute("pageslider", "addslider");
         request.getRequestDispatcher("view/marketer/dashboard-addslider.jsp").forward(request, response);
     }
 
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, IllegalStateException {
         String url = "";
         DAOSlider sdb = new DAOSlider();
         String content = request.getParameter("content");
@@ -60,18 +61,20 @@ public class AddSliderController extends HttpServlet {
             //check subject not -1
             if ("-1".equals(subject)) {
                 url = FAILURE;
-                request.setAttribute("message", "error");
+                request.getSession().setAttribute("message", "error");
+                response.sendRedirect(url);
             } else {
                 url = SUCCESS;
                 //execute insert
                 sdb.insertSilder(Integer.parseInt(subject), fileName, content, note, status == "1" ? true : false);
+                response.sendRedirect(url);
+
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-//        request.getRequestDispatcher(url).forward(request, response);
-          response.sendRedirect(url);
-          return;
+//          response.sendRedirect(url);
+//          return;
     }
 
 }

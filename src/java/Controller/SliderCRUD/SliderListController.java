@@ -5,12 +5,14 @@
 package Controller.SliderCRUD;
 
 import DAO.DAOSlider;
+import Entities.AccountMarketer;
 import Entities.Slider;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -22,13 +24,16 @@ public class SliderListController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, IllegalStateException {
         //pagination
         String search = request.getParameter("search") == null ? "" : request.getParameter("search");
         String entry = request.getParameter("entry") == null || request.getParameter("entry") == "" ? "10" : request.getParameter("entry");
         String currentPage = request.getParameter("index");
 
         //check user thuoc role marketer xem la ai
+        
+        //check user thuoc role marketer xem la ai <== dung filter chan nó.
+       
         
         DAOSlider dsdb = new DAOSlider();
         try {
@@ -61,6 +66,8 @@ public class SliderListController extends HttpServlet {
             request.setAttribute("numberPage", numberPage);
             request.setAttribute("search",search);
             request.setAttribute("index",index);
+            request.setAttribute("pageslider", "listslider");
+//            request.set
         } catch (NumberFormatException e) {
         }
 
