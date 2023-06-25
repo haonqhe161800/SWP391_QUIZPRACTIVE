@@ -4,6 +4,7 @@
  */
 package DAO;
 import Entities.Answer;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
@@ -13,6 +14,23 @@ import module.DBConnect;
  * @author admin
  */
 public class DAOAnswer extends DBConnect{
+    
+    public int addAnswer(Answer answer) {
+        int n = 0;
+        String sql = "Insert into Answer(answer_name, is_correct, question_id)"
+                + " values (?, ?, ?)";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setString(1, answer.getAnswer_name());
+            pre.setInt(2, answer.getIs_correct());
+            pre.setInt(3, answer.getQuestion_id());
+            n = pre.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return n;
+    }
     
     public Vector<Answer> getAll(String sql) {
         Vector<Answer> vector = new Vector<Answer>();

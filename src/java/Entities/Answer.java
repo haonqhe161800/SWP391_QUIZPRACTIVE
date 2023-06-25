@@ -17,6 +17,12 @@ public class Answer {
     public Answer() {
     }
 
+    public Answer(String answer_name, int is_correct, int question_id) {
+        this.answer_name = answer_name;
+        this.is_correct = is_correct;
+        this.question_id = question_id;
+    }
+    
     public Answer(int answer_id, String answer_name, int is_correct, int question_id) {
         this.answer_id = answer_id;
         this.answer_name = answer_name;

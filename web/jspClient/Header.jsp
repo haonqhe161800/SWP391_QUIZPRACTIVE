@@ -31,7 +31,7 @@
                                        aria-label="Toggle navigation" class="<c:if test="${pageHome != null && setList.contains(pageHome)}">active</c:if>">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" aria-label="Toggle navigation" class="">Subject List</a>
+                                    <a href="Activity" aria-label="Toggle navigation" class="">Activity</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="#" aria-label="Toggle navigation">Course List</a>

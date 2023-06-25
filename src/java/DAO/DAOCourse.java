@@ -19,7 +19,8 @@ import module.DBConnect;
  */
 public class DAOCourse extends DBConnect {
 
-    LocalDate date = LocalDate.now();
+    LocalDate date1 = LocalDate.now();
+    LocalDate date2 = LocalDate.now();
 
     public int addCourse(int subject_id, Course course) {
         int n = 0;
@@ -29,8 +30,32 @@ public class DAOCourse extends DBConnect {
                 + "', N'" + course.getDescription()
                 + "', '" + course.getImage()
                 + "', " + course.getIs_publish()
-                + ", '" + date
+                + ", '" + date1
                 + "')";
+        try {
+            Statement statement = conn.createStatement();
+            n = statement.executeUpdate(sql);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return n;
+    }
+    
+    public int updateCourse(Course course) {
+        int n = 0;
+        String sql = "UPDATE Course set course_name = N'" + course.getCourse_name() + "', description = N'" + course.getDescription() + "', image = '" + course.getImage() + "', updated_date = '" + date2 + "' where course_id = " + course.getCourse_id();
+        try {
+            Statement statement = conn.createStatement();
+            n = statement.executeUpdate(sql);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return n;
+    }
+    
+    public int updateCourse2(Course course) {
+        int n = 0;
+        String sql = "UPDATE Course set course_name = N'" + course.getCourse_name() + "', description = N'" + course.getDescription() + "'  where course_id = " + course.getCourse_id();
         try {
             Statement statement = conn.createStatement();
             n = statement.executeUpdate(sql);

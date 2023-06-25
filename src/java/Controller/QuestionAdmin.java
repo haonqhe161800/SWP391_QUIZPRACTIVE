@@ -5,7 +5,10 @@
 
 package Controller;
 
+import DAO.DAOAnswer;
 import DAO.DAOQuestion;
+import Entities.Answer;
+import Entities.Question;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -38,6 +41,7 @@ public class QuestionAdmin extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             
             DAOQuestion dao = new DAOQuestion();
+            DAOAnswer daoAnswer = new DAOAnswer();
             
             String service = request.getParameter("service");
             
@@ -49,9 +53,35 @@ public class QuestionAdmin extends HttpServlet {
                     coursename = course_name.getString(1);
                 }
                 ResultSet listQuestion = dao.getData("select q.question_name, c.course_name, s.subject_name from Question q join Course c on c.course_id = q.course_id join Subject s on c.subject_id = s.subject_id where c.course_id = " + course_id);
+                request.setAttribute("course_id", course_id);
                 request.setAttribute("coursename", coursename);
                 request.setAttribute("listQuestion", listQuestion);
                 request.getRequestDispatcher("jspClient/QuestionAdmin.jsp").forward(request, response);
+            }
+            
+            if(service.equals("add")) {
+                int course_id = Integer.parseInt(request.getParameter("course_id"));
+                String name = request.getParameter("name");
+                Question ques = new Question(name, course_id);
+                String key[] = {"a", "b", "c", "d", "e"};
+                dao.addQuestion(ques);
+                ResultSet rsQuestion = dao.getData("select Top(1) question_id from Question order by question_id desc");
+                int ques_id = 0;
+                if(rsQuestion.next()) {
+                    ques_id = rsQuestion.getInt(1);
+                }
+                for(int i = 0; i < 5; i++) {
+                    String op = request.getParameter("op" + (i+1));
+                    if(!op.equals("")) {
+                        String answer_name = key[i] + ". " + op;
+                        int sl = Integer.parseInt(request.getParameter("sl" + (i+1)));
+                        Answer ans = new Answer(answer_name, sl, ques_id);
+                        daoAnswer.addAnswer(ans);
+                    } else {
+                        break;
+                    }
+                }
+                response.sendRedirect("QuestionAdmin?service=show&courseID=" + course_id);
             }
             
             

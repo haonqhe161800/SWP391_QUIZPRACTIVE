@@ -4,6 +4,7 @@
  */
 package DAO;
 import Entities.Question;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
@@ -14,6 +15,21 @@ import module.DBConnect;
  * @author admin
  */
 public class DAOQuestion extends DBConnect{
+    
+    public int addQuestion(Question question) {
+        int n = 0;
+        String sql = "Insert into Question(question_name, course_id)"
+                + " values (?, ?)";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setString(1, question.getQuestion_name());
+            pre.setInt(2, question.getCourse_id());
+            n = pre.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return n;
+    }
     
     public Vector<Question> getAll(String sql) {
         Vector<Question> vector = new Vector<Question>();

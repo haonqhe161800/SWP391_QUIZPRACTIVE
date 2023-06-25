@@ -70,6 +70,34 @@ public class CourseAdmin extends HttpServlet {
                     response.sendRedirect("Course");
                 }
             }
+            
+            if(service.equals("edit")) {
+                int course_id = Integer.parseInt(request.getParameter("course_id"));
+                String submit = request.getParameter("submit");
+                if(submit == null) {
+                    ResultSet rsCourse = dao.getData("select * from Course where course_id = " + course_id);
+                    request.setAttribute("rsCourse", rsCourse);
+                    request.getRequestDispatcher("jspClient/UpdateCourse.jsp").forward(request, response);
+                } else {
+                    String notifi = "";
+                    String name = request.getParameter("name");
+                    String description = request.getParameter("description");
+                    int subject_id = Integer.parseInt(request.getParameter("subject_id"));
+                    int mentor_id = Integer.parseInt(request.getParameter("mentor_id"));
+                    int is_publish = Integer.parseInt(request.getParameter("is_publish"));
+                    int quantity = Integer.parseInt(request.getParameter("quantity"));
+                    String image = request.getParameter("image");
+                    String created_date = request.getParameter("created_date");
+                    String updated_date = request.getParameter("updated_date");
+                    Course course = new Course(course_id, subject_id, mentor_id, name, description, image, is_publish, quantity, created_date, updated_date);
+                    int n = dao.updateCourse(course);
+                    if(n > 0) {
+                        notifi = "Update course successfully!!";
+                        request.setAttribute("notifi", notifi);
+                        request.getRequestDispatcher("jspClient/UpdateCourse.jsp").forward(request, response);
+                    }
+                }
+            }
         }
     } 
 

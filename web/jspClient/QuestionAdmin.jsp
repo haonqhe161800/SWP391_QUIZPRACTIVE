@@ -50,52 +50,111 @@
     </head>
 
     <body>
-            
-            <%
-                String course_name = (String) request.getAttribute("coursename");
-                
+
+        <%
+            String course_name = (String) request.getAttribute("coursename");
+            int course_id = (int) request.getAttribute("course_id");
+        %>
+
+
+        <div style="margin-bottom: 100px">
+            <jsp:include page="HeaderAdmin.jsp"></jsp:include>
+        </div>
+
+
+        <div class="container">
+            <div style="margin-bottom: 20px; display: flex">
+                <h4 style="margin-right: 8px"><%=course_name%></h4>
+                <span class="btn-open-modal">Add new Question</span>
+            </div>
+            <%if(request.getAttribute("listQuestion") != null) {
+                ResultSet listQuestion = (ResultSet) request.getAttribute("listQuestion");
             %>
+            <table class="table">
+                <tr>
+                    <th scope="col">STT</th>
+                    <th scope="col">Content</th>
+                    <th scope="col">Course name</th>
+                    <th scope="col">Subject name</th>
+                    <th scope="col">Action</th>
+                </tr>
 
-
-            <div style="margin-bottom: 100px ">
-                <jsp:include page="HeaderAdmin.jsp"></jsp:include>
-            </div>
-
-
-            <div class="container">
-                <div style="margin-bottom: 20px">
-                    <h4><%=course_name%></h4>
-                </div>
-                <%if(request.getAttribute("listQuestion") != null) {
-                    ResultSet listQuestion = (ResultSet) request.getAttribute("listQuestion");
-                %>
-                <table class="table">
-                    <tr>
-                        <th scope="col">STT</th>
-                        <th scope="col">Content</th>
-                        <th scope="col">Course name</th>
-                        <th scope="col">Subject name</th>
-                        <th scope="col">Action</th>
-                    </tr>
-
-                    <%int i = 0;
-                    while(listQuestion.next()) {
-                        i++;%>
-                    <tr>
-                        <td><%=i%></td>
-                        <td><%=listQuestion.getString(1)%></td>
-                        <td><%=listQuestion.getString(2)%></td>
-                        <td><%=listQuestion.getString(3)%></td>
-                        <td>
-                            <button>Edit</button>
-                        </td>
-                    </tr>
-                    <%}%>
-                </table>
-                <%} else {%>
-                <h3>This course has no questions</h3>
+                <%int i = 0;
+                while(listQuestion.next()) {
+                    i++;%>
+                <tr>
+                    <td><%=i%></td>
+                    <td><%=listQuestion.getString(1)%></td>
+                    <td><%=listQuestion.getString(2)%></td>
+                    <td><%=listQuestion.getString(3)%></td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
                 <%}%>
+            </table>
+
+            <div class="modal-subject" style="z-index: 1">
+                <div class="modal-container-subject">
+                    <div class="modal-subject-title">
+                        <h4>Add new question</h4>
+                    </div>
+                    <form <form action="QuestionAdmin" method="get">
+                        <input type="hidden" name="service" value="add">
+                        <input type="hidden" name="course_id" value="<%=course_id%>">
+                        <div class="input">
+                            <label for="question-name">Question name</label><br>
+                            <input id="question-name" type="text" name="name" />
+                        </div>
+                        <div class="input">
+                            <label for="option-1">Option 1</label>
+                            <input id="option-1" name="op1" type="text" class="form-control">
+                            <select name="sl1">
+                                <option value="1">True</option>
+                                <option value="0">False</option>
+                            </select>
+                        </div>
+                        <div class="input">
+                            <label for="option-2">Option 2</label>
+                            <input id="option-2" name="op2" type="text" class="form-control">
+                            <select name="sl2">
+                                <option value="1">True</option>
+                                <option value="0">False</option>
+                            </select>
+                        </div>
+                        <div class="input">
+                            <label for="option-3">Option 3</label>
+                            <input id="option-3" name="op3" type="text" class="form-control">
+                            <select name="sl3">
+                                <option value="1">True</option>
+                                <option value="0">False</option>
+                            </select>
+                        </div>
+                        <div class="input">
+                            <label for="option-4">Option 4</label>
+                            <input id="option-4" name="op4" type="text" class="form-control">
+                            <select name="sl4">
+                                <option value="1">True</option>
+                                <option value="0">False</option>
+                            </select>
+                        </div>
+                        <div class="input">
+                            <label for="option-5">Option 5</label>
+                            <input id="option-5" name="op5" type="text" class="form-control">
+                            <select name="sl5">
+                                <option value="1">True</option>
+                                <option value="0">False</option>
+                            </select>
+                        </div>
+                        <div class="button">
+                            <span class="btn-cancel">Cancel</span>
+                            <button style="margin-left: 6px" class="btn-create">Create</button>
+                        </div>
+                    </form>
+                </div>
             </div>
+            <%}%>
+        </div>
 
 
 
@@ -112,35 +171,35 @@
         <script src="./assets/js/main.js"></script>
         <script src="./assets/js/admin.js"></script>
         <script type="text/javascript">
-                                    //========= Category Slider 
-                                    tns({
-                                        container: '.category-slider',
-                                        items: 3,
-                                        slideBy: 'page',
-                                        autoplay: false,
-                                        mouseDrag: true,
-                                        gutter: 0,
-                                        nav: false,
-                                        controls: true,
-                                        controlsText: ['<i class="lni lni-chevron-left"></i>', '<i class="lni lni-chevron-right"></i>'],
-                                        responsive: {
-                                            0: {
-                                                items: 1,
-                                            },
-                                            540: {
-                                                items: 2,
-                                            },
-                                            768: {
-                                                items: 4,
-                                            },
-                                            992: {
-                                                items: 5,
-                                            },
-                                            1170: {
-                                                items: 6,
-                                            }
-                                        }
-                                    });
+            //========= Category Slider 
+            tns({
+                container: '.category-slider',
+                items: 3,
+                slideBy: 'page',
+                autoplay: false,
+                mouseDrag: true,
+                gutter: 0,
+                nav: false,
+                controls: true,
+                controlsText: ['<i class="lni lni-chevron-left"></i>', '<i class="lni lni-chevron-right"></i>'],
+                responsive: {
+                    0: {
+                        items: 1,
+                    },
+                    540: {
+                        items: 2,
+                    },
+                    768: {
+                        items: 4,
+                    },
+                    992: {
+                        items: 5,
+                    },
+                    1170: {
+                        items: 6,
+                    }
+                }
+            });
         </script>
     </body>
 

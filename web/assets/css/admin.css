@@ -79,6 +79,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     display: flex;
 }
 
+.edit-subject.open {
+    display: flex;
+}
+
 .modal-container-subject {
     width: 650px;
     min-height: 200px;
@@ -106,8 +110,18 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     padding: 4px 0;
 }
 
+.edit-container-subject input {
+    width: 100%;
+    border: 1px solid rgb(210, 205, 205);
+    padding: 4px 0;
+}
+
 .button {
     text-align: right;
     padding: 8px 0;
     margin-top: 12px;
+}
+
+.delete-btn, .btn-open-edit {
+    border: transparent;
 }

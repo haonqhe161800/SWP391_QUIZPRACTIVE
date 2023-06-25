@@ -179,7 +179,7 @@
                                     <a href="SubjectController?service=details&subject_id=<%=rsCourse.getInt(11)%>">
                                         <h4 class="title">Môn học: <%=rsCourse.getString(12)%>  </h4>
                                     </a>
-                                    <p class="update-time"><i class="lni lni-timer"></i> Ngày update gần nhất:  <%=rsCourse.getString(9)%></p>
+                                    <p class="update-time"><i class="lni lni-timer"></i> Ngày update gần nhất:  <%= (rsCourse.getString(9) != null ? rsCourse.getString(9) : rsCourse.getString(10))%></p>
                                     <ul class="rating">
                                         <li>Số người tham gia (<%=rsCourse.getInt(8)%>)</li>
                                     </ul>

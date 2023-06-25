@@ -16,6 +16,11 @@ public class Question {
     public Question() {
     }
 
+    public Question(String question_name, int course_id) {
+        this.question_name = question_name;
+        this.course_id = course_id;
+    }
+    
     public Question(int question_id, String question_name, int course_id) {
         this.question_id = question_id;
         this.question_name = question_name;

@@ -261,7 +261,7 @@
                         <td><%=rsSubject.getString(1)%></td>
                         <td><img style="width: 50px; height: 50px" src="<%=rsSubject.getString(3)%>"></td>
                         <td><%=rsSubject.getInt(4)%></td>
-                        <td>
+                        <td style="display: flex; justify-content: space-between"">
                             <form action="SubjectController" method="POST">
                                 <input type="hidden" name="service" value="delete">
                                 <input type="hidden" name="subject_id" value="<%=rsSubject.getInt(2)%>">
@@ -270,7 +270,7 @@
                                     <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
                                 </button>
                             </form>
-
+                            <button class="edit-btn"><a href="#"><i class="far fa-edit"></i></a></button>
                         </td>
 
                     </tr>
@@ -341,7 +341,7 @@
                                     <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
                                 </button>
                             </form>
-                            <button>Edit</button>
+                            <button style="border: transparent" class="edit-btn"><a href="Course?service=edit&course_id=<%=rsCourse.getInt(1)%>"><i class="far fa-edit"></i></a></button>
                         </td>
                     </tr>
                     <%}%>
@@ -359,8 +359,8 @@
                                 <input id="course-name" type="text" name="name" />
                             </div>
                             <div class="input">
-                                  <label for="ourse-description">Description</label>
-                                  <input id="ourse-description" name="description" type="text" class="form-control" required>
+                                  <label for="course-description">Description</label>
+                                  <input id="course-description" name="description" type="text" class="form-control" required>
                             </div>
                             <div class="input">
                                   <label for="ourse-image">Image</label>
