@@ -7,6 +7,8 @@ package DAO;
 import Entities.AccountMarketer;
 import Entities.Blog;
 import Entities.Post;
+import Entities.Slider;
+import Entities.Subject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -46,7 +48,7 @@ public class DAOPost extends DBConnect {
                         rs.getString("modify_date"),
                         rs.getInt("gender"),
                         rs.getInt("role_id"));
-                 Post p = new Post(rs.getInt("post_id"), rs.getInt("marketer_id"), rs.getInt("blog_id"), rs.getInt("subject_id"), rs.getString("tittle"), rs.getDate("posted_date"), rs.getDate("updated_date"), rs.getString("image"), rs.getString("content"), rs.getString("short_content"), rs.getString("status"), b, am);
+                Post p = new Post(rs.getInt("post_id"), rs.getInt("marketer_id"), rs.getInt("blog_id"), rs.getInt("subject_id"), rs.getString("tittle"), rs.getDate("posted_date"), rs.getDate("updated_date"), rs.getString("image"), rs.getString("content"), rs.getString("short_content"), rs.getString("status"), b, am);
                 return p;
             }
         } catch (Exception e) {
@@ -54,16 +56,16 @@ public class DAOPost extends DBConnect {
         }
         return null;
     }
-    
+
 //    getByid and except id of blog detail current
-    public ArrayList<Post> ListPostExceptCurrent(int id){
+    public ArrayList<Post> ListPostExceptCurrent(int id) {
         ArrayList<Post> list = new ArrayList<>();
         String sql = "SELECT TOP(5)* FROM Post p INNER JOIN Marketer_type ma ON p.marketer_id = ma.marketer_id INNER JOIN Blog b ON p.blog_id = b.blog_id WHERE p.post_id != ?";
         try {
             PreparedStatement st = conn.prepareStatement(sql);
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
-            while(rs.next()) {
+            while (rs.next()) {
                 Blog b = new Blog(rs.getInt("blog_id"), rs.getString("blog_name"));
                 AccountMarketer am = new AccountMarketer(
                         rs.getInt("marketer_id"),
@@ -81,7 +83,6 @@ public class DAOPost extends DBConnect {
                         rs.getInt("gender"),
                         rs.getInt("role_id"));
                 list.add(new Post(rs.getInt("post_id"), rs.getInt("marketer_id"), rs.getInt("blog_id"), rs.getInt("subject_id"), rs.getString("tittle"), rs.getDate("posted_date"), rs.getDate("updated_date"), rs.getString("image"), rs.getString("content"), rs.getString("short_content"), rs.getString("status"), b, am));
-            
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -115,7 +116,6 @@ public class DAOPost extends DBConnect {
                         rs.getInt("gender"),
                         rs.getInt("role_id"));
                 Post p = new Post(rs.getInt("post_id"), rs.getInt("marketer_id"), rs.getInt("blog_id"), rs.getInt("subject_id"), rs.getString("tittle"), rs.getDate("posted_date"), rs.getDate("updated_date"), rs.getString("image"), rs.getString("content"), rs.getString("short_content"), rs.getString("status"), b, am);
-                 
                 return p;
             }
         } catch (Exception e) {
@@ -141,12 +141,12 @@ public class DAOPost extends DBConnect {
         ArrayList<Post> list = new ArrayList<>();
         String sql = "SELECT * FROM Post p INNER JOIN Marketer_type ma ON p.marketer_id = ma.marketer_id\n"
                 + "INNER JOIN Blog b ON p.blog_id = b.blog_id\n"
-                + "WHERE p.tittle LIKE ? " + sortby + "  OFFSET ? ROWS FETCH NEXT 3 ROWS ONLY";
+                + "WHERE p.tittle LIKE ? " + sortby + "  OFFSET ? ROWS FETCH NEXT 4 ROWS ONLY";
 
         try {
             PreparedStatement st = conn.prepareStatement(sql);
             st.setString(1, "%" + keyname + "%");
-            st.setInt(2, (offset - 1) * 3);
+            st.setInt(2, (offset - 1) * 4);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Blog b = new Blog(rs.getInt("blog_id"), rs.getString("blog_name"));
@@ -166,7 +166,6 @@ public class DAOPost extends DBConnect {
                         rs.getInt("gender"),
                         rs.getInt("role_id"));
                 list.add(new Post(rs.getInt("post_id"), rs.getInt("marketer_id"), rs.getInt("blog_id"), rs.getInt("subject_id"), rs.getString("tittle"), rs.getDate("posted_date"), rs.getDate("updated_date"), rs.getString("image"), rs.getString("content"), rs.getString("short_content"), rs.getString("status"), b, am));
-            
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -174,8 +173,8 @@ public class DAOPost extends DBConnect {
         return list;
 
     }
-    
-     //getAll verision 2
+
+    //getAll verision 2
     public List<Post> getAllPost2(String key, int offset, int base) {
         List<Post> list = new ArrayList<>();
         String sql = "SELECT * FROM Post p INNER JOIN Marketer_type ma ON p.marketer_id = ma.marketer_id\n"
@@ -204,7 +203,6 @@ public class DAOPost extends DBConnect {
                         rs.getInt("gender"),
                         rs.getInt("role_id"));
                 list.add(new Post(rs.getInt("post_id"), rs.getInt("marketer_id"), rs.getInt("blog_id"), rs.getInt("subject_id"), rs.getString("tittle"), rs.getDate("posted_date"), rs.getDate("updated_date"), rs.getString("image"), rs.getString("content"), rs.getString("short_content"), rs.getString("status"), b, am));
-
             }
             return list;
         } catch (SQLException e) {
@@ -229,31 +227,29 @@ public class DAOPost extends DBConnect {
         }
         return 0;
     }
-    
-      //insert
-    public void insertPost(int marketerid, String tittle, String shortcontent, String content, int blogId, int subjectId, String status, Date postedPost, String thumbnail) {
+
+    //insert
+    public void insertPost(int marketerid, String tittle, String shortcontent, String content, int blogId, int subjectId, String status, String thumbnail) {
         String sql = "INSERT INTO [dbo].[Post]\n"
                 + "           ([marketer_id]\n"
                 + "           ,[subject_id]\n"
                 + "           ,[blog_id]\n"
                 + "           ,[tittle]\n"
-                + "           ,[posted_date]\n"
                 + "           ,[image]\n"
                 + "           ,[content]\n"
                 + "           ,[short_content]\n"
-                + "           ,[status]) VALUE(?,?,?,?,?,?,?,?,?)";
+                + "           ,[status]) VALUES(?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement st = conn.prepareStatement(sql);
             st.setInt(1, marketerid);
             st.setInt(2, subjectId);
             st.setInt(3, blogId);
             st.setString(4, tittle);
-            st.setDate(5, (java.sql.Date) postedPost);
-            st.setString(6, thumbnail);
-            st.setString(7, content);
-            st.setString(8, shortcontent);
-            st.setString(9, status);
-            st.executeLargeUpdate();
+            st.setString(5, thumbnail);
+            st.setString(6, content);
+            st.setString(7, shortcontent);
+            st.setString(8, status);
+            st.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -282,7 +278,7 @@ public class DAOPost extends DBConnect {
             st.setString(7, shortcontent);
             st.setString(8, status);
             st.setInt(9, postId);
-            st.executeLargeUpdate();
+            st.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -314,8 +310,14 @@ public class DAOPost extends DBConnect {
 //        Post p = dpdb.getTop1Post();
 //        System.out.println(p.getB().getBlog_name());
 //
-        Post p = dpdb.getById(1);
-        System.out.println(p.getContent());
+//        Post p = dpdb.getById(1);
+//        System.out.println(p.getContent());
+//        Post p = dpdb.getTop1Post();
+//        System.out.println(p.getB().getBlog_name());
+//        Post p = dpdb.getById(13);
+//        System.out.println(p.getStatus());
+//        dpdb.insertPost(1, "This is title", "This is short content", "this is content", 1, 1, "pending", "");
+        
     }
 
 }

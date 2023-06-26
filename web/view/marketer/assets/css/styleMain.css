@@ -1,177 +1,184 @@
 @import"styleLeftnavDashboard.css";
 
-.menu {
-  display: flex;
-  justify-content: space-between;
-  height: 60px;
-  background-color: #fff;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+
+.dashboard .main-content .details-lists .single-list {
+    position: relative;
+    background: #fff;
+    border-radius: 6px;
+    border: 1px solid #eee;
+    padding: 50px 30px;
+    padding-left: 115px;
 }
 
-/* #btn {
-  text-align: center;
-  padding: 1rem;
-  font-size: 2rem;
-} */
-
-.nav-right_attr {
-  display: flex;
-  justify-content: flex-end;
-  list-style: none;
-  height: 60px;
-  margin: 0 14px;
+.dashboard .main-content .details-lists .single-list .list-icon {
+    height: 65px;
+    width: 65px;
+    line-height: 69px;
+    border: 2px solid #15c0b03d;
+    border-radius: 50%;
+    position: absolute;
+    left: 30px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    text-align: center;
 }
 
-.avatarr {
-  display: flex;
-  align-items: center;
-  font-family: Arial, Helvetica, sans-serif;
+.dashboard .main-content .details-lists .single-list h3 {
+    font-size: 23px;
+    font-weight: 600;
+    position: relative;
+    top: -2px;
 }
 
-.avatarr img {
-  border-radius: 50%;
-  height: 2em;
-  object-fit: cover;
-  width: 2em;
-  cursor: pointer;
+.dashboard .main-content .details-lists .single-list h3 span {
+    display: block;
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 5px;
 }
 
-.dropdown-ofme {
-  display: block;
-  position: absolute;
-  background-color: #11101d;
-  top: 100%;
-  right: 0%;
-  border-radius: 8px;
-}
-
-.quote {
-  margin: -3px;
-  width: 227px;
-  height: 189px;
-}
-.quote:before {
-  content: "";
-  position: absolute;
-  bottom: 185px;
-  left: 200px;
-  border-top: 10px solid #11101d;
-  border-right: 10px solid transparent;
-  border-left: 10px solid transparent;
-  rotate: 180deg
-}
-
-
-.nav-dropdown {
-  display: block;
-}
-
-.dropdown-i {
-  display: flex;
-  list-style: none;
-  padding: 10px;
-  border-bottom: 1px solid #ccc ;
-  color: white;
-  font-size: 14px;
-}
-
-.dropdown-i .avatarr img{
-  height:3em;
-  width: 3em;
-}
-
-#d-name{
-  margin-bottom: 0;
-  font-size: 15px;
-  font-weight: 600;
-  padding: 0 10px;
-
-}
-
-#role{
-  margin-bottom: 0;
-  padding: 0 10px;
-  font-size: 12px;
-  color:gray
-}
-
-.show{
-  display: none;
-}
-
-.content {
-  background-color: #f8f8f8;
-  border-radius: 5px;
-}
-
-.filter {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-}
-
-.add-slider{
-  padding: 4px;
-  cursor: pointer;
-}
-
-.visiblle,
-.hide,
-.delete,
-.edit {
-  border: 1px solid black;
-  padding: 10px;
-  cursor: pointer;
-  margin-bottom: 4px;
-}
-
-.delete:hover {
-  background-color: #b2adde;
-}
-
-.edit:hover {
-  background-color: chocolate;
-}
-
-.footer {
-  height: 100px;
-  background-color: #11101d;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
+.dashboard .main-content .details-lists .single-list .list-icon i {
+    font-size: 25px;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-image: linear-gradient(45deg, #15c0b0, #3fdd90);
 }
 
 
 
-.force-overflow {
-  min-height: 250px;
+
+.dashboard .main-content .activity-log {
+    margin-top: 30px;
+    background: #fff;
+    border-radius: 6px;
+    border: 1px solid #eee;
+    padding-bottom: 20px;
 }
 
-#style-1::-webkit-scrollbar {
-  width: 6px;
-  background-color: #11101D;
+.dashboard .main-content .activity-log .block-title {
+    margin-bottom: 20px;
 }
 
-#style-1::-webkit-scrollbar-thumb {
-  background-color: #000000;
+.dashboard-block .block-title {
+    padding: 25px 30px;
+    font-size: 18px;
+    font-weight: 500;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 30px;
+}
+
+.dashboard .main-content .activity-log ul li {
+    display: block;
+    position: relative;
+    padding-right: 50px;
+    padding-left: 65px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: #fff;
+    -webkit-transition: all .4s ease;
+    transition: all .4s ease;
+}
+
+.dashboard .main-content .activity-log ul li .log-icon {
+    position: absolute;
+    left: 30px;
+    top: 25px;
+}
+
+.dashboard .main-content .activity-log ul li .title {
+    font-size: 14px;
+    color: #666;
+    font-weight: 500;
+}
+
+.dashboard .main-content .activity-log ul li .time {
+    display: block;
+    font-size: 14px;
+    color: #888;
+    margin-top: 2px;
+}
+
+.dashboard .main-content .activity-log ul li .remove {
+    display: block;
+}
+
+.dashboard .main-content .activity-log ul li .remove a {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    height: 15px;
+    width: 15px;
+    line-height: 15px;
+    background: #f4193f;
+    color: #fff;
+    font-size: 10px;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    border-radius: 3px;
 }
 
 
-@media (max-width: 420px) {
-
-  .visiblle,
-  .hide,
-  .delete,
-  .edit {
-    padding: 5px;
-    margin-bottom: 4px;
-  }
+.dashboard .main-content .recent-items {
+    padding-bottom: 20px;
 }
 
-@media (max-width: 420px) {
-  .sidebar li .tooltip {
-    display: none;
-  }
 
+.dashboard-block {
+    border: 1px solid #eee;
+    border-radius: 6px;
+    background: #fff;
+    margin-top: 30px;
+    padding-bottom: 30px;
 }
+
+.dashboard-block .block-title {
+    padding: 25px 30px;
+    font-size: 18px;
+    font-weight: 500;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 30px;
+}
+
+.dashboard .main-content .recent-items .block-title {
+    margin-bottom: 20px;
+}
+
+.dashboard .main-content .recent-items ul li {
+    display: flex;
+    position: relative;
+    padding-right: 50px;
+    padding-left: 30px;
+    padding-bottom: 25px;
+    background: #fff;
+    -webkit-transition: all .4s ease;
+    transition: all .4s ease;
+}
+
+.dashboard .main-content .recent-items ul li .image a img {
+    height: 60px;
+    width: 60px;
+    border-radius: 3px;
+}
+
+.dashboard .main-content .recent-items ul li .product {
+    display: grid;
+    margin-left: 20px;
+}
+
+.dashboard .main-content .recent-items ul li .product .title {
+    font-size: 14px;
+    color: #666;
+    font-weight: 500;
+    margin-top: 15px;
+}
+
+.time {
+    margin-top: -9px;
+}
+

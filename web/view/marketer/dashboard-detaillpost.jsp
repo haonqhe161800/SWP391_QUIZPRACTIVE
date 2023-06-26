@@ -33,6 +33,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     </head>
     <body>
+<<<<<<< Updated upstream
         <jsp:include page="sidebar-dashboard.jsp"></jsp:include>
             <section class="home-section">
             <jsp:include page="sidebar-top.jsp"></jsp:include>

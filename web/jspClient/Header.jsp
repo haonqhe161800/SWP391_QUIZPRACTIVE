@@ -2,6 +2,9 @@
 <%@page import="Entities.AccountUser"%> 
 <%@page import="Entities.AccountMarketer"%> 
 <%@page import="Entities.AccountMentor"%> 
+<%@page import="Entities.AccountMentor"%> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 
 <header class="header navbar-area">
     <div class="container">
@@ -9,7 +12,7 @@
             <div class="col-lg-12">
                 <div class="nav-inner">
                     <nav class="navbar navbar-expand-lg">
-                        <a class="navbar-brand" href="HomeController">
+                        <a class="navbar-brand" href="#">
                             QUIZPRACTICE
                         </a>
                         <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
@@ -19,38 +22,22 @@
                             <span class="toggler-icon"></span>
                             <span class="toggler-icon"></span>
                         </button>
+                      
+                        <c:set var="setList" value="['HomeController', '#', '#', 'listpost']" />
                         <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                             <ul id="nav" class="navbar-nav ms-auto">
                                 <li class="nav-item">
-                                    <a class=" active dd-menu collapsed" href="HomeController"
-                                       data-bs-toggle="collapse" data-bs-target="#submenu-1-1"
-                                       aria-controls="navbarSupportedContent" aria-expanded="false"
-                                       aria-label="Toggle navigation">Home</a>
+                                    <a href="HomeController"
+                                       aria-label="Toggle navigation" class="<c:if test="${pageHome != null && setList.contains(pageHome)}">active</c:if>">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="Activity" aria-label="Toggle navigation">Activity</a>
+                                    <a href="Activity" aria-label="Toggle navigation" class="">Activity</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class=" dd-menu collapsed" href="#"
-                                       data-bs-toggle="collapse" data-bs-target="#submenu-1-3"
-                                       aria-controls="navbarSupportedContent" aria-expanded="false"
-                                       aria-label="Toggle navigation">Listings</a>
-                                    <ul class="sub-menu collapse" id="submenu-1-3">
-                                        <li class="nav-item"><a href="#">List Ad</a></li>
-                                        <li class="nav-item"><a href="#">List Source</a></li>
-                                        <li class="nav-item"><a href="#">List Mentor</a></li>
-                                        <li class="nav-item"><a href="#">List Marketer</a></li>
-                                    </ul>
+                                    <a href="#" aria-label="Toggle navigation">Course List</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class=" dd-menu collapsed" href="#"
-                                       data-bs-toggle="collapse" data-bs-target="#submenu-1-3"
-                                       aria-controls="navbarSupportedContent" aria-expanded="false"
-                                       aria-label="Toggle navigation">Help</a>
-                                    <ul class="sub-menu collapse" id="submenu-1-3">
-                                        <li class="nav-item"><a href="#">Report</a></li>
-                                        <li class="nav-item"><a href="#">Chat</a></li>
-                                    </ul>
+                                    <a href="listpost" aria-label="Toggle navigation" class="<c:if test="${pagePost != null && setList.contains(pagePost)}">active</c:if>">Blog List</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class=" dd-menu collapsed" href="#"
@@ -60,25 +47,32 @@
                                     <ul class="sub-menu mega-menu collapse" id="submenu-1-4">
                                         <li class="single-block">
                                             <ul>
-                                                <li class="mega-menu-title">Essential Pages</li>
-                                                <li class="nav-item"><a href="#">About Us</a></li>
-                                                <li class="nav-item"><a href="#">Sign Up</a></li>
-                                                <li class="nav-item"><a href="SubjectController">Sign In</a></li>
-                                                <li class="nav-item"><a href="ChangePassword">Change Password</a></li>                                                    
-                                                <li class="nav-item"><a href="listpost">Blog Relative Website</a></li>
+                                                <!--<li class="nav-item"><a href="#">Sign Up</a></li>-->
+                                                <!--<li class="nav-item"><a href="SubjectController">Sign In</a></li>-->
+                                                <li class="nav-item"><a href="profile">Account Overview</a></li>
+
                                             </ul>
                                         </li>
                                         <li class="single-block">
                                             <ul>
-                                                <li class="mega-menu-title">Dashboard</li>
-                                                <li class="nav-item"><a href="#">Account Overview</a></li>
-                                                <li class=""><a href="profile">My Profile</a></li>
-                                                <li class="nav-item"><a href="#">My Ads</a></li>
-                                                <li class="nav-item"><a href="#">Messages</a></li></li>
+                                                <li class="mega-menu-title">Link</li>
+                                            </ul>
+                                        </li>
                                     </ul>
                                 </li>
-                            </ul>
-                            </li>
+                                <li class="nav-item">
+                                    <a class=" dd-menu collapsed" href="#"
+                                       data-bs-toggle="collapse" data-bs-target="#submenu-1-3"
+                                       aria-controls="navbarSupportedContent" aria-expanded="false"
+                                       aria-label="Toggle navigation">More</a>
+                                    <ul class="sub-menu collapse" id="submenu-1-3">
+                                        <li class="nav-item"><a href="#">Mentor List</a></li>
+                                        <li class="nav-item"><a href="#">Link 2</a></li>
+                                        <li class="nav-item"><a href="#">Link 3</a></li>
+                                        <li class="nav-item"><a href="#">Link 4</a></li>
+                                    </ul>
+                                </li>
+
                             </ul>
                         </div> <!-- navbar collapse -->
                         <%if(session.getAttribute("accountUser") != null) {
@@ -87,7 +81,7 @@
                         <h6 style="padding: 1rem;color: #081828;">Hello,<span><%=au.getDisplay_name()%></span> </h6>
                         <div style="display: flex;">
                             <img src="https://th.bing.com/th/id/OIP.mDMuXjKAMMflGF_1y8keZAHaEo?pid=ImgDet&rs=1" alt=""  style="border-radius: 50%;height: 3em;object-fit: cover;width: 3em;cursor: pointer;">
-                            <i class="fa-solid fa-chevron-down" style="padding: 1rem;cursor: pointer"></i>
+                            <i class="fa-solid fa-chevron-down" style="padding: 1rem;"></i>
                             <nav class="dropdown-ofme quote show">
                                 <ul class="nav-dropdown">
                                     <li class="dropdown-i">
@@ -96,7 +90,6 @@
                                                 alt=""></span>
                                         <span>
                                             <p id="d-name"><%=au.getDisplay_name()%></p>
-                                            <p id="role">Marketer</p>
                                         </span>
                                     </li>
                                     <li class="dropdown-i">Home</li>
@@ -123,6 +116,9 @@
                                             <p id="role">Marketer</p>
                                         </span>
                                     </li>
+                                    <li class="dropdown-i">Home</li>
+                                    <li class="dropdown-i">Home</li>
+                                    <li class="dropdown-i">Home</li>
                                     <li class="dropdown-i">Home</li>
                                     <li class="dropdown-i"><a href="dashboardmarketer">Dashboard</a></li>
                                     <li class="dropdown-i"><a href="profile">Profile Setting</a></li>
@@ -177,15 +173,7 @@
         let dialogMenu = document.querySelector(".dropdown-ofme");
         iconUp.addEventListener("click", () => {
             dialogMenu.classList.toggle("show");
-            dialogChange();
         })
-        function dialogChange() {
-            if (dialogMenu.classList.contains("show")) {
-                iconUp.classList.replace("fa-chevron-down", "fa-chevron-up");
-            } else {
-                iconUp.classList.replace("fa-chevron-up", "fa-chevron-down");
-            }
-        }
     </script>
 </header>
 <!-- End Header Area -->

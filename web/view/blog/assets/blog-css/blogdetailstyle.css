@@ -7,7 +7,7 @@
 
 /*các thể có letter sẽ kế thừa*/
 html {
-    font-family: Arial, Helvetica, sans-serif;
+   font-family: 'Jost';
 }
 
 .space{
@@ -61,7 +61,6 @@ html {
 
 .intro_author{
     padding: 10px;
-    border-bottom: 1px solid #000;
 }
 
 .name_author {

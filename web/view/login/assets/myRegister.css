@@ -3,6 +3,7 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
+    font-family: Trebuchet MS;
 }
 
 .abcdy {
@@ -44,7 +45,7 @@ body {
     margin-bottom: 0px;
     font-family: 'Segoe UI';
     font-size: 2rem;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .login {
@@ -105,7 +106,7 @@ body {
     line-height: 3em;
     font-family: 'Ubuntu', sans-serif;
     border-radius: 5px;
-    border: 2px solid skyblue;
+    border: 2px solid #5830E0;
 }
 
 .radio-inputs {
@@ -182,11 +183,10 @@ body {
 .form-signup button {
 
     width: 87%;
-    background: #4255ff;
+    background: #0d6efd;
     border: none;
     border-radius: 8px;
     color: slategrey;
-    font-family: 'Ubuntu', sans-serif;
     cursor: pointer;
     padding: 10px;
 }
@@ -209,7 +209,7 @@ body {
     text-decoration: none;
     color: black;
     font-size: 15px;
-    font-weight: 900;
+    font-weight: 600;
 }
 
 /*responsive : */

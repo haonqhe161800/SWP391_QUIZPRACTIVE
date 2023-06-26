@@ -21,8 +21,8 @@
 .quote {
     margin: -25px;
     width: 227px;
-    height: 189px;
 }
+
 .quote:before {
   content: "";
   position: absolute;

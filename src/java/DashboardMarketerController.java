@@ -23,6 +23,7 @@ public class DashboardMarketerController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+         request.setAttribute("pageMarketerdasboard", "dashboardmarketer");
         request.getRequestDispatcher("view/marketer/marketerDashboard.jsp").forward(request, response);
     } 
 

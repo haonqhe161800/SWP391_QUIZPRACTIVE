@@ -52,13 +52,13 @@
     <body>
 
 
-        <div style="margin-bottom: 100px ">
-            <jsp:include page="HeaderAdmin.jsp"></jsp:include>
+            <div style="margin-bottom: 100px ">
+                <jsp:include page="HeaderAdmin.jsp"></jsp:include>
             </div>
 
 
              <div class="container" style="display: flex; position: relative">
-            <jsp:include page="Sidebar.jsp"></jsp:include>
+                <jsp:include page="Sidebar.jsp"></jsp:include>
 
                 <div class="content" style="margin-left: 50px; flex: 2">
                 <%if(request.getAttribute("rsUser") != null) {
@@ -77,7 +77,7 @@
                 </form>
                 <table class="table">
                     <tr>
-                        <th scope="col">ID</th>
+                        <th scope="col">STT</th>
                         <th scope="col">Name</th>
                         <th scope="col">Gender</th>
                         <th scope="col">Email</th>
@@ -86,9 +86,11 @@
                         <th scope="col">Actions</th>
                     </tr>
 
-                    <%while(rsUser.next()) {%>
+                    <%int i = 0;
+                    while(rsUser.next()) {
+                        i++;%>
                     <tr>
-                        <td><%=rsUser.getInt(1)%></td>
+                        <td><%=i%></td>
                         <td><%=rsUser.getString(5)%></td>
                         <td>
                             <%if(rsUser.getInt(13) == 1) {%>
@@ -130,7 +132,7 @@
                 </form>
                 <table class="table">
                     <tr>
-                        <th scope="col">ID</th>
+                        <th scope="col">STT</th>
                         <th scope="col">Name</th>
                         <th scope="col">Gender</th>
                         <th scope="col">Email</th>
@@ -139,9 +141,11 @@
                         <th scope="col">Actions</th>
                     </tr>
 
-                    <%while(rsMentor.next()) {%>
+                    <%int i = 0;
+                    while(rsMentor.next()) {
+                        i++;%>
                     <tr>
-                        <td><%=rsMentor.getInt(1)%></td>
+                        <td><%=i%></td>
                         <td><%=rsMentor.getString(5)%></td>
                         <td>
                             <%if(rsMentor.getInt(13) == 1) {%>
@@ -184,7 +188,7 @@
                 </form>
                  <table class="table">
                     <tr>
-                        <th scope="col">ID</th>
+                        <th scope="col">STT</th>
                         <th scope="col">Name</th>
                         <th scope="col">Gender</th>
                         <th scope="col">Email</th>
@@ -193,9 +197,11 @@
                         <th scope="col">Action</th>
                     </tr>
 
-                    <%while(rsMarketer.next()) {%>
+                    <%int i = 0;
+                    while(rsMarketer.next()) {
+                        i++;%>
                     <tr>
-                        <td><%=rsMarketer.getInt(1)%></td>
+                        <td><%=i%></td>
                         <td><%=rsMarketer.getString(5)%></td>
                         <td>
                             <%if(rsMarketer.getInt(13) == 1) {%>
@@ -227,32 +233,35 @@
                 %>
                 <div style="display: flex">
                     <h3 style="margin-bottom: 12px">Subject list</h3>
-                    <form style="margin-bottom: 12px; padding: 12px">
+                    <form style="margin-bottom: 12px; padding: 12px" method="POST" action="SubjectController">
                         <div style="display: flex; align-items: center">
-                            <input style="padding: 4px 4px; width: 300px; margin-right: 12px" type="text" name="user" placeholder="Enter subject name need to search...">
+                            <input type="hidden" name="service" value="searchAdmin" />
+                            <input style="padding: 4px 4px; width: 300px; margin-right: 12px" type="text" name="name" placeholder="Enter subject name need to search...">
                             <div class="bottom-content">
                                 <input id="submit" class="btn btn-block btn-primary" type="submit" value="Search">
                             </div>
-                            <span href="SubjectController" class="btn-open-modal">Create subject</span>
+                            <span class="btn-open-modal">Create subject</span>
                         </div>
                     </form>
                 </div>
                 <table class="table">
                     <tr>
-                        <th scope="col">ID</th>
+                        <th scope="col">STT</th>
                         <th scope="col">Name</th>
                         <th scope="col">Image</th>
                         <th scope="col">Number of courses</th>
                         <th scope="col">Action</th>                    
                     </tr>
 
-                    <%while(rsSubject.next()) {%>
+                    <%int i = 0;
+                    while(rsSubject.next()) {
+                        i++;%>
                     <tr>
-                        <td><%=rsSubject.getInt(2)%></td>
+                        <td><%=i%></td>
                         <td><%=rsSubject.getString(1)%></td>
                         <td><img style="width: 50px; height: 50px" src="<%=rsSubject.getString(3)%>"></td>
                         <td><%=rsSubject.getInt(4)%></td>
-                        <td>
+                        <td style="display: flex; justify-content: space-between"">
                             <form action="SubjectController" method="POST">
                                 <input type="hidden" name="service" value="delete">
                                 <input type="hidden" name="subject_id" value="<%=rsSubject.getInt(2)%>">
@@ -261,7 +270,7 @@
                                     <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
                                 </button>
                             </form>
-
+                            <button class="edit-btn"><a href="#"><i class="far fa-edit"></i></a></button>
                         </td>
 
                     </tr>
@@ -269,7 +278,7 @@
 
                 </table>
                     
-                        <div class="modal-subject">
+                <div class="modal-subject">
                     <div class="modal-container-subject">
                         <div class="modal-subject-title">
                             <h4>Create new subject</h4>
@@ -278,11 +287,11 @@
                             <input type="hidden" name="service" value="addSubject">
                             <div class="input">
                                 <label for="subject-name">Subject name</label><br>
-                                <input type="text" name="name" />
+                                <input id="subject-name" type="text" name="name" />
                             </div>
                               <div class="input">
-                                <label>Image</label>
-                                <input name="image" type="text" class="form-control" required>
+                                  <label for="subject-image">Image</label>
+                                  <input id="subject-image" name="image" type="text" class="form-control" required>
                             </div>
                             <div class="button">
                                 <span class="btn-cancel">Cancel</span>
@@ -296,29 +305,90 @@
 
                 <%if(request.getAttribute("rsCourse") != null) {
                     ResultSet rsCourse = (ResultSet) request.getAttribute("rsCourse");
+                    ResultSet subjectName = (ResultSet) request.getAttribute("subjectName");
                 %>
-                <h3 style="margin-bottom: 12px">Course list</h3>
+                <div style="margin-bottom: 12px; display: flex">
+                    <h3 style="margin-right: 8px">Course list</h3>
+                    <span class="btn-open-modal">Create course</span>
+                </div>
                 <table class="table">
                     <tr>
-                        <th scope="col">ID</th>
+                        <th scope="col">STT</th>
                         <th scope="col">Subject name</th>
                         <th scope="col">Course name</th>
                         <th scope="col">Image</th>
                         <th scope="col">Number of question</th>
+                        <th scope="col">View question</th>
+                        <th colspan="2">Action</th>
                     </tr>
 
-                    <%while(rsCourse.next()) {%>
+                    <%int i = 0;
+                    while(rsCourse.next()) {
+                        i++;%>
                     <tr>
-                        <td><%=rsCourse.getInt(1)%></td>
+                        <td><%=i%></td>
                         <td><%=rsCourse.getString(2)%></td>
                         <td><%=rsCourse.getString(3)%></td>
                         <td><img style="width: 50px; height: 50px" src="<%=rsCourse.getString(4)%>"></td>
                         <td><%=rsCourse.getInt(5)%></td>
+                        <td><a href="QuestionAdmin?service=show&courseID=<%=rsCourse.getInt(1)%>"><i class="far fa-question-circle"></i></a></td>
+                        <td style="display: flex; justify-content: space-between">
+                            <form action="Course" method="POST">
+                                <input type="hidden" name="service" value="delete">
+                                <input type="hidden" name="course_id" value="<%=rsCourse.getInt(1)%>">
+
+                                <button type="submit" class="delete-btn" data-toggle="modal" onclick="return confirm('Are you sure you want to delete this course?')">                                   
+                                    <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+                                </button>
+                            </form>
+                            <button style="border: transparent" class="edit-btn"><a href="Course?service=edit&course_id=<%=rsCourse.getInt(1)%>"><i class="far fa-edit"></i></a></button>
+                        </td>
                     </tr>
                     <%}%>
                 </table>
+                
+                <div class="modal-subject">
+                    <div class="modal-container-subject">
+                        <div class="modal-subject-title">
+                            <h4>Create new course</h4>
+                        </div>
+                        <form <form action="Course" method="POST">
+                            <input type="hidden" name="service" value="add">
+                            <div class="input">
+                                <label for="course-name">Course name</label><br>
+                                <input id="course-name" type="text" name="name" />
+                            </div>
+                            <div class="input">
+                                  <label for="course-description">Description</label>
+                                  <input id="course-description" name="description" type="text" class="form-control" required>
+                            </div>
+                            <div class="input">
+                                  <label for="ourse-image">Image</label>
+                                  <input id="ourse-image" name="image" type="text" class="form-control" required>
+                            </div>
+                            <div class="input">
+                                <label for="publish">Publish</label>
+                                <select id="publish" name="publish">
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="subject-name">Subject name</label>
+                                <select id="subject-name" name="subject_id">
+                                    <%while(subjectName.next()) {%>
+                                    <option value="<%=subjectName.getInt(1)%>"><%=subjectName.getString(2)%></option>
+                                    <%}%>
+                                </select>
+                            </div>
+                            <div class="button">
+                                <span class="btn-cancel">Cancel</span>
+                                <button style="margin-left: 6px" class="btn-create">Create</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 <%}%>
-
             </div>
         </div>
 

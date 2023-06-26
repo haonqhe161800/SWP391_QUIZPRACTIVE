@@ -73,7 +73,7 @@
                         <p style="margin-bottom: 8px" class="question"><%=i%>. <%=question.getQuestion_name()%></p>
                         <%for (Answer answer : listAnswer) {
                             if(answer.getQuestion_id() == question.getQuestion_id()) {%> 
-                            <input style="margin-bottom:8px" id="<%=answer.getAnswer_id()%>" class="<%=question.getQuestion_id()%>" name="question<%=question.getQuestion_id()%>" type="radio" value="<%=answer.getIs_correct()%>_<%=answer.getAnswer_id()%>" onclick="handleClick(className)"/>
+                            <input style="margin-bottom:8px" id="<%=answer.getAnswer_id()%>" class="<%=i%>" name="question<%=question.getQuestion_id()%>" type="radio" value="<%=answer.getIs_correct()%>_<%=answer.getAnswer_id()%>" onclick="handleClick(className)"/>
                             <label for="<%=answer.getAnswer_id()%>"><%=answer.getAnswer_name()%></label><br>
                             <input type="hidden" name="answer<%=answer.getAnswer_id()%>" value="<%=answer.getAnswer_id()%>" >
                             <%}
@@ -87,9 +87,11 @@
             </div>
                     
             <div class="menu_exam">
-                <%for (Question question : listQuestion) {%>
+                <%int j = 0;
+                for (Question question : listQuestion) {
+                    j++;%>
                 <div>
-                    <p id="question<%=question.getQuestion_id()%>" class="number_question"><%=question.getQuestion_id()%></p>
+                    <p id="question<%=j%>" class="number_question"><%=j%></p>
                 </div>
                 <%}%>
             </div>

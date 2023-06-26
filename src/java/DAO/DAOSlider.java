@@ -77,7 +77,8 @@ public class DAOSlider extends DBConnect {
     //getAll verision 2
     public List<Slider> getAll2(String key, int offset, int base) {
         List<Slider> list = new ArrayList<>();
-         String sql = "SELECT s.slider_id,s.slider_url,s.content,s.note,s.isShow ,s.subject_id,su.subject_id,su.subject_name,su.image,su.title,su.description,su.status FROM Slider s LEFT JOIN Subject su on s.subject_id = su.subject_id"
+
+        String sql = "SELECT s.slider_id,s.slider_url,s.content,s.note,s.isShow ,s.subject_id,su.subject_id,su.subject_name,su.image,su.title,su.description,su.status FROM Slider s LEFT JOIN Subject su on s.subject_id = su.subject_id"
                 + "   WHERE s.content LIKE ? ORDER BY s.slider_id OFFSET ? ROW FETCH NEXT " + base + " ROWS ONLY";
         try {
             PreparedStatement st = conn.prepareStatement(sql);
@@ -85,7 +86,7 @@ public class DAOSlider extends DBConnect {
             st.setInt(2, (offset - 1) * base);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                 Subject su = new Subject(rs.getInt("subject_id"), rs.getString("subject_name"), rs.getString("image"), rs.getString("title"), rs.getString("description"), rs.getBoolean("status"));
+                Subject su = new Subject(rs.getInt("subject_id"), rs.getString("subject_name"), rs.getString("image"), rs.getString("title"), rs.getString("description"), rs.getBoolean("status"));
                 Slider s = new Slider(rs.getInt("slider_id"), rs.getString("slider_url"), rs.getString("content"), rs.getString("note"), rs.getBoolean("isShow"), rs.getInt("subject_id"), su);
                 list.add(s);
             }
@@ -97,7 +98,8 @@ public class DAOSlider extends DBConnect {
     }
 
     //Insert
-    public void insertSilder(int subject_id, String slider_url, String content, String note, boolean isShow) {
+
+    public void insertSilder(int subject_id, String slider_url,String content,String note,boolean isShow) {
         String sql = "INSERT INTO [dbo].[Slider]\n"
                 + "           ([subject_id]\n"
                 + "           ,[slider_url]\n"
@@ -122,7 +124,8 @@ public class DAOSlider extends DBConnect {
     }
 
     //Update
-    public void updateSlider(int slider_id, int subject_id, String slider_url, String content, String note, boolean isShow) {
+
+    public void updateSlider(int slider_id,int subject_id, String slider_url,String content,String note,boolean isShow) {
         String sql = "UPDATE [dbo].[Slider]\n"
                 + "   SET [subject_id] = ? \n"
                 + "      ,[slider_url] = ? \n"
@@ -132,7 +135,7 @@ public class DAOSlider extends DBConnect {
                 + " WHERE slider_id = ?";
         try {
             PreparedStatement st = conn.prepareStatement(sql);
-            st.setInt(1, subject_id);
+           st.setInt(1, subject_id);
             st.setString(2, slider_url);
             st.setString(3, content);
             st.setString(4, note);
@@ -176,11 +179,11 @@ public class DAOSlider extends DBConnect {
         return null;
     }
 
+
     public static void main(String[] args) {
         DAOSlider dsdb = new DAOSlider();
-        List<Slider> list = dsdb.getAll2("C", 1, 3);
-        for (Slider slider : list) {
-            System.out.println(slider);
-        }
+        
+        Slider s = dsdb.getById(1);
+        System.out.println(s.getSubject_id());
     }
 }

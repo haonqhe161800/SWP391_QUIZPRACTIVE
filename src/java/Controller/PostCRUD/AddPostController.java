@@ -15,12 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Date;
 
-/**
- *
- * @author Admin
- */
 @WebServlet(name = "AddPostController", urlPatterns = {"/addpost"})
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024 * 3,
@@ -29,19 +24,17 @@ import java.util.Date;
 )
 public class AddPostController extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-       
-    }
-
-    public final String FAILURE = "view/marketer/dashboard-addpost.jsp";
-    public final String SUCCESS = "listpost";
+    public final String FAILURE = "addpost";
+    public final String SUCCESS = "dashboardlistpost";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        request.setAttribute("pagepost", "addpost");
        request.getRequestDispatcher("view/marketer/dashboard-addpost.jsp").forward(request, response);
     }
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -53,11 +46,11 @@ public class AddPostController extends HttpServlet {
         String content = request.getParameter("message");
         String blog = request.getParameter("blog");
         String subject = request.getParameter("subject");
-        String status = request.getParameter("status");
+        
         String fileName = "";
         try {
             Part thumbnailFile = request.getPart("upfile");
-            String realPath = getServletContext().getRealPath("/uploadPost");
+            String realPath = getServletContext().getRealPath("/upload");
 
             if (thumbnailFile != null && thumbnailFile.getSize() > 0) {
                 fileName = Paths.get(thumbnailFile.getSubmittedFileName()).getFileName().toString();
@@ -75,10 +68,16 @@ public class AddPostController extends HttpServlet {
             //check subject not -1
             if ("-1".equals(subject) || "-1".equals(blog)) {
                 url = FAILURE;
-                request.setAttribute("message", "error");
+                request.getSession().setAttribute("message", "error");
             } else {
                 url = SUCCESS;
                 //execute insert post
+//                pdb.insertPost(marketerid, tittle, shortcontent, content, Integer.parseInt(blog), Integer.parseInt(subject), "pending", postedPost(), fileName);
+                
+                
+                //test execute
+              pdb.insertPost(1, tittle, shortcontent, content, Integer.parseInt(blog), Integer.parseInt(subject), "pending",fileName);
+            
             }
 
         } catch (Exception e) {
@@ -87,11 +86,9 @@ public class AddPostController extends HttpServlet {
         response.sendRedirect(url);
         return;
     }
+
     
-        public Date postedPost() {
-        long millis = System.currentTimeMillis();
-        java.sql.Date date = new java.sql.Date(millis);
-        return date;
-    }
+    //validation short content (250 not null)
+    //validation content (not null)
 
 }

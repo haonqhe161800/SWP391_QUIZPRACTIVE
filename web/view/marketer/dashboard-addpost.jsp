@@ -1,18 +1,21 @@
-<%-- 
-    Document   : dashboard-addpost
-    Created on : 15-Jun-2023, 04:58:15
-    Author     : Admin
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="Entities.Subject"%>
+<%@page import="Entities.Blog"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="DAO.DAOSubject"%>
+<%@page import="DAO.DAOBlog"%>
 <!DOCTYPE html>
-<html>
+<html lang="us">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <!-- Boxicons CDN Link -->
-        <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-        <link rel="stylesheet" href="view/marketer/assets/css/styleSliderAdd.css">       
+
+        <link rel="stylesheet" href="view/marketer/assets/css/stylePostAdd.css">
+
+        <!--favicon-->
+        <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo/lloo.png" />
 
         <!-- Bootstrap 4 -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -27,134 +30,186 @@
                 integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 
+        <!--Component-->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+
+        <!--popup of Marketer-->
+        <link rel="stylesheet" href="./assets/css/newcss.css"/>
         <!-- fontanswer icons -->
         <script src="https://kit.fontawesome.com/fe000f9b2a.js" crossorigin="anonymous"></script>
 
-        <!--Ajax-->
+        <!-- jquery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <style>
+            /*dropdown*/
+            .dashboard-menu ul li.active>a,
+            a[aria-expanded="true"] {
+                /*background: #5830e0;*/
+            }
 
+            a[data-toggle="collapse"] {
+                position: relative;
+            }
+
+            .dropdown-toggle::after {
+                display: block;
+                position: absolute;
+                top: 50%;
+                right: 20px;
+                transform: translateY(-50%);
+            }
+        </style>
     </head>
     <body>
-        <jsp:include page="sidebar-dashboard.jsp"></jsp:include>
-            <section class="home-section">
-            <jsp:include page="sidebar-top.jsp"></jsp:include>
-            <c:if test="${param.message != null}">
+        <jsp:include page="/jspClient/Header.jsp" ></jsp:include>
+            <section class="dashboard section">
+
+            <c:if test="${sessionScope.message != null}">
                 <div class=" container alert alert-danger alert-dismissible mt-3">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <strong>Failure!</strong> Subject invalid or Blog invalid Please re-choose.
                 </div>
             </c:if>
 
-            <div class="content container-fluid mt-3" style="width: 95%;">
-                <div class="row filter">
-                    <div class="num-entry">
-                        <label><a href="#">DashBoard</a> / <a href="dashboardlistpost">List Post</a> / <a>Add Post</a></label>
-                    </div>
-                </div>
-                <form class="row" action="addpost" method="POST" enctype="multipart/form-data" >
-                    <div class="col-md-5">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="">Title:</label>
-                                <div class="item-input">
-                                    <input type="text" name="title" required>
-                                </div>
+            <!--breadcrumbs-->
+            <div class="breadcrumbs" style="background-color: #f9f9f9">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="breadcrumbs-content">
+                                <h1 class="page-title">Dashboard Marketer</h1>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="">Short content:</label>
-                                <div class="item-input">
-                                    <input type="text" name="shortcontent" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="">Image:</label>
-                                <div class="item-input">
-                                    <input type="file" id="file-input" accept="image/*" name="upfile">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <label for="">1920x480</label>
-                            <img class="frame" id="img-preview">
-                        </div>
-                        <div class="col-md-12 mt-3">
-                            <div class="form-group">
-                                <label for="">Relative Subject:</label>
-                                <div class="item-input">
-                                    <Select name="subject">
-                                        <option value="-1">Choose relative subject</option>
-                                        <option value="">A</option>
-                                        <option value="">B</option>
-                                        <option value="">C</option>
-                                    </Select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 mt-3">
-                            <div class="form-group">
-                                <label for="">Category Blog:</label>
-                                <div class="item-input">
-                                    <Select name="blog">
-                                        <option value="-1">Choose category blog</option>
-                                        <option value="">A</option>
-                                        <option value="">B</option>
-                                        <option value="">C</option>
-                                    </Select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <div class="item-input">
-                                    <input type="radio" name="status" id="" checked>
-                                    <label for="">pending</label>
-                                </div>
-                                <div class="item-input">
-                                    <input type="radio" name="status" id="" disabled>
-                                    <label for="">reject</label>
-                                </div>
-                                <div class="item-input">
-                                    <input type="radio" name="status" id="" disabled>
-                                    <label for="">approve</label>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="col-md-7">                        
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="">Content:</label>
-                                <div class="item-input">
-                                    <textarea name="message" id="message"></textarea><br>
-                                </div>
-                            </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <ul class="breadcrumb-nav">
+                                <li><a href="index.html">Home</a></li>
+                                <li>Dashboard</li>
+                                <li>Add Post</li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <div class="item-input">
-                                <button class="btn-dark">Submit</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-                <!-- The Modal -->
-                <div id="myModal" class="mmodal">
-                    <span class="close">&times;</span>
-                    <img class="modal-ccontent" id="img01">
-                    <div id="caption">alt.png</div>
                 </div>
             </div>
+            <!--breadcrumbs-->
+
+
+            <div class="container">
+                <div class="row">
+                    <jsp:include page="/view/marketer/sidebar-dashboard.jsp"></jsp:include>
+
+                        <div class="col-lg-9 col-md-8 col-12" style="background-color: #fff;">
+                            <form class="row" action="addpost" method="POST" enctype="multipart/form-data" >
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="">Title:</label>
+                                        <div class="item-input">
+                                            <input type="text" name="title" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="">Short content:</label>
+                                        <div class="item-input">
+                                            <input type="text" name="shortcontent" required>
+                                        </div>
+                                    </div>
+                                </div>       
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="">Image:</label>
+                                        <div class="item-input">
+                                            <input type="file" id="file-input" accept="image/*" name="upfile">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <img class="frame" id="img-preview">
+                                </div>
+                                <div class="col-md-12 mt-3">
+                                    <div class="form-group">
+                                        <label for="">Relative Subject:</label>
+                                        <div class="item-input">
+                                            <Select name="subject">
+                                                <option value="-1">Choose relative subject</option>
+                                            <%
+                                        DAOSubject sdb = new DAOSubject();    
+                                        List<Subject> list = sdb.getAll();
+                                        for(Subject s : list){
+                                            %>
+                                            <option value="<%=s.getSubject_id()%>"><%=s.getSubject_name()%></option>
+                                            <% }%>
+                                        </Select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-3">
+                                <div class="form-group">
+                                    <label for="">Category Blog:</label>
+                                    <div class="item-input">
+                                        <Select name="blog">
+                                            <option value="-1">Choose category blog</option>
+                                            <%
+                                            DAOBlog bdb = new DAOBlog();    
+                                            ArrayList<Blog> blist = bdb.getAll();
+                                            for(Blog b : blist){
+                                            %>
+                                            <option value="<%=b.getBlog_id()%>"><%=b.getBlog_name()%></option>
+                                            <% }%>
+                                        </Select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--                                    <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <div class="item-input">
+                                                                            <input type="radio" name="status" id="" checked>
+                                                                            <label for="">pending</label>
+                                                                        </div>
+                                                                        <div class="item-input">
+                                                                            <input type="radio" name="status" id="" disabled>
+                                                                            <label for="">reject</label>
+                                                                        </div>
+                                                                        <div class="item-input">
+                                                                            <input type="radio" name="status" id="" disabled>
+                                                                            <label for="">approve</label>
+                                                                        </div>
+                            
+                                                                    </div>
+                                                                </div>-->
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="">Content:</label>
+                                    <div class="item-input">
+                                        <textarea name="message" id="message"></textarea><br>	
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="item-input">
+                                        <button class="btn-dark" id="submit" type="submit">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <!-- The Modal -->
+                    <div id="myModal" class="mmodal">
+                        <span class="cclose">&times;</span>
+                        <img class="modal-ccontent" id="img01">
+                        <div id="caption">alt.png</div>
+                    </div>
+                </div>
+
+            </div>
         </section>
-        <Footer class="footer mt-3">
-            <p>@Copyright by NamNH</p>
-        </Footer>        
+        <jsp:include page="/jspClient/Footer.jsp" />
         <script src="tinymce/tinymce.min.js"></script>
         <script>
             tinymce.init({
@@ -259,7 +314,7 @@
                 modalImg.src = this.src;
             };
             // Get the <span> element that closes the modal
-            var span = document.getElementsByClassName("close")[0];
+            var span = document.getElementsByClassName("cclose")[0];
 
             // When the user clicks on <span> (x), close the modal
             span.onclick = function () {
