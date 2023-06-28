@@ -52,18 +52,6 @@ public class DAOCourse extends DBConnect {
         }
         return n;
     }
-    
-    public int updateCourse2(Course course) {
-        int n = 0;
-        String sql = "UPDATE Course set course_name = N'" + course.getCourse_name() + "', description = N'" + course.getDescription() + "'  where course_id = " + course.getCourse_id();
-        try {
-            Statement statement = conn.createStatement();
-            n = statement.executeUpdate(sql);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return n;
-    }
 
     public int updateQuantity(Course course) {
         int n = 0;

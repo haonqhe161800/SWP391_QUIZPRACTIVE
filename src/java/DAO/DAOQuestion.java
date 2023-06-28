@@ -7,6 +7,7 @@ import Entities.Question;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Vector;
 import module.DBConnect;
 
@@ -46,6 +47,18 @@ public class DAOQuestion extends DBConnect{
             ex.printStackTrace();
         }
         return vector;
+    }
+    
+    public int updateQuestion(Question question) {
+        int n = 0;
+        String sql = "UPDATE Question set question_name = N'" + question.getQuestion_name() + "'  where question_id = " + question.getQuestion_id();
+        try {
+            Statement statement = conn.createStatement();
+            n = statement.executeUpdate(sql);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return n;
     }
     
 }

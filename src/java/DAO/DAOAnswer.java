@@ -7,6 +7,7 @@ import Entities.Answer;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Vector;
 import module.DBConnect;
 /**
@@ -48,6 +49,18 @@ public class DAOAnswer extends DBConnect{
             ex.printStackTrace();
         }
         return vector;
+    }
+    
+    public int updateAnswer(Answer answer) {
+        int n = 0;
+        String sql = "UPDATE Answer set answer_name = N'" + answer.getAnswer_name() + "', is_correct = " + answer.getIs_correct() +  "  where answer_id = " + answer.getAnswer_id();
+        try {
+            Statement statement = conn.createStatement();
+            n = statement.executeUpdate(sql);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return n;
     }
     
 }

@@ -18,6 +18,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -82,6 +83,22 @@ public class QuestionAdmin extends HttpServlet {
                     }
                 }
                 response.sendRedirect("QuestionAdmin?service=show&courseID=" + course_id);
+            }
+            
+            if(service.equals("edit")) {
+                int question_id = Integer.parseInt(request.getParameter("question_id"));
+                int tr = 1;
+                int fa = 0;
+                Vector<Question> vectorQues = dao.getAll("select * from Question where question_id = " + question_id);
+                Vector<Answer> vectorAns = daoAnswer.getAll(("select * from Answer where question_id = " + question_id));
+                String submit = request.getParameter("submit");
+                if(submit == null) {
+                    request.setAttribute("vectorQues", vectorQues);
+                    request.setAttribute("vectorAns", vectorAns);
+                    request.setAttribute("tr", tr);
+                    request.setAttribute("fa", fa);
+                    request.getRequestDispatcher("jspClient/UpdateQuestion.jsp").forward(request, response);
+                }
             }
             
             
