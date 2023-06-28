@@ -52,13 +52,13 @@
     <body>
 
 
-            <div style="margin-bottom: 100px ">
-                <jsp:include page="HeaderAdmin.jsp"></jsp:include>
+        <div style="margin-bottom: 100px ">
+            <jsp:include page="HeaderAdmin.jsp"></jsp:include>
             </div>
 
 
-             <div class="container" style="display: flex; position: relative">
-                <jsp:include page="Sidebar.jsp"></jsp:include>
+            <div class="container" style="display: flex; position: relative">
+            <jsp:include page="Sidebar.jsp"></jsp:include>
 
                 <div class="content" style="margin-left: 50px; flex: 2">
                 <%if(request.getAttribute("rsUser") != null) {
@@ -72,7 +72,7 @@
                         <div class="bottom-content">
                             <input class="btn btn-block btn-primary" type="submit" value="Search">
                         </div>
-
+                        <span class="btn-open-modal">New User</span>
                     </div>
                 </form>
                 <table class="table">
@@ -102,7 +102,7 @@
                         <td><%=rsUser.getString(2)%></td>
                         <td><%=rsUser.getString(3)%></td>
                         <td><%=rsUser.getString(9)%></td>
-                          <td>
+                        <td>
                             <form method="POST" action="User">
                                 <input type="hidden" name="service" value="deleteUser">
                                 <input type="hidden" name="UserId" value="<%= rsUser.getInt("user_id") %>">
@@ -114,6 +114,46 @@
                     </tr>
                     <%}%>
                 </table>
+               <div class="modal-subject">
+    <div class="modal-container-subject">
+        <div class="modal-subject-title">
+            <h4>Create new user</h4>
+        </div>
+        <form action="User" method="POST">
+            <input type="hidden" name="service" value="newUser">
+            <div class="input">
+                <label for="email">Email</label><br>
+                <input id="email" type="email" name="email" required />
+            </div>
+            <div class="input">
+                <label for="password">Password</label><br>
+                <input id="password" type="password" name="password" required />
+            </div>
+            <div class="input">
+                <label for="fullname">Full Name</label><br>
+                <input id="fullname" type="text" name="fullname" required />
+            </div>
+            <div class="input">
+                <label for="gender">Gender</label><br>
+                <select id="gender" name="gender">
+                    <option value="0">Male</option>
+                    <option value="1">Female</option>
+                    <option value="2">Other</option>
+                </select>
+            </div>
+            <div class="input">
+                <label for="dob">Date of Birth</label><br>
+                <input id="dob" type="date" name="dob" required />
+            </div>
+            <div class="button">
+                <span class="btn-cancel">Cancel</span>
+                <button style="margin-left: 6px" class="btn-create" type="submit">Create</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
                 <%}%>
 
                 <%if(request.getAttribute("rsMentor") != null) {
@@ -183,10 +223,10 @@
                         <div class="bottom-content">
                             <input class="btn btn-block btn-primary" type="submit" value="Search">
                         </div>
-                       
+
                     </div>
                 </form>
-                 <table class="table">
+                <table class="table">
                     <tr>
                         <th scope="col">STT</th>
                         <th scope="col">Name</th>
@@ -224,8 +264,8 @@
                         </td>
                     </tr>
                     <%}%>
-                 </table>
-                
+                </table>
+
                 <%}%>
 
                 <%if(request.getAttribute("rsSubject") != null) {
@@ -277,7 +317,7 @@
                     <%}%>
 
                 </table>
-                    
+
                 <div class="modal-subject">
                     <div class="modal-container-subject">
                         <div class="modal-subject-title">
@@ -289,9 +329,9 @@
                                 <label for="subject-name">Subject name</label><br>
                                 <input id="subject-name" type="text" name="name" />
                             </div>
-                              <div class="input">
-                                  <label for="subject-image">Image</label>
-                                  <input id="subject-image" name="image" type="text" class="form-control" required>
+                            <div class="input">
+                                <label for="subject-image">Image</label>
+                                <input id="subject-image" name="image" type="text" class="form-control" required>
                             </div>
                             <div class="button">
                                 <span class="btn-cancel">Cancel</span>
@@ -300,7 +340,7 @@
                         </form>
                     </div>
                 </div>
-                    
+
                 <%}%>
 
                 <%if(request.getAttribute("rsCourse") != null) {
@@ -346,7 +386,7 @@
                     </tr>
                     <%}%>
                 </table>
-                
+
                 <div class="modal-subject">
                     <div class="modal-container-subject">
                         <div class="modal-subject-title">
@@ -359,12 +399,12 @@
                                 <input id="course-name" type="text" name="name" />
                             </div>
                             <div class="input">
-                                  <label for="course-description">Description</label>
-                                  <input id="course-description" name="description" type="text" class="form-control" required>
+                                <label for="course-description">Description</label>
+                                <input id="course-description" name="description" type="text" class="form-control" required>
                             </div>
                             <div class="input">
-                                  <label for="ourse-image">Image</label>
-                                  <input id="ourse-image" name="image" type="text" class="form-control" required>
+                                <label for="ourse-image">Image</label>
+                                <input id="ourse-image" name="image" type="text" class="form-control" required>
                             </div>
                             <div class="input">
                                 <label for="publish">Publish</label>
