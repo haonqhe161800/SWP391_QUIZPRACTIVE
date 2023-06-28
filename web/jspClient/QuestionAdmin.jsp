@@ -84,11 +84,11 @@
                     i++;%>
                 <tr>
                     <td><%=i%></td>
-                    <td><%=listQuestion.getString(1)%></td>
                     <td><%=listQuestion.getString(2)%></td>
                     <td><%=listQuestion.getString(3)%></td>
+                    <td><%=listQuestion.getString(4)%></td>
                     <td>
-                        <button>Edit</button>
+                        <button style="border: transparent" class="edit-btn"><a href="QuestionAdmin?service=edit&question_id=<%=listQuestion.getInt(1)%>"><i class="far fa-edit"></i></a></button>
                     </td>
                 </tr>
                 <%}%>

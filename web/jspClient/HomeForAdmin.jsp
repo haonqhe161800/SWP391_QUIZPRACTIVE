@@ -270,7 +270,7 @@
                                     <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
                                 </button>
                             </form>
-                            <button class="edit-btn"><a href="#"><i class="far fa-edit"></i></a></button>
+                                <button style="border: transparent" class="edit-btn"><a href="#"><i class="far fa-edit"></i></a></button>
                         </td>
 
                     </tr>
