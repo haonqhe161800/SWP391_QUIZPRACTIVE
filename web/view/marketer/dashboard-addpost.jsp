@@ -102,90 +102,77 @@
 
                         <div class="col-lg-9 col-md-8 col-12" style="background-color: #fff;">
                             <form class="row" action="addpost" method="POST" enctype="multipart/form-data" >
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="">Title:</label>
-                                        <div class="item-input">
-                                            <input type="text" name="title" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="">Short content:</label>
-                                        <div class="item-input">
-                                            <input type="text" name="shortcontent" required>
-                                        </div>
-                                    </div>
-                                </div>       
 
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="">Image:</label>
-                                        <div class="item-input">
-                                            <input type="file" id="file-input" accept="image/*" name="upfile">
+                                <div class="col-lg-4 col-md-12 col-12">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">Title:</label>
+                                            <div class="item-input">
+                                                <input type="text" name="title" required>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <img class="frame" id="img-preview">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">Short content:</label>
+                                            <div class="item-input">
+                                                <textarea name="shortcontent" required style="width: 100%"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">Image:</label>
+                                            <div class="item-input">
+                                                <input type="file" id="file-input" accept="image/*" name="upfile">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <img class="frame" id="img-preview">
+                                    </div>
+                                    <div class="col-md-12 mt-3">
+                                        <div class="form-group">
+                                            <label for="">Relative Subject:</label>
+                                            <div class="item-input">
+                                                <Select name="subject">
+                                                    <option value="-1">Choose relative subject</option>
+                                                <%
+                                            DAOSubject sdb = new DAOSubject();    
+                                            List<Subject> list = sdb.getAll();
+                                            for(Subject s : list){
+                                                %>
+                                                <option value="<%=s.getSubject_id()%>"><%=s.getSubject_name()%></option>
+                                                <% }%>
+                                            </Select>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-12 mt-3">
                                     <div class="form-group">
-                                        <label for="">Relative Subject:</label>
+                                        <label for="">Category Blog:</label>
                                         <div class="item-input">
-                                            <Select name="subject">
-                                                <option value="-1">Choose relative subject</option>
-                                            <%
-                                        DAOSubject sdb = new DAOSubject();    
-                                        List<Subject> list = sdb.getAll();
-                                        for(Subject s : list){
-                                            %>
-                                            <option value="<%=s.getSubject_id()%>"><%=s.getSubject_name()%></option>
-                                            <% }%>
-                                        </Select>
+                                            <Select name="blog">
+                                                <option value="-1">Choose category blog</option>
+                                                <%
+                                                DAOBlog bdb = new DAOBlog();    
+                                                ArrayList<Blog> blist = bdb.getAll();
+                                                for(Blog b : blist){
+                                                %>
+                                                <option value="<%=b.getBlog_id()%>"><%=b.getBlog_name()%></option>
+                                                <% }%>
+                                            </Select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12 mt-3">
-                                <div class="form-group">
-                                    <label for="">Category Blog:</label>
-                                    <div class="item-input">
-                                        <Select name="blog">
-                                            <option value="-1">Choose category blog</option>
-                                            <%
-                                            DAOBlog bdb = new DAOBlog();    
-                                            ArrayList<Blog> blist = bdb.getAll();
-                                            for(Blog b : blist){
-                                            %>
-                                            <option value="<%=b.getBlog_id()%>"><%=b.getBlog_name()%></option>
-                                            <% }%>
-                                        </Select>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--                                    <div class="col-md-12">
-                                                                    <div class="form-group">
-                                                                        <div class="item-input">
-                                                                            <input type="radio" name="status" id="" checked>
-                                                                            <label for="">pending</label>
-                                                                        </div>
-                                                                        <div class="item-input">
-                                                                            <input type="radio" name="status" id="" disabled>
-                                                                            <label for="">reject</label>
-                                                                        </div>
-                                                                        <div class="item-input">
-                                                                            <input type="radio" name="status" id="" disabled>
-                                                                            <label for="">approve</label>
-                                                                        </div>
-                            
-                                                                    </div>
-                                                                </div>-->
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="">Content:</label>
-                                    <div class="item-input">
-                                        <textarea name="message" id="message"></textarea><br>	
+                            <div class="col-lg-8 col-md-12 col-12">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="">Content:</label>
+                                        <div class="item-input">
+                                            <textarea name="message" id="message"></textarea><br>	
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -196,7 +183,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </form>
                     </div>
                     <!-- The Modal -->
@@ -206,14 +192,13 @@
                         <div id="caption">alt.png</div>
                     </div>
                 </div>
-
             </div>
         </section>
         <jsp:include page="/jspClient/Footer.jsp" />
         <script src="tinymce/tinymce.min.js"></script>
         <script>
             tinymce.init({
-                selector: "textarea",
+                 selector: "#message",
                 plugins: [
                     "advlist autolink lists link image charmap print preview anchor",
                     "searchreplace visualblocks code fullscreen emoticons textcolor",

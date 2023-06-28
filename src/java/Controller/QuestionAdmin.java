@@ -52,7 +52,7 @@ public class QuestionAdmin extends HttpServlet {
                 if(course_name.next()) {
                     coursename = course_name.getString(1);
                 }
-                ResultSet listQuestion = dao.getData("select q.question_name, c.course_name, s.subject_name from Question q join Course c on c.course_id = q.course_id join Subject s on c.subject_id = s.subject_id where c.course_id = " + course_id);
+                ResultSet listQuestion = dao.getData("select q.question_id, q.question_name, c.course_name, s.subject_name from Question q join Course c on c.course_id = q.course_id join Subject s on c.subject_id = s.subject_id where c.course_id = " + course_id);
                 request.setAttribute("course_id", course_id);
                 request.setAttribute("coursename", coursename);
                 request.setAttribute("listQuestion", listQuestion);

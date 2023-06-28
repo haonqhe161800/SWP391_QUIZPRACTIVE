@@ -67,10 +67,10 @@
                            i++;
                            if(er.getAnswer_choose() == er.getAnswer_id()) {%>
                     <span class="icon" id="icon_<%=i%>"></span>
-                    <input style="margin-bottom:8px" class="result" value="<%=er.getIs_correct()%>" type="radio" checked><span style="margin-left: 4px"><%=er.getAnswer_name()%></span><br>
+                    <input style="margin-bottom:8px" readonly="" class="result" value="<%=er.getIs_correct()%>" type="radio" checked><span style="margin-left: 4px"><%=er.getAnswer_name()%></span><br>
                     <%} else {%>
                     <span id="icon_<%=i%>"></span>
-                    <input style="margin-bottom:8px" class="result" value="<%=er.getIs_correct()%>" type="radio"><span style="margin-left: 4px"><%=er.getAnswer_name()%></span><br>
+                    <input style="margin-bottom:8px" readonly="" class="result" value="<%=er.getIs_correct()%>" type="radio"><span style="margin-left: 4px"><%=er.getAnswer_name()%></span><br>
                     <%}
                 }
             }%>
