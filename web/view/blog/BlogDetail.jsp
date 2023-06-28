@@ -91,10 +91,10 @@
 
                                     <ul class="custom-flex post-meta">
                                         <li>
-                                            <a href="javascript:void(0)">
+                                            <a href="#">
                                                 <div class="intro_author">
                                                     <div class="avatar_author" style="font-size: 2.9px;">
-                                                        <img src="assets/avatar/${postfollow.getAm().getImage()}" alt="" onerror="this.src='view/blog/assets/img/broken-image.png'">
+                                                         <img src="assets/avatar/${postfollow.getAm().getImage()}" alt="" onerror="this.src='assets/avatar/base.png'">
                                                     </div>
                                                     <div class="name_author">
                                                         ${postfollow.getAm().getDisplay_name()}
@@ -103,7 +103,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(0)">
+                                            <a href="#">
                                                 <i class="lni lni-calendar"></i>
                                                 20th March 2023
                                             </a>
@@ -115,31 +115,31 @@
                                         <h5 class="share-title">Social Share</h5>
                                         <ul>
                                             <li>
-                                                <a href="javascript:void(0)">
+                                                <a href="#">
                                                     <i class="lni lni-facebook-filled"></i>
                                                     <span>facebook</span>
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="javascript:void(0)">
+                                                <a href="#">
                                                     <i class="lni lni-twitter-original"></i>
                                                     <span>twitter</span>
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="javascript:void(0)">
+                                                <a href="#">
                                                     <i class="lni lni-google"></i>
                                                     <span>google+</span>
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="javascript:void(0)">
+                                                <a href="#">
                                                     <i class="lni lni-linkedin-original"></i>
                                                     <span>linkedin</span>
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="javascript:void(0)">
+                                                <a href="#">
                                                     <i class="lni lni-pinterest"></i>
                                                     <span>pinterest</span>
                                                 </a>
@@ -169,19 +169,19 @@
                                 <div class="popular-feed-loop">
                                     <div class="single-popular-feed">
                                         <div class="feed-desc">
-                                            <h6 class="post-title"><a href="javascript:void(0)">NULL</a></h6>
+                                            <h6 class="post-title"><a href="#">NULL</a></h6>
                                             <span class="time"><i class="lni lni-calendar"></i> 05th Nov 2023</span>
                                         </div>
                                     </div>
                                     <div class="single-popular-feed">
                                         <div class="feed-desc">
-                                            <h6 class="post-title"><a href="javascript:void(0)">NULL</a></h6>
+                                            <h6 class="post-title"><a href="#">NULL</a></h6>
                                             <span class="time"><i class="lni lni-calendar"></i> 24th March 2023</span>
                                         </div>
                                     </div>
                                     <div class="single-popular-feed">
                                         <div class="feed-desc">
-                                            <h6 class="post-title"><a href="javascript:void(0)">NULL</a></h6>
+                                            <h6 class="post-title"><a href="#">NULL</a></h6>
                                             <span class="time"><i class="lni lni-calendar"></i> 30th Jan 2023</span>
                                         </div>
                                     </div>
@@ -194,7 +194,7 @@
                                 <ul class="custom">
                                     <c:forEach items="${blist}" var="b">
                                         <li>
-                                            <a href="javascript:void(0)">${b.getBlog_name()}<span>${100}</span></a>
+                                            <a href="#">${b.getBlog_name()}<span>${100}</span></a>
                                         </li>
                                     </c:forEach>
                                 </ul>
@@ -207,11 +207,11 @@
                             <c:forEach var="e" items="${listpexcept}">
                                 <div class="card col-md-4" style="width: 30%; margin: 5px 4px" >
                                     <img class="card-img" 
-                                         src="view/blog/assets/img/imgPost/${p.getImage()}" alt="banner.png" onerror="this.src='view/blog/assets/img/broken-image.png'">
+                                          src="assets/images/thumbnail-post/${p.getImage()}" alt="banner.png" onerror="this.src='assets/images/thumbnail-post/broken-image.png'">
                                     <div class="card-body">
                                         <h4 class="card-title"><a href="detailpost?detailpost=${e.getPost_id()}">${e.tittle}</a></h4>
-                                        <p class="card-text">${e.getShort_content()}</p>
-
+                                         <!--<p class="card-text"></p>-->
+                                        ${e.getShort_content()}
                                     </div>
 
                                 </div>

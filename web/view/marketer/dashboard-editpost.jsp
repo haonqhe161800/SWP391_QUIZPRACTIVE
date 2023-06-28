@@ -113,83 +113,90 @@
                                Post po = (Post) request.getAttribute("post");
                                         if(po != null){
                             %>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="">Title:</label>
-                                    <div class="item-input">
-                                        <input type="text" name="title" value="<%=po.getTittle()%>" required>
+                            <div class="col-lg-4 col-md-12 col-12">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="">Title:</label>
+                                        <div class="item-input">
+                                            <input type="text" name="title" value="<%=po.getTittle()%>" required>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="">Short content:</label>
-                                    <div class="item-input">
-                                        <input type="text" name="shortcontent" value="<%=po.getShort_content()%>" required>
+                                </div> 
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="">Short content:</label>
+                                        <div class="item-input">
+                                            <textarea type="text" name="shortcontent" required><%=po.getShort_content()%></textarea>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>       
+                                </div> 
 
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="">Image:</label>
-                                    <div class="item-input">
-                                        <input type="file" id="file-input" accept="image/*" name="upfile">
-                                        <input type="hidden"  name="upfilehide" value="<%=po.getImage()%>"/>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="">Image:</label>
+                                        <div class="item-input">
+                                            <input type="file" id="file-input" accept="image/*" name="upfile">
+                                            <input type="hidden"  name="upfilehide" value="<%=po.getImage()%>"/>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-12">
-                                <img class="frame" id="img-preview" src="upload/<%=po.getImage()%>">
-                            </div>
-                            <div class="col-md-12 mt-3">
-                                <div class="form-group">
-                                    <label for="">Relative Subject:</label>
-                                    <div class="item-input">
-                                        <Select name="subject">
-                                            <option value="-1">Choose relative subject</option>
-                                            <%
-                                                 DAOSubject sdb = new DAOSubject();    
-                                                 List<Subject> list = sdb.getAll();
+                                <div class="col-md-12">
+                                    <img class="frame" id="img-preview" src="upload/<%=po.getImage()%>">
+                                </div>
+
+                                <div class="col-md-12 mt-3">
+                                    <div class="form-group">
+                                        <label for="">Relative Subject:</label>
+                                        <div class="item-input">
+                                            <Select name="subject">
+                                                <option value="-1">Choose relative subject</option>
+                                                <%
+                                                     DAOSubject sdb = new DAOSubject();    
+                                                     List<Subject> list = sdb.getAll();
                                                   
-                                                 for(Subject s : list){
-                                            %>
-                                            <option value="<%=s.getSubject_id()%>" <%=s.getSubject_id() == po.getSubject_id() ? "selected" : "" %> ><%=s.getSubject_name()%></option>
-                                            <% }%>
-                                        </Select>
+                                                     for(Subject s : list){
+                                                %>
+                                                <option value="<%=s.getSubject_id()%>" <%=s.getSubject_id() == po.getSubject_id() ? "selected" : "" %> ><%=s.getSubject_name()%></option>
+                                                <% }%>
+                                            </Select>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-12 mt-3">
-                                <div class="form-group">
-                                    <label for="">Category Blog:</label>
-                                    <div class="item-input">
-                                        <Select name="blog">
-                                            <option value="-1">Choose category blog</option>
-                                            <%
-                                             DAOBlog bdb = new DAOBlog();    
-                                             ArrayList<Blog> blist = bdb.getAll();
-                                             for(Blog b : blist){
-                                            %>
-                                            <option value="<%=b.getBlog_id()%>" <%=b.getBlog_id() == po.getBlog_id() ? "selected" : "" %> ><%=b.getBlog_name()%></option>
-                                            <% }%>
-                                        </Select>
+                                <div class="col-md-12 mt-3">
+                                    <div class="form-group">
+                                        <label for="">Category Blog:</label>
+                                        <div class="item-input">
+                                            <Select name="blog">
+                                                <option value="-1">Choose category blog</option>
+                                                <%
+                                                 DAOBlog bdb = new DAOBlog();    
+                                                 ArrayList<Blog> blist = bdb.getAll();
+                                                 for(Blog b : blist){
+                                                %>
+                                                <option value="<%=b.getBlog_id()%>" <%=b.getBlog_id() == po.getBlog_id() ? "selected" : "" %> ><%=b.getBlog_name()%></option>
+                                                <% }%>
+                                            </Select>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <div class="item-input">
-                                        <label for="">Posted Date:</label>
-                                        <input type="datetime" value="<%=po.getPosted_date()%>" readonly/>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="item-input">
+                                            <label for="">Posted Date:</label>
+                                            <input type="datetime" value="<%=po.getPosted_date()%>" readonly/>
+                                        </div>
                                     </div>
-                                </div>
+                                </div>         
+
                             </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="">Content:</label>
-                                    <div class="item-input">
-                                        <textarea name="message" id="message"><%=po.getContent()%></textarea><br>	
+
+                            <div class="col-lg-8 col-md-12 col-12">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="">Content:</label>
+                                        <div class="item-input">
+                                            <textarea name="message" id="message"><%=po.getContent()%></textarea><br>	
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -222,7 +229,7 @@
         <script src="tinymce/tinymce.min.js"></script>
         <script>
             tinymce.init({
-                selector: "textarea",
+                selector: "#message",
                 plugins: [
                     "advlist autolink lists link image charmap print preview anchor",
                     "searchreplace visualblocks code fullscreen emoticons textcolor",

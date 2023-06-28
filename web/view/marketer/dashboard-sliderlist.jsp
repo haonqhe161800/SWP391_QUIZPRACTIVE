@@ -70,6 +70,25 @@
                 });
             });
         </script>
+            <style>
+            /*dropdown*/
+            .dashboard-menu ul li.active>a,
+            a[aria-expanded="true"] {
+                /*background: #5830e0;*/
+            }
+
+            a[data-toggle="collapse"] {
+                position: relative;
+            }
+
+            .dropdown-toggle::after {
+                display: block;
+                position: absolute;
+                top: 50%;
+                right: 20px;
+                transform: translateY(-50%);
+            }
+        </style>
     </head>
 
     <body>
