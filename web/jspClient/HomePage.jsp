@@ -170,21 +170,21 @@
                                         <span>Mentor name</span>
                                         </a>
                                     </div>
-                                    <a href="#" class="sale"> Join to study </a>
+                                    <a href="CourseController?service=errol&id=<%=rsCourse.getInt(1)%>" class="sale"> Join to course</a>
                                 </div>
                             </div>
                             <div class="content">
                                 <div class="top-content">
                                     <p><%=rsCourse.getString(4)%></p>
                                     <a href="SubjectController?service=details&subject_id=<%=rsCourse.getInt(11)%>">
-                                        <h4 class="title">Môn học: <%=rsCourse.getString(12)%>  </h4>
+                                        <h4 class="title">Subject: <%=rsCourse.getString(12)%>  </h4>
                                     </a>
-                                    <p class="update-time"><i class="lni lni-timer"></i> Ngày update gần nhất:  <%= (rsCourse.getString(9) != null ? rsCourse.getString(9) : rsCourse.getString(10))%></p>
+                                    <p class="update-time"><i class="lni lni-timer"></i> Last update date:  <%= (rsCourse.getString(9) != null ? rsCourse.getString(9) : rsCourse.getString(10))%></p>
                                     <ul class="rating">
-                                        <li>Số người tham gia (<%=rsCourse.getInt(8)%>)</li>
+                                        <li>Number of participants (<%=rsCourse.getInt(8)%>)</li>
                                     </ul>
                                     <ul class="info-list">
-                                        <li><i class="lni lni-timer"></i> Ngày đăng khóa học: <%=rsCourse.getString(9)%></li>
+                                        <li style="display: block; width: 100%"><i class="lni lni-timer"></i> Course posting date: <%=rsCourse.getString(9)%></li>
                                     </ul>
                                 </div>
                                 <div class="bottom-content">
@@ -238,11 +238,11 @@
                                 <div class="top-content">
                                     <p>Full name: <Strong><%=rsMentor.getString(5)%></Strong></p>
                                     <h5 class="title"><strong><%=rsMentor.getString(7)%></strong> </h5>
-                                    <p>Ngày sinh: <strong> <%=rsMentor.getString(10)%></strong></p>
+                                    <p>Date of birth: <strong> <%=rsMentor.getString(10)%></strong></p>
                                     <ul class="info-list">
-                                        <li><i class="fa-solid fa-sparkles"></i> Chuyên môn: <strong> <%=rsMentor.getString(11)%> </strong></li>
+                                        <li><i class="fa-solid fa-sparkles"></i> Specialize: <strong> <%=rsMentor.getString(11)%> </strong></li>
                                     </ul>
-                                    <p>Trình độ chuyên môn: <strong> <%=rsMentor.getString(11)%></strong></p>
+                                    <p>Qualification: <strong> <%=rsMentor.getString(11)%></strong></p>
                                 </div>
                             </div>
                         </div>
@@ -294,12 +294,12 @@
                                 <div class="top-content">
                                     <p>Subject name</p>
                                     <h3 class="title"> Course Name </h3>
-                                    <p class="update-time">Ngày update gần nhất</p>
+                                    <p class="update-time">Last update date:</p>
                                     <ul class="rating">
-                                        <li>số người joined (35)</a></li>
+                                        <li>Number of participants (35)</a></li>
                                     </ul>
                                     <ul class="info-list">
-                                        <li><i class="lni lni-timer"></i> Ngày đăng khóa học</a></li>
+                                        <li><i class="lni lni-timer"></i> Course posting date:</a></li>
                                     </ul>
                                 </div>
                                 <div class="bottom-content">

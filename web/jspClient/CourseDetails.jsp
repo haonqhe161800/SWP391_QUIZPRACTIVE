@@ -61,22 +61,22 @@
                     <div class="name"> <h2><%=rsCourse.getString(4)%></h2> </div>
                     <div class="subject"> <p><strong>Subject: </strong><%=rsCourse.getString(12)%> </p> </div>    
                     <div class="details"> <p><%=rsCourse.getString(5)%></p></div>    
-                    <div class="quantity-q"> <p><strong>Số lượng câu hỏi:</strong> <%=count%></p></div>
+                    <div class="quantity-q"> <p><strong>Number of questions:</strong> <%=count%></p></div>
                     <div>
                         <ul class="rating">
-                            <li><strong>Số người tham gia:</strong> (<%=rsCourse.getInt(8)%>)</li>
+                            <li><strong>Number of participants:</strong> (<%=rsCourse.getInt(8)%>)</li>
                         </ul>
                     </div>
                     <div>
                         <ul class="info-list">
-                            <li><i class="lni lni-timer"></i><strong> Ngày đăng khóa học:</strong> <%=rsCourse.getString(9)%></li>
+                            <li><i class="lni lni-timer"></i><strong> Course posting date:</strong> <%=rsCourse.getString(9)%></li>
                         </ul>
                     </div>
-                    <div> <p class="update-time"><i class="lni lni-timer"></i><strong>   Ngày update gần nhất:</strong> <%=rsCourse.getString(9)%></p> </div>
+                    <div> <p class="update-time"><i class="lni lni-timer"></i><strong>   Last update date:</strong> <%=rsCourse.getString(9)%></p> </div>
                     <div style="display: flex">
                         <%if((errol == 0) || (session.getAttribute("accountUser") == null && session.getAttribute("accountMarketer") == null && session.getAttribute("accountMentor") == null)) {%>   
                             <div class="bottom-content" style="margin-right: 20px">
-                                <a href="CourseController?service=errol&id=<%=rsCourse.getInt(1)%>" class="btn btn-block btn-primary">Tham gia khóa học</a>
+                                <a href="CourseController?service=errol&id=<%=rsCourse.getInt(1)%>" class="btn btn-block btn-primary">Join to course</a>
                             </div>
                         <%}%>
                         <%if(errol != 0) {%>   

@@ -135,19 +135,19 @@
                                                         <span>Mentor name</span>
                                                     </a>
                                                 </div>
-                                                <a href="#" class="sale"> Join to study </a>
+                                                <a href="#" class="sale"> Join to course </a>
                                             </div>
                                         </div>
                                         <div class="content">
                                             <div class="top-content">
                                                 <p><%=rsCourse.getString(4)%></p>
                                                 <h3 class="title"> <%=rsCourse.getString(12)%>  </h3>
-                                                <p class="update-time">Ngày update gần nhất <%=rsCourse.getString(9)%></p>
+                                                <p class="update-time">Last update date: <%=rsCourse.getString(9)%></p>
                                                 <ul class="rating">
-                                                    <li>số người joined (<%=rsCourse.getInt(8)%>)</li>
+                                                    <li>Number of participants (<%=rsCourse.getInt(8)%>)</li>
                                                 </ul>
                                                 <ul class="info-list">
-                                                    <li><i class="lni lni-timer"></i> Ngày đăng khóa học <%=rsCourse.getString(9)%></li>
+                                                    <li style="display: block; width: 100%"><i class="lni lni-timer"></i> Course posting date: <%=rsCourse.getString(9)%></li>
                                                 </ul>
                                             </div>
                                             <div class="bottom-content">
@@ -182,10 +182,10 @@
                                         </div>
                                         <div class="content">
                                             <div class="top-content">
-                                                <p>Giới thiệu: <%=rsSubjectDetails.getString(4)%></p>
-                                                <p class="title"> <strong>Chi tiết: <%=rsSubjectDetails.getString(6)%> </strong> </p>
+                                                <p>Introduce: <%=rsSubjectDetails.getString(4)%></p>
+                                                <p class="title"> <strong>Detail: <%=rsSubjectDetails.getString(6)%> </strong> </p>
                                                 <%while (countCourse.next()) {%>
-                                                    <h6>Số khóa học: (<%=countCourse.getInt(1)%>)</h6>
+                                                    <h6>Number of courses: (<%=countCourse.getInt(1)%>)</h6>
                                                 <%}%>
                                             </div>
                                             <% if(session.getAttribute("accountAdmin") != null) {%>
