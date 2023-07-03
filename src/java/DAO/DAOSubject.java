@@ -52,19 +52,21 @@ public class DAOSubject extends DBConnect {
         }
         return null;
     }
-public int deleteSubject(int id){
-    int n=0;
-    String sql ="delete from Subject\n "
-            +"where subject_id =?";
-    try {
+
+    public int deleteSubject(int id) {
+        int n = 0;
+        String sql = "delete from Subject\n "
+                + "where subject_id =?";
+        try {
             PreparedStatement st = conn.prepareStatement(sql);
             st.setInt(1, id);
-           n= st.executeUpdate();
+            n = st.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);
         }
-    return n;
-}
+        return n;
+    }
+
     //add
     public int addSubject(Subject subject) {
         int n = 0;
@@ -82,45 +84,29 @@ public int deleteSubject(int id){
 
         return n;
     }
-   public static void main(String[] args) {
-//        try {
-//            // Nhập thông tin môn học từ người dùng
-//            Scanner scanner = new Scanner(System.in);
-//            System.out.print("Enter subject name: ");
-//            String name = scanner.nextLine();
-//            System.out.print("Enter subject image: ");
-//            String image = scanner.nextLine();
-//
-//            // Khởi tạo đối tượng Subject
-//            Subject newSubject = new Subject(name, image);
-//
-//            // Thêm môn học mới vào database
-//            DAOSubject ds = new DAOSubject();
-//            int result = ds.addSubject(newSubject);
-//
-//            // Xử lý kết quả trả về
-//            if (result > 0)
-//                System.out.println("Thêm môn học thành công!");
-//            else
-//                System.out.println("Thêm môn học thất bại!");
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
 
-           
-            DAOSubject sdb = new DAOSubject();
-            List<Subject> list = sdb.getAll();
-            for (Subject subject : list) {
-                System.out.println(subject);
-       }
-    
-}
+    public int updateSubject(Subject subject) {
+        int n = 0;
+        String sql = "UPDATE [dbo].[Subject]\n"
+                + "   SET [subject_name] = ?\n"
+                + "      ,[image] = ?\n"
+                + "      ,[title] = ?\n"
+                + "      ,[status] = ?\n"
+                + "      ,[description] = ?\n"
+                + " WHERE [subject_id] = ?";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
 
-//        DAOSubject subjectDAO = new DAOSubject();
-//        
-//        // Example usage
-//        int idToDelete = 7 ; // Replace with the actual ID you want to delete
-//        int rowsAffected = subjectDAO.deleteSubject(idToDelete);
-//        System.out.println("Rows deleted: " + rowsAffected);
+            pre.setString(1, subject.getSubject_name());
+            pre.setString(2, subject.getImage());
+            pre.setString(3, subject.getTilte());
+            pre.setBoolean(4, subject.getStatus());
+            pre.setString(5, subject.getDescription());
+            pre.setInt(6, subject.getSubject_id());
+            n = pre.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return n;
     }
-
-  
+}

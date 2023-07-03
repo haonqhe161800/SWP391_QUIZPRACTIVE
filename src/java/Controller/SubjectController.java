@@ -75,45 +75,6 @@ public class SubjectController extends HttpServlet {
                 request.setAttribute("rsSubject", rsSubject);
                 request.getRequestDispatcher("/jspClient/SubjectDetails.jsp").forward(request, response);
             }
-            if (service.equals("delete")) {
-                int delete = Integer.parseInt(request.getParameter("subject_id"));
-                int rowsAffected = daoSubject.deleteSubject(delete);
-
-                // Chuyển hướng về trang HomeForAdmin.jsp sau khi xóa
-                response.sendRedirect("Subject");
-
-            }
-            if (service.equals("addSubject")) {
-                // Lấy thông tin từ form
-                String name = request.getParameter("name");
-                String image = request.getParameter("image");
-
-                // Khởi tạo đối tượng Subject
-                Entities.Subject newSubject = new Entities.Subject(name, image);
-
-                // Thêm môn học mới vào database
-                int result = daoSubject.addSubject(newSubject);
-
-                // Xử lý kết quả trả về
-                if (result > 0)
-                    System.out.println("Thêm môn học thành công!");
-                else
-                    System.out.println("Thêm môn học thất bại!");
-                
-                response.sendRedirect("Subject");
-            }
-            
-
-            if(service.equals("searchAdmin")) {
-                String name = request.getParameter("name");
-                ResultSet rsSubject = daoSubject.getData("SELECT [Subject].subject_name, [Subject].subject_id, [Subject].[image], COUNT(Course.course_id) AS quantity_of_course\n"
-                        + "FROM Subject\n"
-                        + "LEFT JOIN Course ON Subject.subject_id = Course.subject_id\n"
-                        + "where [Subject].subject_name like N'%" + name + "%'\n" 
-                        + "GROUP BY [Subject].subject_id,  [Subject].subject_name, [Subject].[image]");
-            request.setAttribute("rsSubject", rsSubject);
-            request.getRequestDispatcher("jspClient/HomeForAdmin.jsp").forward(request, response);
-            }
             
         }
     }

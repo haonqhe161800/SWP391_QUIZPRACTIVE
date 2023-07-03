@@ -64,7 +64,7 @@ public class Subject {
         this.description = description;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 

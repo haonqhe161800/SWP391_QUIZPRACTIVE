@@ -273,9 +273,9 @@
                 %>
                 <div style="display: flex">
                     <h3 style="margin-bottom: 12px">Subject list</h3>
-                    <form style="margin-bottom: 12px; padding: 12px" method="POST" action="SubjectController">
+                    <form style="margin-bottom: 12px; padding: 12px" method="POST" action="Subject">
                         <div style="display: flex; align-items: center">
-                            <input type="hidden" name="service" value="searchAdmin" />
+                            <input type="hidden" name="service" value="search" />
                             <input style="padding: 4px 4px; width: 300px; margin-right: 12px" type="text" name="name" placeholder="Enter subject name need to search...">
                             <div class="bottom-content">
                                 <input id="submit" class="btn btn-block btn-primary" type="submit" value="Search">
@@ -302,7 +302,7 @@
                         <td><img style="width: 50px; height: 50px" src="<%=rsSubject.getString(3)%>"></td>
                         <td><%=rsSubject.getInt(4)%></td>
                         <td style="display: flex; justify-content: space-between"">
-                            <form action="SubjectController" method="POST">
+                            <form action="Subject" method="POST">
                                 <input type="hidden" name="service" value="delete">
                                 <input type="hidden" name="subject_id" value="<%=rsSubject.getInt(2)%>">
 
@@ -310,7 +310,7 @@
                                     <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
                                 </button>
                             </form>
-                                <button style="border: transparent" class="edit-btn"><a href="#"><i class="far fa-edit"></i></a></button>
+                                <button style="border: transparent" class="edit-btn"><a href="Subject?service=edit&subject_id=<%=rsSubject.getInt(2)%>"><i class="far fa-edit"></i></a></button>
                         </td>
 
                     </tr>
@@ -323,8 +323,8 @@
                         <div class="modal-subject-title">
                             <h4>Create new subject</h4>
                         </div>
-                        <form <form action="SubjectController" method="POST">
-                            <input type="hidden" name="service" value="addSubject">
+                        <form <form action="Subject" method="POST">
+                            <input type="hidden" name="service" value="add">
                             <div class="input">
                                 <label for="subject-name">Subject name</label><br>
                                 <input id="subject-name" type="text" name="name" />
