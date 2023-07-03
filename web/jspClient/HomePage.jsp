@@ -170,7 +170,9 @@
                                         <span>Mentor name</span>
                                         </a>
                                     </div>
-                                    <a href="CourseController?service=errol&id=<%=rsCourse.getInt(1)%>" class="sale"> Join to course</a>
+                                    <%if (session.getAttribute("accountMentor") == null) {%>
+                                        <a href="CourseController?service=errol&id=<%=rsCourse.getInt(1)%>" class="sale"> Join to course</a>
+                                    <% }%>
                                 </div>
                             </div>
                             <div class="content">
@@ -199,7 +201,7 @@
             <div class="row view-all" style="margin-top: 10px">
                 <div class="col-lg-5 col-md-5 col-12"></div>
                 <div class="col-lg-2 col-md-2 col-12">
-                    <a href="#" class="btn btn-block btn-primary"> View All Course</a>
+                    <a href="ViewAll?service=viewAllCourse" class="btn btn-block btn-primary"> View All Course</a>
                 </div>
                 <div class="col-lg-5 col-md-5 col-12"></div>
             </div>
@@ -253,7 +255,7 @@
             <div class="row view-all" style="margin-top: 10px">
                 <div class="col-lg-5 col-md-5 col-12"></div>
                 <div class="col-lg-2 col-md-2 col-12">
-                    <a href="#" class="btn btn-block btn-primary"> View All Mentor</a>
+                    <a href="ViewAll?service=viewAllMentor" class="btn btn-block btn-primary"> View All Mentor</a>
                 </div>
                 <div class="col-lg-5 col-md-5 col-12"></div>
             </div>
@@ -314,7 +316,7 @@
             <div class="row view-all" style="margin-top: 10px">
                 <div class="col-lg-5 col-md-5 col-12"></div>
                 <div class="col-lg-2 col-md-2 col-12">
-                    <a href="#" class="btn btn-block btn-primary"> View All Ads</a>
+                    <a href="ViewAll?service=viewAllPost" class="btn btn-block btn-primary"> View All Ads</a>
                 </div>
                 <div class="col-lg-5 col-md-5 col-12"></div>
             </div>
