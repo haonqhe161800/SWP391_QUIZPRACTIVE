@@ -4,6 +4,7 @@
  */
 package Entities;
 
+
 /**
  *
  * @author admin
@@ -26,6 +27,13 @@ public class Course {
 
     public Course(String course_name, String description, String image, int is_publish) {
         this.course_name = course_name;
+        this.description = description;
+        this.image = image;
+        this.is_publish = is_publish;
+    }  
+    public Course(String course_name, int mentor_id, String description, String image, int is_publish) {
+        this.course_name = course_name;
+        this.mentor_id = mentor_id;
         this.description = description;
         this.image = image;
         this.is_publish = is_publish;
@@ -123,5 +131,7 @@ public class Course {
     public void setUpdated_date(String updated_date) {
         this.updated_date = updated_date;
     }
+    
+    
 
 }

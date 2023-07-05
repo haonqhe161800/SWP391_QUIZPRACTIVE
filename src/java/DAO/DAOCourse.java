@@ -41,6 +41,26 @@ public class DAOCourse extends DBConnect {
         return n;
     }
     
+    public int addCourseByMentor(int subject_id, Course course) {
+        int n = 0;
+        String sql = "Insert into [Course]([subject_id], [mentor_id], [course_name], [description], [image], [is_publish], [created_date]) "
+                + "values (" + subject_id
+                + ", "+ course.getMentor_id()
+                + ", N'" + course.getCourse_name()
+                + "', N'" + course.getDescription()
+                + "', '" + course.getImage()
+                + "', " + course.getIs_publish()
+                + ", '" + date1
+                + "')";
+        try {
+            Statement statement = conn.createStatement();
+            n = statement.executeUpdate(sql);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return n;
+    }
+    
     public int updateCourse(Course course) {
         int n = 0;
         String sql = "UPDATE Course set course_name = N'" + course.getCourse_name() + "', description = N'" + course.getDescription() + "', image = '" + course.getImage() + "', updated_date = '" + date2 + "' where course_id = " + course.getCourse_id();
@@ -113,4 +133,14 @@ public class DAOCourse extends DBConnect {
         }
         return endPage;
     }
+    
+    public static void main(String[] args) {
+        DAOCourse dao = new DAOCourse();
+        Course course = new Course("C nang cao",1 , "Hoc C nang cao", "./assets/images/categories/CourseC(1).png", 1);
+        int n = dao.addCourseByMentor(1, course);
+        if (n > 0) {
+            System.out.println("add success");
+        }
+    }
+    
 }

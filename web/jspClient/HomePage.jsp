@@ -84,7 +84,7 @@
                                             <select name="category" id="category">
                                                 <option value="category" selected disabled>Categories</option>
                                                 <option value="mentor" name="mentor">Mentor</option>
-                                                <option value="blog" name="blog">Blog</option>
+                                                <option value="blog" name="blog">Post</option>
                                                 <option value="course" name="course">Course</option>
                                             </select>
                                         </div>

@@ -13,7 +13,7 @@
                 <div class="nav-inner">
                     <nav class="navbar navbar-expand-lg">
                         <a class="navbar-brand" href="#">
-                            QUIZPRACTICE
+                            <strong>QUIZPRACTICE</strong>
                         </a>
                         <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -33,9 +33,9 @@
                                 <li class="nav-item">
                                     <a href="Activity" aria-label="Toggle navigation" class="">Activity</a>
                                 </li>
-                                <li class="nav-item">
+<!--                                <li class="nav-item">
                                     <a href="#" aria-label="Toggle navigation">Course List</a>
-                                </li>
+                                </li>-->
                                 <li class="nav-item">
                                     <a href="listpost" aria-label="Toggle navigation" class="<c:if test="${pagePost != null && setList.contains(pagePost)}">active</c:if>">Blog List</a>
                                 </li>
@@ -66,12 +66,17 @@
                                        aria-controls="navbarSupportedContent" aria-expanded="false"
                                        aria-label="Toggle navigation">More</a>
                                     <ul class="sub-menu collapse" id="submenu-1-3">
-                                        <li class="nav-item"><a href="#">Mentor List</a></li>
-                                        <li class="nav-item"><a href="#">Link 2</a></li>
-                                        <li class="nav-item"><a href="#">Link 3</a></li>
-                                        <li class="nav-item"><a href="#">Link 4</a></li>
+                                        <li class="nav-item"><a href="ViewAll?service=viewAllCourse">Courses</a></li>
+                                        <li class="nav-item"><a href="ViewAll?service=viewAllMentor">Mentors</a></li>
+                                        <li class="nav-item"><a href="ViewAllPost">Posts</a></li>
+                                        <!--<li class="nav-item"><a href="#">Link 4</a></lili>-->
                                     </ul>
                                 </li>
+                                <%if (session.getAttribute("accountMentor") != null) {%>
+                                <li class="nav-item">
+                                    <a href="CourseMentor" aria-label="Toggle navigation" class="">Post Course</a>
+                                </li>
+                                <% } %>
 
                             </ul>
                         </div> <!-- navbar collapse -->
@@ -129,7 +134,7 @@
                         <%} else if(session.getAttribute("accountMentor") != null) {
                             AccountMentor amor = (AccountMentor) session.getAttribute("accountMentor");
                         %>
-                        <h6 style="padding: 1rem;color: #081828;">Hello,<span><%=amor.getDisplay_name()%></span> </h6>
+                        <h6 style="padding: 1rem;color: #081828;"><span><%=amor.getDisplay_name()%></span> </h6>
                         <div style="display: flex;">
                             <img src="https://th.bing.com/th/id/OIP.mDMuXjKAMMflGF_1y8keZAHaEo?pid=ImgDet&rs=1" alt=""  style="border-radius: 50%;height: 3em;object-fit: cover;width: 3em;cursor: pointer;">
                             <i class="fa-solid fa-chevron-down" style="padding: 1rem;cursor: pointer"></i>
@@ -157,7 +162,7 @@
                                     <a href="login"><i class="lni lni-enter"></i>Login</a>
                                 </li>
                                 <li>
-                                    <a href="#"><i class="lni lni-user"></i>Sig up</a>
+                                    <a href="#"><i class="lni lni-user"></i>Sign up</a>
                                 </li>
                             </ul>
                         </div>

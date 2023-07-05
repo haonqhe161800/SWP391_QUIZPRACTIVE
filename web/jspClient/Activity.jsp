@@ -33,6 +33,7 @@
             <jsp:include page="Header.jsp"></jsp:include>
         </div>
 
+        
         <div class="container" style="margin-bottom: 150px ">
             <div class="row">
                 <%while(rs.next()) {%>
