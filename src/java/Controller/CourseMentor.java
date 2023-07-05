@@ -47,10 +47,6 @@ public class CourseMentor extends HttpServlet {
             }
 
             if (service.equals("show")) {
-//                HttpSession session = request.getSession();
-//                AccountMentor mentor = (AccountMentor) session.getAttribute("accountMentor");
-//                int mentor_id = Integer.parseInt(request.getParameter("mentor_id"));
-//                int mentor_id = mentor.getMentor_id();
                 HttpSession session = request.getSession();
                 AccountMentor mentor = (AccountMentor) session.getAttribute("accountMentor");
                 int mentor_id = mentor.getMentor_id();
@@ -80,13 +76,7 @@ public class CourseMentor extends HttpServlet {
                 String description = request.getParameter("description");
 
                 Part imagePath = request.getPart("image");
-                String uploadPath = getServletContext().getRealPath("/assets/images/categories");
                 String fileName = imagePath.getSubmittedFileName();
-                File uploadDir = new File(uploadPath);
-                if (!uploadDir.exists()) {
-                    uploadDir.mkdir(); // Tạo thư mục nếu chưa tồn tại
-                }
-                
                 String relativePath = "./assets/images/categories/" + fileName;
                 String absolutePath = getServletContext().getRealPath(relativePath);
                 imagePath.write(absolutePath);
@@ -98,17 +88,45 @@ public class CourseMentor extends HttpServlet {
                 ResultSet rsSubject = daoSubject.getData("select * from Subject");
                 request.setAttribute("rsCourse", rsCourse);
                 request.setAttribute("rsSubject", rsSubject);
-//
-//                int mentor_id = 0;
-//                if (rsCourse.next()) {
-//                    mentor_id = rsCourse.getInt(9);
-//                }
-////                int Nmentor_id = 1;
-                
                 Course course = new Course(course_name, mentor_id, description, relativePath, publish);
                 int n = daoCourse.addCourseByMentor(subject_id, course);
                 if (n > 0) {
                     response.sendRedirect("CourseMentor");
+                }
+            }
+            
+            if (service.equals("update")) {
+                int course_id = Integer.parseInt(request.getParameter("course_id"));
+                String submit = request.getParameter("submit");
+                if(submit == null) {
+                    ResultSet rsCourse = daoCourse.getData("select * from Subject s join Course c on s.subject_id = c.subject_id join Mentor_type m on c.mentor_id = m.mentor_id where c.course_id = " + course_id);
+                    request.setAttribute("rsCourse", rsCourse);
+                    request.getRequestDispatcher("jspClient/UpdateCourseByMentor.jsp").forward(request, response);
+                } else {
+                    String notifi = "";
+                    String name = request.getParameter("name");
+                    String description = request.getParameter("description");
+                    int subject_id = Integer.parseInt(request.getParameter("subject_id"));
+                    int mentor_id = Integer.parseInt(request.getParameter("mentor_id"));
+                    int is_publish = Integer.parseInt(request.getParameter("is_publish"));
+                    int quantity = Integer.parseInt(request.getParameter("quantity"));
+//                    String image = request.getParameter("image");
+                    
+                    Part imagePath = request.getPart("image");
+                    String fileName = imagePath.getSubmittedFileName();
+                    String image = "./assets/images/categories/" + fileName;
+                    String absolutePath = getServletContext().getRealPath(image);
+                    imagePath.write(absolutePath);
+                    
+                    String created_date = request.getParameter("created_date");
+                    String updated_date = request.getParameter("updated_date");
+                    Course course = new Course(course_id, subject_id, mentor_id, name, description, image, is_publish, quantity, created_date, updated_date);
+                    int n = daoCourse.updateCourse(course);
+                    if(n > 0) {
+                        notifi = "Update course successfully!!";
+                        request.setAttribute("notifi", notifi);
+                        request.getRequestDispatcher("jspClient/UpdateCourseByMentor.jsp").forward(request, response);
+                    }
                 }
             }
         } 

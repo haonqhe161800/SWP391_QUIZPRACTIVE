@@ -137,7 +137,7 @@
                                 </td>
                                 <td class="text-center">
                                     <!--update-->
-                                    <button style="border: transparent" class="edit-btn"><a href="Course?service=edit&course_id=<%=rsCourse.getInt(7)%>"><i class="far fa-edit"></i></a></button>
+                                    <button style="border: transparent" class="edit-btn"><a href="CourseMentor?service=update&course_id=<%=rsCourse.getInt(7)%>"><i class="far fa-edit"></i></a></button>
                                 </td>
                                 <td class="text-center">
                                     <!--delete-->
