@@ -19,6 +19,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -57,7 +58,7 @@ public class QuestionByMentor extends HttpServlet {
                     course_name = name.getString(1);
                 }
                 
-                ResultSet rsQuestion = dao.getData("select q.question_name from Question q join Course c on c.course_id = q.course_id where q.course_id = " + course_id + " and c.mentor_id = " + mentor_id);
+                ResultSet rsQuestion = dao.getData("select q.question_name, q.question_id from Question q join Course c on c.course_id = q.course_id where q.course_id = " + course_id + " and c.mentor_id = " + mentor_id);
 //                ResultSet rsAnswer = dao.getData("select * from Question where course_id = " + course_id);
                 request.setAttribute("course_id", course_id);
                 request.setAttribute("course_name", course_name);
@@ -66,7 +67,43 @@ public class QuestionByMentor extends HttpServlet {
             }
 
             if (service.equals("update")) {
-                
+                int question_id = Integer.parseInt(request.getParameter("question_id"));
+                int truee = 1;
+                int falsee = 0;
+                Vector<Question> vectorQuestion = dao.getAll("select * from Question where question_id = " + question_id);
+                Question question = vectorQuestion.get(0);
+                int course_Id = question.getCourse_id();
+                Vector<Answer> vectorAnswer = daoAnswer.getAll(("select * from Answer where question_id = " + question_id));
+                String submit = request.getParameter("submit");
+                if(submit == null) {
+                    request.setAttribute("course_id", course_Id);
+                    request.setAttribute("vectorQuestion", vectorQuestion);
+                    request.setAttribute("vectorAnswer", vectorAnswer);
+                    request.setAttribute("truee", truee);
+                    request.setAttribute("falsee", falsee);
+                        request.getRequestDispatcher("jspClient/UpdateQuestionByMentor.jsp").forward(request, response);
+                } else {
+                    String notifi = "";
+                    int question_Id = Integer.parseInt(request.getParameter("course_id"));
+                    int course_id = Integer.parseInt(request.getParameter("course_id"));
+                    String question_name = request.getParameter("question_name");
+                    int anwser_id = Integer.parseInt(request.getParameter("anwser_id"));
+                    String anwser_name = request.getParameter("anwser_name");
+                    int is_correct = Integer.parseInt(request.getParameter("is_correct"));
+                    
+                    Question q = new Question(question_Id, question_name, course_id);
+                    Answer a = new Answer(anwser_id, anwser_name, is_correct, question_Id);
+                    
+                    int n1 = dao.updateQuestion(q);
+                    int n2 = daoAnswer.updateAnswer(a);
+                    
+                    if(n1 > 0 && n2 > 0) {
+                        notifi = "Update successfully!!";
+                        request.setAttribute("notifi", notifi);
+//                        request.getRequestDispatcher("jspClient/UpdateQuestionByMentor.jsp").forward(request, response);
+                        response.sendRedirect("QuestionByMentor?service=show&course_id=" + course_Id);
+                    }
+                }
             }
             
             if (service.equals("create")) {

@@ -140,9 +140,11 @@
                                 <tr>
                                     <td class="text-center"> <%=i%> </td>
                                     <td class="text-center"> <%=rsQuestion.getString(1)%> </td>
+                                    <!--update-->
                                     <td class="text-center">
-                                        <button style="border: transparent" class="edit-btn"><a href="#"><i class="far fa-edit"></i></a></button>
+                                        <button style="border: transparent" class="edit-btn"><a href="QuestionByMentor?service=update&question_id=<%=rsQuestion.getInt(2)%>"><i class="far fa-edit"></i></a></button>
                                     </td>
+                                    <!--delete-->
                                     <td class="text-center">
                                         <button style="border: transparent" class="edit-btn"><a href="#"><i class="fa-solid fa-trash"></i></i></a></button>
                                     </td>
