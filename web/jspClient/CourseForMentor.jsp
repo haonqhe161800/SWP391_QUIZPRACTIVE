@@ -107,7 +107,7 @@
                     <%ResultSet rsCourse = (ResultSet) request.getAttribute("rsCourse");%>
                     <table class="table">
                         <thead>
-                            <tr class="" style="background-color: #9D8C9D">
+                            <tr class="text-center" style="background-color: #9D8C9D">
                                 <th scope="col">Num</th>
                                 <th scope="col">Subject Name</th>
                                 <th scope="col">Course Name</th>
@@ -127,23 +127,23 @@
                             <tr>
                                 <td class="text-center"> <%=i%> </td>
                                 <td class="text-center"> <%=rsCourse.getString(2)%> </td>
-                                <td class="text-center"> <%=rsCourse.getString(10)%> </td>
+                                <td class="text-center"> <%=rsCourse.getString(3)%> </td>
                                 <td> 
-                                    <img style="width: 50px; height: 50px" src="<%=rsCourse.getString(12)%>"> 
+                                    <img style="width: 50px; height: 50px" src="<%=rsCourse.getString(4)%>"> 
                                 </td>
-                                <td class="text-center">1</td>
+                                <td class="text-center"><%=rsCourse.getInt(5)%></td>
                                 <td> 
-                                    <a class="text-center" href="#"> Details <i class="far fa-question-circle"></i></a> 
+                                    <a class="text-center" href="QuestionByMentor?service=show&course_id=<%=rsCourse.getInt(1)%>"> Question Details <i class="far fa-question-circle"></i></a> 
                                 </td>
                                 <td class="text-center">
                                     <!--update-->
-                                    <button style="border: transparent" class="edit-btn"><a href="CourseMentor?service=update&course_id=<%=rsCourse.getInt(7)%>"><i class="far fa-edit"></i></a></button>
+                                    <button style="border: transparent" class="edit-btn"><a href="CourseMentor?service=update&course_id=<%=rsCourse.getInt(1)%>"><i class="far fa-edit"></i></a></button>
                                 </td>
                                 <td class="text-center">
                                     <!--delete-->
                                     <form action="CourseMentor" method="POST">
                                         <input type="hidden" name="service" value="delete">
-                                        <input type="hidden" name="course_id" value="<%=rsCourse.getInt(7)%>">
+                                        <input type="hidden" name="course_id" value="<%=rsCourse.getInt(1)%>">
 
                                         <button type="submit" class="delete-btn" data-toggle="modal" onclick="return confirm('Are you sure you want to delete this course?')">                                   
                                             <i class="fa-solid fa-trash"></i>

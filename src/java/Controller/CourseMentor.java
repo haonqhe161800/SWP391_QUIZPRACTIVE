@@ -51,7 +51,7 @@ public class CourseMentor extends HttpServlet {
                 AccountMentor mentor = (AccountMentor) session.getAttribute("accountMentor");
                 int mentor_id = mentor.getMentor_id();
 
-                ResultSet rsCourse = daoCourse.getData("select * from Subject s join Course c on s.subject_id = c.subject_id join Mentor_type m on c.mentor_id = m.mentor_id where m.mentor_id = " + mentor_id);
+                ResultSet rsCourse = daoCourse.getData("select c.course_id, s.subject_name, c.course_name, c.[image], Count(q.question_name) as number_of_questions from [Course] c join [Subject] s on c.subject_id = s.subject_id left join Question q on q.course_id = c.course_id where c.mentor_id = " + mentor_id + " group by c.course_id, s.subject_name, c.course_name, c.[image]");
                 ResultSet rsSubject = daoSubject.getData("select * from Subject");
                 request.setAttribute("rsCourse", rsCourse);
                 request.setAttribute("rsSubject", rsSubject);
