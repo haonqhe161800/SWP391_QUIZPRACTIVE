@@ -45,7 +45,7 @@ public class ControllBlogList extends HttpServlet {
         ArrayList<Post> plist = pdb.selectBlogList(sort, search, index);
         //total slider
         List<Slider> listsilder = sdb.getAll();
-        int count = sdb.getCountSliderShow();
+        int count = listsilder.size();
 
         request.setAttribute("latestp", pdb.getTop1Post());
         request.setAttribute("numberPage", numberPage);
@@ -62,7 +62,6 @@ public class ControllBlogList extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
     }
 
     @Override

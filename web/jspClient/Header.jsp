@@ -6,7 +6,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-<header class="header navbar-area">
+<header class="header navbar-area sticky">
+
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-12">
@@ -182,3 +183,6 @@
     </script>
 </header>
 <!-- End Header Area -->
+
+
+  

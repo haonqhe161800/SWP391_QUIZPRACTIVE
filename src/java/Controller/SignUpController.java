@@ -25,7 +25,7 @@ import java.util.Random;
  *
  * @author Admin
  */
-public class Signup extends HttpServlet {
+public class SignUpController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

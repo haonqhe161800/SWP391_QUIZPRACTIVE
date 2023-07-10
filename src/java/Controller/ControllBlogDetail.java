@@ -32,6 +32,8 @@ public class ControllBlogDetail extends HttpServlet {
 
             request.setAttribute("latestp", pdb.getTop1Post());
             request.setAttribute("blist", bdb.getAll());
+//            hien tai moi chi la lay danh các post ma ko co chua cai post dc hien thi nay
+//                    trong tuong lai thi se là liet ke cac bai post cung the loai va sap xep theo thu thu ngay dang
             request.setAttribute("listpexcept", pdb.ListPostExceptCurrent(postId));
             request.setAttribute("postfollow", p);
 

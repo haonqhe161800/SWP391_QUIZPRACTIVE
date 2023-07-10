@@ -95,7 +95,7 @@
         <jsp:include page="/jspClient/Header.jsp" ></jsp:include>
 
 
-            <section class="dashboard section">
+            <section class="dashboard">
                 <!--breadcrumbs-->
                 <div class="breadcrumbs" style="background-color: #f9f9f9">
                     <div class="container">
@@ -260,14 +260,6 @@
                     closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");//replacing the iocns class
                 }
             }
-
-
-            // dialog menu
-            let iconUp = document.querySelector(".fa-chevron-down");
-            let dialogMenu = document.querySelector(".dropdown-ofme");
-            iconUp.addEventListener("click", () => {
-                dialogMenu.classList.toggle("show");
-            })
         </script>
     </body>
 </html>
