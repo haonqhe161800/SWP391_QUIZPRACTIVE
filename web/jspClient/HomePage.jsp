@@ -154,7 +154,9 @@
             
             <div class="single-head">
                 <div class="row">
-                    <% while(rsCourse.next()) {%>
+                    <%  int count = 0; 
+                        while(rsCourse.next() && count < 6) {
+                    %>
                         
                     <div class="col-lg-4 col-md-6 col-12">
                         <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
@@ -195,7 +197,8 @@
                             </div>
                         </div>
                     </div>
-                    <% } %>
+                    <% count++;
+                    } %>
                 </div>
             </div>
             <div class="row view-all" style="margin-top: 10px">
@@ -225,7 +228,8 @@
             <!--Content-->
             <div class="single-head">
                 <div class="row">
-                    <% while (rsMentor.next()) { %>
+                    <% int count2 = 0;
+                    while (rsMentor.next() && count2 < 6) { %>
                     <div class="col-lg-4 col-md-6 col-12">
                         <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
                             <div class="image"> <!--ảnh mentor-->
@@ -249,7 +253,8 @@
                             </div>
                         </div>
                     </div>
-                    <% } %>
+                    <% count2++; 
+                    } %>
                 </div>
             </div>
             <div class="row view-all" style="margin-top: 10px">

@@ -65,8 +65,10 @@ public class QuestionByMentor extends HttpServlet {
                 request.setAttribute("rsQuestion", rsQuestion);
                 request.getRequestDispatcher("jspClient/QuestionByMentor.jsp").forward(request, response);
             }
-
+            
             if (service.equals("update")) {
+                int n1 = 0;
+                int n2 = 0;
                 int question_id = Integer.parseInt(request.getParameter("question_id"));
                 int truee = 1;
                 int falsee = 0;
@@ -75,6 +77,7 @@ public class QuestionByMentor extends HttpServlet {
                 int course_Id = question.getCourse_id();
                 Vector<Answer> vectorAnswer = daoAnswer.getAll(("select * from Answer where question_id = " + question_id));
                 String submit = request.getParameter("submit");
+                String notifi = "";
                 if(submit == null) {
                     request.setAttribute("course_id", course_Id);
                     request.setAttribute("vectorQuestion", vectorQuestion);
@@ -83,27 +86,36 @@ public class QuestionByMentor extends HttpServlet {
                     request.setAttribute("falsee", falsee);
                         request.getRequestDispatcher("jspClient/UpdateQuestionByMentor.jsp").forward(request, response);
                 } else {
-                    String notifi = "";
-                    int question_Id = Integer.parseInt(request.getParameter("course_id"));
+                    int question_Id = Integer.parseInt(request.getParameter("question_id"));
                     int course_id = Integer.parseInt(request.getParameter("course_id"));
                     String question_name = request.getParameter("question_name");
-                    int anwser_id = Integer.parseInt(request.getParameter("anwser_id"));
-                    String anwser_name = request.getParameter("anwser_name");
-                    int is_correct = Integer.parseInt(request.getParameter("is_correct"));
-                    
                     Question q = new Question(question_Id, question_name, course_id);
-                    Answer a = new Answer(anwser_id, anwser_name, is_correct, question_Id);
+                    n1 = dao.updateQuestion(q);
                     
-                    int n1 = dao.updateQuestion(q);
-                    int n2 = daoAnswer.updateAnswer(a);
-                    
-                    if(n1 > 0 && n2 > 0) {
-                        notifi = "Update successfully!!";
-                        request.setAttribute("notifi", notifi);
-//                        request.getRequestDispatcher("jspClient/UpdateQuestionByMentor.jsp").forward(request, response);
-                        response.sendRedirect("QuestionByMentor?service=show&course_id=" + course_Id);
+                    for (int i = 0; i < vectorAnswer.size(); i++) {
+                        int anwser_id = Integer.parseInt(request.getParameter("answer_id" + i));
+                        String anwser_name = request.getParameter("answer_name" + i);
+                        int is_correct = Integer.parseInt(request.getParameter("is_correct" + i));
+                        Answer a = new Answer(anwser_id, anwser_name, is_correct, question_Id);
+                        daoAnswer.updateAnswer(a);
                     }
+                    response.sendRedirect("QuestionByMentor?service=show&course_id=" + course_Id);
+
+                    
+//                    Question q = new Question(question_Id, question_name, course_id);
+//                    Answer a = new Answer(anwser_id, anwser_name, is_correct, question_Id);
+                    
+//                    n1 = dao.updateQuestion(q);
+//                    n2 = daoAnswer.updateAnswer(a);
+                    
                 }
+//                if(n1 > 0 && n2 > 0) {
+//                    notifi = "Update successfully!!";
+//                    request.setAttribute("notifi", notifi);
+//                        request.getRequestDispatcher("jspClient/UpdateQuestionByMentor.jsp").forward(request, response);
+//                        response.sendRedirect("QuestionByMentor?service=show&course_id=" + course_Id);
+//                    response.sendRedirect("CourseMentor" );
+//                }
             }
             
             if (service.equals("create")) {
