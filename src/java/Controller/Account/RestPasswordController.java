@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 import module.Mailer;
@@ -74,7 +75,8 @@ public class RestPasswordController extends HttpServlet {
 
     }
 
-    public void sendDocumentHTML(String email, int role) {
+    public void sendDocumentHTML(String email, int role) throws UnsupportedEncodingException {
+        String linksend = Mailer.generateLink("http://localhost:8080/Project_SWP391/forgotten?action=reset&email=" + email + "&role=" + role);
         Mailer.send(email, "Verify",
                 "<!DOCTYPE html>\n"
                 + "<html lang=\"en\">\n"
@@ -158,7 +160,7 @@ public class RestPasswordController extends HttpServlet {
                 + "                </p>\n"
                 + "            </div>\n"
                 + "            <div class=\"link\">\n"
-                + "                <a href=\"http://localhost:8080/Project_SWP391/forgotten?action=reset&email=" + email + "&role=" + role + "\">Reset Password</a>\n"
+                + "                <a href=" + linksend + ">Reset Password</a>\n"
                 + "            </div>\n"
                 + "         </div>\n"
                 + "    </div>\n"

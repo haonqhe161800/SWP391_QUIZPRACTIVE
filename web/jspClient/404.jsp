@@ -1,9 +1,18 @@
+<%-- 
+    Document   : 404
+    Created on : 04-Jul-2023, 16:42:20
+    Author     : Admin
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="x-ua-compatible" content="ie=edge" />
         <meta name="description" content="" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!-- Web Font -->
         <link
@@ -39,7 +48,7 @@
                             <h2>Here Is Some Problem</h2>
                             <p>The page you are looking for it maybe deleted</p>
                             <div class="button">
-                                <a href="HomeController" class="btn">Go To Home</a>
+                                <a href="<%= request.getContextPath() %>" class="btn">Go To Home</a>
                             </div>
                         </div>
                     </div>
@@ -59,5 +68,5 @@
                 document.querySelector('.preloader').style.opacity = '0';
                 document.querySelector('.preloader').style.display = 'none';
             }</script>
-        </body> 
+    </body> 
 </html>

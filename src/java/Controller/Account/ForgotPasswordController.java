@@ -19,6 +19,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import module.Mailer;
 
 public class ForgotPasswordController extends HttpServlet {
 
@@ -28,37 +29,44 @@ public class ForgotPasswordController extends HttpServlet {
         String action = request.getParameter("action");
         String email = request.getParameter("email");
         String attribute = request.getParameter("role");
-        HttpSession session = request.getSession();
+        String expiration = request.getParameter("expiration");
 
-        if (action != null && email != null && attribute != null) {
-            if (action.equals("reset")) {
-                switch (attribute) {
-                    case "1":
-                        request.getSession().setAttribute("AccountA", new DAOAdmin().checkExist(email));
-                        break;
-                    case "2":
-                        request.getSession().setAttribute("AccountM", new DAOMentor().checkExist(email));
-                        break;
-                    case "3":
-                        request.getSession().setAttribute("AccountMa", new DAOMarketer().checkExist(email));
-                        break;
-                    case "4":
-                        request.getSession().setAttribute("AccountU", new DAOUser().checkExist(email));
-                        break;
-                    default:
-                        response.sendRedirect("login");
-                }
-                session.setAttribute("eemail", email);
-                session.setAttribute("attribute", attribute);
-                request.getRequestDispatcher("view/forgotpsw/resetpsw.jsp").forward(request, response);
-            } else {
-//                request.getRequestDispatcher("view/Error/404.jsp").forward(request, response);
-                response.sendRedirect("jspClient/404.html");
-            }
+        if (!Mailer.isValidLink(expiration)) {
+            response.sendRedirect("jspClient/404.jsp");
         } else {
-            //tra ve cai gi khi khong co action 
-            request.getRequestDispatcher("jspClient/404.html").forward(request, response);
+            HttpSession session = request.getSession();
+
+            if (action != null && email != null && attribute != null) {
+                if (action.equals("reset")) {
+                    switch (attribute) {
+                        case "1":
+                            request.getSession().setAttribute("AccountA", new DAOAdmin().checkExist(email));
+                            break;
+                        case "2":
+                            request.getSession().setAttribute("AccountM", new DAOMentor().checkExist(email));
+                            break;
+                        case "3":
+                            request.getSession().setAttribute("AccountMa", new DAOMarketer().checkExist(email));
+                            break;
+                        case "4":
+                            request.getSession().setAttribute("AccountU", new DAOUser().checkExist(email));
+                            break;
+                        default:
+                            response.sendRedirect("login");
+                    }
+                    session.setAttribute("eemail", email);
+                    session.setAttribute("attribute", attribute);
+                    request.getRequestDispatcher("view/forgotpsw/resetpsw.jsp").forward(request, response);
+                } else {
+//                request.getRequestDispatcher("view/Error/404.jsp").forward(request, response);
+                    response.sendRedirect("jspClient/404.html");
+                }
+            } else {
+                //tra ve cai gi khi khong co action 
+                request.getRequestDispatcher("jspClient/404.jsp").forward(request, response);
+            }
         }
+
     }
 
     @Override

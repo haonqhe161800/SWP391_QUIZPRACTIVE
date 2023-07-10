@@ -24,7 +24,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author Admin
  */
-public class Login extends HttpServlet {
+public class LoginController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

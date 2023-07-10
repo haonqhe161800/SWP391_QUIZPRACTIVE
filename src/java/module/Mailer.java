@@ -4,6 +4,13 @@
  */
 package module;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import static java.nio.charset.StandardCharsets.UTF_8;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -45,6 +52,30 @@ public class Mailer {
         } catch (MessagingException e) {
             e.printStackTrace();
         }
+    }
+    
+    
+   private static final int LINK_EXPIRATION_MINUTES = 1;
+
+    public static String generateLink(String destinationUrl) throws UnsupportedEncodingException {
+        LocalDateTime expirationTime = LocalDateTime.now().plus(LINK_EXPIRATION_MINUTES, ChronoUnit.MINUTES);
+        String encodedExpirationTime = URLEncoder.encode(expirationTime.toString(), UTF_8.toString());
+        String link = destinationUrl + "&expiration=" + encodedExpirationTime;
+
+        return link;
+    }
+
+    public static boolean isValidLink(String link) throws UnsupportedEncodingException{
+        if (link != null) {
+            String encodedExpirationTime = link;
+            String expirationTime = URLDecoder.decode(encodedExpirationTime, UTF_8.toString());
+
+            LocalDateTime expirationDateTime = LocalDateTime.parse(expirationTime);
+            if (expirationDateTime.isAfter(LocalDateTime.now())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
