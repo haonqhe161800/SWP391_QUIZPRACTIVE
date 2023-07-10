@@ -8,16 +8,24 @@ import DAO.DAOSubject;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
 import java.sql.ResultSet;
 
 /**
  *
  * @author admin
  */
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024 * 3,
+        maxFileSize = 1024 * 1024 * 10,
+        maxRequestSize = 1024 * 1024 * 11
+)
+
 @WebServlet(name = "Subject", urlPatterns = {"/Subject"})
 public class Subject extends HttpServlet {
 
@@ -62,10 +70,14 @@ public class Subject extends HttpServlet {
             if (service.equals("add")) {
                 // Lấy thông tin từ form
                 String name = request.getParameter("name");
-                String image = request.getParameter("image");
+                Part imagePath = request.getPart("file");
+                String fileName = imagePath.getSubmittedFileName();
+                String relativePath = "./assets/images/categories/" + fileName;
+                String absolutePath = getServletContext().getRealPath(relativePath);
+                imagePath.write(absolutePath);
 
                 // Khởi tạo đối tượng Subject
-                Entities.Subject newSubject = new Entities.Subject(name, image);
+                Entities.Subject newSubject = new Entities.Subject(name, relativePath);
 
                 // Thêm môn học mới vào database
                 int result = dao.addSubject(newSubject);
@@ -101,11 +113,15 @@ public class Subject extends HttpServlet {
                 } else {
                     String notifi = "";
                     String name = request.getParameter("subject_name");
-                    String image = request.getParameter("image");
+                    Part imagePath = request.getPart("file");
+                    String fileName = imagePath.getSubmittedFileName();
+                    String relativePath = "./assets/images/categories/" + fileName;
+                    String absolutePath = getServletContext().getRealPath(relativePath);
+                    imagePath.write(absolutePath);
                     String title = request.getParameter("title");
                     boolean status = Boolean.parseBoolean(request.getParameter("status"));
                     String description = request.getParameter("description");
-                    Entities.Subject sub = new Entities.Subject(subject_id, name, image, title, description, status);
+                    Entities.Subject sub = new Entities.Subject(subject_id, name, relativePath, title, description, status);
                     int n = dao.updateSubject(sub);
                     if (n > 0) {
                         notifi = "Update subject successfully!!";

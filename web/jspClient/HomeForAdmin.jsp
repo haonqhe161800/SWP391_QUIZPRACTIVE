@@ -331,7 +331,7 @@
                             </div>
                             <div class="input">
                                 <label for="subject-image">Image</label>
-                                <input id="subject-image" name="image" type="text" class="form-control" required>
+                                <input id="subject-image" name="file" type="file" class="form-control" required>
                             </div>
                             <div class="button">
                                 <span class="btn-cancel">Cancel</span>
@@ -392,7 +392,7 @@
                         <div class="modal-subject-title">
                             <h4>Create new course</h4>
                         </div>
-                        <form <form action="Course" method="POST">
+                        <form <form action="Course" method="POST" enctype="multipart/form-data">
                             <input type="hidden" name="service" value="add">
                             <div class="input">
                                 <label for="course-name">Course name</label><br>
@@ -404,7 +404,7 @@
                             </div>
                             <div class="input">
                                 <label for="ourse-image">Image</label>
-                                <input id="ourse-image" name="image" type="text" class="form-control" required>
+                                <input id="ourse-image" name="file" type="file" class="form-control" required>
                             </div>
                             <div class="input">
                                 <label for="publish">Publish</label>
@@ -423,7 +423,7 @@
                             </div>
                             <div class="button">
                                 <span class="btn-cancel">Cancel</span>
-                                <button style="margin-left: 6px" class="btn-create">Create</button>
+                                <button type="submit" style="margin-left: 6px" class="btn-create">Create</button>
                             </div>
                         </form>
                     </div>

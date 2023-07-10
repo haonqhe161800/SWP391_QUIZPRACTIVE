@@ -23,7 +23,6 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /**
  *
  * @author Admin
@@ -31,33 +30,32 @@ import java.util.logging.Logger;
 @WebServlet(name = "QuestionByMentor", urlPatterns = {"/QuestionByMentor"})
 public class QuestionByMentor extends HttpServlet {
 
- 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             String service = request.getParameter("service");
-            
+
             DAOQuestion dao = new DAOQuestion();
             DAOAnswer daoAnswer = new DAOAnswer();
-            
+
             if (service == null) {
-               service = "show"; 
+                service = "show";
             }
-            
+
             if (service.equals("show")) {
                 HttpSession session = request.getSession();
                 AccountMentor mentor = (AccountMentor) session.getAttribute("accountMentor");
                 int mentor_id = mentor.getMentor_id();
-                
+
                 int course_id = Integer.parseInt(request.getParameter("course_id"));
                 //get course name
                 ResultSet name = dao.getData("select course_name from Course where course_id = " + course_id);
                 String course_name = "";
-                if(name.next()) {
+                if (name.next()) {
                     course_name = name.getString(1);
                 }
-                
+
                 ResultSet rsQuestion = dao.getData("select q.question_name, q.question_id from Question q join Course c on c.course_id = q.course_id where q.course_id = " + course_id + " and c.mentor_id = " + mentor_id);
 //                ResultSet rsAnswer = dao.getData("select * from Question where course_id = " + course_id);
                 request.setAttribute("course_id", course_id);
@@ -65,33 +63,26 @@ public class QuestionByMentor extends HttpServlet {
                 request.setAttribute("rsQuestion", rsQuestion);
                 request.getRequestDispatcher("jspClient/QuestionByMentor.jsp").forward(request, response);
             }
-            
+
             if (service.equals("update")) {
-                int n1 = 0;
-                int n2 = 0;
                 int question_id = Integer.parseInt(request.getParameter("question_id"));
-                int truee = 1;
-                int falsee = 0;
                 Vector<Question> vectorQuestion = dao.getAll("select * from Question where question_id = " + question_id);
                 Question question = vectorQuestion.get(0);
                 int course_Id = question.getCourse_id();
                 Vector<Answer> vectorAnswer = daoAnswer.getAll(("select * from Answer where question_id = " + question_id));
                 String submit = request.getParameter("submit");
-                String notifi = "";
-                if(submit == null) {
+                if (submit == null) {
                     request.setAttribute("course_id", course_Id);
                     request.setAttribute("vectorQuestion", vectorQuestion);
                     request.setAttribute("vectorAnswer", vectorAnswer);
-                    request.setAttribute("truee", truee);
-                    request.setAttribute("falsee", falsee);
-                        request.getRequestDispatcher("jspClient/UpdateQuestionByMentor.jsp").forward(request, response);
+                    request.getRequestDispatcher("jspClient/UpdateQuestionByMentor.jsp").forward(request, response);
                 } else {
                     int question_Id = Integer.parseInt(request.getParameter("question_id"));
                     int course_id = Integer.parseInt(request.getParameter("course_id"));
                     String question_name = request.getParameter("question_name");
                     Question q = new Question(question_Id, question_name, course_id);
-                    n1 = dao.updateQuestion(q);
-                    
+                    dao.updateQuestion(q);
+
                     for (int i = 0; i < vectorAnswer.size(); i++) {
                         int anwser_id = Integer.parseInt(request.getParameter("answer_id" + i));
                         String anwser_name = request.getParameter("answer_name" + i);
@@ -100,41 +91,26 @@ public class QuestionByMentor extends HttpServlet {
                         daoAnswer.updateAnswer(a);
                     }
                     response.sendRedirect("QuestionByMentor?service=show&course_id=" + course_Id);
-
-                    
-//                    Question q = new Question(question_Id, question_name, course_id);
-//                    Answer a = new Answer(anwser_id, anwser_name, is_correct, question_Id);
-                    
-//                    n1 = dao.updateQuestion(q);
-//                    n2 = daoAnswer.updateAnswer(a);
-                    
                 }
-//                if(n1 > 0 && n2 > 0) {
-//                    notifi = "Update successfully!!";
-//                    request.setAttribute("notifi", notifi);
-//                        request.getRequestDispatcher("jspClient/UpdateQuestionByMentor.jsp").forward(request, response);
-//                        response.sendRedirect("QuestionByMentor?service=show&course_id=" + course_Id);
-//                    response.sendRedirect("CourseMentor" );
-//                }
             }
-            
+
             if (service.equals("create")) {
                 int course_id = Integer.parseInt(request.getParameter("course_id"));
                 String name = request.getParameter("name");
-                
+
                 Question ques = new Question(name, course_id);
                 String key[] = {"a", "b", "c", "d", "e"};
                 dao.addQuestion(ques);
                 ResultSet rsQuestion = dao.getData("select Top(1) question_id from Question order by question_id desc");
                 int ques_id = 0;
-                if(rsQuestion.next()) {
+                if (rsQuestion.next()) {
                     ques_id = rsQuestion.getInt(1);
                 }
-                for(int i = 0; i < 5; i++) {
-                    String op = request.getParameter("op" + (i+1));
-                    if(!op.equals("")) {
+                for (int i = 0; i < 5; i++) {
+                    String op = request.getParameter("op" + (i + 1));
+                    if (!op.equals("")) {
                         String answer_name = key[i] + ". " + op;
-                        int sl = Integer.parseInt(request.getParameter("sl" + (i+1)));
+                        int sl = Integer.parseInt(request.getParameter("sl" + (i + 1)));
                         Answer ans = new Answer(answer_name, sl, ques_id);
                         daoAnswer.addAnswer(ans);
                     } else {
@@ -143,9 +119,9 @@ public class QuestionByMentor extends HttpServlet {
                 }
                 response.sendRedirect("QuestionByMentor?service=show&course_id=" + course_id);
             }
-            
-            if(service.equals("delete")) {
-                
+
+            if (service.equals("delete")) {
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(QuestionByMentor.class.getName()).log(Level.SEVERE, null, ex);
