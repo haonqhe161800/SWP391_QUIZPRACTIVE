@@ -3,10 +3,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title> Dashboard-Marketer</title>
-        <link rel="stylesheet" href="view/marketer/assets/css/styleSliderList.css">
+       <link rel="stylesheet" href="view/marketer/assets/css/stylePostList.css">
 
         <!--END FIXXED-->
 
@@ -95,7 +94,7 @@
         <jsp:include page="/jspClient/Header.jsp" ></jsp:include>
 
 
-            <section class="dashboard">
+            <section class="dashboard section">
                 <!--breadcrumbs-->
                 <div class="breadcrumbs" style="background-color: #f9f9f9">
                     <div class="container">
@@ -107,8 +106,8 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-12">
                                 <ul class="breadcrumb-nav">
-                                    <li><a href="index.html">Home</a></li>
-                                    <li>Dashboard</li>
+                                    <li><a href="HomeController">Home</a></li>
+                                    <li><a href="dashboardmarketer">Dashboard</a></li>
                                     <li>List Slider</li>
                                 </ul>
                             </div>
@@ -185,7 +184,7 @@
                         </div>
                         <div class="container-fluid pt-2">
                             <div class="row justify-content-md-center">
-                                <div class="pagination left">
+                                <div class="pagination center">
                                     <ul class="pagination-list">
                                             <c:if test="${index > 1}">
                                             <li>

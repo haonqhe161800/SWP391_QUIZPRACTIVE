@@ -24,7 +24,7 @@ public class ChangePasswordController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
-        request.getRequestDispatcher("/view/changePassword/changePassword.jsp").forward(request, response);
+        request.getRequestDispatcher("jspClient/changePassword.jsp").forward(request, response);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class ChangePasswordController extends HttpServlet {
         DAOAdmin adminDao = new DAOAdmin();
         
         if (aa != null) {
-            request.getRequestDispatcher("/view/changePassword/changePassword.jsp").forward(request, response);
+            request.getRequestDispatcher("jspClient/changePassword.jsp").forward(request, response);
         } else if (am != null) {
             am.setPassword(CPass);          
             marketerDao.updatePasswordByName(CPass, am.getEmail());
@@ -70,7 +70,7 @@ public class ChangePasswordController extends HttpServlet {
             request.getRequestDispatcher("/view/login/sign_in.jsp").forward(request, response);
         } else {
             request.setAttribute("error", "Update failed");
-            request.getRequestDispatcher("/view/changePassword/changePassword.jsp").forward(request, response);
+            request.getRequestDispatcher("jspClient/changePassword.jsp").forward(request, response);
         }
     }
 

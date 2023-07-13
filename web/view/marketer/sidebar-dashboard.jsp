@@ -32,7 +32,6 @@
                             </li>
                         </ul>
                     </li>
-                    <li><a href="#"><i class="lni lni-printer"></i>NULL</a></li>
                     <li>
                         <a href="#sliderSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle <c:if test="${pageslider != null && setList.contains(pageslider)}">active</c:if>">Slider</a>
                     <ul class="collapse list-unstyled" id="sliderSubmenu">
@@ -45,22 +44,7 @@
                     </ul>
                 </li>
                 <li><a href="#"><i class="lni lni-graph"></i>Analytics</a></li>
-                <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li>
-                            <a href="#">Page 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 3</a>
-                        </li>
-                    </ul>
-                </li>
-                <li><a href="#"><i class="lni lni-printer"></i>NULL</a></li>
-
+                
             </ul>
             <div class="button">
                 <a class="btn" href="signout">Logout</a>

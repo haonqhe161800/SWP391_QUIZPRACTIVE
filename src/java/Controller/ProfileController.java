@@ -19,10 +19,7 @@ import Entities.AccountMarketer;
 import Entities.AccountMentor;
 import Entities.AccountUser;
 
-/**
- *
- * @author QUANG HAO
- */
+
 public class ProfileController extends HttpServlet {
 
     @Override
@@ -30,7 +27,7 @@ public class ProfileController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
-        request.getRequestDispatcher("view/profile/profile.jsp").forward(request, response);
+        request.getRequestDispatcher("jspClient/profile.jsp").forward(request, response);
 
     }
 
@@ -44,11 +41,11 @@ public class ProfileController extends HttpServlet {
         String academicLevel = request.getParameter("academiclevel");
         String gender = request.getParameter("gender");
         String dob = request.getParameter("dob");
-        String image = request.getParameter("avatar");
+        String avatar = request.getParameter("avatar");
         String modifydate = dateCurrent();
 
-        if (image.isEmpty()) {
-            image = "base.png";
+        if (avatar.isEmpty()) {
+            avatar = "base.png";
         }
 
         HttpSession session = request.getSession();
@@ -66,47 +63,47 @@ public class ProfileController extends HttpServlet {
         DAOAdmin dadb = new DAOAdmin();
 
         if (aa != null) {
-            request.getRequestDispatcher("view/profile/profile.jsp").forward(request, response);
+            request.getRequestDispatcher("jspClient/profile.jsp").forward(request, response);
         } else if (am != null) {
             am.setDisplay_name(displayname);
             am.setDescyourself(describeMe);
             am.setFullName(fullname);
-            am.setImage(image);
+            am.setImage(avatar);
             am.setAddress(address);
             am.setAcademiclevel(academicLevel);
             am.setDob(dob);
-            dmdb.updateProfile(am.getMakerter_id(), describeMe, fullname, image, displayname, address, dob, academicLevel, modifydate, Integer.parseInt(gender));
+            dmdb.updateProfile(am.getMakerter_id(), describeMe, fullname, avatar, displayname, address, dob, academicLevel, modifydate, Integer.parseInt(gender));
             request.setAttribute("message", "Update successfull!");
             session.setAttribute("accountMarketer", am);
-            request.getRequestDispatcher("view/profile/profile.jsp").forward(request, response);
+            request.getRequestDispatcher("jspClient/profile.jsp").forward(request, response);
         } else if (ame != null) {
             ame.setDisplay_name(displayname);
             ame.setDescyourself(describeMe);
             ame.setFullName(fullname);
-            ame.setImage(image);
+            ame.setImage(avatar);
             ame.setAddress(address);
             ame.setAcademiclevel(academicLevel);
             ame.setDob(dob);
-            dmedb.updateProfile(ame.getMentor_id(), describeMe, fullname, image, displayname, address, dob, academicLevel, modifydate, Integer.parseInt(gender));
+            dmedb.updateProfile(ame.getMentor_id(), describeMe, fullname, avatar, displayname, address, dob, academicLevel, modifydate, Integer.parseInt(gender));
             request.setAttribute("message", "Update successfull!");
             session.setAttribute("accountMentor", ame);
-            request.getRequestDispatcher("view/profile/profile.jsp").forward(request, response);
+            request.getRequestDispatcher("jspClient/profile.jsp").forward(request, response);
         } else if (au != null) {
             au.setDisplay_name(displayname);
             au.setDescyourself(describeMe);
             au.setFullName(fullname);
-            au.setImage(image);
+            au.setImage(avatar);
             au.setAddress(address);
             au.setAcademiclevel(academicLevel);
             au.setDob(dob);
             au.setGender(Integer.parseInt(gender));
-            dudb.updateProfile(au.getUser_id(), describeMe, fullname, image, displayname, address, dob, academicLevel, modifydate, Integer.parseInt(gender));
+            dudb.updateProfile(au.getUser_id(), describeMe, fullname, avatar, displayname, address, dob, academicLevel, modifydate, Integer.parseInt(gender));
             request.setAttribute("message", "Update successfull!");
             session.setAttribute("accountUser", au);
-            request.getRequestDispatcher("view/profile/profile.jsp").forward(request, response);
+            request.getRequestDispatcher("jspClient/profile.jsp").forward(request, response);
         } else {
             request.setAttribute("error", "Update fail");
-            request.getRequestDispatcher("view/profile/profile.jsp").forward(request, response);
+            request.getRequestDispatcher("jspClient/profile.jsp").forward(request, response);
         }
     }
 

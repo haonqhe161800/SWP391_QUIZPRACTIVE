@@ -29,6 +29,8 @@ public class Mailer {
     public static void send(String to, String sub,String msg) {
         String user = "toptech8868@gmail.com";
         String pass = "sjxyriefmnrchwzs";
+//            private final String MAIL = "namnhhe161918@fpt.edu.vn";
+//    private final String PASSWORD = "ngohuunam1102002";
 //        String user = "quizpracticesystemk16@gmail.com";
 //        String pass = "abcd@1234";
         Properties props = new Properties();

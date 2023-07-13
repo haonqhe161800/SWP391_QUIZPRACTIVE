@@ -20,7 +20,8 @@ import java.nio.file.Paths;
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024 * 3,
         maxFileSize = 1024 * 1024 * 10,
-        maxRequestSize = 1024 * 1024 * 11
+        maxRequestSize = 1024 * 1024 * 11,
+        location = "/upload"
 )
 public class AddPostController extends HttpServlet {
 
@@ -50,7 +51,6 @@ public class AddPostController extends HttpServlet {
         String fileName = "";
         try {
             Part thumbnailFile = request.getPart("upfile");
-            String realPath = getServletContext().getRealPath("/upload");
 
             if (thumbnailFile != null && thumbnailFile.getSize() > 0) {
                 fileName = Paths.get(thumbnailFile.getSubmittedFileName()).getFileName().toString();
@@ -58,11 +58,11 @@ public class AddPostController extends HttpServlet {
                 fileName = "broken-image.png";
             }
 
-            if (!Files.exists(Paths.get(realPath))) {
-                Files.createDirectory(Paths.get(realPath));
+            if (!Files.exists(Paths.get(fileName))) {
+                Files.createDirectory(Paths.get(fileName));
             }
             if (thumbnailFile != null && thumbnailFile.getSize() > 0) {
-                thumbnailFile.write(realPath + "/" + fileName);
+                thumbnailFile.write(fileName);
             }
 
             //check subject not -1

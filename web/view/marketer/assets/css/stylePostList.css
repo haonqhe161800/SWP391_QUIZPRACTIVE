@@ -70,6 +70,20 @@
   margin-bottom: 4px;
 }
 
+i.visiblle,
+i.hide,
+span > a > .delete,
+span > a > .edit {
+    border: 1px solid black;
+    padding: 10px;
+    cursor: pointer;
+    margin-bottom: 4px;
+}
+
+span > a > .delete:hover {
+    background-color: #b2adde;
+}
+
 .delete:hover {
   background-color: #b2adde;
 }

@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ControllBlogList extends HttpServlet {
+public class BlogListController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -25,6 +25,9 @@ public class ControllBlogList extends HttpServlet {
 
         String search = request.getParameter("search") == null ? "" : request.getParameter("search");
         String sort = request.getParameter("sort") == null ? "" : request.getParameter("sort");
+
+        //specific a category blog
+        String blog_id = request.getParameter("blog_id");
 //
         search = search.trim();
         DAOSlider sdb = new DAOSlider();
@@ -32,7 +35,8 @@ public class ControllBlogList extends HttpServlet {
         DAOPost pdb = new DAOPost();
 
         //pagination
-        int totalPost = pdb.getNumberPost(search);
+        int totalPost = blog_id == null ? pdb.getNumberPost(search) : pdb.getNumberPost(search,blog_id);
+                
         int numberPage = (int) Math.ceil((double) totalPost / 4);
         int index;
         String currentPage = request.getParameter("index");
@@ -42,7 +46,15 @@ public class ControllBlogList extends HttpServlet {
             index = Integer.parseInt(currentPage);
         }
 //        //view post
-        ArrayList<Post> plist = pdb.selectBlogList(sort, search, index);
+//        //specific view post belog to category
+        ArrayList<Post> plist = null;
+        if (blog_id == null) {
+          plist = pdb.selectBlogList(sort, search, index);
+
+        } else {
+          plist = pdb.selectBlogList(sort, search, index, blog_id);
+          request.setAttribute("categoryblog", bdb.getById(blog_id));
+        }
         //total slider
         List<Slider> listsilder = sdb.getAll();
         int count = listsilder.size();
@@ -51,9 +63,9 @@ public class ControllBlogList extends HttpServlet {
         request.setAttribute("numberPage", numberPage);
         request.setAttribute("plist", plist);
         request.setAttribute("totalSliderShow", count);
-        request.setAttribute("search",search);
+        request.setAttribute("search", search);
         request.setAttribute("blist", bdb.getAll());
-        request.setAttribute("pagePost","listpost");
+        request.setAttribute("pagePost", "listpost");
         request.getSession().setAttribute("listslider", listsilder);
         request.getRequestDispatcher("view/blog/BlogList.jsp").forward(request, response);
 

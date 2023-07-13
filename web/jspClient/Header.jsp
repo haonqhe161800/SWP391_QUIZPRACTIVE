@@ -2,7 +2,7 @@
 <%@page import="Entities.AccountUser"%> 
 <%@page import="Entities.AccountMarketer"%> 
 <%@page import="Entities.AccountMentor"%> 
-<%@page import="Entities.AccountMentor"%> 
+<%@page import="Entities.AccountAdmin"%> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
@@ -69,7 +69,6 @@
                                     <ul class="sub-menu collapse" id="submenu-1-3">
                                         <li class="nav-item"><a href="ViewAll?service=viewAllCourse">Courses</a></li>
                                         <li class="nav-item"><a href="ViewAll?service=viewAllMentor">Mentors</a></li>
-                                        <li class="nav-item"><a href="ViewAllPost">Posts</a></li>
                                         <!--<li class="nav-item"><a href="#">Link 4</a></lili>-->
                                     </ul>
                                 </li>
@@ -86,21 +85,22 @@
                         %>                        
                         <h6 style="padding: 1rem;color: #081828;">Hello,<span><%=au.getDisplay_name()%></span> </h6>
                         <div style="display: flex;">
-                            <img src="https://th.bing.com/th/id/OIP.mDMuXjKAMMflGF_1y8keZAHaEo?pid=ImgDet&rs=1" alt=""  style="border-radius: 50%;height: 3em;object-fit: cover;width: 3em;cursor: pointer;">
+                            <img src="assets/avatar/<%=au.getImage()%>" alt="" onerror="this.src='assets/avatar/base.png'" style="border-radius: 50%;height: 3em;object-fit: cover;width: 3em;cursor: pointer;">
                             <i class="fa-solid fa-chevron-down" style="padding: 1rem;"></i>
                             <nav class="dropdown-ofme quote show">
                                 <ul class="nav-dropdown">
                                     <li class="dropdown-i">
                                         <span class="avatarr"><img
-                                                src="https://th.bing.com/th/id/OIP.mDMuXjKAMMflGF_1y8keZAHaEo?pid=ImgDet&rs=1"
-                                                alt=""></span>
+                                                src="assets/avatar/<%=au.getImage()%>"
+                                                alt="" onerror="this.src='assets/avatar/base.png'"></span>
                                         <span>
                                             <p id="d-name"><%=au.getDisplay_name()%></p>
                                         </span>
                                     </li>
                                     <li class="dropdown-i">Home</li>
-                                    <li class="dropdown-i">Profile Setting</li>
-                                    <li class="dropdown-i"><a class="text-white" href="signout">Sign out</a></li>
+                                    <li class="dropdown-i"><a href="profile">Profile Setting</a></li>
+                                    <li class="dropdown-i"><a href="ChangePassword">ChangePassword</a></li>
+                                    <li class="dropdown-i"><a href="signout">Sign out</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -109,25 +109,22 @@
                         %>
                         <h6 style="padding: 1rem;color: #081828;">Hello,<span><%=amer.getDisplay_name()%></span> </h6>
                         <div style="display: flex;">
-                            <img src="https://th.bing.com/th/id/OIP.mDMuXjKAMMflGF_1y8keZAHaEo?pid=ImgDet&rs=1" alt=""  style="border-radius: 50%;height: 3em;object-fit: cover;width: 3em;cursor: pointer;">
+                            <img src="assets/avatar/<%=amer.getImage()%>" alt="" onerror="this.src='assets/avatar/base.png'"  style="border-radius: 50%;height: 3em;object-fit: cover;width: 3em;cursor: pointer;">
                             <i class="fa-solid fa-chevron-down" style="padding: 1rem;cursor: pointer"></i>
                             <nav class="dropdown-ofme quote show">
                                 <ul class="nav-dropdown">
                                     <li class="dropdown-i">
                                         <span class="avatarr"><img
-                                                src="https://th.bing.com/th/id/OIP.mDMuXjKAMMflGF_1y8keZAHaEo?pid=ImgDet&rs=1"
-                                                alt=""></span>
+                                                src="assets/avatar/<%=amer.getImage()%>" alt="" onerror="this.src='assets/avatar/base.png'"></span>
                                         <span>
                                             <p id="d-name"><%=amer.getDisplay_name()%></p>
                                             <p id="role">Marketer</p>
                                         </span>
                                     </li>
                                     <li class="dropdown-i">Home</li>
-                                    <li class="dropdown-i">Home</li>
-                                    <li class="dropdown-i">Home</li>
-                                    <li class="dropdown-i">Home</li>
                                     <li class="dropdown-i"><a href="dashboardmarketer">Dashboard</a></li>
                                     <li class="dropdown-i"><a href="profile">Profile Setting</a></li>
+                                    <li class="dropdown-i"><a href="ChangePassword">ChangePassword</a></li>
                                     <li class="dropdown-i"><a href="signout">Sign out</a></li>
                                 </ul>
                             </nav>
@@ -137,22 +134,47 @@
                         %>
                         <h6 style="padding: 1rem;color: #081828;"><span><%=amor.getDisplay_name()%></span> </h6>
                         <div style="display: flex;">
-                            <img src="https://th.bing.com/th/id/OIP.mDMuXjKAMMflGF_1y8keZAHaEo?pid=ImgDet&rs=1" alt=""  style="border-radius: 50%;height: 3em;object-fit: cover;width: 3em;cursor: pointer;">
+                            <img src="assets/avatar/<%=amor.getImage()%>" alt="" onerror="this.src='assets/avatar/base.png'"  style="border-radius: 50%;height: 3em;object-fit: cover;width: 3em;cursor: pointer;">
                             <i class="fa-solid fa-chevron-down" style="padding: 1rem;cursor: pointer"></i>
                             <nav class="dropdown-ofme quote show">
                                 <ul class="nav-dropdown">
                                     <li class="dropdown-i">
                                         <span class="avatarr"><img
-                                                src="https://th.bing.com/th/id/OIP.mDMuXjKAMMflGF_1y8keZAHaEo?pid=ImgDet&rs=1"
-                                                alt=""></span>
+                                                src="assets/avatar/<%=amor.getImage()%>" alt="" onerror="this.src='assets/avatar/base.png'" ></span>
                                         <span>
                                             <p id="d-name"><%=amor.getDisplay_name()%></p>
                                             <p id="role">Marketer</p>
                                         </span>
                                     </li>
                                     <li class="dropdown-i">Home</li>
-                                    <li class="dropdown-i">Profile Setting</li>
-                                    <li class="dropdown-i"><a class="text-white" href="signout">Sign out</a></li>
+                                    <li class="dropdown-i"><a href="profile">Profile Setting</a></li>
+                                    <li class="dropdown-i"><a href="ChangePassword">ChangePassword</a></li>
+                                    <li class="dropdown-i"><a href="signout">Sign out</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <%
+                            }else if(session.getAttribute("accountAdmin")!= null){
+                            AccountAdmin amin = (AccountAdmin) session.getAttribute("accountAdmin");
+                        %>
+                        <h6 style="padding: 1rem;color: #081828;"><span>Admin</span> </h6>
+                        <div style="display: flex;">
+                            <img  src="" alt="" onerror="this.src='assets/avatar/base.png'"  style="border-radius: 50%;height: 3em;object-fit: cover;width: 3em;cursor: pointer;">
+                            <i class="fa-solid fa-chevron-down" style="padding: 1rem;cursor: pointer"></i>
+                            <nav class="dropdown-ofme quote show">
+                                <ul class="nav-dropdown">
+                                    <li class="dropdown-i">
+                                        <span class="avatarr"><img
+                                                src="" alt="" onerror="this.src='assets/avatar/base.png'" ></span>
+                                        <span>
+                                            <p id="d-name">Admin</p>
+                                            <p id="role">admin</p>
+                                        </span>
+                                    </li>
+                                    <li class="dropdown-i">Home</li>
+                                     <li class="dropdown-i"><a href="User">Dashboard</a></li>
+                                    <li class="dropdown-i"><a href="ChangePassword">ChangePassword</a></li>
+                                    <li class="dropdown-i"><a href="signout">Sign out</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -163,7 +185,7 @@
                                     <a href="login"><i class="lni lni-enter"></i>Login</a>
                                 </li>
                                 <li>
-                                    <a href="#"><i class="lni lni-user"></i>Sign up</a>
+                                    <a href="signup"><i class="lni lni-user"></i>Sign up</a>
                                 </li>
                             </ul>
                         </div>

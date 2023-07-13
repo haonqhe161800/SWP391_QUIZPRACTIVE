@@ -83,9 +83,9 @@
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">
                         <ul class="breadcrumb-nav">
-                            <li><a href="index.html">Home</a></li>
-                            <li>Dashboard</li>
-                            <li>Add Slider</li>
+                             <li><a href="HomeController">Home</a></li>
+                                <li><a href="listslider">List Slider</a></li>
+                                <li>Add Slider</li>
                         </ul>
                     </div>
                 </div>

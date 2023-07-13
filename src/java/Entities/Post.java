@@ -5,16 +5,19 @@
 package Entities;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import module.FormatDate;
 
 /**
  *
  * @author Admin
  */
-public class Post {
+public class Post implements FormatDate {
 
-    private int post_id, marketer_id, blog_id,subject_id;
+    private int post_id, marketer_id, blog_id, subject_id;
     private Date posted_date, update_date;
-    private String tittle,image, content, short_content;
+    private String tittle, image, content, short_content;
     private Blog b;
     private AccountMarketer am;
     private String status;
@@ -22,8 +25,7 @@ public class Post {
     public Post() {
     }
 
-
-    public Post(int post_id, int marketer_id, int blog_id,int subject_id,String tittle, Date posted_date, Date update_date, String image, String content, String short_content, String status, Blog b, AccountMarketer am) {
+    public Post(int post_id, int marketer_id, int blog_id, int subject_id, String tittle, Date posted_date, Date update_date, String image, String content, String short_content, String status, Blog b, AccountMarketer am) {
         this.post_id = post_id;
         this.marketer_id = marketer_id;
         this.blog_id = blog_id;
@@ -39,8 +41,8 @@ public class Post {
         this.am = am;
 
     }
-    
-      public String getTittle() {
+
+    public String getTittle() {
         return tittle;
     }
 
@@ -48,7 +50,7 @@ public class Post {
         this.tittle = tittle;
     }
 
-     public int getSubject_id() {
+    public int getSubject_id() {
         return subject_id;
     }
 
@@ -56,9 +58,6 @@ public class Post {
         this.subject_id = subject_id;
     }
 
-    
-
-    
     public Date getPosted_date() {
         return posted_date;
     }
@@ -104,14 +103,7 @@ public class Post {
     }
 
     public void setStatus(String status) {
-        if (status == "pending") {
-            this.status = status;
-        } else if (status == "approved") {
-            this.status = status;
-        } else if (status == "rejected") {
-            this.status = status;
-        }
-
+        this.status = status;
     }
 
     public int getPost_id() {
@@ -154,6 +146,21 @@ public class Post {
         this.am = am;
     }
 
-    
-    
+    @Override
+    public String changeFormat(Date datesubmit) {
+        if (datesubmit.toString() == null) {
+            return null;
+        }
+        //2023-06-21   
+        String inputDate = datesubmit.toString();
+
+        // Chuyển đổi chuỗi ngày thành LocalDate
+        LocalDate date = LocalDate.parse(inputDate);
+
+        // Định dạng lại ngày theo định dạng mong muốn
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd'th' MMM yyyy");
+        String outputDate = date.format(formatter);
+        return outputDate;
+    }
+
 }

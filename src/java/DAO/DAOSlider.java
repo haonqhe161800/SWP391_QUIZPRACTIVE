@@ -27,7 +27,7 @@ public class DAOSlider extends DBConnect {
                 + "      ,[note]\n"
                 + "      ,[isShow]\n"
                 + "      ,[subject_id]\n"
-                + "  FROM [QUIZ_PRACTICE].[dbo].[Slider]";
+                + "  FROM [QUIZ_PRACTICE].[dbo].[Slider] WHERE isShow = 1";
 
         try {
             PreparedStatement st = conn.prepareStatement(sql);

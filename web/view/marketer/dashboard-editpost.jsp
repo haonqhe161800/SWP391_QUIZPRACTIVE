@@ -92,8 +92,8 @@
                         </div>
                         <div class="col-lg-6 col-md-6 col-12">
                             <ul class="breadcrumb-nav">
-                                <li><a href="index.html">Home</a></li>
-                                <li>Dashboard</li>
+                                <li><a href="HomeController">Home</a></li>
+                                <li><a href="dashboardlistpost">List Post</a></li>
                                 <li>Edit Post</li>
                             </ul>
                         </div>
@@ -141,7 +141,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <img class="frame" id="img-preview" src="upload/<%=po.getImage()%>">
+                                    <img class="frame" id="img-preview" src="assets/images/thumbnail-post/<%=po.getImage()%>">
                                 </div>
 
                                 <div class="col-md-12 mt-3">
@@ -170,7 +170,7 @@
                                                 <option value="-1">Choose category blog</option>
                                                 <%
                                                  DAOBlog bdb = new DAOBlog();    
-                                                 ArrayList<Blog> blist = bdb.getAll();
+                                                 ArrayList<Blog> blist = bdb.getAll2();
                                                  for(Blog b : blist){
                                                 %>
                                                 <option value="<%=b.getBlog_id()%>" <%=b.getBlog_id() == po.getBlog_id() ? "selected" : "" %> ><%=b.getBlog_name()%></option>
