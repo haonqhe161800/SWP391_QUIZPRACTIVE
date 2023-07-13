@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
-        <servlet-name>ControllBlogList</servlet-name>
-        <servlet-class>Controller.ControllBlogList</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ProfileController</servlet-name>
         <servlet-class>Controller.ProfileController</servlet-class>
     </servlet>
@@ -25,10 +21,6 @@
         <servlet-class>Controller.Account.RestPasswordController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ControllBlogDetail</servlet-name>
-        <servlet-class>Controller.ControllBlogDetail</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>SliderListController</servlet-name>
         <servlet-class>Controller.SliderCRUD.SliderListController</servlet-class>
     </servlet>
@@ -44,10 +36,18 @@
         <servlet-name>PostListController</servlet-name>
         <servlet-class>Controller.PostCRUD.PostListController</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>ControllBlogList</servlet-name>
-        <url-pattern>/listpost</url-pattern>
-    </servlet-mapping>
+    <servlet>
+        <servlet-name>BlogListController</servlet-name>
+        <servlet-class>Controller.BlogListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlogDetailController</servlet-name>
+        <servlet-class>Controller.BlogDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LicensingPostController</servlet-name>
+        <servlet-class>Controller.LicensingPostController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProfileController</servlet-name>
         <url-pattern>/profile</url-pattern>
@@ -69,10 +69,6 @@
         <url-pattern>/restpassword</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ControllBlogDetail</servlet-name>
-        <url-pattern>/detailpost</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>DashboardMarketerController</servlet-name>
         <url-pattern>/dashboardmarketer</url-pattern>
     </servlet-mapping>
@@ -91,6 +87,18 @@
     <servlet-mapping>
         <servlet-name>PostListController</servlet-name>
         <url-pattern>/dashboardlistpost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogListController</servlet-name>
+        <url-pattern>/listpost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogDetailController</servlet-name>
+        <url-pattern>/detailpost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LicensingPostController</servlet-name>
+        <url-pattern>/post</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

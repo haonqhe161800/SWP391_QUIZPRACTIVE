@@ -12,7 +12,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Profile</title>
-        <link rel="stylesheet" href="view/profile/assets/css.profile.css"/>
+        <link rel="stylesheet" href="assets/css/profile.css"/>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
@@ -90,9 +90,10 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="py-2">
-                                    <div class="col-md-12"><label class="labels">Avatar:</label><input type="file" class="form-control" placeholder="link image" name="avatar" id="imageInput" value="${amase != null ? amase.image : (amese != null ? amese.image : (ause != null ? ause.image : 'link image'))}" ${adse != null ? 'disabled' : ''}></div> <br>
-                                </div>
-                            </div>
+                                    <div class="col-md-12"><label class="labels">Avatar:</label><input type="file" class="form-control"  accept="image/*" id="file-input" accept="image/*" name="avatar"  ${adse != null ? 'disabled' : ''}/>
+                                        <input type="hidden"  value="${amase != null ? amase.image : (amese != null ? amese.image : (ause != null ? ause.image : 'link image'))}"/>
+                                    </div> <br>
+                                </div>                            </div>
                             <div class="mt-3 text-center"><button class="btn btn-primary profile-button" type="Submit" id="btn">Save Profile</button></div>
                         </div>
                     </form>        
@@ -137,50 +138,16 @@
 </script>
 
 <script type="text/javascript">
-// Lắng nghe sự kiện change của trường input file
-    document.getElementById('imageInput').addEventListener('change', function (e) {
-        var reader = new FileReader();
-
-        // Đọc file ảnh đã chọn
-        reader.onload = function (e) {
-            var previewImage = document.getElementById('previewImage');
-            // Hiển thị ảnh đã chọn trong phần tử <img>
-            previewImage.src = e.target.result;
-        };
-
-        // Đọc dữ liệu của file ảnh
-        reader.readAsDataURL(e.target.files[0]);
-    });
+            const input = document.getElementById('file-input');
+            const image = document.getElementById('previewImage');
+            input.addEventListener('change', (e) => {
+                if (e.target.files.length) {
+                    const src = URL.createObjectURL(e.target.files[0]);
+                    image.src = src;
+                }
+            });
 </script>
 <script type="text/javascript">
-
-//    $('#profileForm').submit(function (event) {
-//        event.preventDefault(); // Ngăn chặn form submit và reload trang
-//
-//        // Lấy dữ liệu từ form
-//        var formData = $(this).serialize();
-//
-//        // Gửi yêu cầu Ajax
-//        $.ajax({
-//            url: 'profile',
-//            type: 'POST',
-//            data: formData,
-//            success: function (response) {
-//                Swal.fire(
-//                        'Good job!',
-//                        'Save change finish!',
-//                        'success'
-//                        );
-//            },
-//            error: function () {
-//                Swal.fire({
-//                    icon: 'error',
-//                    title: 'Oops...',
-//                    text: 'Something went wrong!'
-//                });
-//            }
-//        });
-//    });
 </script>
 </body>
 </html>

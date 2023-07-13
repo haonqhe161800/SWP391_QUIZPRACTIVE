@@ -5,6 +5,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title> Dashboard-Marketer</title>
         <!-- Boxicons CDN Link -->
         <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
         <link rel="stylesheet" href="view/marketer/assets/css/stylePostList.css">
@@ -100,8 +101,8 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-12">
                                 <ul class="breadcrumb-nav">
-                                    <li><a href="index.html">Home</a></li>
-                                    <li>Dashboard</li>
+                                    <li><a href="HomeController">Home</a></li>
+                                    <li><a href="dashboardmarketer">Dashboard</a></li>
                                     <li>List Posts</li>
                                 </ul>
                             </div>
@@ -155,9 +156,17 @@
                                             <td>${l.tittle}</td>
                                             <td style="width: 30%;"><img src="assets/images/thumbnail-post/${l.image}" alt="" width="70%"></td>
                                             <td>
-                                                <span><i class="fa-regular fa-thumbs-up" ></i></span>
-                                                <span><i class="fa-solid fa-exclamation" ></i></span>
-                                                <span><i class="fa-solid fa-hourglass-start"></i></span>
+                                                <c:choose>
+                                                    <c:when test="${l.status == 'approved'}">
+                                                        <i class="fa-regular fa-thumbs-up btn-success"></i>
+                                                    </c:when>
+                                                    <c:when test="${l.status == 'rejected'}">
+                                                        <i class="fa-solid fa-exclamation btn-danger"></i>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <i class="fa-solid fa-hourglass-start btn-warning"></i>
+                                                    </c:otherwise>
+                                                </c:choose>
                                             </td>
                                             <td style="text-align: center;">
                                                 <span><a href="deletepost?id=${l.post_id}" data-toggle="modal"

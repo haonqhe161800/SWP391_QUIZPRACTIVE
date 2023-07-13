@@ -85,8 +85,8 @@
                         </div>
                         <div class="col-lg-6 col-md-6 col-12">
                             <ul class="breadcrumb-nav">
-                                <li><a href="index.html">Home</a></li>
-                                <li>Dashboard</li>
+                                <li><a href="HomeController">Home</a></li>
+                                <li><a href="dashboardlistpost">List Post</a></li>
                                 <li>Add Post</li>
                             </ul>
                         </div>
@@ -156,7 +156,7 @@
                                                 <option value="-1">Choose category blog</option>
                                                 <%
                                                 DAOBlog bdb = new DAOBlog();    
-                                                ArrayList<Blog> blist = bdb.getAll();
+                                                ArrayList<Blog> blist = bdb.getAll2();
                                                 for(Blog b : blist){
                                                 %>
                                                 <option value="<%=b.getBlog_id()%>"><%=b.getBlog_name()%></option>

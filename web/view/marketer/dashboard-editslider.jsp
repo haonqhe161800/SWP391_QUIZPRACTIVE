@@ -91,8 +91,8 @@
                         </div>
                         <div class="col-lg-6 col-md-6 col-12">
                             <ul class="breadcrumb-nav">
-                                <li><a href="index.html">Home</a></li>
-                                <li>Dashboard</li>
+                                <li><a href="HomeController">Home</a></li>
+                                <li><a href="listslider">List Slider</a></li>
                                 <li>Edit Slider</li>
                             </ul>
                         </div>
@@ -174,7 +174,7 @@
                     </div>
                     <!-- The Modal -->
                     <div id="myModal" class="mmodal">
-                        <span class="close">&times;</span>
+                        <span class="cclose">&times;</span>
                         <img class="modal-ccontent" id="img01">
                         <div id="caption">alt.png</div>
                     </div>
@@ -230,7 +230,7 @@
                 modalImg.src = this.src;
         };
         // Get the <span> element that closes the modal
-                var span = document.getElementsByClassName("close")[0];
+                var span = document.getElementsByClassName("cclose")[0];
             
             // When the user clicks on <span> (x), close the modal                                    
                 span.onclick = function () 
