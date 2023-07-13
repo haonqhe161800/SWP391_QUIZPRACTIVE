@@ -142,11 +142,6 @@ public class CourseController extends HttpServlet {
                 int id = Integer.parseInt(request.getParameter("id"));
                 HttpSession session = request.getSession();
                 AccountUser au = (AccountUser) session.getAttribute("accountUser");
-                ResultSet listEd = daoEd.getData("select * from Exam_details where course_id = " + id + " and user_id = " + au.getUser_id());
-                if(listEd.next()) {
-                    daoEd.removeExamdetails(au.getUser_id(), id);
-                    daoResultTest.removeResultTest(au.getUser_id(), id);
-                }
                 String nameCourse = "";
                 ResultSet rsCourse = daoCourse.getData("select * from Course where course_id = " + id);
                 if (rsCourse.next()) {
