@@ -37,13 +37,14 @@ public class HomeController extends HttpServlet {
             DAO.DAOPost daoPost = new DAOPost();
 
             if (service.equals("displayAll")) {
-                ResultSet rsSubject = daoSubject.getData("SELECT [Subject].subject_name, [Subject].subject_id, [Subject].[image], COUNT(Course.course_id) AS quantity_of_course\n"
-                        + "FROM Subject\n"
-                        + "LEFT JOIN Course ON Subject.subject_id = Course.subject_id\n"
-                        + "GROUP BY [Subject].subject_id,  [Subject].subject_name, [Subject].[image]");
-                ResultSet rsCourse = daoCourse.getData("select * from [Course] c join [Subject] s on c.subject_id = s.subject_id ");
+                ResultSet rsSubject = daoSubject.getData("SELECT s.subject_name, s.subject_id, s.[image], COUNT(c.course_id) AS quantity_of_course\n"
+                        + "FROM Subject s LEFT JOIN Course c ON s.subject_id = c.subject_id\n"
+                        + "GROUP BY s.subject_id,  s.subject_name, s.[image]");
+                ResultSet rsCourse = daoCourse.getData("select c.course_id, c.image, m.display_name, m.image, c.course_name, s.subject_name, c.created_date, c.quantity, c.updated_date, s.subject_id\n" 
+                        + "from [Subject] s join [Course] c on s.subject_id = c.subject_id\n"
+                        + "left join Mentor_type m on c.mentor_id = m.mentor_id");
                 ResultSet rsMentor = daoMentor.getData("select * from Mentor_type");
-                ResultSet rsPost = daoPost.getData("select * from Post");
+                ResultSet rsPost = daoPost.getData("select * from Post p left join Marketer_type m on p.marketer_id = m.marketer_id");
 
                 request.setAttribute("rsSubject", rsSubject);
                 request.setAttribute("rsCourse", rsCourse);

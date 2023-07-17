@@ -163,13 +163,13 @@
                             <div class="image"> <!--ảnh course-->
                                 <!--Click vào ảnh cũng giống như click vào phần details -->
                                 <a href="CourseController?service=details&course_id=<%=rsCourse.getInt(1)%>" class="thumbnail">
-                                    <img height="218px" src="<%=rsCourse.getString(6)%>" alt="#">
+                                    <img height="218px" src="<%=rsCourse.getString(2)%>" alt="#">
                                 </a>
                                 <div class="author">
                                     <div class="author-image">    <!--ảnh mentor-->
                                         <a href="#">
-                                            <img src="./assets/images/items-grid/author-1.jpg" alt="#">
-                                        <span>Mentor name</span>
+                                            <img src="<%=rsCourse.getString(4)%>" alt="#">
+                                        <span><%=rsCourse.getString(3)%></span>
                                         </a>
                                     </div>
                                     <%if (session.getAttribute("accountMentor") == null) {%>
@@ -179,16 +179,16 @@
                             </div>
                             <div class="content">
                                 <div class="top-content">
-                                    <p><%=rsCourse.getString(4)%></p>
-                                    <a href="SubjectController?service=details&subject_id=<%=rsCourse.getInt(11)%>">
-                                        <h4 class="title">Subject: <%=rsCourse.getString(12)%>  </h4>
+                                    <p><%=rsCourse.getString(5)%></p>
+                                    <a href="SubjectController?service=details&subject_id=<%=rsCourse.getInt(10)%>">
+                                        <h4 class="title">Subject: <%=rsCourse.getString(6)%>  </h4>
                                     </a>
                                     <p class="update-time"><i class="lni lni-timer"></i> Last update date:  <%= (rsCourse.getString(9) != null ? rsCourse.getString(9) : rsCourse.getString(10))%></p>
                                     <ul class="rating">
                                         <li>Number of participants (<%=rsCourse.getInt(8)%>)</li>
                                     </ul>
                                     <ul class="info-list">
-                                        <li style="display: block; width: 100%"><i class="lni lni-timer"></i> Course posting date: <%=rsCourse.getString(9)%></li>
+                                        <li style="display: block; width: 100%"><i class="lni lni-timer"></i> Course posting date: <%=rsCourse.getString(7)%></li>
                                     </ul>
                                 </div>
                                 <div class="bottom-content">
@@ -234,21 +234,28 @@
                         <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
                             <div class="image"> <!--ảnh mentor-->
                                 <a href="#" class="thumbnail">
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6WsN6dLPa3HAHXNM3Pgy2k1TIe5c80AJ3sg&usqp=CAU" alt="#">
+                                    <img src="<%=rsMentor.getString(6)%>" alt="#">
                                 </a>
                                 <div class="author">
                                     <a href="#" class="sale"> Details </a>
                                 </div>
                             </div>
-                            <div class="content">
+                            <div class="content" style="font-size: 18px">
                                 <div class="top-content">
-                                    <p>Full name: <Strong><%=rsMentor.getString(5)%></Strong></p>
+                                    <p><Strong><%=rsMentor.getString(5)%></Strong></p>
                                     <h5 class="title"><strong><%=rsMentor.getString(7)%></strong> </h5>
-                                    <p>Date of birth: <strong> <%=rsMentor.getString(10)%></strong></p>
-                                    <ul class="info-list">
-                                        <li><i class="fa-solid fa-sparkles"></i> Specialize: <strong> <%=rsMentor.getString(11)%> </strong></li>
+                                    <ul class="birthday">
+                                        <li><i class="fa-solid fa-cake-candles"></i> Birthday: <strong> <%=rsMentor.getString(10)%></strong></li>
                                     </ul>
-                                    <p>Qualification: <strong> <%=rsMentor.getString(11)%></strong></p>
+                                    <ul>
+                                        <li><i class="fa-solid fa-school"></i> Qualification: <strong> <%=rsMentor.getString(11)%></strong></li>
+                                    </ul>
+                                    <ul class="specialize">
+                                        <li><i class="fa-solid fa-user-doctor-hair-long"></i> Specialize: <strong> <%=rsMentor.getString(14)%></strong></li>
+                                    </ul>
+                                    <ul class="address">
+                                        <li><i class="fa-solid fa-location-dot"></i> Address: <strong> <%=rsMentor.getString(9)%></strong></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -271,7 +278,7 @@
     
     
     
-    <!-- Tương tự bên trên, phần này là list ad -->
+    <!-- Tương tự bên trên, phần này là list post -->
     <section class="items-grid section custom-padding">
         <div class="container">
             <div class="row">
@@ -283,40 +290,47 @@
             </div>
             <div class="single-head">
                 <div class="row">
+                    <% int count3 = 0;
+                    while (rsPost.next() && count3 < 6) { %>
                     <div class="col-lg-4 col-md-6 col-12">
-                        <!-- Start Single Grid -->
                         <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
-                            <div class="image"> <!--ảnh course-->
-                                <!--Click vào ảnh cũng giống như click vào phần details -->
-                                <a href="#" class="thumbnail"><img src="../assets/images/items-grid/img1.jpg" alt="#"></a>
+                            <div class="image">
+                                <a href="#" class="thumbnail">
+                                    <img src="<%=rsPost.getString(7)%>" alt="#">
+                                </a>
                                 <div class="author">
-                                    <div class="author-image">    <!--ảnh mentor-->
-                                        <img src="../assets/images/items-grid/author-1.jpg" alt="#">
-                                        <span>Mentor name</span></a>
+                                    <div class="author-image">    <!--ảnh marketer-->
+                                        <a href="#">
+                                            <img src="<%=rsPost.getString(16)%>" alt="#">
+                                            <span><%=rsPost.getString(17)%></span>
+                                        </a>
                                     </div>
-                                    <a href="#" class="sale"> Join to study </a>
                                 </div>
                             </div>
-                            <div class="content">
+                            <div class="content" style="font-size: 18px">
                                 <div class="top-content">
-                                    <p>Subject name</p>
-                                    <h3 class="title"> Course Name </h3>
-                                    <p class="update-time">Last update date:</p>
-                                    <ul class="rating">
-                                        <li>Number of participants (35)</a></li>
+                                    <!--tittle--> 
+                                    <ul>
+                                        <p>Title: <Strong><%=rsPost.getString(4)%></Strong></p>
                                     </ul>
-                                    <ul class="info-list">
-                                        <li><i class="lni lni-timer"></i> Course posting date:</a></li>
+                                    <!--short content-->
+                                    <ul>
+                                        <h5 class="title"><strong><%=rsPost.getString(9)%></strong> </h5>
                                     </ul>
-                                </div>
-                                <div class="bottom-content">
-                                    <a href="#" class="btn btn-block btn-primary">Details</a>
+                                    <ul class="posted-date">
+                                        <li><i class="fa-solid fa-calendar-days"></i> Posted date: <strong> <%=rsPost.getString(5)%></strong></li>
+                                    </ul>
+                                    <ul>
+                                        <li><i class="fa-solid fa-calendar-days"></i> Updated date: <strong> <%=rsPost.getString(6)%></strong></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    </div>
+                    <% count3++; 
+                    } %>
                 </div>
+            </div>>
             </div>
             <div class="row view-all" style="margin-top: 10px">
                 <div class="col-lg-5 col-md-5 col-12"></div>
