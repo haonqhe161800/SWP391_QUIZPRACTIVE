@@ -106,7 +106,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title">
-                        <h2 class="wow fadeInUp" data-wow-delay=".4s">All Mentor</h2>
+                        <h2 class="wow fadeInUp" data-wow-delay=".4s">All Mentor Outstanding</h2>
                     </div>
                 </div>
             </div>
@@ -118,21 +118,28 @@
                         <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
                             <div class="image"> <!--ảnh mentor-->
                                 <a href="#" class="thumbnail">
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6WsN6dLPa3HAHXNM3Pgy2k1TIe5c80AJ3sg&usqp=CAU" alt="#">
+                                    <img src="<%=rsMentor.getString(6)%>" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6WsN6dLPa3HAHXNM3Pgy2k1TIe5c80AJ3sg&usqp=CAU'" alt="#">
                                 </a>
                                 <div class="author">
                                     <a href="#" class="sale"> Details </a>
                                 </div>
                             </div>
-                            <div class="content">
+                            <div class="content" style="font-size: 18px">
                                 <div class="top-content">
-                                    <p>Full name: <Strong><%=rsMentor.getString(5)%></Strong></p>
+                                    <p><Strong><%=rsMentor.getString(5)%></Strong></p>
                                     <h5 class="title"><strong><%=rsMentor.getString(7)%></strong> </h5>
-                                    <p>Date of birth: <strong> <%=rsMentor.getString(10)%></strong></p>
-                                    <ul class="info-list">
-                                        <li><i class="fa-solid fa-sparkles"></i> Specialize: <strong> <%=rsMentor.getString(11)%> </strong></li>
+                                    <ul class="birthday">
+                                        <li><i class="fa-solid fa-cake-candles"></i> Birthday: <strong> <%=rsMentor.getString(10)%></strong></li>
                                     </ul>
-                                    <p>Qualification: <strong> <%=rsMentor.getString(11)%></strong></p>
+                                    <ul>
+                                        <li><i class="fa-solid fa-school"></i> Qualification: <strong> <%=rsMentor.getString(11)%></strong></li>
+                                    </ul>
+                                    <ul class="specialize">
+                                        <li><i class="fa-solid fa-user-doctor-hair-long"></i> Specialize: <strong> <%=rsMentor.getString(14)%></strong></li>
+                                    </ul>
+                                    <ul class="address">
+                                        <li><i class="fa-solid fa-location-dot"></i> Address: <strong> <%=rsMentor.getString(9)%></strong></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -140,9 +147,8 @@
                     <% } %>
                 </div>
             </div>
-            
         </div>
-    </section>   
+    </section>  
                 
 
     <!-- start Footer -->

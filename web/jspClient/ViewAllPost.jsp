@@ -99,7 +99,58 @@
     <%
         ResultSet rsPost = (ResultSet)request.getAttribute("rsPost");
     %>
-    
+    <section class="items-grid section custom-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title">
+                        <h2 class="wow fadeInUp" data-wow-delay=".4s">All Post</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="single-head">
+                <div class="row">
+                    <% while (rsPost.next()) { %>
+                    <div class="col-lg-4 col-md-6 col-12" style="height: 700px">
+                        <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
+                            <div class="image">
+                                <a href="#" class="thumbnail">
+                                    <img src="<%=rsPost.getString(6)%>" onerror="this.src='https://www.wikihow.com/images/9/96/Use-a-Blog-for-Business-Step-10.jpg'" alt="#">
+                                </a>
+                                <div class="author">
+                                    <div class="author-image">    <!--ảnh marketer-->
+                                        <a href="#">
+                                            <img width="100px" src="<%=rsPost.getString(9)%>" onerror="this.src='https://cdn.onlinewebfonts.com/svg/img_511291.png'" alt="#">
+                                            <span><%=rsPost.getString(8)%></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content" style="font-size: 18px">
+                                <div class="top-content">
+                                    <!--tittle--> 
+                                    <ul>
+                                        <p>Title: <Strong><%=rsPost.getString(3)%></Strong></p>
+                                    </ul>
+                                    <!--short content-->
+                                    <ul>
+                                        <h5 class="title"><strong><%=rsPost.getString(7)%></strong> </h5>
+                                    </ul>
+                                    <ul class="posted-date">
+                                        <li><i class="fa-solid fa-calendar-days"></i> Posted date: <strong> <%=rsPost.getString(4)%></strong></li>
+                                    </ul>
+                                    <ul>
+                                        <li><i class="fa-solid fa-calendar-days"></i> Updated date: <strong> <%=rsPost.getString(5)%></strong></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
+            </div>>
+        </div>
+    </section>
     <!-- List Post -->
     
     

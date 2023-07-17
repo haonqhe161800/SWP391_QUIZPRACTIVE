@@ -52,7 +52,9 @@ public class ViewAll extends HttpServlet {
 
             //all course
             if (service.equals("viewAllCourse")) {
-                ResultSet rsCourse = daoCourse.getData("select * from [Course] c join [Subject] s on c.subject_id = s.subject_id ");
+                ResultSet rsCourse = daoCourse.getData("select c.course_id, c.image, m.display_name, m.image, c.course_name, s.subject_name, c.created_date, c.quantity, c.updated_date, s.subject_id\n" 
+                        + "from [Subject] s join [Course] c on s.subject_id = c.subject_id\n"
+                        + "left join Mentor_type m on c.mentor_id = m.mentor_id");
                 
                 request.setAttribute("rsCourse", rsCourse);
                 request.getRequestDispatcher("/jspClient/ViewAllCourse.jsp").forward(request, response);
@@ -68,7 +70,8 @@ public class ViewAll extends HttpServlet {
             
             //all post
             if (service.equals("viewAllPost")) {
-                ResultSet rsPost = daoPost.getData("select * from Post");
+                ResultSet rsPost = daoPost.getData("select p.post_id, p.blog_id, p.tittle, p.posted_date, p.updated_date, p.image, p.short_content, m.fullname, m.image\n"
+                        + "from Post p left join Marketer_type m on p.marketer_id = m.marketer_id");
                 request.setAttribute("rsPost", rsPost);
                 request.getRequestDispatcher("/jspClient/ViewAllPost.jsp").forward(request, response);
             }
@@ -78,7 +81,9 @@ public class ViewAll extends HttpServlet {
             if (service.equals("searchCourse")) {
                 request.setCharacterEncoding("UTF-8");
                 String search_name = request.getParameter("keyword");
-                ResultSet rsCourseS = daoCourse.getData("select * from [Course] c join [Subject] s on c.subject_id = s.subject_id where c.course_name like N'%" + search_name + "%'");
+                ResultSet rsCourseS = daoCourse.getData("select c.course_id, c.image, m.display_name, m.image, c.course_name, s.subject_name, c.created_date, c.quantity, c.updated_date, s.subject_id\n" 
+                        + "from [Subject] s join [Course] c on s.subject_id = c.subject_id\n"
+                        + "left join Mentor_type m on c.mentor_id = m.mentor_id where c.course_name like N'%" + search_name + "%'");
                 
                 request.setAttribute("text_search", search_name);
                 request.setAttribute("rsCourse", rsCourseS);
@@ -100,7 +105,8 @@ public class ViewAll extends HttpServlet {
             if (service.equals("searchPost")) {
                 request.setCharacterEncoding("UTF-8");
                 String search_name = request.getParameter("keyword");
-                ResultSet rsPostS = daoMentor.getData("select * from [Course] c join [Subject] s on c.subject_id = s.subject_id where c.course_name like N'%" + search_name + "%'");
+                ResultSet rsPostS = daoMentor.getData("select p.post_id, p.blog_id, p.tittle, p.posted_date, p.updated_date, p.image, p.short_content, m.fullname, m.image\n"
+                            + "from Post p left join Marketer_type m on p.marketer_id = m.marketer_id where p.tittle like N'%" + search_name + "%'");
                 
                 request.setAttribute("rsPost", rsPostS);
                 request.setAttribute("text_search", search_name);

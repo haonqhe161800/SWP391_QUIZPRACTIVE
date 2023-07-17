@@ -113,20 +113,21 @@
             
             <div class="single-head">
                 <div class="row">
-                    <% while(rsCourse.next()) {%>
+                    <%  while(rsCourse.next()) {
+                    %>
                         
                     <div class="col-lg-4 col-md-6 col-12">
                         <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
                             <div class="image"> <!--ảnh course-->
                                 <!--Click vào ảnh cũng giống như click vào phần details -->
                                 <a href="CourseController?service=details&course_id=<%=rsCourse.getInt(1)%>" class="thumbnail">
-                                    <img height="218px" src="<%=rsCourse.getString(6)%>" alt="#">
+                                    <img height="218px" src="<%=rsCourse.getString(2)%>" alt="#">
                                 </a>
                                 <div class="author">
                                     <div class="author-image">    <!--ảnh mentor-->
                                         <a href="#">
-                                            <img src="./assets/images/items-grid/author-1.jpg" alt="#">
-                                        <span>Mentor name</span>
+                                            <img src="<%=rsCourse.getString(4)%>" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6WsN6dLPa3HAHXNM3Pgy2k1TIe5c80AJ3sg&usqp=CAU'" alt="#">
+                                        <span><%=rsCourse.getString(3) != null ? rsCourse.getString(3) : ""%></span>
                                         </a>
                                     </div>
                                     <%if (session.getAttribute("accountMentor") == null) {%>
@@ -136,16 +137,16 @@
                             </div>
                             <div class="content">
                                 <div class="top-content">
-                                    <p><%=rsCourse.getString(4)%></p>
-                                    <a href="SubjectController?service=details&subject_id=<%=rsCourse.getInt(11)%>">
-                                        <h4 class="title">Subject: <%=rsCourse.getString(12)%>  </h4>
+                                    <p><%=rsCourse.getString(5)%></p>
+                                    <a href="SubjectController?service=details&subject_id=<%=rsCourse.getInt(10)%>">
+                                        <h4 class="title">Subject: <%=rsCourse.getString(6)%>  </h4>
                                     </a>
                                     <p class="update-time"><i class="lni lni-timer"></i> Last update date:  <%= (rsCourse.getString(9) != null ? rsCourse.getString(9) : rsCourse.getString(10))%></p>
                                     <ul class="rating">
                                         <li>Number of participants (<%=rsCourse.getInt(8)%>)</li>
                                     </ul>
                                     <ul class="info-list">
-                                        <li style="display: block; width: 100%"><i class="lni lni-timer"></i> Course posting date: <%=rsCourse.getString(9)%></li>
+                                        <li style="display: block; width: 100%"><i class="lni lni-timer"></i> Course posting date: <%=rsCourse.getString(7)%></li>
                                     </ul>
                                 </div>
                                 <div class="bottom-content">
