@@ -168,8 +168,8 @@
                                 <div class="author">
                                     <div class="author-image">    <!--ảnh mentor-->
                                         <a href="#">
-                                            <img src="<%=rsCourse.getString(4)%>" alt="#">
-                                        <span><%=rsCourse.getString(3)%></span>
+                                            <img src="<%=rsCourse.getString(4)%>" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6WsN6dLPa3HAHXNM3Pgy2k1TIe5c80AJ3sg&usqp=CAU'" alt="#">
+                                        <span><%=rsCourse.getString(3) != null ? rsCourse.getString(3) : ""%></span>
                                         </a>
                                     </div>
                                     <%if (session.getAttribute("accountMentor") == null) {%>
@@ -234,7 +234,7 @@
                         <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
                             <div class="image"> <!--ảnh mentor-->
                                 <a href="#" class="thumbnail">
-                                    <img src="<%=rsMentor.getString(6)%>" alt="#">
+                                    <img src="<%=rsMentor.getString(6)%>" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6WsN6dLPa3HAHXNM3Pgy2k1TIe5c80AJ3sg&usqp=CAU'" alt="#">
                                 </a>
                                 <div class="author">
                                     <a href="#" class="sale"> Details </a>
@@ -292,17 +292,17 @@
                 <div class="row">
                     <% int count3 = 0;
                     while (rsPost.next() && count3 < 6) { %>
-                    <div class="col-lg-4 col-md-6 col-12">
+                    <div class="col-lg-4 col-md-6 col-12" style="height: 700px">
                         <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
                             <div class="image">
                                 <a href="#" class="thumbnail">
-                                    <img src="<%=rsPost.getString(7)%>" alt="#">
+                                    <img src="<%=rsPost.getString(6)%>" onerror="this.src='https://www.wikihow.com/images/9/96/Use-a-Blog-for-Business-Step-10.jpg'" alt="#">
                                 </a>
                                 <div class="author">
                                     <div class="author-image">    <!--ảnh marketer-->
                                         <a href="#">
-                                            <img src="<%=rsPost.getString(16)%>" alt="#">
-                                            <span><%=rsPost.getString(17)%></span>
+                                            <img width="100px" src="<%=rsPost.getString(9)%>" onerror="this.src='https://cdn.onlinewebfonts.com/svg/img_511291.png'" alt="#">
+                                            <span><%=rsPost.getString(8)%></span>
                                         </a>
                                     </div>
                                 </div>
@@ -311,17 +311,17 @@
                                 <div class="top-content">
                                     <!--tittle--> 
                                     <ul>
-                                        <p>Title: <Strong><%=rsPost.getString(4)%></Strong></p>
+                                        <p>Title: <Strong><%=rsPost.getString(3)%></Strong></p>
                                     </ul>
                                     <!--short content-->
                                     <ul>
-                                        <h5 class="title"><strong><%=rsPost.getString(9)%></strong> </h5>
+                                        <h5 class="title"><strong><%=rsPost.getString(7)%></strong> </h5>
                                     </ul>
                                     <ul class="posted-date">
-                                        <li><i class="fa-solid fa-calendar-days"></i> Posted date: <strong> <%=rsPost.getString(5)%></strong></li>
+                                        <li><i class="fa-solid fa-calendar-days"></i> Posted date: <strong> <%=rsPost.getString(4)%></strong></li>
                                     </ul>
                                     <ul>
-                                        <li><i class="fa-solid fa-calendar-days"></i> Updated date: <strong> <%=rsPost.getString(6)%></strong></li>
+                                        <li><i class="fa-solid fa-calendar-days"></i> Updated date: <strong> <%=rsPost.getString(5)%></strong></li>
                                     </ul>
                                 </div>
                             </div>
@@ -348,6 +348,8 @@
     
     
     <!--Search display -->
+<!--    -----------------
+    ------------------>
     <%} else {
         if(request.getAttribute("rsCourse") != null && request.getAttribute("rsMentor") == null && request.getAttribute("rsPost") == null) { %>
         <%ResultSet rsCourses = (ResultSet)request.getAttribute("rsCourse");%>
@@ -356,37 +358,40 @@
                 <div class="container">
                     <div class="single-head">
                         <div class="row">
-                            <% while(rsCourses.next()) {%>
+                            <%  while(rsCourses.next()) {
+                            %>
 
                             <div class="col-lg-4 col-md-6 col-12">
                                 <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
                                     <div class="image"> <!--ảnh course-->
                                         <!--Click vào ảnh cũng giống như click vào phần details -->
                                         <a href="CourseController?service=details&course_id=<%=rsCourses.getInt(1)%>" class="thumbnail">
-                                            <img height="218px" src="<%=rsCourses.getString(6)%>" alt="#">
+                                            <img height="218px" src="<%=rsCourses.getString(2)%>" alt="#">
                                         </a>
                                         <div class="author">
                                             <div class="author-image">    <!--ảnh mentor-->
                                                 <a href="#">
-                                                    <img src="./assets/images/items-grid/author-1.jpg" alt="#">
-                                                <span>Mentor name</span>
+                                                    <img src="<%=rsCourses.getString(4)%>" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6WsN6dLPa3HAHXNM3Pgy2k1TIe5c80AJ3sg&usqp=CAU'" alt="#">
+                                                <span><%=rsCourses.getString(3) != null ? rsCourses.getString(3) : ""%></span>
                                                 </a>
                                             </div>
-                                            <a href="#" class="sale"> Join to study </a>
+                                            <%if (session.getAttribute("accountMentor") == null) {%>
+                                                <a href="CourseController?service=errol&id=<%=rsCourses.getInt(1)%>" class="sale"> Join to course</a>
+                                            <% }%>
                                         </div>
                                     </div>
                                     <div class="content">
                                         <div class="top-content">
-                                            <p><%=rsCourses.getString(4)%></p>
-                                            <a href="SubjectController?service=details&subject_id=<%=rsCourses.getInt(11)%>">
-                                                <h4 class="title">Môn học: <%=rsCourses.getString(12)%>  </h4>
+                                            <p><%=rsCourses.getString(5)%></p>
+                                            <a href="SubjectController?service=details&subject_id=<%=rsCourses.getInt(10)%>">
+                                                <h4 class="title">Subject: <%=rsCourses.getString(6)%>  </h4>
                                             </a>
-                                            <p class="update-time"><i class="lni lni-timer"></i> Ngày update gần nhất:  <%=rsCourses.getString(9)%></p>
+                                            <p class="update-time"><i class="lni lni-timer"></i> Last update date:  <%= (rsCourses.getString(9) != null ? rsCourses.getString(9) : rsCourses.getString(10))%></p>
                                             <ul class="rating">
-                                                <li>Số người tham gia (<%=rsCourses.getInt(8)%>)</li>
+                                                <li>Number of participants (<%=rsCourses.getInt(8)%>)</li>
                                             </ul>
                                             <ul class="info-list">
-                                                <li><i class="lni lni-timer"></i> Ngày đăng khóa học: <%=rsCourses.getString(9)%></li>
+                                                <li style="display: block; width: 100%"><i class="lni lni-timer"></i> Course posting date: <%=rsCourses.getString(7)%></li>
                                             </ul>
                                         </div>
                                         <div class="bottom-content">
@@ -404,79 +409,91 @@
         <%ResultSet rsMentorS = (ResultSet)request.getAttribute("rsMentor");%>
         
             <section class="items-grid section custom-padding">
-        <div class="container">
-            <div class="single-head">
-                <div class="row">
-                    <% while (rsMentorS.next()) { %>
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
-                            <div class="image"> <!--ảnh mentor-->
-                                <a href="#" class="thumbnail">
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6WsN6dLPa3HAHXNM3Pgy2k1TIe5c80AJ3sg&usqp=CAU" alt="#">
-                                </a>
-                                <div class="author">
-                                    <a href="#" class="sale"> Details </a>
+                <div class="container">
+                    <div class="single-head">
+                        <div class="row">
+                            <% while (rsMentorS.next()) { %>
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
+                                    <div class="image"> <!--ảnh mentor-->
+                                        <a href="#" class="thumbnail">
+                                            <img src="<%=rsMentorS.getString(6)%>" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6WsN6dLPa3HAHXNM3Pgy2k1TIe5c80AJ3sg&usqp=CAU'" alt="#">
+                                        </a>
+                                        <div class="author">
+                                            <a href="#" class="sale"> Details </a>
+                                        </div>
+                                    </div>
+                                    <div class="content" style="font-size: 18px">
+                                        <div class="top-content">
+                                            <p><Strong><%=rsMentorS.getString(5)%></Strong></p>
+                                            <h5 class="title"><strong><%=rsMentorS.getString(7)%></strong> </h5>
+                                            <ul class="birthday">
+                                                <li><i class="fa-solid fa-cake-candles"></i> Birthday: <strong> <%=rsMentorS.getString(10)%></strong></li>
+                                            </ul>
+                                            <ul>
+                                                <li><i class="fa-solid fa-school"></i> Qualification: <strong> <%=rsMentorS.getString(11)%></strong></li>
+                                            </ul>
+                                            <ul class="specialize">
+                                                <li><i class="fa-solid fa-user-doctor-hair-long"></i> Specialize: <strong> <%=rsMentorS.getString(14)%></strong></li>
+                                            </ul>
+                                            <ul class="address">
+                                                <li><i class="fa-solid fa-location-dot"></i> Address: <strong> <%=rsMentorS.getString(9)%></strong></li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="content">
-                                <div class="top-content">
-                                    <p>Full name: <Strong><%=rsMentorS.getString(5)%></Strong></p>
-                                    <h5 class="title"><strong><%=rsMentorS.getString(7)%></strong> </h5>
-                                    <p>Ngày sinh: <strong> <%=rsMentorS.getString(10)%></strong></p>
-                                    <ul class="info-list">
-                                        <li><i class="fa-solid fa-sparkles"></i> Chuyên môn: <strong> <%=rsMentorS.getString(11)%> </strong></li>
-                                    </ul>
-                                    <p>Trình độ chuyên môn: <strong> <%=rsMentorS.getString(11)%></strong></p>
-                                </div>
-                            </div>
+                            <% } %>
                         </div>
                     </div>
-                    <% } %>
                 </div>
-            </div>
-        </div>
-    </section>
+            </section>
         <%} else if(request.getAttribute("rsCourse") == null && request.getAttribute("rsMentor") == null && request.getAttribute("rsPost") != null) { %>
-        <%ResultSet rsPosts = (ResultSet)request.getAttribute("rsPost");%>
+        <%ResultSet rsPostS = (ResultSet)request.getAttribute("rsPost");%>
         
             <section class="items-grid section custom-padding">
                 <div class="container">
                     <div class="single-head">
                         <div class="row">
-                            <div class="col-lg-4 col-md-6 col-12">
-                                <!-- Start Single Grid -->
+                            <% while (rsPostS.next()) { %>
+                            <div class="col-lg-4 col-md-6 col-12" style="height: 700px">
                                 <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
-                                    <div class="image"> <!--ảnh course-->
-                                        <!--Click vào ảnh cũng giống như click vào phần details -->
-                                        <a href="#" class="thumbnail"><img src="../assets/images/items-grid/img1.jpg" alt="#"></a>
+                                    <div class="image">
+                                        <a href="#" class="thumbnail">
+                                            <img src="<%=rsPostS.getString(6)%>" onerror="this.src='https://www.wikihow.com/images/9/96/Use-a-Blog-for-Business-Step-10.jpg'" alt="#">
+                                        </a>
                                         <div class="author">
-                                            <div class="author-image">    <!--ảnh mentor-->
-                                                <img src="../assets/images/items-grid/author-1.jpg" alt="#">
-                                                <span>Mentor name</span></a>
+                                            <div class="author-image">    <!--ảnh marketer-->
+                                                <a href="#">
+                                                    <img width="100px" src="<%=rsPostS.getString(9)%>" onerror="this.src='https://cdn.onlinewebfonts.com/svg/img_511291.png'" alt="#">
+                                                    <span><%=rsPostS.getString(8)%></span>
+                                                </a>
                                             </div>
-                                            <a href="#" class="sale"> Join to study </a>
                                         </div>
                                     </div>
-                                    <div class="content">
+                                    <div class="content" style="font-size: 18px">
                                         <div class="top-content">
-                                            <p>Subject name</p>
-                                            <h3 class="title"> Course Name </h3>
-                                            <p class="update-time">Ngày update gần nhất</p>
-                                            <ul class="rating">
-                                                <li>số người joined (35)</a></li>
+                                            <!--tittle--> 
+                                            <ul>
+                                                <p>Title: <Strong><%=rsPostS.getString(3)%></Strong></p>
                                             </ul>
-                                            <ul class="info-list">
-                                                <li><i class="lni lni-timer"></i> Ngày đăng khóa học</a></li>
+                                            <!--short content-->
+                                            <ul>
+                                                <h5 class="title"><strong><%=rsPostS.getString(7)%></strong> </h5>
                                             </ul>
-                                        </div>
-                                        <div class="bottom-content">
-                                            <a href="#" class="btn btn-block btn-primary">Details</a>
+                                            <ul class="posted-date">
+                                                <li><i class="fa-solid fa-calendar-days"></i> Posted date: <strong> <%=rsPostS.getString(4)%></strong></li>
+                                            </ul>
+                                            <ul>
+                                                <li><i class="fa-solid fa-calendar-days"></i> Updated date: <strong> <%=rsPostS.getString(5)%></strong></li>
+                                            </ul>
                                         </div>
                                     </div>
+                                </div>
                             </div>
+                            <% } %>
                         </div>
-                        </div>
-                    </div>
+                    </div>>
                 </div>
             </section>
         <%}%>

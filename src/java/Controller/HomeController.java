@@ -44,7 +44,8 @@ public class HomeController extends HttpServlet {
                         + "from [Subject] s join [Course] c on s.subject_id = c.subject_id\n"
                         + "left join Mentor_type m on c.mentor_id = m.mentor_id");
                 ResultSet rsMentor = daoMentor.getData("select * from Mentor_type");
-                ResultSet rsPost = daoPost.getData("select * from Post p left join Marketer_type m on p.marketer_id = m.marketer_id");
+                ResultSet rsPost = daoPost.getData("select p.post_id, p.blog_id, p.tittle, p.posted_date, p.updated_date, p.image, p.short_content, m.fullname, m.image\n"
+                        + "from Post p left join Marketer_type m on p.marketer_id = m.marketer_id");
 
                 request.setAttribute("rsSubject", rsSubject);
                 request.setAttribute("rsCourse", rsCourse);
@@ -72,13 +73,18 @@ public class HomeController extends HttpServlet {
                         break;
 
                     case "blog":
-                        ResultSet rsPostS = daoPost.getData("select * from Blog b where b.blog_name like N'%" + search_name + "%'");
+                        ResultSet rsPostS = daoPost.getData("select p.post_id, p.blog_id, p.tittle, p.posted_date, p.updated_date, p.image, p.short_content, m.fullname, m.image\n"
+                            + "from Post p left join Marketer_type m on p.marketer_id = m.marketer_id where p.tittle like N'%" + search_name + "%'");
                         request.setAttribute("rsPost", rsPostS);
 //                        session.setAttribute("type", "blog");
                         break;
 
                     case "course":
-                        ResultSet rsCourseS = daoCourse.getData("select * from [Course] c join [Subject] s on c.subject_id = s.subject_id where c.course_name like N'%" + search_name + "%'");
+//                        ResultSet rsCourseS = daoCourse.getData("select * from [Course] c join [Subject] s on c.subject_id = s.subject_id where c.course_name like N'%" + search_name + "%'");
+                        ResultSet rsCourseS = daoCourse.getData("select c.course_id, c.image, m.display_name, m.image, c.course_name, s.subject_name, c.created_date, c.quantity, c.updated_date, s.subject_id\n" 
+                        + "from [Subject] s join [Course] c on s.subject_id = c.subject_id\n"
+                        + "left join Mentor_type m on c.mentor_id = m.mentor_id where c.course_name like N'%" + search_name + "%'");
+
                         request.setAttribute("rsCourse", rsCourseS);
 //                        session.setAttribute("type", "course");
                         break;
