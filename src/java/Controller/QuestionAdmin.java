@@ -5,6 +5,7 @@
 package Controller;
 
 import DAO.DAOAnswer;
+import DAO.DAOCourse;
 import DAO.DAOQuestion;
 import Entities.Answer;
 import Entities.Question;
@@ -60,17 +61,14 @@ public class QuestionAdmin extends HttpServlet {
 
             DAOQuestion daoQues = new DAOQuestion();
             DAOAnswer daoAns = new DAOAnswer();
+            DAOCourse daoCourse = new DAOCourse();
 
             String service = request.getParameter("service");
 
             if (service.equals("show")) {
                 int course_id = Integer.parseInt(request.getParameter("courseID"));
-                ResultSet course_name = daoQues.getData("select course_name from Course where course_id = " + course_id);
-                String coursename = "";
+                String coursename = daoCourse.getNameCourse(course_id);
                 String open = "";
-                if (course_name.next()) {
-                    coursename = course_name.getString(1);
-                }
                 ResultSet listQuestion = daoQues.getData("select q.question_id, q.question_name, c.course_name, s.subject_name from Question q join Course c on c.course_id = q.course_id join Subject s on c.subject_id = s.subject_id where c.course_id = " + course_id);
                 request.setAttribute("course_id", course_id);
                 request.setAttribute("coursename", coursename);
@@ -187,6 +185,7 @@ public class QuestionAdmin extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 
     public boolean checkFormatFileExcel(String fileName) throws IOException {
         boolean check = true;

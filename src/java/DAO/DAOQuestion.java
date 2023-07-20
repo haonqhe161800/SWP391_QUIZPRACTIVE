@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import module.DBConnect;
 
 /**
@@ -55,6 +57,19 @@ public class DAOQuestion extends DBConnect{
         try {
             Statement statement = conn.createStatement();
             n = statement.executeUpdate(sql);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return n;
+    }
+    
+    public int getNumberQuestion(int course_id) {
+        int n = 0;
+        ResultSet rsCountQuestion = getData("select Count(q.question_name) from Course c, Question q where q.course_id = c.course_id and c.course_id = " + course_id);
+        try {
+            if (rsCountQuestion.next()) {
+                n = rsCountQuestion.getInt(1);
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

@@ -10,12 +10,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 .exam {
     margin-bottom: 100px; 
     display: flex; 
-    justify-content: space-around;
+    padding: 0 200px;
+    justify-content: space-between
 }
 
-.content_exam {
-    flex: 2;
-}
 
 .question {
     font-weight: 700;
@@ -23,8 +21,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 }
 
 .menu_exam {
-    flex: 1; 
     display: flex;
+    justify-self: flex-end;
 }
 
 .number_question {
@@ -63,4 +61,24 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     /* Ket hop voi keyframe de tao hieu ung */
     animation: modalFadeIn ease 0.5s;
     background-color: rgb(239, 216, 185);
+}
+
+.number {
+    color: black;   
+    font-weight: 600;
+    margin-right: 8px;
+}
+
+.name_course {
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid grey;
+    padding: 0 300px;
+}
+
+.exam-items {
+    margin-bottom: 12px;
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 8px
 }
