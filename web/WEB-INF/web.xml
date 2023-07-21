@@ -26,7 +26,7 @@
     </servlet>
     <servlet>
         <servlet-name>DashboardMarketerController</servlet-name>
-        <servlet-class>DashboardMarketerController</servlet-class>
+        <servlet-class>Controller.DashboardMarketerController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddSliderController</servlet-name>

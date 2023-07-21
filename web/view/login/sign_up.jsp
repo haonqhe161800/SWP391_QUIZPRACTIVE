@@ -8,6 +8,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Sign up</title>
+        <!--favicon-->
+        <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo/lloo.png" />
         <link rel="stylesheet" href="view/login/assets/myRegister.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
               integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -220,10 +222,10 @@
                                 <input type="text" placeholder="FullName" name="fullname" id="checkname" required/>
                             </div>
                             <div class="form-input">
-                                <input type="password" placeholder="Password" id="password" name="pass" required onkeyup='check()'/>
+                                <input type="password" placeholder="Password" id="password" name="pass" required/>
                             </div>
                             <div class="form-input">
-                                <input type="password" placeholder="Confirm Password"  id="repassword" name="cpass" required onkeyup='check()'/>
+                                <input type="password" placeholder="Confirm Password"  id="repassword" name="cpass" required />
                             </div>
                             <div class="form-input">
                                 <div class="radio-inputs">
@@ -268,9 +270,12 @@
             </div>
         </div>
         <script type="text/javascript">
-            var check = function () {
-                if (document.getElementById('password').value ==
-                        document.getElementById('repassword').value) {
+            const passwordInput = document.getElementById("password");
+            const confirmPasswordInput = document.getElementById("repassword");
+            
+            confirmPasswordInput.addEventListener("input", function() {
+                if (passwordInput.value ===
+                        confirmPasswordInput.value) {
                     toast({
                         title: "Success!",
                         message: "Matching",
@@ -285,7 +290,7 @@
                         duration: 5000
                     });
                 }
-            };
+            });
 
             var birthdayInput = document.getElementById('dob');
             birthdayInput.addEventListener('blur', function () {
@@ -317,8 +322,8 @@
                         duration: 5000
                     });
                     checkname.value = "";
-                } 
-            })
+                }
+            });
 
         </script>
         <script src="view/login/assets/js/mycode.js"></script>
