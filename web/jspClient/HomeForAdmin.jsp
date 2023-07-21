@@ -77,9 +77,7 @@
                             <th scope="col">Name</th>
                             <th scope="col">Gender</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Password</th>
                             <th scope="col">Address</th>
-                            <th scope="col">Actions</th>
                         </tr>
 
                         <%int i = 0;
@@ -96,17 +94,7 @@
                                 <%}%>
                             </td>
                             <td><%=rsUser.getString(2)%></td>
-                            <td><%=rsUser.getString(3)%></td>
                             <td><%=rsUser.getString(9)%></td>
-                            <td>
-                                <form method="POST" action="User">
-                                    <input type="hidden" name="service" value="deleteUser">
-                                    <input type="hidden" name="UserId" value="<%= rsUser.getInt("user_id") %>">
-                                    <button type="submit" class="delete-btn" data-toggle="modal" onclick="return confirm('Are you sure you want to delete this user?')">
-                                        <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
-                                    </button>
-                                </form>
-                            </td>
                         </tr>
                         <%}%>
                     </table>
@@ -172,9 +160,7 @@
                             <th scope="col">Name</th>
                             <th scope="col">Gender</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Password</th>
                             <th scope="col">Address</th>
-                            <th scope="col">Actions</th>
                         </tr>
 
                         <%int i = 0;
@@ -191,18 +177,7 @@
                                 <%}%>
                             </td>
                             <td><%=rsMentor.getString(2)%></td>
-                            <td><%=rsMentor.getString(3)%></td>
                             <td><%=rsMentor.getString(9)%></td>
-                            <td>
-                                <form method="POST" action="Mentor">
-                                    <input type="hidden" name="service" value="deleteMentor">
-                                    <input type="hidden" name="mentor_id" value="<%= rsMentor.getInt("mentor_id") %>">
-                                    <button type="submit" class="delete-btn" data-toggle="modal" onclick="return confirm('Are you sure you want to delete this mentor?')">
-                                        <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
-                                    </button>
-                                </form>
-                            </td>
-
                         </tr>
                         <%}%>
                     </table>
@@ -228,9 +203,7 @@
                             <th scope="col">Name</th>
                             <th scope="col">Gender</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Password</th>
                             <th scope="col">Address</th>
-                            <th scope="col">Action</th>
                         </tr>
 
                         <%int i = 0;
@@ -247,17 +220,7 @@
                                 <%}%>
                             </td>
                             <td><%=rsMarketer.getString(2)%></td>
-                            <td><%=rsMarketer.getString(3)%></td>
                             <td><%=rsMarketer.getString(9)%></td>
-                            <td>
-                                <form method="POST" action="Marketer">
-                                    <input type="hidden" name="service" value="deleteMarketer">
-                                    <input type="hidden" name="marketerId" value="<%= rsMarketer.getInt("marketer_id") %>">
-                                    <button type="submit" class="delete-btn" data-toggle="modal" onclick="return confirm('Are you sure you want to delete this marketer?')">
-                                        <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
-                                    </button>
-                                </form>
-                            </td>
                         </tr>
                         <%}%>
                     </table>
@@ -323,11 +286,11 @@
                                 <input type="hidden" name="service" value="add">
                                 <div class="input">
                                     <label for="subject-name">Subject name</label><br>
-                                    <input id="subject-name" type="text" name="name" />
+                                    <input id="subject-name" type="text" name="name" required=""/>
                                 </div>
                                 <div class="input">
                                     <label for="subject-image">Image</label>
-                                    <input id="subject-image" name="file" type="file" class="form-control" required>
+                                    <input id="subject-image" name="file" type="file" class="form-control" required="">
                                 </div>
                                 <div class="button">
                                     <span class="btn-cancel">Cancel</span>
@@ -392,7 +355,7 @@
                                 <input type="hidden" name="service" value="add">
                                 <div class="input">
                                     <label for="course-name">Course name</label><br>
-                                    <input id="course-name" type="text" name="name" />
+                                    <input id="course-name" type="text" name="name" required=""/>
                                 </div>
                                 <div class="input">
                                     <label for="course-description">Description</label>
