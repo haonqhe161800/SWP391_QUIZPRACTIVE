@@ -33,17 +33,14 @@ public class SubjectController extends HttpServlet {
             String service = request.getParameter("service");
 
             if (service.equals("details")) {
-                //Lấy ra id của subject mà mình muốn xem list
                 int subject_id = Integer.parseInt(request.getParameter("subject_id"));
-                //câu lệnh sql lấy ra phần subject list
                 ResultSet rsSubject = daoSubject.getData("SELECT [Subject].subject_name, [Subject].subject_id, [Subject].[image], COUNT(Course.course_id) AS quantity_of_course\n"
                         + "FROM Subject\n"
                         + "LEFT JOIN Course ON Subject.subject_id = Course.subject_id\n"
                         + "GROUP BY [Subject].subject_id,  [Subject].subject_name, [Subject].[image]");
-                //câu lệnh sql lấy ra phần list courses
-                ResultSet rsCourse = daoCourse.getData("select * from [Course] c join [Subject] s on c.subject_id = s.subject_id where c.subject_id = " + subject_id);
-
-                //subject details
+                ResultSet rsCourse = daoCourse.getData("select c.course_id, c.image, m.display_name, m.image, c.course_name, s.subject_name, c.created_date, c.quantity, c.updated_date, s.subject_id, m.mentor_id\n" 
+                        + "from [Subject] s join [Course] c on s.subject_id = c.subject_id\n"
+                        + "left join Mentor_type m on c.mentor_id = m.mentor_id where s.subject_id = " + subject_id);
                 ResultSet rsSubjectDetails = daoSubject.getData("select * from [Subject]  where subject_id = " + subject_id);
                 ResultSet countCourse = daoCourse.getData("select count(course_id) from Course where subject_id = " + subject_id);
                 

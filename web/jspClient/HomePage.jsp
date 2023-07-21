@@ -7,6 +7,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.ResultSet"%>
+<%@page import="java.text.DateFormat, java.text.ParseException, java.text.SimpleDateFormat, java.util.Date, java.time.format.DateTimeFormatter, java.time.LocalDate"%>
+<%@page import="java.time.format.DateTimeFormatter, java.time.LocalDateTime" %>
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
 
@@ -138,6 +140,7 @@
         ResultSet rsMentor = (ResultSet)request.getAttribute("rsMentor");
         ResultSet rsPost = (ResultSet)request.getAttribute("rsPost");
     %>
+
     
 
     
@@ -160,14 +163,13 @@
                         
                     <div class="col-lg-4 col-md-6 col-12">
                         <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
-                            <div class="image"> <!--ảnh course-->
-                                <!--Click vào ảnh cũng giống như click vào phần details -->
+                            <div class="image">
                                 <a href="CourseController?service=details&course_id=<%=rsCourse.getInt(1)%>" class="thumbnail">
                                     <img height="218px" src="<%=rsCourse.getString(2)%>" alt="#">
                                 </a>
                                 <div class="author">
-                                    <div class="author-image">    <!--ảnh mentor-->
-                                        <a href="#">
+                                    <div class="author-image">
+                                        <a href="Mentor?service=info&mentor_id=<%=rsCourse.getInt(11)%>">
                                             <img src="<%=rsCourse.getString(4)%>" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6WsN6dLPa3HAHXNM3Pgy2k1TIe5c80AJ3sg&usqp=CAU'" alt="#">
                                         <span><%=rsCourse.getString(3) != null ? rsCourse.getString(3) : ""%></span>
                                         </a>
@@ -179,11 +181,11 @@
                             </div>
                             <div class="content">
                                 <div class="top-content">
-                                    <p><%=rsCourse.getString(5)%></p>
                                     <a href="SubjectController?service=details&subject_id=<%=rsCourse.getInt(10)%>">
-                                        <h4 class="title">Subject: <%=rsCourse.getString(6)%>  </h4>
+                                        <p style="color: #F9A7A7; font-size: 18px; font-weight: 500">Subject: <%=rsCourse.getString(6)%></p>
                                     </a>
-                                    <p class="update-time"><i class="lni lni-timer"></i> Last update date:  <%= (rsCourse.getString(9) != null ? rsCourse.getString(9) : rsCourse.getString(10))%></p>
+                                    <h4 class="title" style="height: 50px"><%=rsCourse.getString(5)%>  </h4>
+                                    <p class="update-time"><i class="lni lni-timer"></i> Last update date:  <%= (rsCourse.getString(9) != null ? rsCourse.getString(9) : rsCourse.getString(7))%></p>
                                     <ul class="rating">
                                         <li>Number of participants (<%=rsCourse.getInt(8)%>)</li>
                                     </ul>
@@ -237,7 +239,7 @@
                                     <img src="<%=rsMentor.getString(6)%>" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6WsN6dLPa3HAHXNM3Pgy2k1TIe5c80AJ3sg&usqp=CAU'" alt="#">
                                 </a>
                                 <div class="author">
-                                    <a href="#" class="sale"> Details </a>
+                                    <a href="Mentor?service=info&mentor_id=<%=rsMentor.getInt(1)%>" class="sale"> Details </a>
                                 </div>
                             </div>
                             <div class="content" style="font-size: 18px">
@@ -370,7 +372,7 @@
                                         </a>
                                         <div class="author">
                                             <div class="author-image">    <!--ảnh mentor-->
-                                                <a href="#">
+                                                <a href="Mentor?service=info&mentor_id=<%=rsCourses.getInt(11)%>">
                                                     <img src="<%=rsCourses.getString(4)%>" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6WsN6dLPa3HAHXNM3Pgy2k1TIe5c80AJ3sg&usqp=CAU'" alt="#">
                                                 <span><%=rsCourses.getString(3) != null ? rsCourses.getString(3) : ""%></span>
                                                 </a>
@@ -382,10 +384,10 @@
                                     </div>
                                     <div class="content">
                                         <div class="top-content">
-                                            <p><%=rsCourses.getString(5)%></p>
                                             <a href="SubjectController?service=details&subject_id=<%=rsCourses.getInt(10)%>">
-                                                <h4 class="title">Subject: <%=rsCourses.getString(6)%>  </h4>
+                                                <p style="color: #F9A7A7; font-size: 18px; font-weight: 500">Subject: <%=rsCourses.getString(6)%></p>
                                             </a>
+                                            <h4 class="title"><%=rsCourses.getString(5)%>  </h4>
                                             <p class="update-time"><i class="lni lni-timer"></i> Last update date:  <%= (rsCourses.getString(9) != null ? rsCourses.getString(9) : rsCourses.getString(10))%></p>
                                             <ul class="rating">
                                                 <li>Number of participants (<%=rsCourses.getInt(8)%>)</li>
@@ -420,7 +422,7 @@
                                             <img src="<%=rsMentorS.getString(6)%>" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6WsN6dLPa3HAHXNM3Pgy2k1TIe5c80AJ3sg&usqp=CAU'" alt="#">
                                         </a>
                                         <div class="author">
-                                            <a href="#" class="sale"> Details </a>
+                                            <a href="Mentor?service=info&mentor_id=<%=rsMentorS.getInt(1)%>" class="sale"> Details </a>
                                         </div>
                                     </div>
                                     <div class="content" style="font-size: 18px">

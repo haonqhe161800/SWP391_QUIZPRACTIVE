@@ -14,6 +14,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -58,8 +61,37 @@ public class Mentor extends HttpServlet {
                 daoMentor.deleteMentor(deleteMentor);
                 response.sendRedirect("Mentor");
             }
-
-        }
+            
+            if (service.equals("info")) {
+                int mentor_id = Integer.parseInt(request.getParameter("mentor_id"));
+                
+                ResultSet rsMentorInfo = daoMentor.getData("select * from Mentor_type m where m.mentor_id = " + mentor_id);
+                ResultSet coursesPosted = daoMentor.getData("select count(c.course_id), c.quantity, s.subject_name, c.course_name from Subject s join Course c on s.subject_id = c.subject_id\n" +
+                        "join Mentor_type m on m.mentor_id = c.mentor_id where m.mentor_id = " + mentor_id + "\n" +
+                        "group by s.subject_name, c.quantity, c.course_name");
+                int numCoursesPosted = 0;
+                int quantityPati = 0;
+                while(coursesPosted.next()) {
+                    numCoursesPosted += coursesPosted.getInt(1);
+                    quantityPati += coursesPosted.getInt(2);
+                }
+                
+                ResultSet rsRelatedCourse = daoMentor.getData("select c.course_id, c.image, m.display_name, m.image, c.course_name, s.subject_name, c.created_date, c.quantity, c.updated_date, s.subject_id, m.mentor_id \n" +
+                    "from [Subject] s join [Course] c on s.subject_id = c.subject_id \n" +
+                    "left join Mentor_type m on c.mentor_id = m.mentor_id where m.mentor_id = " + mentor_id);
+                
+                ResultSet rsRelatedMentor = daoMentor.getData("select * from Mentor_type m where m.mentor_id <> " + mentor_id);
+                
+                request.setAttribute("rsRelatedMentor", rsRelatedMentor);
+                request.setAttribute("rsRelatedCourse", rsRelatedCourse);
+                request.setAttribute("rsMentorInfo", rsMentorInfo);
+                request.setAttribute("quantityPati", quantityPati);
+                request.setAttribute("numCoursesPosted", numCoursesPosted);
+                request.getRequestDispatcher("jspClient/MentorInfomation.jsp").forward(request, response);
+            }
+        } catch (SQLException ex) {
+           Logger.getLogger(Mentor.class.getName()).log(Level.SEVERE, null, ex);
+       }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

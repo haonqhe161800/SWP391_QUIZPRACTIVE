@@ -90,7 +90,9 @@ public class CourseController extends HttpServlet {
                 if (rsCourse2.next()){
                     subject_id = rsCourse2.getInt(2);
                 }
-                ResultSet rsRelCourse = daoCourse.getData("select * from [Course] c join [Subject] s on c.subject_id = s.subject_id where s.subject_id = " + subject_id + "  and c.course_id <> " + course_id);
+                ResultSet rsRelCourse = daoCourse.getData("select c.course_id, c.image, m.display_name, m.image, c.course_name, s.subject_name, c.created_date, c.quantity, c.updated_date, s.subject_id, m.mentor_id \n" +
+                    "from [Subject] s join [Course] c on s.subject_id = c.subject_id \n" +
+                    "left join Mentor_type m on c.mentor_id = m.mentor_id where s.subject_id = " + subject_id + " and c.course_id <> " + course_id);
                 request.setAttribute("rsRelCourse", rsRelCourse);
 
 

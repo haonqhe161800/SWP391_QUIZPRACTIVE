@@ -93,60 +93,69 @@
             
         <% ResultSet rsRelCourse = (ResultSet) request.getAttribute("rsRelCourse");%>
             <!--Related course-->
-            <section class="items-grid section custom-padding" >
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section-title">
-                        <h2 class="wow fadeInUp" data-wow-delay=".4s">Related Course</h2>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="single-head">
-                <div class="row">
-                    <% while(rsRelCourse.next()) {%>
-                        
-                    <div class="col-lg-3 col-md-6 col-12">
-                        <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
-                            <div class="image"> <!--ảnh course-->
-                                <!--Click vào ảnh cũng giống như click vào phần details -->
-                                <a href="CourseController?service=details&course_id=<%=rsRelCourse.getInt(1)%>" class="thumbnail">
-                                    <img height="218px" src="<%=rsRelCourse.getString(6)%>" alt="#">
-                                </a>
-                                <div class="author">
-                                    <div class="author-image">    <!--ảnh mentor-->
-                                        <a href="#">
-                                            <img src="./assets/images/items-grid/author-1.jpg" alt="#">
-                                        <span>Mentor name</span>
-                                        </a>
-                                    </div>
-                                    <a style="margin-left: 50px " href="CourseController?service=details&course_id=<%=rsRelCourse.getInt(1)%>" class="btn btn-block btn-primary">Details</a>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <div class="top-content">
-                                    <p><%=rsRelCourse.getString(4)%></p>
-                                    <a href="SubjectController?service=details&subject_id=<%=rsRelCourse.getInt(11)%>">
-                                        <h4 class="title">Môn học: <%=rsRelCourse.getString(12)%>  </h4>
-                                    </a>
-                                    <p class="update-time"><i class="lni lni-timer"></i> Ngày update gần nhất:  <%=rsRelCourse.getString(9)%></p>
-                                    <ul class="rating">
-                                        <li>Số người tham gia (<%=rsRelCourse.getInt(8)%>)</li>
-                                    </ul>
-                                    <ul class="info-list">
-                                        <li><i class="lni lni-timer"></i> Ngày đăng khóa học: <%=rsRelCourse.getString(9)%></li>
-                                    </ul>
-                                </div>
-                                
+            <section class="items-grid section custom-padding">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="section-title">
+                                <h2 class="wow fadeInUp" data-wow-delay=".4s">Realated Course</h2>
                             </div>
                         </div>
                     </div>
-                    <% } %>
+
+                    <div class="single-head">
+                        <div class="row">
+                            <%  while(rsRelCourse.next()) { %>
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
+                                    <div class="image">
+                                        <a href="CourseController?service=details&course_id=<%=rsRelCourse.getInt(1)%>" class="thumbnail">
+                                            <img height="218px" src="<%=rsRelCourse.getString(2)%>" alt="#">
+                                        </a>
+                                        <div class="author">
+                                            <div class="author-image">
+                                                <a href="Mentor?service=info&mentor_id=<%=rsRelCourse.getInt(11)%>">
+                                                    <img src="<%=rsRelCourse.getString(4)%>" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6WsN6dLPa3HAHXNM3Pgy2k1TIe5c80AJ3sg&usqp=CAU'" alt="#">
+                                                <span><%=rsRelCourse.getString(3) != null ? rsRelCourse.getString(3) : ""%></span>
+                                                </a>
+                                            </div>
+                                            <%if (session.getAttribute("accountMentor") == null) {%>
+                                                <a href="CourseController?service=errol&id=<%=rsRelCourse.getInt(1)%>" class="sale"> Join to course</a>
+                                            <% }%>
+                                        </div>
+                                    </div>
+                                    <div class="content">
+                                        <div class="top-content">
+                                            <p><%=rsRelCourse.getString(5)%></p>
+                                            <a href="SubjectController?service=details&subject_id=<%=rsRelCourse.getInt(10)%>">
+                                                <h4 class="title">Subject: <%=rsRelCourse.getString(6)%>  </h4>
+                                            </a>
+                                            <p class="update-time"><i class="lni lni-timer"></i> Last update date:  <%= (rsRelCourse.getString(9) != null ? rsRelCourse.getString(9) : rsRelCourse.getString(7))%></p>
+                                            <ul class="rating">
+                                                <li>Number of participants (<%=rsRelCourse.getInt(8)%>)</li>
+                                            </ul>
+                                            <ul class="info-list">
+                                                <li style="display: block; width: 100%"><i class="lni lni-timer"></i> Course posting date: <%=rsRelCourse.getString(7)%></li>
+                                            </ul>
+                                        </div>
+                                        <div class="bottom-content">
+                                            <a href="CourseController?service=details&course_id=<%=rsCourse.getInt(1)%>" class="btn btn-block btn-primary">Details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
+                        </div>
+                    </div>
+                    <div class="row view-all" style="margin-top: 10px">
+                        <div class="col-lg-5 col-md-5 col-12"></div>
+                        <div class="col-lg-2 col-md-2 col-12">
+                            <a href="ViewAll?service=viewAllCourse" class="btn btn-block btn-primary"> View All Course</a>
+                        </div>
+                        <div class="col-lg-5 col-md-5 col-12"></div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </section>        
+            </section>        
 
         <jsp:include page="Footer.jsp"></jsp:include>
 
