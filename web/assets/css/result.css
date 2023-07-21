@@ -22,3 +22,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     display: flex;
     justify-content: space-between
 }
+
+
+.number {
+    color: black;   
+    font-weight: 600;
+    margin-right: 8px;
+}
+
+.exam-items {
+    margin-bottom: 12px;
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 8px
+}

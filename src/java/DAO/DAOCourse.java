@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import module.DBConnect;
 
 /**
@@ -134,13 +136,17 @@ public class DAOCourse extends DBConnect {
         return endPage;
     }
     
-    public static void main(String[] args) {
-        DAOCourse dao = new DAOCourse();
-        Course course = new Course("C nang cao",1 , "Hoc C nang cao", "./assets/images/categories/CourseC(1).png", 1);
-        int n = dao.addCourseByMentor(1, course);
-        if (n > 0) {
-            System.out.println("add success");
+    public String getNameCourse(int course_id) {
+        String n = "";
+        ResultSet rsCourse =  getData("select * from Course where course_id = " + course_id);
+        try {
+            if (rsCourse.next()) {
+                n = rsCourse.getString(4);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOCourse.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return n;
     }
     
 }

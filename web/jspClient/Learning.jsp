@@ -33,7 +33,7 @@
         <link rel="stylesheet" href="./assets/css/tiny-slider.css" />
         <link rel="stylesheet" href="./assets/css/glightbox.min.css" />
         <link rel="stylesheet" href="./assets/css/main.css" />
-
+        <link rel="stylesheet" href="./assets/css/exam.css" />
         <!--popup of -->
         <link rel="stylesheet" href="./assets/css/newcss.css"/>
         <!-- fontanswer icons -->
@@ -56,22 +56,26 @@
             <jsp:include page="Header.jsp"></jsp:include>
             </div>
 
-            <div style="text-align: center; margin-bottom: 20px">
-                <h2><%=nameCourse%></h2>
+        <div class="name_course">
+            <h2><%=nameCourse%></h2>
         </div>
 
-        <div class="container" style="margin-bottom: 100px">
+        <div style="padding: 0 300px; margin-bottom: 100px">
             <%int i = 0;
             for (Question question : listQuestion) {
              i++;%>
-            <div style="margin-bottom: 12px">
-                <p style="margin-bottom: 8px"><%=i%>. <%=question.getQuestion_name()%></p>
+            <div style="margin-bottom: 30px">
+                <p style="margin-bottom: 20px"><span class="number"><%=i%>. </span> <%=question.getQuestion_name()%></p>
                 <%for (Answer answer : listAnswer) {
                     if(answer.getQuestion_id() == question.getQuestion_id()) {
                         if(answer.getIs_correct() == 1) {%>
-                <input style="margin-bottom:8px" type="radio" checked /><%=answer.getAnswer_name()%><br>
+                <div class="exam-items">
+                    <input type="radio" checked /><%=answer.getAnswer_name()%><br>
+                </div>
                 <%} else {%>
-                <input style="margin-bottom:8px" type="radio" disabled /><%=answer.getAnswer_name()%><br>
+                <div class="exam-items">
+                    <input type="radio" disabled /><%=answer.getAnswer_name()%><br>
+                </div>
                 <%}
                 }
         }%>

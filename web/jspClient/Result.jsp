@@ -55,22 +55,26 @@
             </div>
         </div>
 
-        <div style="padding: 0 400px; margin-bottom: 20px">
+        <div style="padding: 0 300px; margin-bottom: 100px">
             <div class="content_exam">
                 <%int i = 0, j = 0;
                 for (Question question : listQuestion) {
                     j++;%>
-                <div style="margin-bottom: 12px">
-                    <p style="margin-bottom: 8px"><%=j%>. <%=question.getQuestion_name()%></p>
+                <div style="margin-bottom: 30px">
+                    <p style="margin-bottom: 20px"><%=j%>. <%=question.getQuestion_name()%></p>
                     <%for (Exam_results er : listEr) {
                        if(er.getQuestion_id() == question.getQuestion_id()) {
                            i++;
                            if(er.getAnswer_choose() == er.getAnswer_id()) {%>
-                    <span class="icon" id="icon_<%=i%>"></span>
-                    <input style="margin-bottom:8px" readonly="" class="result" value="<%=er.getIs_correct()%>" type="radio" checked><span style="margin-left: 4px"><%=er.getAnswer_name()%></span><br>
+                    <div class="exam-items"> 
+                        <span class="icon" id="icon_<%=i%>"></span>
+                        <input style="margin-bottom:8px" readonly="" class="result" value="<%=er.getIs_correct()%>" type="radio" checked><span style="margin-left: 4px"><%=er.getAnswer_name()%></span><br>
+                    </div>
                     <%} else {%>
-                    <span id="icon_<%=i%>"></span>
-                    <input style="margin-bottom:8px" readonly="" class="result" value="<%=er.getIs_correct()%>" type="radio"><span style="margin-left: 4px"><%=er.getAnswer_name()%></span><br>
+                    <div class="exam-items">
+                        <span id="icon_<%=i%>"></span>
+                        <input style="margin-bottom:8px" readonly="" class="result" value="<%=er.getIs_correct()%>" type="radio"><span style="margin-left: 4px"><%=er.getAnswer_name()%></span><br>
+                    </div>
                     <%}
                 }
             }%>
