@@ -1,12 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
 <%@ page import="com.google.gson.Gson"%>
 <%@ page import="com.google.gson.JsonObject"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>JSP Page</title>
+        <title>Dashboard-marketing</title>
         <!--FIXXED-->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="view/marketer/assets/css/styleMain.css"/>
@@ -32,13 +31,15 @@
             rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 
-        <!--popup of Marketer-->
-        <link rel="stylesheet" href="/assets/css/newcss.css"/>
+     <!--popup of Marketer-->
+        <link rel="stylesheet" href="./assets/css/newcss.css"/>
         <!-- fontanswer icons -->
         <script src="https://kit.fontawesome.com/fe000f9b2a.js" crossorigin="anonymous"></script>
 
         <!-- jquery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+
         <style>
             /*dropdown*/
             .dashboard-menu ul li.active>a,
@@ -102,7 +103,7 @@
                                                     <i class="lni lni-postcard"></i>
                                                 </div>
                                                 <h3>
-                                                    340
+                                                ${requestScope.totalPost}
                                                     <span>Number of posts</span>
                                                 </h3>
                                             </div>
@@ -115,7 +116,7 @@
                                                     <i class="lni lni-image"></i>
                                                 </div>
                                                 <h3>
-                                                    23
+                                                    ${requestScope.totalSlider}
                                                     <span>Number of sliders</span>
                                                 </h3>
                                             </div>
@@ -128,8 +129,8 @@
                                                     <i class="lni lni-bug"></i>
                                                 </div>
                                                 <h3>
-                                                    ##
-                                                    <span>Null </span>
+                                                    ${requestScope.totalPending}
+                                                    <span>Post pending</span>
                                                 </h3>
                                             </div>
 

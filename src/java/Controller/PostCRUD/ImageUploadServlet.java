@@ -28,6 +28,7 @@ public class ImageUploadServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final String UPLOAD_DIRECTORY = "upload"; // Thư mục lưu trữ ảnh tải lên
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String fileName = "";
         String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIRECTORY;
@@ -41,19 +42,18 @@ public class ImageUploadServlet extends HttpServlet {
             Part filePart = request.getPart("file");
             fileName = (String) getFileName(filePart);
 
-            // Ghi tệp tin vào thư mục lưu trữ
-            OutputStream out = new FileOutputStream(new File(uploadPath + File.separator + fileName));
-            InputStream fileContent = filePart.getInputStream();
-
-            int read;
-            final byte[] buffer = new byte[1024];
-            while ((read = fileContent.read(buffer)) != -1) {
-                out.write(buffer, 0, read);
+            InputStream fileContent;
+            try ( // Ghi tệp tin vào thư mục lưu trữ
+                    OutputStream out = new FileOutputStream(new File(uploadPath + File.separator + fileName))) {
+                fileContent = filePart.getInputStream();
+                int read;
+                final byte[] buffer = new byte[1024];
+                while ((read = fileContent.read(buffer)) != -1) {
+                    out.write(buffer, 0, read);
+                }
             }
-
-            out.close();
             fileContent.close();
-        } catch (Exception e) {
+        } catch (ServletException | IOException e) {
             response.getWriter().println(e.getMessage());
         }
 

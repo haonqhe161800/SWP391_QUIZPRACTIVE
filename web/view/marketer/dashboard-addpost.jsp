@@ -67,13 +67,18 @@
         <jsp:include page="/jspClient/Header.jsp" ></jsp:include>
             <section class="dashboard section">
 
-            <c:if test="${sessionScope.message != null}">
+            <c:if test="${requestScope.message1 != null}">
                 <div class=" container alert alert-danger alert-dismissible mt-3">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <strong>Failure!</strong> Subject invalid or Blog invalid Please re-choose.
                 </div>
             </c:if>
-
+            <c:if test="${requestScope.message2 != null}">
+                <div class=" container alert alert-danger alert-dismissible mt-3">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Failure!</strong> Short content or content of post invalid Please re-write.
+                </div>
+            </c:if>    
             <!--breadcrumbs-->
             <div class="breadcrumbs" style="background-color: #f9f9f9">
                 <div class="container">

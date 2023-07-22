@@ -140,11 +140,11 @@ public class LoginController extends HttpServlet {
         } else if (am != null && au == null && ame == null) {
             session.setAttribute("accountMarketer", am);
             //tra ve Dashboard marketer
-            response.sendRedirect("HomeController");
+            response.sendRedirect("dashboardmarketer");
         } else if (ame != null && am == null && au == null) {
             session.setAttribute("accountMentor", ame);
             //tra ve Dashboard memtor
-            response.sendRedirect("HomeController");
+            response.sendRedirect("CourseMentor");
         } else {
             request.getRequestDispatcher("view/login/sign_in.jsp").forward(request, response);
         }

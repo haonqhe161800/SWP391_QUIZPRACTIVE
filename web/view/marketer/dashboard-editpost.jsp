@@ -74,6 +74,12 @@
                     <strong>Failure!</strong> Subject or Blog invalid Please re-choose.
                 </div>
             </c:if>
+             <c:if test="${requestScope.message2 != null}">
+                <div class=" container alert alert-danger alert-dismissible mt-3">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Failure!</strong> Short content or content of post invalid Please re-write.
+                </div>
+            </c:if>    
             <c:if test="${requestScope.notification != null}">
                 <div class=" container alert alert-success alert-dismissible mt-3">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>

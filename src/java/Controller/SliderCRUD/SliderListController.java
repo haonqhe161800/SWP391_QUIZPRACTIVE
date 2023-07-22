@@ -12,7 +12,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -29,13 +28,12 @@ public class SliderListController extends HttpServlet {
         String search = request.getParameter("search") == null ? "" : request.getParameter("search");
         String entry = request.getParameter("entry") == null || request.getParameter("entry") == "" ? "10" : request.getParameter("entry");
         String currentPage = request.getParameter("index");
-
-        //check user thuoc role marketer xem la ai
-        
-        //check user thuoc role marketer xem la ai <== dung filter chan nó.
-       
-        
-        DAOSlider dsdb = new DAOSlider();
+         AccountMarketer ama = (AccountMarketer) request.getSession().getAttribute("accountMarketer") == null ? null : (AccountMarketer) request.getSession().getAttribute("accountMarketer");
+//         if(ama == null){
+//            request.setAttribute("notfound", "error");
+//            request.getRequestDispatcher("view/marketer/dashboard-postlist.jsp").forward(request, response);
+//        }else{
+               DAOSlider dsdb = new DAOSlider();
         try {
             search = search.trim();
             int indexp = Integer.parseInt(entry);
@@ -72,6 +70,7 @@ public class SliderListController extends HttpServlet {
         }
 
         request.getRequestDispatcher("view/marketer/dashboard-sliderlist.jsp").forward(request, response);
+//         }
     }
 
     @Override

@@ -2,6 +2,7 @@
 package Controller.PostCRUD;
 
 import DAO.DAOPost;
+import Entities.AccountMarketer;
 import Entities.Post;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -48,7 +49,7 @@ public class UpdatePostController extends HttpServlet {
                 request.setAttribute("post", p);
                 request.getSession().setAttribute("id", post_id);
                 request.setAttribute("pagepost", "updatepost");
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
                 response.getWriter().print(e.getMessage());
             }
             request.getRequestDispatcher(KNOW).forward(request, response);
@@ -67,11 +68,10 @@ public class UpdatePostController extends HttpServlet {
         String blog = request.getParameter("blog");
         String subject = request.getParameter("subject");
         String thumbnail = request.getParameter("upfilehide");
-
         try {
             String fileimg = "";
             Part part = request.getPart("upfile");
-            String realPath = getServletContext().getRealPath("/upload");
+            String realPath = getServletContext().getRealPath("/assets/images/thumbnail-post");
 
             if (part != null && part.getSize() > 0) {
                 fileimg = realPath + "\\" + part.getSubmittedFileName();
@@ -93,10 +93,14 @@ public class UpdatePostController extends HttpServlet {
             }
 
             //check subject or blog not -1
-            if ("-1".equals(subject) || "-1".equals(blog)) {
+            if ( "-1".equals(subject) || "-1".equals(blog)) {
                 url = KNOW;
-                request.setAttribute("message", "error");
-            } else {
+                request.setAttribute("message1", "errorrrr");
+            } else if(!checkLengthContent(shortcontent, content)){
+                 url = KNOW;
+                request.setAttribute("message2", "error");
+            } 
+            else {
                 url = KNOW;
                 pdb.updatePost(tittle, shortcontent, content, Integer.parseInt(blog), Integer.parseInt(subject), "pending", TimeCurrent(), thumbnail, Integer.parseInt(post_id));
                 request.setAttribute("notification", "success");
@@ -116,6 +120,17 @@ public class UpdatePostController extends HttpServlet {
         long millis = System.currentTimeMillis();
         java.sql.Date date = new java.sql.Date(millis);
         return date;
+    }
+    //validation short content (250 not null)
+    //validation content (not null)
+    public boolean checkLengthContent(String shortcontent, String content) {
+        if (shortcontent.length() > 250 && content == null) {
+            return false;
+        }
+        if(shortcontent.length() > 250 && content.trim().isEmpty()){
+            return false;
+        }
+        return true;
     }
 
 }

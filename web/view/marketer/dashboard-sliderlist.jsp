@@ -5,7 +5,7 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title> Dashboard-Marketer</title>
-       <link rel="stylesheet" href="view/marketer/assets/css/stylePostList.css">
+        <link rel="stylesheet" href="view/marketer/assets/css/stylePostList.css">
 
         <!--END FIXXED-->
 
@@ -69,7 +69,7 @@
                 });
             });
         </script>
-            <style>
+        <style>
             /*dropdown*/
             .dashboard-menu ul li.active>a,
             a[aria-expanded="true"] {
@@ -120,7 +120,7 @@
                     <div class="row">
                     <jsp:include page="/view/marketer/sidebar-dashboard.jsp"></jsp:include>
 
-                    <div class="col-lg-9 col-md-8 col-12" style="background-color: #fff;">
+                        <div class="col-lg-9 col-md-8 col-12" style="background-color: #fff;">
                             <div class="row filter">
                                 <div class="col-lg-3 col-md-4 num-entry">
                                     <form action="" onchange="change()" id="f1">
@@ -144,59 +144,80 @@
                             </div>
                         </div>
                         <div class="row">
-                            <table class="table">
-                                <thead class="">
-                                    <tr>
-                                        <th scope="col">Id <i class="fa-solid fa-arrow-up" style="float: right; margin-top: 4px;"></i></th>
-                                        <th scope="col">Content <i class="fa-solid fa-arrow-up-a-z" style="float: right; margin-top: 4px;"></i></th>
-                                        <th scope="col">Slider_url</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col" style="text-align: center;">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <c:forEach var="l" items="${requestScope.listslider}" varStatus="i">
+                            <c:if test="${listslider != null}">
+                                <table class="table">
+                                    <thead class="">
                                         <tr>
-                                            <td scope="row">${i.index + 1}</td>
-                                            <td>${l.content}</td>
-                                            <td style="width: 30%;"><img src="uploadslider/${l.url}" alt="${l.url}" width="90%"></td>
-                                            <td style="width: 12%;">
-
-                                                <c:if test="${l.isShow}">
-                                                    <span ><i class="visiblle fa-regular fa-eye" style="cursor: not-allowed; background-color: #0080008a"></i> </span>
-                                                </c:if>
-                                                <c:if test="${!l.isShow}">
-                                                    <span ><i class="hide fa-regular fa-eye-slash" style="cursor: not-allowed; background-color: red"></i></span>
-                                                    </c:if>
-
-                                            </td>
-                                            <td style="text-align: center;">
-                                                <span><a href="#" data-toggle="modal"
-                                                         data-target="#exampleModal" class="ddelete"><i class=" delete fa-regular fa-trash-can"></i></a>
-                                                    <input type="hidden" name="id" id="id" value="${l.slider_id}">
-                                                </span>
-                                                <span><a href="updateslider?id=${l.slider_id}"><i class="edit fa-regular fa-pen-to-square"></i></a></span>
-                                            </td> 
+                                            <th scope="col">No <i class="fa-solid fa-arrow-up" style="float: right; margin-top: 4px;"></i></th>
+                                            <th scope="col">Content <i class="fa-solid fa-arrow-up-a-z" style="float: right; margin-top: 4px;"></i></th>
+                                            <th scope="col">Slider_url</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col" style="text-align: center;">Action</th>
                                         </tr>
-                                    </c:forEach>
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach var="l" items="${requestScope.listslider}" varStatus="i">
+                                            <tr>
+                                                <td scope="row">${i.index + 1}</td>
+                                                <td data-slider-id="${l.slider_id}">
+                                                    <div class="slider-content" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                                        ${l.content}
+                                                    </div>
+                                                </td>
+                                                <td style="width: 30%;"><img src="uploadslider/${l.url}" alt="${l.url}" width="90%"></td>
+                                                <td style="width: 12%;">
+
+                                                    <c:if test="${l.isShow}">
+                                                        <span ><i class="visiblle fa-regular fa-eye" style="cursor: not-allowed; background-color: #0080008a"></i> </span>
+                                                    </c:if>
+                                                    <c:if test="${!l.isShow}">
+                                                        <span ><i class="hide fa-regular fa-eye-slash" style="cursor: not-allowed; background-color: red"></i></span>
+                                                        </c:if>
+
+                                                </td>
+                                                <td style="text-align: center;">
+                                                    <span><a href="#" data-toggle="modal"
+                                                             data-target="#exampleModal" class="ddelete"><i class=" delete fa-regular fa-trash-can"></i></a>
+                                                        <input type="hidden" name="id" id="id" value="${l.slider_id}">
+                                                    </span>
+                                                    <span><a href="updateslider?id=${l.slider_id}"><i class="edit fa-regular fa-pen-to-square"></i></a></span>
+                                                </td> 
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </c:if>
+
+                            <c:if test="${notfound == 0}">
+                                <div class="error-area">
+                                    <div class="d-table">
+                                        <div class="d-table-cell">
+                                            <div class="container">
+                                                <div class="error-content">
+                                                    <h1>404</h1>
+                                                    <p>Not Found!!!</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </c:if>
                         </div>
                         <div class="container-fluid pt-2">
                             <div class="row justify-content-md-center">
                                 <div class="pagination center">
                                     <ul class="pagination-list">
-                                            <c:if test="${index > 1}">
+                                        <c:if test="${index > 1}">
                                             <li>
                                                 <a href="dashboardlistslider?search=${requestScope.search}&entry=${param['entry']}&index=${param['index']-1}"><i class="lni lni-chevron-left"></i></a>
                                             </li> 
-                                            </c:if>
-                                            <c:forEach var = "i" begin = "1" end = "${numberPage}">
+                                        </c:if>
+                                        <c:forEach var = "i" begin = "1" end = "${numberPage}">
                                             <li class="${param['index']==i?'pa-active':''}"><a href="dashboardlistslider?search=${requestScope.search}&entry=${param['entry']}&index=${i}">${i}</a></li>
                                             </c:forEach>
                                             <c:if test="${ index < numberPage}">
                                             <li><a href="dashboardlistslider?search=${requestScope.search}&entry=${param['entry']}&index=${param['index']+1}"><i class="lni lni-chevron-right"></i></a></li>
-                                            </c:if>
+                                                </c:if>
                                     </ul>
                                 </div>
 
@@ -238,10 +259,40 @@
                     </div>
                 </div>
             </div>
+            <!--Delete Modal HTML end-->
+
+            <!--Modal Detail Slider-->
+            <div id="slider-details">
+              
+            </div>
+            <!--Modal Detail Slider end-->
         </section>
 
         <jsp:include page="/jspClient/Footer.jsp" />
+        <script>
+            $(document).ready(function () {
+                // Xử lý sự kiện click vào tiêu đề sản phẩm
+                $('.slider-content').click(function () {
+                    // Lấy id sản phẩm từ thuộc tính data-product-id
+                    var sliderId = $(this).parent().data('slider-id');
 
+                    // Gửi yêu cầu Ajax để lấy chi tiết sản phẩm dựa vào sliderId
+                    $.ajax({
+                        type: 'GET',
+                        url: 'dashboarddetailslider',
+                        data: {id: sliderId},
+                        success: function (data) {
+
+                            $('#slider-details').html(data);
+                        },
+                        error: function () {
+
+                            alert('Đã có lỗi xảy ra.');
+                        }
+                    });
+                });
+            });
+        </script>
         <script>
             let sidebar = document.querySelector(".sidebar");
             let closeBtn = document.querySelector("#btn");

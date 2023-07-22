@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Set"%>
@@ -112,7 +113,7 @@
                                         <li>
                                             <a href="#">
                                                 <i class="lni lni-calendar"></i>
-                                                <%=p.changeFormat(p.getPosted_date())%>
+                                                <fmt:formatDate value="${p.getPosted_date()}" pattern="dd-MM-yyyy" />
                                             </a>
                                         </li>
                                     </ul>

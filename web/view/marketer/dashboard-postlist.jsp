@@ -66,7 +66,7 @@
                 });
             });
         </script>
-                
+
         <style>
             /*dropdown*/
             .dashboard-menu ul li.active>a,
@@ -84,6 +84,10 @@
                 top: 50%;
                 right: 20px;
                 transform: translateY(-50%);
+            }
+            
+            tr > td > a{
+                color: #000;
             }
         </style>
     </head>
@@ -139,10 +143,11 @@
                         </div>
 
                         <div class="row">
-                            <table class="table">
+                            <c:if test="${listpost != null}">
+                                <table class="table">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Id <i class="fa-solid fa-arrow-up"></i></th>
+                                        <th scope="col">No <i class="fa-solid fa-arrow-up"></i></th>
                                         <th scope="col" style="width: 37%;">Title <i class="fa-solid fa-arrow-up-a-z"></i></th>
                                         <th scope="col">Thumbnail</th>
                                         <th scope="col">Status</th>
@@ -153,7 +158,7 @@
                                     <c:forEach var="l" items="${requestScope.listpost}" varStatus="i">
                                         <tr>
                                             <th scope="row">${i.index + 1}</th>
-                                            <td>${l.tittle}</td>
+                                            <td><a href="dashboarddetailpost?postid=${l.post_id}">${l.tittle}</a></td>
                                             <td style="width: 30%;"><img src="assets/images/thumbnail-post/${l.image}" alt="" width="70%"></td>
                                             <td>
                                                 <c:choose>
@@ -179,6 +184,22 @@
                                     </c:forEach>
                                 </tbody>
                             </table>
+                            </c:if>
+
+                            <c:if test="${notfound != null}">
+                                <div class="error-area">
+                                    <div class="d-table">
+                                        <div class="d-table-cell">
+                                            <div class="container">
+                                                <div class="error-content">
+                                                    <h1>404</h1>
+                                                    <p>Not Found!!!</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </c:if>
                         </div>
                         <div class="container-fluid pt-2">
                             <div class="row justify-content-md-center">

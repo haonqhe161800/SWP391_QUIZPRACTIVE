@@ -43,8 +43,6 @@
                         </li>
                     </ul>
                 </li>
-                <li><a href="#"><i class="lni lni-graph"></i>Analytics</a></li>
-                
             </ul>
             <div class="button">
                 <a class="btn" href="signout">Logout</a>

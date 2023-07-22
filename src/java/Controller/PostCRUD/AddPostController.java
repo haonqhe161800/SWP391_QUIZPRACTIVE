@@ -5,6 +5,7 @@
 package Controller.PostCRUD;
 
 import DAO.DAOPost;
+import Entities.AccountMarketer;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -20,22 +21,21 @@ import java.nio.file.Paths;
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024 * 3,
         maxFileSize = 1024 * 1024 * 10,
-        maxRequestSize = 1024 * 1024 * 11,
-        location = "/upload"
+        maxRequestSize = 1024 * 1024 * 11
 )
 public class AddPostController extends HttpServlet {
 
     public final String FAILURE = "addpost";
     public final String SUCCESS = "dashboardlistpost";
+    private final int MAX_LENGTH = 250;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        request.setAttribute("pagepost", "addpost");
-       request.getRequestDispatcher("view/marketer/dashboard-addpost.jsp").forward(request, response);
-    }
 
+        request.setAttribute("pagepost", "addpost");
+        request.getRequestDispatcher("view/marketer/dashboard-addpost.jsp").forward(request, response);
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -47,48 +47,60 @@ public class AddPostController extends HttpServlet {
         String content = request.getParameter("message");
         String blog = request.getParameter("blog");
         String subject = request.getParameter("subject");
+        AccountMarketer  ama = (AccountMarketer) request.getSession().getAttribute("accountMarketer") == null ? null : (AccountMarketer) request.getSession().getAttribute("accountMarketer") ;
         
         String fileName = "";
         try {
             Part thumbnailFile = request.getPart("upfile");
+            String realPath = getServletContext().getRealPath("/assets/images/thumbnail-post");
 
             if (thumbnailFile != null && thumbnailFile.getSize() > 0) {
                 fileName = Paths.get(thumbnailFile.getSubmittedFileName()).getFileName().toString();
             } else {
-                fileName = "broken-image.png";
+                fileName = "broken-image.jpg";
             }
 
-            if (!Files.exists(Paths.get(fileName))) {
-                Files.createDirectory(Paths.get(fileName));
+            if (!Files.exists(Paths.get(realPath))) {
+                Files.createDirectory(Paths.get(realPath));
             }
             if (thumbnailFile != null && thumbnailFile.getSize() > 0) {
-                thumbnailFile.write(fileName);
+                thumbnailFile.write(realPath + "/" + fileName);
             }
 
             //check subject not -1
-            if ("-1".equals(subject) || "-1".equals(blog)) {
+            if (("-1".equals(subject) || "-1".equals(blog)) ) {
                 url = FAILURE;
-                request.getSession().setAttribute("message", "error");
-            } else {
+                request.setAttribute("message1", "errorrrrr");
+            } else if(!checkLengthContent(shortcontent, content)){
+                url = FAILURE;
+                request.setAttribute("message2", "error");
+            } 
+            else {
                 url = SUCCESS;
                 //execute insert post
-//                pdb.insertPost(marketerid, tittle, shortcontent, content, Integer.parseInt(blog), Integer.parseInt(subject), "pending", postedPost(), fileName);
-                
-                
+                pdb.insertPost(ama.getRole_id(), tittle, shortcontent, content, Integer.parseInt(blog), Integer.parseInt(subject), "pending", fileName);
+
                 //test execute
-              pdb.insertPost(1, tittle, shortcontent, content, Integer.parseInt(blog), Integer.parseInt(subject), "pending",fileName);
-            
+//                pdb.insertPost(1, tittle, shortcontent, content, Integer.parseInt(blog), Integer.parseInt(subject), "pending", fileName);
+
             }
 
-        } catch (Exception e) {
+        } catch (ServletException | IOException | NumberFormatException e) {
             System.out.println(e.getMessage());
         }
         response.sendRedirect(url);
-        return;
     }
 
-    
     //validation short content (250 not null)
     //validation content (not null)
+    public boolean checkLengthContent(String shortcontent, String content) {
+        if (shortcontent.length() > 250) {
+            return false;
+        }
+        else if(content.trim().isEmpty()){
+            return false;
+        }
+        return true;
+    }
 
 }

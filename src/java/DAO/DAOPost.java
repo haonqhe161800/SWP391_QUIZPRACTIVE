@@ -229,15 +229,16 @@ public class DAOPost extends DBConnect {
     }
 
     //getAll verision 2
-    public List<Post> getAllPost2(String key, int offset, int base) {
+    public List<Post> getAllPost2(String key, int offset, int base, int id) {
         List<Post> list = new ArrayList<>();
         String sql = "SELECT * FROM Post p INNER JOIN Marketer_type ma ON p.marketer_id = ma.marketer_id\n"
                 + "INNER JOIN Blog b ON p.blog_id = b.blog_id\n"
-                + "WHERE  p.tittle LIKE ? ORDER BY p.post_id  OFFSET ? ROW FETCH NEXT " + base + " ROWS ONLY";
+                + "WHERE  p.marketer_id = ? AND p.tittle LIKE ? ORDER BY p.post_id  OFFSET ? ROW FETCH NEXT " + base + " ROWS ONLY";
         try {
             PreparedStatement st = conn.prepareStatement(sql);
-            st.setString(1, "%" + key + "%");
-            st.setInt(2, (offset - 1) * base);
+            st.setInt(1,id);
+            st.setString(2, "%" + key + "%");
+            st.setInt(3, (offset - 1) * base);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Blog b = new Blog(rs.getInt("blog_id"), rs.getString("blog_name"));
@@ -266,6 +267,24 @@ public class DAOPost extends DBConnect {
     }
 
     //get number of post
+    public int getNumberPost(String search, int id) {
+        String sql = "SELECT COUNT(*) FROM Post p INNER JOIN Marketer_type ma ON p.marketer_id = ma.marketer_id\n"
+                + "INNER JOIN Blog b ON p.blog_id = b.blog_id\n"
+                + "WHERE p.marketer_id = ? AND b.blog_name LIKE ?";
+        try {
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setInt(1,id);
+            st.setString(2, "%" + search + "%");
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return 0;
+    }
+    //get number of post
     public int getNumberPost(String search) {
         String sql = "SELECT COUNT(*) FROM Post p INNER JOIN Marketer_type ma ON p.marketer_id = ma.marketer_id\n"
                 + "INNER JOIN Blog b ON p.blog_id = b.blog_id\n"
@@ -277,7 +296,8 @@ public class DAOPost extends DBConnect {
             if (rs.next()) {
                 return rs.getInt(1);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            System.out.println(e);
         }
         return 0;
     }
@@ -369,9 +389,45 @@ public class DAOPost extends DBConnect {
         }
         return false;
     }
+    
+    //total post in the system
+    public int getTotalNumberPost(){
+        String sql = "SELECT COUNT(*) FROM POST";
+        try {
+            PreparedStatement st = conn.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.getMessage();
+        }
+        return 0;
+    }
+    
+    //total post waiting confirm for admin 
+    public int getTotalPendingPost(){
+        String sql = "SELECT COUNT(*) FROM Post WHERE status = 'pending'";
+         try {
+            PreparedStatement st = conn.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.getMessage();
+        }
+        return 0;
+    }
+    
+    
 
     public static void main(String[] args) {
         DAOPost dpdb = new DAOPost();
+//        List<Post> list = dpdb.getAllPost2("", 0, 4, 1);
+//        for (Post post : list) {
+//            System.out.println(post.getPosted_date());
+//        }
 //        System.out.println(dpdb.getNumberPost("C"));
 //        ArrayList<Post> list = dpdb.selectBlogList("1", "", 1);
 //        for (Post post : list) {
