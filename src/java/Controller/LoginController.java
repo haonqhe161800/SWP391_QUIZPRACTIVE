@@ -8,10 +8,12 @@ import DAO.DAOAdmin;
 import DAO.DAOMarketer;
 import DAO.DAOMentor;
 import DAO.DAOUser;
+import DAO.DAOVisitors;
 import Entities.AccountAdmin;
 import Entities.AccountMarketer;
 import Entities.AccountMentor;
 import Entities.AccountUser;
+import Entities.Visitors;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
@@ -122,6 +124,7 @@ public class LoginController extends HttpServlet {
         DAOMarketer dmdb = new DAOMarketer();
         DAOMentor dmedb = new DAOMentor();
         DAOAdmin dadb = new DAOAdmin();
+        DAOVisitors daoVis = new DAOVisitors();
 
         AccountUser au = dudb.checkLogin(email, pass);
         AccountMarketer am = dmdb.checkLogin(email, pass);
@@ -134,6 +137,7 @@ public class LoginController extends HttpServlet {
             response.sendRedirect("User");
         } else if (au != null && am == null && ame == null) {
             session.setAttribute("accountUser", au);
+            daoVis.addVisitors(new Visitors(au.getUser_id(), au.getRole_id()));
             //tra ve home
             response.sendRedirect("HomeController");
 
@@ -143,6 +147,7 @@ public class LoginController extends HttpServlet {
             response.sendRedirect("dashboardmarketer");
         } else if (ame != null && am == null && au == null) {
             session.setAttribute("accountMentor", ame);
+            daoVis.addVisitors(new Visitors(ame.getMentor_id(), ame.getRole_id()));
             //tra ve Dashboard memtor
             response.sendRedirect("CourseMentor");
         } else {

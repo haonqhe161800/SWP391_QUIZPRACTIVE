@@ -61,9 +61,15 @@
                         Post list
                     </a>
                 </div>
+                <div class="item item-post">
+                    <a class="item-link" href="Dashboard">
+                        <i class="icon fas fa-ad"></i>
+                        Dashboard
+                    </a>
+                </div>
             </div>
         </div>
-        
+
         <script src="./assets/js/main.js"></script>
     </body>
 </html>
