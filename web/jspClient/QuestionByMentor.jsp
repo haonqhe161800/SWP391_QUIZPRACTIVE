@@ -54,7 +54,7 @@
             </div>
             
             <div class="row" style="padding: 50px 0">
-                <!--create Qustion-->
+                <!--create Question-->
                 <div class="create col-md-4">
                     <h3 style="margin-bottom: 10px; border-bottom: solid 1px black; width: 300px">Create a Question</h3>
                     

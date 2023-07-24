@@ -49,7 +49,6 @@ public class QuestionByMentor extends HttpServlet {
                 int mentor_id = mentor.getMentor_id();
 
                 int course_id = Integer.parseInt(request.getParameter("course_id"));
-                //get course name
                 ResultSet name = dao.getData("select course_name from Course where course_id = " + course_id);
                 String course_name = "";
                 if (name.next()) {
@@ -57,7 +56,6 @@ public class QuestionByMentor extends HttpServlet {
                 }
 
                 ResultSet rsQuestion = dao.getData("select q.question_name, q.question_id from Question q join Course c on c.course_id = q.course_id where q.course_id = " + course_id + " and c.mentor_id = " + mentor_id);
-//                ResultSet rsAnswer = dao.getData("select * from Question where course_id = " + course_id);
                 request.setAttribute("course_id", course_id);
                 request.setAttribute("course_name", course_name);
                 request.setAttribute("rsQuestion", rsQuestion);
