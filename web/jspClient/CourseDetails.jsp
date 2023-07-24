@@ -92,6 +92,7 @@
             
             
         <% ResultSet rsRelCourse = (ResultSet) request.getAttribute("rsRelCourse");%>
+        <%if (rsRelCourse != null) {%>
             <!--Related course-->
             <section class="items-grid section custom-padding">
                 <div class="container">
@@ -147,15 +148,9 @@
                             <% } %>
                         </div>
                     </div>
-                    <div class="row view-all" style="margin-top: 10px">
-                        <div class="col-lg-5 col-md-5 col-12"></div>
-                        <div class="col-lg-2 col-md-2 col-12">
-                            <a href="ViewAll?service=viewAllCourse" class="btn btn-block btn-primary"> View All Course</a>
-                        </div>
-                        <div class="col-lg-5 col-md-5 col-12"></div>
-                    </div>
                 </div>
-            </section>        
+            </section> 
+                        <% } %>
 
         <jsp:include page="Footer.jsp"></jsp:include>
 

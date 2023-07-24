@@ -250,10 +250,10 @@
                                         <li><i class="fa-solid fa-cake-candles"></i> Birthday: <strong> <%=rsMentor.getString(10)%></strong></li>
                                     </ul>
                                     <ul>
-                                        <li><i class="fa-solid fa-school"></i> Qualification: <strong> <%=rsMentor.getString(11)%></strong></li>
+                                        <li><i class="fa-solid fa-school"></i> Qualification: <strong> <%=rsMentor.getString(11) != null ? rsMentor.getString(11) : "Postgraduate"%></strong></li>
                                     </ul>
                                     <ul class="specialize">
-                                        <li><i class="fa-solid fa-user-doctor-hair-long"></i> Specialize: <strong> <%=rsMentor.getString(14)%></strong></li>
+                                        <li><i class="fa-solid fa-user-doctor-hair-long"></i> Specialize: <strong> <%=rsMentor.getString(14) != null ? rsMentor.getString(14) : "Mentor" %></strong></li>
                                     </ul>
                                     <ul class="address">
                                         <li><i class="fa-solid fa-location-dot"></i> Address: <strong> <%=rsMentor.getString(9)%></strong></li>
