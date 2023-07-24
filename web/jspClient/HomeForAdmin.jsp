@@ -23,9 +23,9 @@
         <!-- fontanswer icons -->
         <script src="https://kit.fontawesome.com/fe000f9b2a.js" crossorigin="anonymous"></script>
 
-<<<<<<< HEAD
-            href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-            rel="stylesheet">
+        <<<<<<< HEAD
+        href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 
         <!-- ========================= CSS here ========================= -->
@@ -36,7 +36,7 @@
         <link rel="stylesheet" href="assets/css/glightbox.min.css" />
         <link rel="stylesheet" href="assets/css/main.css" />
         <link rel="stylesheet" href="assets/css/admin.css" />
-=======
+        =======
         <!-- jquery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <style>
@@ -44,7 +44,7 @@
                 margin-top: 10%;
             }
         </style>
->>>>>>> af1072aeb2402ad5adb789647d0669d3715ca195
+        >>>>>>> af1072aeb2402ad5adb789647d0669d3715ca195
     </head>
 
     <body>
@@ -68,7 +68,6 @@
                             <div class="bottom-content">
                                 <input class="btn btn-block btn-primary" type="submit" value="Search">
                             </div>
-                            <span class="btn-open-modal">New User</span>
                         </div>
                     </form>
                     <table class="table">
@@ -151,7 +150,6 @@
                             <div class="bottom-content">
                                 <input class="btn btn-block btn-primary" type="submit" value="Search">
                             </div>
-
                         </div>
                     </form>
                     <table class="table">
