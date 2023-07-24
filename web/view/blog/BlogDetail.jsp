@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Set"%>
@@ -113,7 +114,14 @@
                                         <li>
                                             <a href="#">
                                                 <i class="lni lni-calendar"></i>
-                                                <fmt:formatDate value="${p.getPosted_date()}" pattern="dd-MM-yyyy" />
+                                                <%
+                                        Date postedDate = p.getPosted_date();
+
+                                        // Định dạng ngày tháng vào một chuỗi thích hợp
+                                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                                        String formattedDate = dateFormat.format(postedDate);
+                                                %>
+                                                <%= formattedDate %>
                                             </a>
                                         </li>
                                     </ul>
@@ -225,7 +233,7 @@
                           for(Post pp : listpexcept){
                          
                         %>
-                        
+
                         <div class="card col-lg-3" style="margin: 5px 4px" >
                             <img class="card-img" 
                                  src="assets/images/thumbnail-post/<%=pp.getImage()%>" alt="banner.png" onerror="this.src='assets/images/thumbnail-post/broken-image.png'">
@@ -235,7 +243,7 @@
                                 <%=pp.getShort_content()%>
                             </div>
                         </div>
-                            <% }%>
+                        <% }%>
                         <div class="col-md-4" style="position: relative;">
                             <div class="boxing-item" style="border: 1px solid black; position: absolute; top: 50%; left: 10%; width: 240px; height: 40px;"> <p style="text-align: center; line-height: 40px;"><a href="listpost">CHECK OUT OTHER POSTS</a></p> </div>
                         </div>

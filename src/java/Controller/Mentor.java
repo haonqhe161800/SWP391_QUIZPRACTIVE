@@ -22,7 +22,7 @@ import java.util.logging.Logger;
  *
  * @author QUANG HAO
  */
-@WebServlet(name="Mentor", urlPatterns={"/Mentor"})
+@WebServlet(name="Mentor", urlPatterns={"/manageMentor"})
 public class Mentor extends HttpServlet {
    
     /** 

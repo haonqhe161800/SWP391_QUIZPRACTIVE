@@ -27,7 +27,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author Admin
  */
-@WebFilter(filterName = "AdminAuthentication", urlPatterns = {"/User","/Mentor","/Marketer","/Subject","/Course","/Post"})
+@WebFilter(filterName = "AdminAuthentication", urlPatterns = {"/manageUser","/manageMentor","/manageMarketer","/manageSubject","/manageCourse","/confirmPost"})
             
 public class AdminAuthentication implements Filter {
     

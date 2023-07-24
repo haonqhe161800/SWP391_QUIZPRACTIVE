@@ -4,7 +4,6 @@
  */
 package Controller;
 
-import DAO.DAORole;
 import DAO.DAOUser;
 import Entities.AccountUser;
 import java.io.IOException;
@@ -21,7 +20,7 @@ import java.util.Random;
  *
  * @author admin
  */
-@WebServlet(name = "User", urlPatterns = {"/User"})
+@WebServlet(name = "User", urlPatterns = {"/manageUser"})
 public class User extends HttpServlet {
 
     /**

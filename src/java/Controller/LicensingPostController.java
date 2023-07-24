@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-@WebServlet(name = "LicensingPostController", urlPatterns = {"/post"})
+@WebServlet(name = "LicensingPostController", urlPatterns = {"/confirmPost"})
 public class LicensingPostController extends HttpServlet {
   
   

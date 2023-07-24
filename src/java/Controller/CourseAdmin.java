@@ -29,7 +29,7 @@ import java.sql.ResultSet;
         maxRequestSize = 1024 * 1024 * 11
 )
 
-@WebServlet(name = "Course", urlPatterns = {"/Course"})
+@WebServlet(name = "Course", urlPatterns = {"/manageCourse"})
 public class CourseAdmin extends HttpServlet {
 
     /**
