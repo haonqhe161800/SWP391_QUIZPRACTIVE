@@ -117,6 +117,15 @@ public class CourseAdmin extends HttpServlet {
                     }
                 }
             }
+            
+            if(service.equals("search")) {
+                String name = request.getParameter("name");
+                ResultSet rsCourse = dao.getData("select c.course_id, s.subject_name, c.course_name, c.[image], Count(q.question_name) as number_of_questions from [Course] c join [Subject] s on c.subject_id = s.subject_id left join Question q on q.course_id = c.course_id where c.course_name like N'%" + name + "%' group by c.course_id, s.subject_name, c.course_name, c.[image]");
+                ResultSet subjectName = dao.getData("select subject_id, subject_name from Subject");
+                request.setAttribute("subjectName", subjectName);
+                request.setAttribute("rsCourse", rsCourse);
+                request.getRequestDispatcher("jspClient/HomeForAdmin.jsp").forward(request, response);
+            }
         }
     }
 
