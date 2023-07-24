@@ -228,8 +228,9 @@
                     <%if(request.getAttribute("rsSubject") != null) {
                         ResultSet rsSubject = (ResultSet) request.getAttribute("rsSubject");
                     %>
+
+                    <h3 style="margin-bottom: 12px">Subject list</h3>
                     <div style="display: flex">
-                        <h3 style="margin-bottom: 12px">Subject list</h3>
                         <form style="margin-bottom: 12px; padding: 12px" method="POST" action="Subject">
                             <div style="display: flex; align-items: center">
                                 <input type="hidden" name="service" value="search" />
@@ -304,9 +305,20 @@
                         ResultSet rsCourse = (ResultSet) request.getAttribute("rsCourse");
                         ResultSet subjectName = (ResultSet) request.getAttribute("subjectName");
                     %>
-                    <div style="margin-bottom: 12px; display: flex">
+                    <div style="margin-bottom: 12px">
                         <h3 style="margin-right: 8px">Course list</h3>
-                        <span class="btn-open-modal">Create course</span>
+                        <div style="display: flex">
+                        <form style="margin-bottom: 12px; padding: 12px" method="POST" action="Course">
+                            <div style="display: flex; align-items: center">
+                                <input type="hidden" name="service" value="search" />
+                                <input style="padding: 4px 4px; width: 300px; margin-right: 12px" type="text" name="name" placeholder="Enter course name need to search...">
+                                <div class="bottom-content">
+                                    <input id="submit" class="btn btn-block btn-primary" type="submit" value="Search">
+                                </div>
+                                <span class="btn-open-modal">Create course</span>
+                            </div>
+                        </form>
+                    </div>
                     </div>
                     <table class="table">
                         <tr>
