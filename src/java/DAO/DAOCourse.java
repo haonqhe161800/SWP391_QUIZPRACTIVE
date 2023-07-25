@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,8 +22,9 @@ import module.DBConnect;
  */
 public class DAOCourse extends DBConnect {
 
-    LocalDate date1 = LocalDate.now();
-    LocalDate date2 = LocalDate.now();
+    LocalDate date = LocalDate.now();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    String datenow = date.format(formatter);
 
     public int addCourse(int subject_id, Course course) {
         int n = 0;
@@ -32,7 +34,7 @@ public class DAOCourse extends DBConnect {
                 + "', N'" + course.getDescription()
                 + "', '" + course.getImage()
                 + "', " + course.getIs_publish()
-                + ", '" + date1
+                + ", '" + course.getCreated_date()
                 + "')";
         try {
             Statement statement = conn.createStatement();
@@ -42,17 +44,17 @@ public class DAOCourse extends DBConnect {
         }
         return n;
     }
-    
+
     public int addCourseByMentor(int subject_id, Course course) {
         int n = 0;
         String sql = "Insert into [Course]([subject_id], [mentor_id], [course_name], [description], [image], [is_publish], [created_date]) "
                 + "values (" + subject_id
-                + ", "+ course.getMentor_id()
+                + ", " + course.getMentor_id()
                 + ", N'" + course.getCourse_name()
                 + "', N'" + course.getDescription()
                 + "', '" + course.getImage()
                 + "', " + course.getIs_publish()
-                + ", '" + date1
+                + ", '" + course.getCreated_date()
                 + "')";
         try {
             Statement statement = conn.createStatement();
@@ -62,10 +64,10 @@ public class DAOCourse extends DBConnect {
         }
         return n;
     }
-    
+
     public int updateCourse(Course course) {
         int n = 0;
-        String sql = "UPDATE Course set course_name = N'" + course.getCourse_name() + "', description = N'" + course.getDescription() + "', image = '" + course.getImage() + "', updated_date = '" + date2 + "' where course_id = " + course.getCourse_id();
+        String sql = "UPDATE Course set course_name = N'" + course.getCourse_name() + "', description = N'" + course.getDescription() + "', image = '" + course.getImage() + "', updated_date = '" + datenow + "' where course_id = " + course.getCourse_id();
         try {
             Statement statement = conn.createStatement();
             n = statement.executeUpdate(sql);
@@ -77,7 +79,7 @@ public class DAOCourse extends DBConnect {
 
     public int updateQuantity(Course course) {
         int n = 0;
-        String sql = "UPDATE Course set quantity = " + (course.getQuantity() + 1) + " where course_id = " + course.getCourse_id();
+        String sql = "UPDATE Course set quantity = " + (course.getQuantity() + 1) + ", updated_date = '" + datenow + "' where course_id = " + course.getCourse_id();
 
         try {
             Statement statement = conn.createStatement();
@@ -135,10 +137,10 @@ public class DAOCourse extends DBConnect {
         }
         return endPage;
     }
-    
+
     public String getNameCourse(int course_id) {
         String n = "";
-        ResultSet rsCourse =  getData("select * from Course where course_id = " + course_id);
+        ResultSet rsCourse = getData("select * from Course where course_id = " + course_id);
         try {
             if (rsCourse.next()) {
                 n = rsCourse.getString(4);
@@ -148,12 +150,11 @@ public class DAOCourse extends DBConnect {
         }
         return n;
     }
-    
+
 //    public static void main(String[] args) {
 //        DAOCourse dao = new DAOCourse();
 //        int n = dao.getEndPage("select * from Course");
 //        
 //        System.out.println(n);
 //    }
-    
 }

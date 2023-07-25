@@ -4,6 +4,9 @@
  */
 package Entities;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 
 /**
  *
@@ -19,7 +22,7 @@ public class Course {
     private String image;
     private int is_publish;
     private int quantity;
-    private String created_date;
+    private String created_date = formatDate();
     private String updated_date;
 
     public Course() {
@@ -132,6 +135,12 @@ public class Course {
         this.updated_date = updated_date;
     }
     
-    
+    public String formatDate() {
+        String datenow = "";
+        LocalDate date = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        datenow = date.format(formatter);
+        return datenow;
+    }
 
 }
