@@ -134,7 +134,7 @@ public class LoginController extends HttpServlet {
         if (aa != null && au == null && am == null && ame == null) {
             session.setAttribute("accountAdmin", aa);
             //tra ve Dashboard admin
-            response.sendRedirect("User");
+            response.sendRedirect("manageUser");
         } else if (au != null && am == null && ame == null) {
             session.setAttribute("accountUser", au);
             daoVis.addVisitors(new Visitors(au.getUser_id(), au.getRole_id()));

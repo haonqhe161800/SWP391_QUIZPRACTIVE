@@ -21,35 +21,35 @@
 
             <div class="side-bar-item">
                 <div class="item item-user">
-                    <a class="item-link" href="User">
+                    <a class="item-link" href="manageUser">
                         <i class="icon far fa-address-book"></i>
                         Student list
                     </a>
                 </div>
 
                 <div class="item item-user">
-                    <a class="item-link" href="Mentor">
+                    <a class="item-link" href="manageMentor">
                         <i class="icon far fa-address-book"></i>
                         Mentor list
                     </a>
                 </div>
 
                 <div class="item item-user">
-                    <a class="item-link" href="Marketer">
+                    <a class="item-link" href="manageMarketer">
                         <i class="icon far fa-address-book"></i>
                         Marketer list
                     </a>
                 </div>
 
                 <div class="item item-subject">
-                    <a class="item-link" href="Subject">
+                    <a class="item-link" href="manageSubject">
                         <i class="icon fas fa-book-open"></i>
                         Subject list
                     </a>
                 </div>
 
                 <div class="item item-course">
-                    <a class="item-link" href="Course">
+                    <a class="item-link" href="manageCourse">
                         <i class="icon fas fa-book"></i>
                         Course list
                     </a>
@@ -64,7 +64,7 @@
                 <div class="item item-post">
                     <a class="item-link" href="Dashboard">
                         <i class="icon fas fa-ad"></i>
-                        Dashboard
+                        Chart
                     </a>
                 </div>
             </div>

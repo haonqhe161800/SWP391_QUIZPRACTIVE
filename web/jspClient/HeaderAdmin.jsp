@@ -6,7 +6,7 @@
                 <div class="col-lg-12">
                     <div class="nav-inner">
                         <nav class="navbar navbar-expand-lg" style="display: flex; justify-content: space-between">
-                            <a class="navbar-brand" href="User">
+                            <a class="navbar-brand" href="manageUser">
                                 <strong>QUIZPRACTICE</strong>
                             </a>
                             <%
@@ -15,7 +15,7 @@
                             <div class="login-button">
                                 <ul>
                                     <li>
-                                        <a href="#"><i class="lni lni-enter"></i>Hello Admin</a>
+                                        <a href="manageUser"><img  src="" alt="" onerror="this.src='assets/avatar/base.png'"  style="border-radius: 50%;height: 3em;object-fit: cover;width: 3em;cursor: pointer;">Hello Admin</a>
                                     </li>
                                     <li>
                                         <a href="signout"><i class="lni lni-user"></i> Logout</a>

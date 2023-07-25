@@ -169,7 +169,7 @@
                                 </a>
                                 <div class="author">
                                     <div class="author-image">
-                                        <a href="Mentor?service=info&mentor_id=<%=rsCourse.getInt(11)%>">
+                                        <a href="MentorInfor?mentor_id=<%=rsCourse.getInt(11)%>">
                                             <img src="<%=rsCourse.getString(4)%>" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6WsN6dLPa3HAHXNM3Pgy2k1TIe5c80AJ3sg&usqp=CAU'" alt="#">
                                         <span><%=rsCourse.getString(3) != null ? rsCourse.getString(3) : ""%></span>
                                         </a>
@@ -239,7 +239,7 @@
                                     <img src="<%=rsMentor.getString(6)%>" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6WsN6dLPa3HAHXNM3Pgy2k1TIe5c80AJ3sg&usqp=CAU'" alt="#">
                                 </a>
                                 <div class="author">
-                                    <a href="Mentor?service=info&mentor_id=<%=rsMentor.getInt(1)%>" class="sale"> Details </a>
+                                    <a href="MentorInfor?mentor_id=<%=rsMentor.getInt(1)%>" class="sale"> Details </a>
                                 </div>
                             </div>
                             <div class="content" style="font-size: 18px">

@@ -49,7 +49,7 @@
 
     <body>
 
-        <jsp:include page="Header.jsp"></jsp:include>
+        <jsp:include page="HeaderAdmin.jsp"></jsp:include>
             <div class="space"></div>
 
             <div>
@@ -265,7 +265,7 @@
                                     <input type="hidden" name="subject_id" value="<%=rsSubject.getInt(2)%>">
 
                                     <button type="submit" class="delete-btn" data-toggle="modal" onclick="return confirm('Are you sure you want to delete this subject?')">                                   
-                                        <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+                                        <i class="far fa-trash-alt"></i>
                                     </button>
                                 </form>
                                 <button style="border: transparent" class="edit-btn"><a href="Subject?service=edit&subject_id=<%=rsSubject.getInt(2)%>"><i class="far fa-edit"></i></a></button>
@@ -342,15 +342,17 @@
                             <td><%=rsCourse.getInt(5)%></td>
                             <td><a href="QuestionAdmin?service=show&courseID=<%=rsCourse.getInt(1)%>"><i class="far fa-question-circle"></i></a></td>
                             <td style="display: flex; justify-content: space-between">
+                                <%if(rsCourse.getString(6) == null) {%>
                                 <form action="Course" method="POST">
                                     <input type="hidden" name="service" value="delete">
                                     <input type="hidden" name="course_id" value="<%=rsCourse.getInt(1)%>">
 
                                     <button type="submit" class="delete-btn" data-toggle="modal" onclick="return confirm('Are you sure you want to delete this course?')">                                   
-                                        <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+                                        <i class="far fa-trash-alt"></i>
                                     </button>
                                 </form>
                                 <button style="border: transparent" class="edit-btn"><a href="Course?service=edit&course_id=<%=rsCourse.getInt(1)%>"><i class="far fa-edit"></i></a></button>
+                                <%}%>
                             </td>
                         </tr>
                         <%}%>

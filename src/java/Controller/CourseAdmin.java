@@ -54,7 +54,7 @@ public class CourseAdmin extends HttpServlet {
             }
 
             if (service.equals("show")) {
-                ResultSet rsCourse = dao.getData("select c.course_id, s.subject_name, c.course_name, c.[image], Count(q.question_name) as number_of_questions from [Course] c join [Subject] s on c.subject_id = s.subject_id left join Question q on q.course_id = c.course_id group by c.course_id, s.subject_name, c.course_name, c.[image]");
+                ResultSet rsCourse = dao.getData("select c.course_id, s.subject_name, c.course_name, c.[image], Count(q.question_name) as number_of_questions, c.mentor_id from [Course] c join [Subject] s on c.subject_id = s.subject_id left join Question q on q.course_id = c.course_id group by c.course_id, s.subject_name, c.course_name, c.[image], c.mentor_id");
                 ResultSet subjectName = dao.getData("select subject_id, subject_name from Subject");
                 request.setAttribute("subjectName", subjectName);
                 request.setAttribute("rsCourse", rsCourse);
