@@ -26,7 +26,7 @@ import java.sql.ResultSet;
         maxRequestSize = 1024 * 1024 * 11
 )
 
-@WebServlet(name = "Subject", urlPatterns = {"/manageSubject"})
+@WebServlet(name = "manageSubject", urlPatterns = {"/manageSubject"})
 public class Subject extends HttpServlet {
 
     /**

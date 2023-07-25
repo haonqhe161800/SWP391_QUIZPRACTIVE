@@ -15,8 +15,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.ResultSet;
 
 /**
@@ -29,7 +27,7 @@ import java.sql.ResultSet;
         maxRequestSize = 1024 * 1024 * 11
 )
 
-@WebServlet(name = "Course", urlPatterns = {"/manageCourse"})
+@WebServlet(name = "manageCourse", urlPatterns = {"/manageCourse"})
 public class CourseAdmin extends HttpServlet {
 
     /**
@@ -69,12 +67,14 @@ public class CourseAdmin extends HttpServlet {
                 String relativePath = "./assets/images/categories/" + fileName;
                 String absolutePath = getServletContext().getRealPath(relativePath);
                 imagePath.write(absolutePath);
+                
                 int publish = Integer.parseInt(request.getParameter("publish"));
                 int subject_id = Integer.parseInt(request.getParameter("subject_id"));
                 Course course = new Course(course_name, description, relativePath, publish);
+                
                 int n = dao.addCourse(subject_id, course);
                 if (n > 0) {
-                    response.sendRedirect("Course");
+                    response.sendRedirect("manageCourse");
                 }
             }
 
@@ -82,7 +82,7 @@ public class CourseAdmin extends HttpServlet {
                 int course_id = Integer.parseInt(request.getParameter("course_id"));
                 int n = dao.deleteCourseByCourseID(course_id);
                 if (n > 0) {
-                    response.sendRedirect("Course");
+                    response.sendRedirect("manageCourse");
                 }
             }
 

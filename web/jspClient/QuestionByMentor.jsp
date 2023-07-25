@@ -42,73 +42,34 @@
 
         <!-- jquery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    
+
     </head>
     <body>
-        
-        
+
+
         <%int course_id = Integer.parseInt(request.getParameter("course_id"));%>
         <div class="container" style="margin-top: 15px; background-color: #F3F6E6 ; margin-bottom: 15px">
             <div class="back" style="padding: 20px">
                 <a style="font-size: 20px; border-bottom: solid greenyellow 1px; width: 170px" href="CourseMentor">Back to dashboard</a>
             </div>
-            
+
             <div class="row" style="padding: 50px 0">
                 <!--create Question-->
                 <div class="create col-md-4">
                     <h3 style="margin-bottom: 10px; border-bottom: solid 1px black; width: 300px">Create a Question</h3>
-                    
+
                     <div class="modal-subject">
                         <div class="modal-container-subject">
-                            <form action="QuestionByMentor" method="POST">
+                            <%if(request.getAttribute("notifi") != null) {
+                                String notifi = (String) request.getAttribute("notifi");%>
+                            <p style="margin-bottom: 12px; color: red"><%=notifi%></p>
+                            <%}%> 
+                            <p style="color: red">*Note that the excel file must be in the correct .xls format and the format is as follows</p>
+                            <img src="./assets/images/categories/FormatExcel.png" alt="alt" width="100%"/>
+                            <form action="QuestionByMentor" method="POST" enctype="multipart/form-data">
                                 <input type="hidden" name="service" value="create">
                                 <input type="hidden" name="course_id" value="<%=course_id%>">
-                                
-                                <div class="input">
-                                    <label for="question-name">Question name</label><br>
-                                    <input id="question-name" type="text" name="name" />
-                                </div>
-                                <div class="input">
-                                    <label for="option-1">Option 1</label>
-                                    <input id="option-1" name="op1" type="text" class="form-control">
-                                    <select name="sl1">
-                                        <option value="1">True</option>
-                                        <option value="0">False</option>
-                                    </select>
-                                </div>
-                                <div class="input">
-                                    <label for="option-2">Option 2</label>
-                                    <input id="option-2" name="op2" type="text" class="form-control">
-                                    <select name="sl2">
-                                        <option value="1">True</option>
-                                        <option value="0">False</option>
-                                    </select>
-                                </div>
-                                <div class="input">
-                                    <label for="option-3">Option 3</label>
-                                    <input id="option-3" name="op3" type="text" class="form-control">
-                                    <select name="sl3">
-                                        <option value="1">True</option>
-                                        <option value="0">False</option>
-                                    </select>
-                                </div>
-                                <div class="input">
-                                    <label for="option-4">Option 4</label>
-                                    <input id="option-4" name="op4" type="text" class="form-control">
-                                    <select name="sl4">
-                                        <option value="1">True</option>
-                                        <option value="0">False</option>
-                                    </select>
-                                </div>
-                                <div class="input">
-                                    <label for="option-5">Option 5</label>
-                                    <input id="option-5" name="op5" type="text" class="form-control">
-                                    <select name="sl5">
-                                        <option value="1">True</option>
-                                        <option value="0">False</option>
-                                    </select>
-                                </div>
-                                
+                                <input type="file" name="file" />
                                 <div class="button">
                                     <button style="margin: 10px 0 0 300px; width: 80px; height: 30px; border-radius: 15%; " class="btn-create btn-success">Create</button>
                                 </div>
@@ -116,12 +77,12 @@
                         </div>
                     </div>
                 </div> 
-                
+
                 <!--course created-->
                 <div class="col-md-8">
                     <%String course_name = (String) request.getAttribute("course_name");%>
                     <h3 style="margin-bottom: 10px; border-bottom: solid 1px black; width: 500px"><%=course_name%></h3>
-                        <%ResultSet rsQuestion = (ResultSet) request.getAttribute("rsQuestion");%>
+                    <%ResultSet rsQuestion = (ResultSet) request.getAttribute("rsQuestion");%>
                     <table class="table">
                         <thead>
                             <tr class="text-center" style="background-color: #B8EA99 ">
@@ -137,18 +98,18 @@
                                 while (rsQuestion.next()) { 
                                     i++;
                             %>
-                                <tr>
-                                    <td class="text-center"> <%=i%> </td>
-                                    <td class="text-center"> <%=rsQuestion.getString(1)%> </td>
-                                    <!--update-->
-                                    <td class="text-center">
-                                        <button style="border: transparent" class="edit-btn"><a href="QuestionByMentor?service=update&question_id=<%=rsQuestion.getInt(2)%>"><i class="far fa-edit"></i></a></button>
-                                    </td>
-                                    <!--delete-->
-                                    <td class="text-center">
-                                        <button style="border: transparent" class="edit-btn"><a href="#"><i class="fa-solid fa-trash"></i></i></a></button>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td class="text-center"> <%=i%> </td>
+                                <td class="text-center"> <%=rsQuestion.getString(1)%> </td>
+                                <!--update-->
+                                <td class="text-center">
+                                    <button style="border: transparent" class="edit-btn"><a href="QuestionByMentor?service=update&question_id=<%=rsQuestion.getInt(2)%>"><i class="far fa-edit"></i></a></button>
+                                </td>
+                                <!--delete-->
+                                <td class="text-center">
+                                    <button style="border: transparent" class="edit-btn"><a href="#"><i class="fa-solid fa-trash"></i></i></a></button>
+                                </td>
+                            </tr>
                             <% } %>
                         </tbody>
                     </table>

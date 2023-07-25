@@ -178,7 +178,7 @@
                                         </span>
                                     </li>
                                     <li class="dropdown-i">Home</li>
-                                     <li class="dropdown-i"><a href="User">Dashboard</a></li>
+                                     <li class="dropdown-i"><a href="manageUser">Dashboard</a></li>
                                     <li class="dropdown-i"><a href="ChangePassword">ChangePassword</a></li>
                                     <li class="dropdown-i"><a href="signout">Sign out</a></li>
                                 </ul>

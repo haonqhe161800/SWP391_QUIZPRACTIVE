@@ -18,7 +18,7 @@ import java.sql.ResultSet;
  *
  * @author admin
  */
-@WebServlet(name = "Marketer", urlPatterns = {"/manageMarketer"})
+@WebServlet(name = "manageMarketer", urlPatterns = {"/manageMarketer"})
 public class Marketer extends HttpServlet {
 
     /**

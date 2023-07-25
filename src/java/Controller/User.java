@@ -20,7 +20,7 @@ import java.util.Random;
  *
  * @author admin
  */
-@WebServlet(name = "User", urlPatterns = {"/manageUser"})
+@WebServlet(name = "manageUser", urlPatterns = {"/manageUser"})
 public class User extends HttpServlet {
 
     /**

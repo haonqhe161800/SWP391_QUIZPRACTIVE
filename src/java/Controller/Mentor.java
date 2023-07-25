@@ -20,7 +20,7 @@ import java.sql.ResultSet;
  *
  * @author QUANG HAO
  */
-@WebServlet(name="Mentor", urlPatterns={"/manageMentor"})
+@WebServlet(name="manageMentor", urlPatterns={"/manageMentor"})
 public class Mentor extends HttpServlet {
    
     /** 

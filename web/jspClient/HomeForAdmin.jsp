@@ -23,9 +23,6 @@
         <!-- fontanswer icons -->
         <script src="https://kit.fontawesome.com/fe000f9b2a.js" crossorigin="anonymous"></script>
 
-        <<<<<<< HEAD
-        href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 
         <!-- ========================= CSS here ========================= -->
@@ -61,7 +58,7 @@
                         ResultSet rsUser = (ResultSet) request.getAttribute("rsUser");
                     %>
                     <h3 style="margin-bottom: 12px">User list</h3>
-                    <form method="post" action="User">
+                    <form method="post" action="manageUser">
                         <input type="hidden" name="service" value="search">
                         <div style="display: flex">
                             <input style="padding: 4px 4px; width: 300px; margin-right: 12px" type="text" name="name" placeholder="Enter user name need to search...">
@@ -97,45 +94,6 @@
                         </tr>
                         <%}%>
                     </table>
-                    <div class="modal-subject">
-                        <div class="modal-container-subject">
-                            <div class="modal-subject-title">
-                                <h4>Create new user</h4>
-                            </div>
-                            <form action="User" method="POST">
-                                <input type="hidden" name="service" value="newUser">
-                                <div class="input">
-                                    <label for="email">Email</label><br>
-                                    <input id="email" type="email" name="email" required />
-                                </div>
-                                <div class="input">
-                                    <label for="password">Password</label><br>
-                                    <input id="password" type="password" name="password" required />
-                                </div>
-                                <div class="input">
-                                    <label for="fullname">Full Name</label><br>
-                                    <input id="fullname" type="text" name="fullname" required />
-                                </div>
-                                <div class="input">
-                                    <label for="gender">Gender</label><br>
-                                    <select id="gender" name="gender">
-                                        <option value="0">Male</option>
-                                        <option value="1">Female</option>
-                                        <option value="2">Other</option>
-                                    </select>
-                                </div>
-                                <div class="input">
-                                    <label for="dob">Date of Birth</label><br>
-                                    <input id="dob" type="date" name="dob" required />
-                                </div>
-                                <div class="button">
-                                    <span class="btn-cancel">Cancel</span>
-                                    <button style="margin-left: 6px" class="btn-create" type="submit">Create</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
 
                     <%}%>
 
@@ -143,7 +101,7 @@
                         ResultSet rsMentor = (ResultSet) request.getAttribute("rsMentor");
                     %>
                     <h3 style="margin-bottom: 12px">Mentor list</h3>
-                    <form method="post" action="Mentor">
+                    <form method="post" action="manageMentor">
                         <input type="hidden" name="service" value="search">
                         <div style="display: flex">
                             <input style="padding: 4px 4px; width: 300px; margin-right: 12px" type="text" name="name" placeholder="Enter mentor name need to search...">
@@ -185,7 +143,7 @@
                         ResultSet rsMarketer = (ResultSet) request.getAttribute("rsMarketer");
                     %>
                     <h3 style="margin-bottom: 12px">Marketer list</h3>
-                    <form method="post" action="Marketer">
+                    <form method="post" action="manageMarketer">
                         <input type="hidden" name="service" value="search">
                         <div style="display: flex">
                             <input style="padding: 4px 4px; width: 300px; margin-right: 12px" type="text" name="name" placeholder="Enter nmarketer name need to search...">
@@ -231,7 +189,7 @@
 
                     <h3 style="margin-bottom: 12px">Subject list</h3>
                     <div style="display: flex">
-                        <form style="margin-bottom: 12px; padding: 12px" method="POST" action="Subject">
+                        <form style="margin-bottom: 12px; padding: 12px" method="POST" action="manageSubject">
                             <div style="display: flex; align-items: center">
                                 <input type="hidden" name="service" value="search" />
                                 <input style="padding: 4px 4px; width: 300px; margin-right: 12px" type="text" name="name" placeholder="Enter subject name need to search...">
@@ -260,7 +218,7 @@
                             <td><img style="width: 50px; height: 50px" src="<%=rsSubject.getString(3)%>"></td>
                             <td><%=rsSubject.getInt(4)%></td>
                             <td style="display: flex; justify-content: space-between"">
-                                <form action="Subject" method="POST">
+                                <form action="manageSubject" method="POST">
                                     <input type="hidden" name="service" value="delete">
                                     <input type="hidden" name="subject_id" value="<%=rsSubject.getInt(2)%>">
 
@@ -268,7 +226,7 @@
                                         <i class="far fa-trash-alt"></i>
                                     </button>
                                 </form>
-                                <button style="border: transparent" class="edit-btn"><a href="Subject?service=edit&subject_id=<%=rsSubject.getInt(2)%>"><i class="far fa-edit"></i></a></button>
+                                <button style="border: transparent" class="edit-btn"><a href="manageSubject?service=edit&subject_id=<%=rsSubject.getInt(2)%>"><i class="far fa-edit"></i></a></button>
                             </td>
 
                         </tr>
@@ -281,7 +239,7 @@
                             <div class="modal-subject-title">
                                 <h4>Create new subject</h4>
                             </div>
-                            <form <form action="Subject" method="POST">
+                            <form <form action="manageSubject" method="POST">
                                 <input type="hidden" name="service" value="add">
                                 <div class="input">
                                     <label for="subject-name">Subject name</label><br>
@@ -308,7 +266,7 @@
                     <div style="margin-bottom: 12px">
                         <h3 style="margin-right: 8px">Course list</h3>
                         <div style="display: flex">
-                        <form style="margin-bottom: 12px; padding: 12px" method="POST" action="Course">
+                        <form style="margin-bottom: 12px; padding: 12px" method="POST" action="manageCourse">
                             <div style="display: flex; align-items: center">
                                 <input type="hidden" name="service" value="search" />
                                 <input style="padding: 4px 4px; width: 300px; margin-right: 12px" type="text" name="name" placeholder="Enter course name need to search...">
@@ -343,7 +301,7 @@
                             <td><a href="QuestionAdmin?service=show&courseID=<%=rsCourse.getInt(1)%>"><i class="far fa-question-circle"></i></a></td>
                             <td style="display: flex; justify-content: space-between">
                                 <%if(rsCourse.getString(6) == null) {%>
-                                <form action="Course" method="POST">
+                                <form action="manageCourse" method="POST">
                                     <input type="hidden" name="service" value="delete">
                                     <input type="hidden" name="course_id" value="<%=rsCourse.getInt(1)%>">
 
@@ -351,7 +309,7 @@
                                         <i class="far fa-trash-alt"></i>
                                     </button>
                                 </form>
-                                <button style="border: transparent" class="edit-btn"><a href="Course?service=edit&course_id=<%=rsCourse.getInt(1)%>"><i class="far fa-edit"></i></a></button>
+                                <button style="border: transparent" class="edit-btn"><a href="manageCourse?service=edit&course_id=<%=rsCourse.getInt(1)%>"><i class="far fa-edit"></i></a></button>
                                 <%}%>
                             </td>
                         </tr>
@@ -363,7 +321,7 @@
                             <div class="modal-subject-title">
                                 <h4>Create new course</h4>
                             </div>
-                            <form <form action="Course" method="POST" enctype="multipart/form-data">
+                            <form action="manageCourse" method="POST" enctype="multipart/form-data">
                                 <input type="hidden" name="service" value="add">
                                 <div class="input">
                                     <label for="course-name">Course name</label><br>

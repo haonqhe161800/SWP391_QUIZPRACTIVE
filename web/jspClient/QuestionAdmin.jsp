@@ -60,13 +60,17 @@
 
         <div style="margin-bottom: 100px">
             <jsp:include page="HeaderAdmin.jsp"></jsp:include>
-        </div>
+            </div>
+
+        <%String mentor_id = (String) request.getAttribute("mentor_id");%>
 
 
         <div class="container">
             <div style="margin-bottom: 20px; display: flex">
                 <h4 style="margin-right: 8px"><%=course_name%></h4>
+                <%if(mentor_id == null) {%>
                 <span class="btn-open-modal">Add new Question</span>
+                <%}%>  
             </div>
             <%if(request.getAttribute("listQuestion") != null) {
                 ResultSet listQuestion = (ResultSet) request.getAttribute("listQuestion");
@@ -89,12 +93,14 @@
                     <td><%=listQuestion.getString(3)%></td>
                     <td><%=listQuestion.getString(4)%></td>
                     <td>
-                        <button style="border: transparent" class="edit-btn"><a href="QuestionAdmin?service=edit&question_id=<%=listQuestion.getInt(1)%>"><i class="far fa-edit"></i></a></button>
+                        <%if(mentor_id == null) {%>
+                            <button style="border: transparent" class="edit-btn"><a href="QuestionAdmin?service=edit&question_id=<%=listQuestion.getInt(1)%>"><i class="far fa-edit"></i></a></button>
+                        <%}%> 
                     </td>
                 </tr>
                 <%}%>
             </table>
-            
+
 
             <div class="modal-subject<%=open%>" style="z-index: 1">
                 <div class="modal-container-subject">
@@ -103,7 +109,7 @@
                     </div>
                     <%if(request.getAttribute("notifi") != null) {
                         String notifi = (String) request.getAttribute("notifi");%>
-                        <p style="margin-bottom: 12px; color: red"><%=notifi%></p>
+                    <p style="margin-bottom: 12px; color: red"><%=notifi%></p>
                     <%}%> 
                     <p style="color: red">*Note that the excel file must be in the correct .xls format and the format is as follows</p>
                     <img src="./assets/images/categories/FormatExcel.png" alt="alt"/>
