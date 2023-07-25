@@ -280,7 +280,6 @@
     
     
     
-    <!-- Tương tự bên trên, phần này là list post -->
     <section class="items-grid section custom-padding">
         <div class="container">
             <div class="row">
@@ -301,7 +300,7 @@
                                     <img src="<%=rsPost.getString(6)%>" onerror="this.src='https://www.wikihow.com/images/9/96/Use-a-Blog-for-Business-Step-10.jpg'" alt="#">
                                 </a>
                                 <div class="author">
-                                    <div class="author-image">    <!--ảnh marketer-->
+                                    <div class="author-image"> 
                                         <a href="#">
                                             <img width="100px" src="<%=rsPost.getString(9)%>" onerror="this.src='https://cdn.onlinewebfonts.com/svg/img_511291.png'" alt="#">
                                             <span><%=rsPost.getString(8)%></span>
@@ -309,9 +308,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="content" style="font-size: 18px">
+                            <div class="content" style="font-size: 18px; height: 350px">
                                 <div class="top-content">
-                                    <!--tittle--> 
                                     <ul>
                                         <p>Title: <Strong><%=rsPost.getString(3)%></Strong></p>
                                     </ul>
@@ -372,7 +370,7 @@
                                         </a>
                                         <div class="author">
                                             <div class="author-image">    <!--ảnh mentor-->
-                                                <a href="Mentor?service=info&mentor_id=<%=rsCourses.getInt(11)%>">
+                                                <a href="MentorInfor?mentor_id=<%=rsCourses.getInt(11)%>">
                                                     <img src="<%=rsCourses.getString(4)%>" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6WsN6dLPa3HAHXNM3Pgy2k1TIe5c80AJ3sg&usqp=CAU'" alt="#">
                                                 <span><%=rsCourses.getString(3) != null ? rsCourses.getString(3) : ""%></span>
                                                 </a>
@@ -422,7 +420,7 @@
                                             <img src="<%=rsMentorS.getString(6)%>" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6WsN6dLPa3HAHXNM3Pgy2k1TIe5c80AJ3sg&usqp=CAU'" alt="#">
                                         </a>
                                         <div class="author">
-                                            <a href="Mentor?service=info&mentor_id=<%=rsMentorS.getInt(1)%>" class="sale"> Details </a>
+                                            <a href="MentorInfor?mentor_id=<%=rsMentorS.getInt(1)%>" class="sale"> Details </a>
                                         </div>
                                     </div>
                                     <div class="content" style="font-size: 18px">

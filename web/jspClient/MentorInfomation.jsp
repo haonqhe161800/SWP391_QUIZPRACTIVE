@@ -104,12 +104,8 @@
                                             </div>
                                             <div class="px-4">
                                                 <p class="small text-muted mb-1"> <strong>Specialize</strong> </p>
-                                                <p class="mb-0 text-center"><%=rsMentorInfo.getString(14) != null ? rsMentorInfo.getString(14) : ""%></p>
+                                                <p class="mb-0 text-center"><%=rsMentorInfo.getString(14) != null ? rsMentorInfo.getString(14) : "Mentor"%></p>
                                             </div>
-                                            <!--<div>
-                                              <p class="small text-muted mb-1">Rating</p>
-                                              <p class="mb-0">8.5</p>
-                                            </div>-->
                                         </div>
                                         <div class="d-flex pt-1 desc d-flex justify-content-start rounded-3 p-2 mb-2"
                                              style="background-color: #efefef;">
@@ -141,9 +137,8 @@
                                             </div>
                                             <div class="d-flex pt-1" style="margin-bottom: 10px">
                                                 <button type="button" style="width: 200px" class="btn btn-outline-primary">
-                                                    <a class="text-dark" href="Mentor?service=info&mentor_id=<%=rsRelatedMentor.getInt(1)%>">Details</a>
+                                                    <a class="text-dark" href="MentorInfor?mentor_id=<%=rsRelatedMentor.getInt(1)%>">Details</a>
                                                 </button>
-                                                <!--<button type="button" class="btn btn-primary flex-grow-1">Follow</button>-->
                                             </div>
                                         </div>
                                     </div>
