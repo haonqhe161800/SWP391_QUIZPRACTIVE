@@ -74,7 +74,10 @@
                     </div>
                     <div> <p class="update-time"><i class="lni lni-timer"></i><strong>   Last update date:</strong> <%=rsCourse.getString(9)%></p> </div>
                     <div style="display: flex">
-                        <%if((errol == 0) || (session.getAttribute("accountUser") == null && session.getAttribute("accountMarketer") == null && session.getAttribute("accountMentor") == null)) {%>   
+                        <%if(errol == 0 && session.getAttribute("accountMentor") != null) {%>
+                            <div class="bottom-content" style="margin-right: 20px">
+                            </div>
+                        <%} else if((errol == 0) || (session.getAttribute("accountUser") == null && session.getAttribute("accountMarketer") == null && session.getAttribute("accountMentor") == null)) {%>   
                             <div class="bottom-content" style="margin-right: 20px">
                                 <a href="CourseController?service=errol&id=<%=rsCourse.getInt(1)%>" class="btn btn-block btn-primary">Join to course</a>
                             </div>
