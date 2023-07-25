@@ -59,7 +59,7 @@ public class DAOPost extends DBConnect {
     public ArrayList<Post> ListPostExceptCurrent(String id) {
         ArrayList<Post> list = new ArrayList<>();
         for (Post post : list) {
-            
+
         }
         String sql = "SELECT TOP(5)* FROM Post p INNER JOIN Marketer_type ma ON p.marketer_id = ma.marketer_id INNER JOIN Blog b ON p.blog_id = b.blog_id WHERE p.status = 'approved' \n"
                 + "AND p.post_id != ? \n"
@@ -236,7 +236,7 @@ public class DAOPost extends DBConnect {
                 + "WHERE  p.marketer_id = ? AND p.tittle LIKE ? ORDER BY p.post_id  OFFSET ? ROW FETCH NEXT " + base + " ROWS ONLY";
         try {
             PreparedStatement st = conn.prepareStatement(sql);
-            st.setInt(1,id);
+            st.setInt(1, id);
             st.setString(2, "%" + key + "%");
             st.setInt(3, (offset - 1) * base);
             ResultSet rs = st.executeQuery();
@@ -273,7 +273,7 @@ public class DAOPost extends DBConnect {
                 + "WHERE p.marketer_id = ? AND b.blog_name LIKE ?";
         try {
             PreparedStatement st = conn.prepareStatement(sql);
-            st.setInt(1,id);
+            st.setInt(1, id);
             st.setString(2, "%" + search + "%");
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
@@ -284,6 +284,7 @@ public class DAOPost extends DBConnect {
         }
         return 0;
     }
+
     //get number of post
     public int getNumberPost(String search) {
         String sql = "SELECT COUNT(*) FROM Post p INNER JOIN Marketer_type ma ON p.marketer_id = ma.marketer_id\n"
@@ -389,9 +390,9 @@ public class DAOPost extends DBConnect {
         }
         return false;
     }
-    
+
     //total post in the system
-    public int getTotalNumberPost(){
+    public int getTotalNumberPost() {
         String sql = "SELECT COUNT(*) FROM POST";
         try {
             PreparedStatement st = conn.prepareStatement(sql);
@@ -404,11 +405,11 @@ public class DAOPost extends DBConnect {
         }
         return 0;
     }
-    
+
     //total post waiting confirm for admin 
-    public int getTotalPendingPost(){
+    public int getTotalPendingPost() {
         String sql = "SELECT COUNT(*) FROM Post WHERE status = 'pending'";
-         try {
+        try {
             PreparedStatement st = conn.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
@@ -419,8 +420,72 @@ public class DAOPost extends DBConnect {
         }
         return 0;
     }
-    
-    
+
+    //get all post with status = pending
+    public ArrayList<Post> getAllPostPending() {
+
+        ArrayList<Post> list = new ArrayList<>();
+        String sql = "SELECT * FROM Post p INNER JOIN Marketer_type ma ON p.marketer_id = ma.marketer_id INNER JOIN Blog b ON p.blog_id = b.blog_id\n"
+                + "WHERE p.status = 'pending'";
+
+        try {
+            PreparedStatement st = conn.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Blog b = new Blog(rs.getInt("blog_id"), rs.getString("blog_name"));
+                AccountMarketer am = new AccountMarketer(
+                        rs.getInt("marketer_id"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("describe_yourself"),
+                        rs.getString("fullname"),
+                        rs.getString("image"),
+                        rs.getString("display_name"),
+                        rs.getString("created_date"),
+                        rs.getString("address"),
+                        rs.getString("date_of_birth"),
+                        rs.getString("academic_level"),
+                        rs.getString("modify_date"),
+                        rs.getInt("gender"),
+                        rs.getInt("role_id"));
+                list.add(new Post(rs.getInt("post_id"), rs.getInt("marketer_id"), rs.getInt("blog_id"), rs.getInt("subject_id"), rs.getString("tittle"), rs.getDate("posted_date"), rs.getDate("updated_date"), rs.getString("image"), rs.getString("content"), rs.getString("short_content"), rs.getString("status"), b, am));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+
+    }
+
+    //update post status pending to approved
+    public boolean updateStatusPostApproved(int id) {
+        String sql = "UPDATE [dbo].[Post] SET [status] = 'approved' WHERE post_id = ?";
+        try {
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.getMessage();
+        }
+
+        return false;
+    }
+
+    //update post status pending to approved
+    public boolean updateStatusPostReject(int id) {
+        String sql = "UPDATE [dbo].[Post] SET [status] = 'rejected' WHERE post_id = ?";
+        try {
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.getMessage();
+        }
+
+        return false;
+    }
 
     public static void main(String[] args) {
         DAOPost dpdb = new DAOPost();

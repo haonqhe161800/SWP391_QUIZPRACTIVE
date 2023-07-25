@@ -56,7 +56,7 @@
                 </div>
 
                 <div class="item item-post">
-                    <a class="item-link" href="Post">
+                    <a class="item-link" href="managePost">
                         <i class="icon fas fa-ad"></i>
                         Post list
                     </a>

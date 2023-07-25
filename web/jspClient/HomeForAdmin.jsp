@@ -1,5 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.ResultSet"%>
+<%@page import="java.util.ArrayList" %>
+<%@page import="Entities.Post" %>
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
     <head>
@@ -33,7 +35,6 @@
         <link rel="stylesheet" href="assets/css/glightbox.min.css" />
         <link rel="stylesheet" href="assets/css/main.css" />
         <link rel="stylesheet" href="assets/css/admin.css" />
-        =======
         <!-- jquery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <style>
@@ -41,7 +42,6 @@
                 margin-top: 10%;
             }
         </style>
-        >>>>>>> af1072aeb2402ad5adb789647d0669d3715ca195
     </head>
 
     <body>
@@ -266,17 +266,17 @@
                     <div style="margin-bottom: 12px">
                         <h3 style="margin-right: 8px">Course list</h3>
                         <div style="display: flex">
-                        <form style="margin-bottom: 12px; padding: 12px" method="POST" action="manageCourse">
-                            <div style="display: flex; align-items: center">
-                                <input type="hidden" name="service" value="search" />
-                                <input style="padding: 4px 4px; width: 300px; margin-right: 12px" type="text" name="name" placeholder="Enter course name need to search...">
-                                <div class="bottom-content">
-                                    <input id="submit" class="btn btn-block btn-primary" type="submit" value="Search">
+                            <form style="margin-bottom: 12px; padding: 12px" method="POST" action="manageCourse">
+                                <div style="display: flex; align-items: center">
+                                    <input type="hidden" name="service" value="search" />
+                                    <input style="padding: 4px 4px; width: 300px; margin-right: 12px" type="text" name="name" placeholder="Enter course name need to search...">
+                                    <div class="bottom-content">
+                                        <input id="submit" class="btn btn-block btn-primary" type="submit" value="Search">
+                                    </div>
+                                    <span class="btn-open-modal">Create course</span>
                                 </div>
-                                <span class="btn-open-modal">Create course</span>
-                            </div>
-                        </form>
-                    </div>
+                            </form>
+                        </div>
                     </div>
                     <table class="table">
                         <tr>
@@ -310,7 +310,7 @@
                                     </button>
                                 </form>
                                 <button style="border: transparent" class="edit-btn"><a href="manageCourse?service=edit&course_id=<%=rsCourse.getInt(1)%>"><i class="far fa-edit"></i></a></button>
-                                <%}%>
+                                        <%}%>
                             </td>
                         </tr>
                         <%}%>
@@ -358,6 +358,42 @@
                         </div>
                     </div>
                     <%}%>
+
+                    <%
+                   if(request.getAttribute("rsAprrovePost") != null) {
+                       ArrayList<Post> arrpending = (ArrayList<Post>) request.getAttribute("rsAprrovePost");
+                    
+                    %>
+                    <div class="row">                        
+                        <%
+                           for (Post post : arrpending) {                                      
+                        %>
+                        <div class="col-lg-6 col-md-6 col-12" style="background-color: #edeae5;border-radius: 8px;box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;">
+                            <a class="row" style="padding: 2%;">
+                                <div class="col-5" style="border-right: 1px solid black;">
+                                    <img src="https://th.bing.com/th/id/OIP._u2y3ALsReUrOiEKDaF9-gHaEE?pid=ImgDet&rs=1" alt="alt" width="100%" height="105px"/>
+                                </div>
+                                <div class="col-7" style="text-align: center;">
+                                    <div><p>Title: <%=post.getTittle()%></p></div>
+                                    <div><p>Category:<%=post.getB().getBlog_name()%></p></div>
+
+                                    <% String pattern = "yyyy-MM-dd";%>
+                                    <% java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(pattern); %>
+                                    <% String datestring = sdf.format(post.getPosted_date()); %>
+                                    <div><p>Date: <%=datestring%></p></div>
+                                    <div><h4><%=post.getAm().getDisplay_name()%></h4></div>
+                                </div>
+                            </a>
+                            <button class="btn-success" style="margin: 3%;padding: 10px;" onclick="window.location.href = 'managePost?id=<%=post.getPost_id()%>&status=approve'">Approve</button>
+                            <button class="btn-danger" style="float: right;margin: 3%;padding: 10px;" onclick="window.location.href = 'managePost?id=<%=post.getPost_id()%>&status=reject'">Reject</button>
+                        </div>
+                        <%
+                           }
+                        %>
+                    </div>
+                    <%
+                      }
+                    %>
                 </div>
             </div>
         </div>
@@ -377,35 +413,35 @@
         <script src="assets/js/main.js"></script>
         <script src="assets/js/admin.js"></script>
         <script type="text/javascript">
-                                        //========= Category Slider 
-                                        tns({
-                                            container: '.category-slider',
-                                            items: 3,
-                                            slideBy: 'page',
-                                            autoplay: false,
-                                            mouseDrag: true,
-                                            gutter: 0,
-                                            nav: false,
-                                            controls: true,
-                                            controlsText: ['<i class="lni lni-chevron-left"></i>', '<i class="lni lni-chevron-right"></i>'],
-                                            responsive: {
-                                                0: {
-                                                    items: 1,
-                                                },
-                                                540: {
-                                                    items: 2,
-                                                },
-                                                768: {
-                                                    items: 4,
-                                                },
-                                                992: {
-                                                    items: 5,
-                                                },
-                                                1170: {
-                                                    items: 6,
-                                                }
+                                    //========= Category Slider 
+                                    tns({
+                                        container: '.category-slider',
+                                        items: 3,
+                                        slideBy: 'page',
+                                        autoplay: false,
+                                        mouseDrag: true,
+                                        gutter: 0,
+                                        nav: false,
+                                        controls: true,
+                                        controlsText: ['<i class="lni lni-chevron-left"></i>', '<i class="lni lni-chevron-right"></i>'],
+                                        responsive: {
+                                            0: {
+                                                items: 1,
+                                            },
+                                            540: {
+                                                items: 2,
+                                            },
+                                            768: {
+                                                items: 4,
+                                            },
+                                            992: {
+                                                items: 5,
+                                            },
+                                            1170: {
+                                                items: 6,
                                             }
-                                        });
+                                        }
+                                    });
         </script>
     </body>
 
