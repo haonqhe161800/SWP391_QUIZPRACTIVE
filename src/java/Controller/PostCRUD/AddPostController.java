@@ -47,7 +47,7 @@ public class AddPostController extends HttpServlet {
         String content = request.getParameter("message");
         String blog = request.getParameter("blog");
         String subject = request.getParameter("subject");
-        AccountMarketer  ama = (AccountMarketer) request.getSession().getAttribute("accountMarketer") == null ? null : (AccountMarketer) request.getSession().getAttribute("accountMarketer") ;
+        AccountMarketer  ama = (AccountMarketer) request.getSession().getAttribute("accountMarketer");
         
         String fileName = "";
         try {
@@ -78,7 +78,7 @@ public class AddPostController extends HttpServlet {
             else {
                 url = SUCCESS;
                 //execute insert post
-                pdb.insertPost(ama.getRole_id(), tittle, shortcontent, content, Integer.parseInt(blog), Integer.parseInt(subject), "pending", fileName);
+                pdb.insertPost(ama.getMakerter_id(), tittle, shortcontent, content, Integer.parseInt(blog), Integer.parseInt(subject), "pending", fileName);
 
                 //test execute
 //                pdb.insertPost(1, tittle, shortcontent, content, Integer.parseInt(blog), Integer.parseInt(subject), "pending", fileName);
@@ -86,9 +86,9 @@ public class AddPostController extends HttpServlet {
             }
 
         } catch (ServletException | IOException | NumberFormatException e) {
-            System.out.println(e.getMessage());
+            
         }
-        response.sendRedirect(url);
+       response.sendRedirect(url);
     }
 
     //validation short content (250 not null)

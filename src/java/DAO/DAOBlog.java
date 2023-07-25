@@ -94,7 +94,7 @@ public class DAOBlog extends DBConnect {
     
     //count by id post
     public int countById(int id){
-        String sql = "SELECT COUNT(*) FROM Blog b  INNER JOIN Post p ON b.blog_id = p.blog_id  WHERE b.blog_id = ?";
+        String sql = "SELECT COUNT(*) FROM Blog b  INNER JOIN Post p ON b.blog_id = p.blog_id  WHERE p.status = 'approved' AND b.blog_id = ?";
         int num = 0;
         try {
             PreparedStatement st = conn.prepareStatement(sql);

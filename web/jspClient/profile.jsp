@@ -5,6 +5,8 @@
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -14,18 +16,13 @@
         <title>Profile</title>
         <link rel="stylesheet" href="assets/css/profile.css"/>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-
-        <!--link sweetAlert-->
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
+        <!--favicon-->
+        <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo/lloo.png" />
         <!--popup of -->
         <link rel="stylesheet" href="./assets/css/newcss.css"/>
         <!-- fontanswer icons -->
         <script src="https://kit.fontawesome.com/fe000f9b2a.js" crossorigin="anonymous"></script>
 
-        <!-- jquery -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <style>
             .space{
                 margin-top: 5%;
@@ -44,12 +41,12 @@
             <c:set scope="session" var="ause" value="${sessionScope.accountUser}"/>
             <div class="row">
                 <div class="col-md-3 border-right">
-                    <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" id="previewImage"  width="200px" src="view/avatar/${amase.image != null ? amase.image : (amese.image != null ? amese.image : (ause.image != null ? ause.image : "base.jpg"))}">
-                        <span class="font-weight-bold"> ${amase != null ? amase.display_name : (amese != null ? amese.display_name : (ause != null ? ause.display_name : adse))} </span>
-                        <span class="text-black-50">${amase != null ? amase.email : (amese != null ? amese.email : (ause != null ? ause.email : adse.email))}</span><span> </span></div>
+                    <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" id="previewImage"  width="200px" src="assets/avatar/${amase.image != null ? amase.image : (amese.image != null ? amese.image : (ause.image != null ? ause.image : "base.jpg"))}">
+                        <span class="font-weight-bold"> ${amase != null ? amase.display_name : (amese != null ? amese.display_name : ause.display_name)} </span>
+                        <span class="text-black-50">${amase != null ? amase.email : (amese != null ? amese.email : ause.email)}</span><span> </span></div>
                 </div>
                 <div class="col-md-5 border-right">
-                    <form action="profile" method="POST" id="profileForm">
+                    <form action="profile" method="POST" id="profileForm" enctype="multipart/form-data">
                         <div class="p-3 py-5">
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <h4 class="text-right">Profile Settings</h4>
@@ -78,22 +75,24 @@
                                 <div class="col-md-12">
                                     <label class="labels">Gender</label>
                                     <div class="group-rad" style="display: flex;justify-content: space-around;">
-                                        <div class="item"> <input type="radio"  name="gender" value="1"  ${amase != null ? (amase.gender == 1 ? 'checked' : '') : (amese != null ? (amese.gender == 1 ? 'checked' : '') : (ause != null ? (ause.gender == 1 ? 'checked' : '') : ''))} ${adse != null ? 'disabled' : ''}>
+                                        <div class="item"> <input type="radio"  name="gender" value="1"  ${amase != null ? (amase.gender == 1 ? 'checked' : '') : (amese != null ? (amese.gender == 1 ? 'checked' : '') : (ause != null ? (ause.gender == 1 ? 'checked' : '') : ''))}>
                                             <label>Male</label><br></div>
-                                        <div class="item"> <input type="radio" name="gender" value="0"  ${amase != null ? (amase.gender == 0 ? 'checked' : '') : (amese != null ? (amese.gender == 0 ? 'checked' : '') : (ause != null ? (ause.gender == 0 ? 'checked' : '') : ''))} ${adse != null ? 'disabled' : ''}>
+                                        <div class="item"> <input type="radio" name="gender" value="0"  ${amase != null ? (amase.gender == 0 ? 'checked' : '') : (amese != null ? (amese.gender == 0 ? 'checked' : '') : (ause != null ? (ause.gender == 0 ? 'checked' : '') : ''))}>
                                               <label>Female</label><br></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row mt-3">
-                                <div class="col-md-12"><label class="labels">Birthday</label><input type="date" class="form-control" placeholder="date of birth" name="dob" value="${amase != null ? amase.dob : (amese != null ? amese.dob : (ause != null ? ause.dob : ''))}" ${adse != null ? 'disabled' : ''} required></div>
+                                <fmt:parseDate value="${amase != null ? amase.dob : (amese != null ? amese.dob : (ause != null ? ause.dob : ''))}" pattern="yyyy-MM-dd" var="date" />
+                                <div class="col-md-12"><label class="labels">Birthday</label><input type="date" class="form-control" placeholder="date of birth" name="dob" value="<fmt:formatDate value='${date}' pattern='yyyy-MM-dd' />" required></div>
                             </div>
                             <div class="col-md-12">
                                 <div class="py-2">
-                                    <div class="col-md-12"><label class="labels">Avatar:</label><input type="file" class="form-control"  accept="image/*" id="file-input" accept="image/*" name="avatar"  ${adse != null ? 'disabled' : ''}/>
-                                        <input type="hidden"  value="${amase != null ? amase.image : (amese != null ? amese.image : (ause != null ? ause.image : 'link image'))}"/>
+                                    <div class="col-md-12"><label class="labels">Avatar:</label><input type="file" class="form-control"  id="file-input" accept="image/*" name="avatar" />
+<!--                                        <input type="hide"  value="${amase != null ? amase.image : (amese != null ? amese.image : (ause != null ? ause.image : 'link image'))}"/>-->
                                     </div> <br>
-                                </div>                            </div>
+                                </div>                          
+                            </div>
                             <div class="mt-3 text-center"><button class="btn btn-primary profile-button" type="Submit" id="btn">Save Profile</button></div>
                         </div>
                     </form>        
@@ -138,14 +137,14 @@
 </script>
 
 <script type="text/javascript">
-            const input = document.getElementById('file-input');
-            const image = document.getElementById('previewImage');
-            input.addEventListener('change', (e) => {
-                if (e.target.files.length) {
-                    const src = URL.createObjectURL(e.target.files[0]);
-                    image.src = src;
-                }
-            });
+    const input = document.getElementById('file-input');
+    const image = document.getElementById('previewImage');
+    input.addEventListener('change', (e) => {
+        if (e.target.files.length) {
+            const src = URL.createObjectURL(e.target.files[0]);
+            image.src = src;
+        }
+    });
 </script>
 <script type="text/javascript">
 </script>

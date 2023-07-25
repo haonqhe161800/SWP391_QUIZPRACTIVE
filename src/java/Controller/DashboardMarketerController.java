@@ -6,6 +6,8 @@ package Controller;
  */
 
 
+import DAO.DAOPost;
+import DAO.DAOSlider;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -25,6 +27,18 @@ public class DashboardMarketerController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+         DAOPost pdb = new DAOPost();
+         DAOSlider sdb = new DAOSlider();
+         
+         try {
+            int totalpost = pdb.getNumberPost("");
+            int totalSlider = sdb.getCountSliderShow();
+            int totalPending = pdb.getTotalPendingPost();
+            request.setAttribute("totalpost", totalpost);
+            request.setAttribute("totalPending", totalPending);
+            request.setAttribute("totalslidershow", totalSlider);
+        } catch (Exception e) {
+        }
          request.setAttribute("pageMarketerdasboard", "dashboardmarketer");
         request.getRequestDispatcher("view/marketer/marketerDashboard.jsp").forward(request, response);
     } 

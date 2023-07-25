@@ -31,7 +31,7 @@ public class PostListController extends HttpServlet {
             //role id of marketer
             search = search.trim();
             int indexp = Integer.parseInt(entry);
-            int totalPost = dpdb.getNumberPost(search,ama.getRole_id());
+            int totalPost = dpdb.getNumberPost(search,ama.getMakerter_id());
 //            int totalPost = dpdb.getNumberPost(search,1);
 
             //assgin numberPage
@@ -52,8 +52,8 @@ public class PostListController extends HttpServlet {
             }
 
             //view slider list follow some option
-//            List<Post> list = dpdb.getAllPost2(search, index, indexp, ama.getRole_id());
-            List<Post> list = dpdb.getAllPost2(search, index, indexp, 1);
+            List<Post> list = dpdb.getAllPost2(search, index, indexp, ama.getMakerter_id());
+//            List<Post> list = dpdb.getAllPost2(search, index, indexp, 1);
 
             request.setAttribute("listpost", list);
             request.setAttribute("numberPage", numberPage);
