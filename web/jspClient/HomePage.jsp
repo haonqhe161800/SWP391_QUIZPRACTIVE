@@ -323,7 +323,7 @@
                                         <li><i class="fa-solid fa-calendar-days"></i> Posted date: <strong> <%=rsPost.getString(4)%></strong></li>
                                     </ul>
                                     <ul>
-                                        <li><i class="fa-solid fa-calendar-days"></i> Updated date: <strong> <%=rsPost.getString(5)%></strong></li>
+                                        <li><i class="fa-solid fa-calendar-days"></i> Updated date: <strong> <%=rsPost.getString(5) != null ? rsPost.getString(5) : rsPost.getString(4)%></strong></li>
                                     </ul>
                                 </div>
                             </div>

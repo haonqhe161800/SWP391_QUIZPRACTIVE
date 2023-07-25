@@ -129,8 +129,8 @@ public class DAOCourse extends DBConnect {
     public int getEndPage(String sql) {
         int endPage = 0;
         Vector<Course> vector = getAll(sql);
-        endPage = vector.size() / 12;
-        if (vector.size() % 12 != 0) {
+        endPage = vector.size() / 6;
+        if (vector.size() % 6 != 0) {
             endPage++;
         }
         return endPage;
@@ -148,5 +148,12 @@ public class DAOCourse extends DBConnect {
         }
         return n;
     }
+    
+//    public static void main(String[] args) {
+//        DAOCourse dao = new DAOCourse();
+//        int n = dao.getEndPage("select * from Course");
+//        
+//        System.out.println(n);
+//    }
     
 }

@@ -42,7 +42,8 @@ public class HomeController extends HttpServlet {
                         + "GROUP BY s.subject_id,  s.subject_name, s.[image]");
                 ResultSet rsCourse = daoCourse.getData("select c.course_id, c.image, m.display_name, m.image, c.course_name, s.subject_name, c.created_date, c.quantity, c.updated_date, s.subject_id, m.mentor_id\n" 
                         + "from [Subject] s join [Course] c on s.subject_id = c.subject_id\n"
-                        + "left join Mentor_type m on c.mentor_id = m.mentor_id");
+                        + "left join Mentor_type m on c.mentor_id = m.mentor_id\n"
+                        + "order by c.created_date asc");
                 ResultSet rsMentor = daoMentor.getData("select * from Mentor_type");
                 ResultSet rsPost = daoPost.getData("select p.post_id, p.blog_id, p.tittle, p.posted_date, p.updated_date, p.image, p.short_content, m.fullname, m.image\n"
                         + "from Post p left join Marketer_type m on p.marketer_id = m.marketer_id");

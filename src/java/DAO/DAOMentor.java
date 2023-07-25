@@ -1,9 +1,12 @@
 package DAO;
 
+import Controller.Mentor;
 import Entities.AccountMentor;
+import Entities.Course;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Vector;
 import module.DBConnect;
 
 /**
@@ -85,6 +88,7 @@ public class DAOMentor extends DBConnect {
                         rs.getString("academic_level"),
                         rs.getString("modify_date"),
                         rs.getInt("gender"),
+//                        rs.getString("specialize"),
                         rs.getInt("role_id")
                 );
                 return ame;
@@ -187,6 +191,46 @@ public class DAOMentor extends DBConnect {
             System.out.println(e);
         }
     }
+    
+    
+    public Vector<AccountMentor> getAll(String sql) {
+        Vector<AccountMentor> vector = new Vector<AccountMentor>();
+        ResultSet rs = this.getData(sql);
+        try {
+            while (rs.next()) {
+                int mentor_id = rs.getInt(1);
+                String email = rs.getString(2);
+                String password = rs.getString(3);
+                String describe_yourself = rs.getString(4);
+                String fullname = rs.getString(5);
+                String image = rs.getString(6);
+                String display_name = rs.getString(7);
+                String created_date = rs.getString(8);
+                String address = rs.getString(9);
+                String date_of_birth = rs.getString(10);
+                String academic_level = rs.getString(11);
+                String modify_date = rs.getString(12);
+                int gender = rs.getInt(13);
+                String specialize = rs.getString(14);
+                int role_id = rs.getInt(15);
+                AccountMentor mentor = new AccountMentor(mentor_id, email, password, describe_yourself, fullname, image, display_name, created_date, address, date_of_birth, academic_level, modify_date, gender, specialize, role_id);
+                vector.add(mentor);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return vector;
+    }
+    
+    public int getEndPage(String sql) {
+        int endPage = 0;
+        Vector<AccountMentor> vector = getAll(sql);
+        endPage = vector.size() / 6;
+        if (vector.size() % 6 != 0) {
+            endPage++;
+        }
+        return endPage;
+    }
 
 
 //delete
@@ -201,10 +245,16 @@ public class DAOMentor extends DBConnect {
             System.out.println(e);
         }
     }
-    public static void main(String args[]) {
-        DAOMentor dudb = new DAOMentor();
-        AccountMentor au = dudb.checkLogin("TranQuyBan@gmail.com", "12345");
-
-        System.out.println(au.getDisplay_name());
-    }
+//    public static void main(String args[]) {
+//        DAOMentor dudb = new DAOMentor();
+//        AccountMentor au = dudb.checkLogin("TranQuyBan@gmail.com", "12345");
+//
+//        System.out.println(au.getDisplay_name());
+//    }
+    
+//    public static void main(String[] args) {
+//        DAOMentor dao = new DAOMentor();
+//        int n = dao.getEndPage("select * from Mentor_type offset 1 rows fetch next 6 rows only");
+//        System.out.println(n);
+//    }
 }

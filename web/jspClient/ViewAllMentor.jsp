@@ -44,6 +44,50 @@
 
      <!-- jquery -->
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+     
+     <style>
+         .paging {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .paging a {
+          display: inline-block;
+          padding: 5px 10px;
+          margin-right: 5px;
+          color: #333;
+          text-decoration: none;
+          font-size: 16px;
+          border: 1px solid #ccc; 
+          border-radius: 3px;
+        }
+
+        .paging a.active {
+          background-color: #333;
+          color: #fff;
+        }
+
+        .paging a:hover:not(.active) {
+          background-color: #f2f2f2;
+        }
+
+        .btn_prev, .btn_next {
+          font-size: 20px;
+        }
+
+        .btn_prev:hover, .btn_next:hover {
+          background-color: #f2f2f2;
+        }
+
+        .btn_prev {
+          margin-right: 10px;
+        }
+
+        .btn_next {
+          margin-left: 10px;
+        }
+     </style>
 </head>
 
 <body>
@@ -149,6 +193,25 @@
             </div>
         </div>
     </section>  
+                
+    <%
+        int endP = (int)request.getAttribute("endP");
+        int indexP = (int)request.getAttribute("indexP");
+        String href = (String)request.getAttribute("href");
+    %>
+    <p class="paging text-center" style="margin: 20px 0 20px 0; font-size: 20px">
+            <a href="<%=href%>&index=<%=(indexP-1)%>" style="<%=indexP > 1 && indexP <= endP ? "display: inline-block" : "display: none"%>"> 
+                <i class="fas fa-chevron-left btn_prev"></i>
+            </a>
+
+        <%for(int i = 1; i <= endP; i++) {%>
+            <a class="paging_link <%=indexP == i ? "active" : ""%>" href="<%=href%>&index=<%=i%>"><%=i%></a>
+        <%}%>
+
+        <a href="<%=href%>&index=<%=(indexP+1)%>" style="<%=indexP < endP && indexP >= 1 ? "display: inline-block" : "display: none"%>"> 
+            <i class="fas fa-chevron-right btn_next"></i>
+        </a>
+    </p> 
                 
 
     <!-- start Footer -->

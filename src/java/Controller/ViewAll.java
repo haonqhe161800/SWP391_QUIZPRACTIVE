@@ -17,6 +17,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -52,18 +55,39 @@ public class ViewAll extends HttpServlet {
 
             //all course
             if (service.equals("viewAllCourse")) {
+                int endP = daoCourse.getEndPage("select * from Course");
+                String index = request.getParameter("index");
+                if (index == null) {
+                    index = "1";
+                }
+                int indexP = Integer.parseInt(index);
+                String href = "ViewAll?service=viewAllCourse";
+                request.setAttribute("endP", endP);
+                request.setAttribute("indexP", indexP);
+                request.setAttribute("href", href);
+                
+                
                 ResultSet rsCourse = daoCourse.getData("select c.course_id, c.image, m.display_name, m.image, c.course_name, s.subject_name, c.created_date, c.quantity, c.updated_date, s.subject_id\n" 
                         + "from [Subject] s join [Course] c on s.subject_id = c.subject_id\n"
-                        + "left join Mentor_type m on c.mentor_id = m.mentor_id");
-                
+                        + "left join Mentor_type m on c.mentor_id = m.mentor_id order by c.course_id desc offset " + ((indexP - 1) * 6) + " rows fetch next 6 rows only");
                 request.setAttribute("rsCourse", rsCourse);
                 request.getRequestDispatcher("/jspClient/ViewAllCourse.jsp").forward(request, response);
             }
             
             //all mentor
             if (service.equals("viewAllMentor")) {
-                ResultSet rsMentor = daoMentor.getData("select * from Mentor_type");
+                int endP = daoMentor.getEndPage("select * from Mentor_type");
+                String index = request.getParameter("index");
+                if (index == null) {
+                    index = "1";
+                }
+                int indexP = Integer.parseInt(index);
+                String href = "ViewAll?service=viewAllMentor";
+                request.setAttribute("endP", endP);
+                request.setAttribute("indexP", indexP);
+                request.setAttribute("href", href);
                 
+                ResultSet rsMentor = daoMentor.getData("select * from Mentor_type order by mentor_id desc offset " + ((indexP - 1) * 6) + " rows fetch next 6 rows only");
                 request.setAttribute("rsMentor", rsMentor);
                 request.getRequestDispatcher("/jspClient/ViewAllMentor.jsp").forward(request, response);
             }
@@ -113,7 +137,7 @@ public class ViewAll extends HttpServlet {
                 request.getRequestDispatcher("/jspClient/ViewAllPost.jsp").forward(request, response);
             }
             
-        }
+        } 
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

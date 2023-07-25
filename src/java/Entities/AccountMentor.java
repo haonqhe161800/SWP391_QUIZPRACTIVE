@@ -22,11 +22,29 @@ public class AccountMentor {
     private String academiclevel;
     private String modify_date;
     private int gender;
+    private String specialize;
     private int role_id;
     
     public AccountMentor() {
     }
 
+    public AccountMentor(int mentor_id, String email, String password, String descyourself, String fullName, String image, String display_name, String created_date, String address, String dob, String academiclevel, String modify_date, int gender, String specialize, int role_id) {
+        this.mentor_id = mentor_id;
+        this.email = email;
+        this.password = password;
+        this.descyourself = descyourself;
+        this.fullName = fullName;
+        this.image = image;
+        this.display_name = display_name;
+        this.created_date = created_date;
+        this.address = address;
+        this.dob = dob;
+        this.academiclevel = academiclevel;
+        this.modify_date = modify_date;
+        this.gender = gender;
+        this.specialize = specialize;
+        this.role_id = role_id;
+    }
     public AccountMentor(int mentor_id, String email, String password, String descyourself, String fullName, String image, String display_name, String created_date, String address, String dob, String academiclevel, String modify_date, int gender, int role_id) {
         this.mentor_id = mentor_id;
         this.email = email;
@@ -44,6 +62,14 @@ public class AccountMentor {
         this.role_id = role_id;
     }
 
+    public String getSpecialize() {
+        return specialize;
+    }
+
+    public void setSpecialize(String specialize) {
+        this.specialize = specialize;
+    }
+    
     public String getEmail() {
         return email;
     }
