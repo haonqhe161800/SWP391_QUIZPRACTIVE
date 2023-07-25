@@ -7,13 +7,13 @@ package Entities;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import module.FormatDate;
+
 
 /**
  *
  * @author Admin
  */
-public class Post implements FormatDate {
+public class Post {
 
     private int post_id, marketer_id, blog_id, subject_id;
     private Date posted_date, update_date;
@@ -146,21 +146,5 @@ public class Post implements FormatDate {
         this.am = am;
     }
 
-    @Override
-    public String changeFormat(Date datesubmit) {
-        if (datesubmit.toString() == null) {
-            return null;
-        }
-        //2023-06-21   
-        String inputDate = datesubmit.toString();
-
-        // Chuyển đổi chuỗi ngày thành LocalDate
-        LocalDate date = LocalDate.parse(inputDate);
-
-        // Định dạng lại ngày theo định dạng mong muốn
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd'th' MMM yyyy");
-        String outputDate = date.format(formatter);
-        return outputDate;
-    }
 
 }

@@ -25,11 +25,10 @@ import jakarta.servlet.http.HttpSession;
 
 /**
  *
- * @author Admin
+ * @author admin
  */
-@WebFilter(filterName = "AdminAuthentication", urlPatterns = {"/manageUser","/manageMentor","/manageMarketer","/manageSubject","/manageCourse","/managePost"})
-            
-public class AdminAuthentication implements Filter {
+@WebFilter(filterName = "LogAuthentication", urlPatterns = {"/profile","/ChangePassword"})
+public class LogAuthentication implements Filter {
     
     private static final boolean debug = true;
 
@@ -38,13 +37,13 @@ public class AdminAuthentication implements Filter {
     // configured. 
     private FilterConfig filterConfig = null;
     
-    public AdminAuthentication() {
+    public LogAuthentication() {
     }    
     
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("AdminAuthentication:DoBeforeProcessing");
+            log("LogAuthentication:DoBeforeProcessing");
         }
 
         // Write code here to process the request and/or response before
@@ -72,7 +71,7 @@ public class AdminAuthentication implements Filter {
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("AdminAuthentication:DoAfterProcessing");
+            log("LogAuthentication:DoAfterProcessing");
         }
 
         // Write code here to process the request and/or response after
@@ -108,11 +107,13 @@ public class AdminAuthentication implements Filter {
             throws IOException, ServletException {
         
         if (debug) {
-            log("AdminAuthentication:doFilter()");
+            log("LogAuthentication:doFilter()");
         }
         
         doBeforeProcessing(request, response);
-         HttpServletRequest req = (HttpServletRequest) request;
+        
+        
+        HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
         HttpSession session = req.getSession();
@@ -121,11 +122,12 @@ public class AdminAuthentication implements Filter {
         AccountMentor ame = (AccountMentor) session.getAttribute("accountMentor");
         AccountAdmin aa = (AccountAdmin) session.getAttribute("accountAdmin");
         AccountUser au = (AccountUser) session.getAttribute("accountUser");
-        if(aa == null){
+        if(aa != null){
                  res.sendRedirect("jspClient/404.jsp");
-        }else if(ame != null || ama != null || au != null){
+        }else if(ama == null || ame == null || au == null || aa == null){
             res.sendRedirect("jspClient/404.jsp");
         }
+        
         
         Throwable problem = null;
         try {
@@ -182,7 +184,7 @@ public class AdminAuthentication implements Filter {
         this.filterConfig = filterConfig;
         if (filterConfig != null) {
             if (debug) {                
-                log("AdminAuthentication:Initializing filter");
+                log("LogAuthentication:Initializing filter");
             }
         }
     }
@@ -193,9 +195,9 @@ public class AdminAuthentication implements Filter {
     @Override
     public String toString() {
         if (filterConfig == null) {
-            return ("AdminAuthentication()");
+            return ("LogAuthentication()");
         }
-        StringBuffer sb = new StringBuffer("AdminAuthentication(");
+        StringBuffer sb = new StringBuffer("LogAuthentication(");
         sb.append(filterConfig);
         sb.append(")");
         return (sb.toString());

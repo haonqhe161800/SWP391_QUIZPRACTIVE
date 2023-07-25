@@ -68,15 +68,15 @@ public class LoginController extends HttpServlet {
             if (aa != null && au == null && am == null && ame == null) {
                 session.setAttribute("accountAdmin", aa);
                 //tra ve Dashboard admin
-                response.sendRedirect("User");
+                response.sendRedirect("manageUser");
             } else if (am != null && au == null && ame == null && aa == null) {
                 session.setAttribute("accountMarketer", am);
                 //tra ve Dashboard marketing
-                response.sendRedirect("cbl");
+                response.sendRedirect("dashboardmarketer");
             } else if (ame != null && am == null && au == null && aa == null) {
                 session.setAttribute("accountMentor", ame);
                 //tra ve Dashboard mentor
-                response.sendRedirect("cbl");
+                response.sendRedirect("HomeController");
             } else {
                 session.setAttribute("accountUser", au);
                 //tra ve home
